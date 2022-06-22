@@ -2,7 +2,7 @@ import "./main.css";
 import Content from "./content/Content";
 import Sidebar from "./Sidebar/Sidebar";
 import Topbar from "./topbar/Topbar";
-import { Container, Grid } from "@mui/material";
+import {Container, Grid} from "@mui/material";
 // import { styled } from "@mui/material/styles";
 // import Paper from "@mui/material/Paper";
 import SidebarBottom from "./Sidebar/SidebarBottom";
@@ -16,9 +16,9 @@ import SidebarBottom from "./Sidebar/SidebarBottom";
 // }));
 
 const Main = () => {
-  return (
-    <Content/>
-  );
+    return (
+        <Content/>
+    );
 };
 
 export default Main;

@@ -8,10 +8,10 @@ import SidebarBottom from "../pages/main/Sidebar/SidebarBottom";
 const AppLayout = ({children}) => {
     return (
         <div>
-            <Container className="container" maxWidth="xl">
+            <Container className="container" maxWidth="xxl">
                 <Grid
                     container
-                    spacing={2}
+                    spacing={0}
                     direction="row-reverse"
                     justifyContent="space-between"
                 >
