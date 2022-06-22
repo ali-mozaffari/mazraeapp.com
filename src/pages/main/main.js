@@ -1,4 +1,3 @@
-import "./main.css";
 import Content from "./content/Content";
 import Sidebar from "./Sidebar/Sidebar";
 import Topbar from "./topbar/Topbar";
