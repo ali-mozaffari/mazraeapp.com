@@ -24,6 +24,8 @@ const ActivitiesListPage = () => {
                     </button>
                 </div>
             </div>
+
+            <hr/>
         </div>
     );
 };
