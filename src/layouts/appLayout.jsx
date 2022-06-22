@@ -2,7 +2,7 @@ import React from 'react';
 
 const AppLayout = ({children}) => {
     return (
-        <div>
+        <div style={{backgroundColor:'red'}}>
             {children}
         </div>
     );
