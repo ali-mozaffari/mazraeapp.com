@@ -1,8 +1,15 @@
 import * as React from "react";
 import { Badge, Button, Fade, Grid, Menu, MenuItem } from "@mui/material";
 import { usePopupState, bindMenu, bindTrigger } from "material-ui-popup-state";
-import { BellIcon } from "../../../assets/icon";
+import {
+  BellIcon,
+  MoneyIcon,
+  PencilIcon,
+  ExitlIcon,
+} from "../../../assets/icon";
 import "./Topbar.css";
+import logo from "./../../../assets/img/avatarIcon.png";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const Topbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,7 +43,7 @@ const Topbar = () => {
         </Badge>
       </Grid>
 
-      <Grid item bgcolor="#fff">
+      <Grid item style={{borderRadius:"8px", width:"25%", backgroundColor:"#fff"}}>
         <div>
           <Button
             id="fade-button"
@@ -44,8 +51,12 @@ const Topbar = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
+            className="topbarProfile"
           >
-            Dashboard
+
+            <img src={logo} />
+            <span style={{padding:"0 15px", fontSize: "15px"}}>آرمان قربانی</span>
+            <KeyboardArrowDownIcon />
           </Button>
           <Menu
             id="fade-menu"
@@ -57,9 +68,24 @@ const Topbar = () => {
             onClose={handleClose}
             TransitionComponent={Fade}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <span>
+                <MoneyIcon fill={{ color: "currentColor" }} />
+              </span>
+              <span>اعتبار:</span>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <span>
+                <PencilIcon fill={{ color: "currentColor" }} />
+              </span>
+              <span>ویرایش اطلاعات</span>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <span>
+                <ExitlIcon fill={{ color: "currentColor" }} />
+              </span>
+              <span>خروج از حساب</span>
+            </MenuItem>
           </Menu>
         </div>
       </Grid>

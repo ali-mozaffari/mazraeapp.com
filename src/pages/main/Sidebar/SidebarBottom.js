@@ -100,8 +100,6 @@ const SidebarBottom = () => {
 
   const list = (anchor: Anchor) => (
     <Box
-      // sx={{ pos: anchor === "bottom" ? "auto" : 250 }}
-      // role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >

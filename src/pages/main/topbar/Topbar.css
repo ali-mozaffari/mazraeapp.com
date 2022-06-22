@@ -1,3 +1,11 @@
-.topbarRight {
-    background-color: darkseagreen;
+.topbarProfile {
+    color: #383838 !important;
+    display: flex !important;
+    justify-content: space-between !important;
 }
+
+.topbarProfile img {
+    width: 40px;
+    height: 40px;
+}
+
