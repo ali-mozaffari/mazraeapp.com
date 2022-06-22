@@ -35,6 +35,12 @@
     white-space: nowrap;
 }
 
+.listBottom {
+    width: 25%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .css-186175o-MuiGrid-root {
     margin: 0 auto;
 }

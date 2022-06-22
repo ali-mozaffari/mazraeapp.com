@@ -34,7 +34,7 @@ const Sidebar = () => {
         {
             text: "فعالیت ها",
             icon: <News fill="currentColor"/>,
-            path: "/activity",
+            path: "/activities",
         },
         {
             text: "پیش بینی آب و هوا",

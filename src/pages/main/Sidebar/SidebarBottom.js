@@ -19,6 +19,7 @@ import {
   BlockUser,
   Path16,
   Insect,
+  ThreeDots,
 } from "../../../assets/icon";
 import "./Sidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -155,7 +156,7 @@ const SidebarBottom = () => {
       className="sidebarBottomGrid"
     >
       {sidebarBottomItemShow.map((item) => (
-        <List key={item.text} disablePadding className="list bottom">
+        <List key={item.text} disablePadding className="listBottom">
           <div
             style={
               location.pathname === item.path
@@ -171,12 +172,12 @@ const SidebarBottom = () => {
             <ListItem disablePadding onClick={() => navigate(item.path)}>
               <ListItemButton sx={{ display: "block", textAlign: "center" }}>
                 <ListItemIcon
-                  style={{ color: "currentColor" }}
+                  style={{ color: "currentColor", justifyContent: "center" }}
                   className="sidebarIcon"
                 >
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText className="sidebarText" primary={item.text} />
+                <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
             
@@ -185,7 +186,10 @@ const SidebarBottom = () => {
       ))}
       {["bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>بیشتر ...</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>
+          <span style={{position: "absolute", top: "12px"}}><ThreeDots fill={"#383838"} /></span>
+            <span style={{color:"#383838", paddingTop:"20px"}}>بیشتر</span>
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
