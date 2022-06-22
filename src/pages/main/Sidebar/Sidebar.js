@@ -29,7 +29,7 @@ const Sidebar = () => {
     {
       text: "مزرعه من",
       icon: <StayHome fill="currentColor" />,
-      path: "/",
+      path: "/home",
     },
     {
       text: "فعالیت ها",
