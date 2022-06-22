@@ -8,14 +8,14 @@ import SidebarBottom from "../pages/main/Sidebar/SidebarBottom";
 const AppLayout = ({children}) => {
     return (
         <div>
-            <Container className="container" maxWidth="xxl">
+            <div>
                 <Grid
                     container
                     spacing={0}
                     direction="row-reverse"
                     justifyContent="space-between"
                 >
-                    <Grid xs={12} sm={12} md={9} lg={9}>
+                    <Grid xs={12} sm={12} md={9} lg={8} className="mx-auto">
                         <Topbar/>
                         {children}
                     </Grid>
@@ -23,7 +23,7 @@ const AppLayout = ({children}) => {
                     <Sidebar/>
                     <SidebarBottom/>
                 </Grid>
-            </Container>
+            </div>
         </div>
     );
 };

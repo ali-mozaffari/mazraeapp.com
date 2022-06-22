@@ -3,7 +3,7 @@ import React from 'react';
 const ActivitiesListPage = () => {
     return (
         <div className="page-container">
-            <div className="d-flex justify-content-between">
+            <div className="d-md-flex justify-content-between">
                 <div >
                     <h5 className="fw-bolder">
                         <strong>
@@ -16,10 +16,10 @@ const ActivitiesListPage = () => {
                     </p>
                 </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn btn-outline-light-blue">
+                    <button className="btn-outline-light-blue mx-1">
                         گزارش فعالیت ها
                     </button>
-                    <button className="btn btn-dark-blue">
+                    <button className="btn-dark-blue mx-1">
                         فعالیت جدید
                     </button>
                 </div>
