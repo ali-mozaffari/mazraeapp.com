@@ -3,7 +3,8 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter} from 'react-router-dom';
 import '../src/assets/css/fontiran.css';
-import './index.css'
+import './index.css';
+import './assets/css/main.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
