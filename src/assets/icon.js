@@ -134,12 +134,49 @@ export const Path16 = (props) => {
   );
 };
 
-export const Group_134 = (props) => {
+export const Insect = (props) => {
+  return (
+    <svg
+      fill={props.fill}
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M15.3 14.89l2.77 2.77a1 1 0 0 1 0 1.41 1 1 0 0 1-1.41 0l-2.59-2.58A5.99 5.99 0 0 1 11 18V9.04a1 1 0 0 0-2 0V18a5.98 5.98 0 0 1-3.07-1.51l-2.59 2.58a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41l2.77-2.77A5.95 5.95 0 0 1 4.07 13H1a1 1 0 1 1 0-2h3V8.41L.93 5.34a1 1 0 0 1 0-1.41 1 1 0 0 1 1.41 0l2.1 2.1h11.12l2.1-2.1a1 1 0 0 1 1.41 0 1 1 0 0 1 0 1.41L16 8.41V11h3a1 1 0 1 1 0 2h-3.07c-.1.67-.32 1.31-.63 1.89zM15 5H5a5 5 0 1 1 10 0z" />
+    </svg>
+  );
+};
+
+export const ThreeDots = (props) => {
+  return (
+    <svg
+      fill={props.fill}
+      width="20"
+      height="20"
+      id="Layer_1"
+      data-name="Layer 1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 122.88 29.96"
+    >
+      <defs>
+        <style></style>
+      </defs>
+      <title>3-horizontal-dots</title>
+      <path
+        class="cls-1"
+        d="M0,15A15,15,0,1,1,15,30,15,15,0,0,1,0,15Zm92.93,0a15,15,0,1,1,15,15,15,15,0,0,1-15-15ZM46.46,15a15,15,0,1,1,15,15,15,15,0,0,1-15-15Z"
+      />
+    </svg>
+  );
+};
+
+export const BellIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="30.669"
-      height="26.836"
+      width="20"
+      height="20"
       viewBox="0 0 30.669 26.836"
     >
       <g
@@ -173,25 +210,5 @@ export const Group_134 = (props) => {
         </g>
       </g>
     </svg>
-  );
-};
-
-export const Insect = (props) => {
-  return (
-    <svg
-      fill={props.fill}
-      width="20px"
-      height="20px"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M15.3 14.89l2.77 2.77a1 1 0 0 1 0 1.41 1 1 0 0 1-1.41 0l-2.59-2.58A5.99 5.99 0 0 1 11 18V9.04a1 1 0 0 0-2 0V18a5.98 5.98 0 0 1-3.07-1.51l-2.59 2.58a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41l2.77-2.77A5.95 5.95 0 0 1 4.07 13H1a1 1 0 1 1 0-2h3V8.41L.93 5.34a1 1 0 0 1 0-1.41 1 1 0 0 1 1.41 0l2.1 2.1h11.12l2.1-2.1a1 1 0 0 1 1.41 0 1 1 0 0 1 0 1.41L16 8.41V11h3a1 1 0 1 1 0 2h-3.07c-.1.67-.32 1.31-.63 1.89zM15 5H5a5 5 0 1 1 10 0z" />
-    </svg>
-  );
-};
-
-export const ThreeDots = (props) => {
-  return (
-    <svg fill={props.fill} width="20px" height="20px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 29.96"><defs><style></style></defs><title>3-horizontal-dots</title><path class="cls-1" d="M0,15A15,15,0,1,1,15,30,15,15,0,0,1,0,15Zm92.93,0a15,15,0,1,1,15,15,15,15,0,0,1-15-15ZM46.46,15a15,15,0,1,1,15,15,15,15,0,0,1-15-15Z"/></svg>
   );
 };
