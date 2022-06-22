@@ -1,7 +1,8 @@
 import React, {Suspense} from "react";
 import Main from "./pages/main/main";
 import AppLayout from "./layouts/appLayout";
-
+import {Redirect, Route, Routes, useNavigate} from "react-router-dom";
+import {Router} from "react-router-dom";
 // const ViewAuthorization = React.lazy(() =>
 //     import(/* webpackChunkName: "views-user" */ './views/AuthView')
 // );
@@ -13,6 +14,9 @@ const ViewApp = React.lazy(() =>
 
 
 const App = () => {
+
+    const history = useNavigate();
+
     return (
         <div>
             <Main />
@@ -21,21 +25,21 @@ const App = () => {
 
                 <Router history={history}>
 
-                    <Switch>
+                    <Routes>
 
                         <Route path={['/app']}>
                             <AppLayout>
-                                <Switch>
+                                <Routes>
 
                                     <Route path={`/app`}
                                            render={(props) => <ViewApp {...props}/>}/>
 
-                                </Switch>
+                                </Routes>
                             </AppLayout>
                         </Route>
 
 
-                    </Switch>
+                    </Routes>
                 </Router>
 
             </Suspense>
