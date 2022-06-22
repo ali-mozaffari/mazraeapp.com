@@ -17,22 +17,7 @@ import SidebarBottom from "./Sidebar/SidebarBottom";
 
 const Main = () => {
   return (
-    <Container className="container" maxWidth="xl">   
-      <Grid
-        container
-        spacing={2}
-        direction="row-reverse"
-        justifyContent="space-between"
-      >
-        <Grid xs={12} sm={12} md={9} lg={9}>
-        <Topbar />
-        <Content />
-        </Grid>
-        
-        <Sidebar />
-        <SidebarBottom />
-      </Grid>
-    </Container>
+    <Content/>
   );
 };
 
