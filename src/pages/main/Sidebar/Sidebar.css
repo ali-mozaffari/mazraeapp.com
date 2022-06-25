@@ -8,7 +8,7 @@
 .sidebarBottomGrid {
     width: 100%;
     background-color: #fff;
-    padding-right: 25px !important;
+    /* padding-right: 25px !important; */
     justify-content: center;
 }
 

@@ -4,8 +4,17 @@
     justify-content: space-between !important;
 }
 
-.topbarProfile img {
-    width: 40px;
+.imgGrid {
+    padding: 5px;
+    background-color: #f2f8f6;
+    border-radius: 5px;
     height: 40px;
+    margin-top: 5px !important;
+    margin-right: 5px !important;
+}
+
+.imgGrid img {
+    width: 32px;
+    height: 30px;
 }
 

@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Badge, Button, Fade, Grid, Menu, MenuItem } from "@mui/material";
+import {
+  Badge,
+  Button,
+  Fade,
+  Grid,
+  Menu,
+  MenuItem,
+  Stack,
+} from "@mui/material";
 import { usePopupState, bindMenu, bindTrigger } from "material-ui-popup-state";
 import {
   BellIcon,
@@ -27,7 +35,7 @@ const Topbar = () => {
         item
         style={{
           backgroundColor: "#fff",
-          padding: "11px 16px",
+          padding: "10px 15px",
           borderRadius: "5px",
         }}
       >
@@ -43,9 +51,42 @@ const Topbar = () => {
         </Badge>
       </Grid>
 
-      <Grid item style={{borderRadius:"8px", width:"25%", backgroundColor:"#fff"}}>
-        <div>
-          <Button
+      <Grid
+        item
+        style={{ borderRadius: "8px", width: "25%", backgroundColor: "#fff" }}
+      >
+
+
+
+        
+        {/* <Grid
+          container
+          margin="0 auto"
+          id="fade-button"
+          aria-controls={open ? "fade-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          style={{cursor:"pointer"}}
+        >
+          <Grid item xs={3} className="imgGrid">
+            <img src={logo} />
+          </Grid>
+          <Grid
+            item
+            sx={{ display: { xs: "none", md: "block" } }}
+            xs={6}
+            pt="10px"
+            pr="5px"
+          >
+            <span>آرمان قربانی</span>
+          </Grid>
+          <Grid item xs={3} pt="10px" maxWidth="10px !important">
+            <KeyboardArrowDownIcon />
+          </Grid>
+        </Grid> */}
+
+        {/* <Button
             id="fade-button"
             aria-controls={open ? "fade-menu" : undefined}
             aria-haspopup="true"
@@ -57,8 +98,8 @@ const Topbar = () => {
             <img src={logo} />
             <span style={{padding:"0 15px", fontSize: "15px"}}>آرمان قربانی</span>
             <KeyboardArrowDownIcon />
-          </Button>
-          <Menu
+          </Button> */}
+          {/* <Menu
             id="fade-menu"
             MenuListProps={{
               "aria-labelledby": "fade-button",
@@ -86,8 +127,7 @@ const Topbar = () => {
               </span>
               <span>خروج از حساب</span>
             </MenuItem>
-          </Menu>
-        </div>
+          </Menu> */}
       </Grid>
     </Grid>
   );
