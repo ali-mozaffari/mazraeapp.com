@@ -53,6 +53,7 @@ const Topbar = () => {
       sx={{ bgcolor: { xs: "#fff", sm: "#fff", md: "transparent" } }}
       p={2}
       mt={2}
+      position="relative !important"
     >
       <Grid
         className="topLogo"
@@ -150,7 +151,7 @@ const Topbar = () => {
         </MenuItem>
       </Menu>
 
-      <div style={{ position: "fixed", left: "0", width: "15%" }}>
+      <div style={{ position: "absolute", left: "0", width: "15%" }}>
         <Grid
           onClick={toggling}
           sx={{
@@ -190,7 +191,7 @@ const Topbar = () => {
             pt="15px"
             pr="7px"
           >
-            <span>آرمان قربانی احمدی حسینی</span>
+            <span>آرمان قربانی</span>
           </Grid>
           <Grid
             xs={3}
