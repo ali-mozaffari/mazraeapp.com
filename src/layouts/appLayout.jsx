@@ -15,6 +15,7 @@ const AppLayout = ({children}) => {
                     direction="row-reverse"
                     justifyContent="space-between"
                 >
+
                     <Grid xs={12} sm={12} md={9} lg={8} className="mx-auto">
                         <Topbar/>
                         {children}
