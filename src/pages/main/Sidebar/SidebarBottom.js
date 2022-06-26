@@ -42,7 +42,7 @@ const SidebarBottom = () => {
       path: "/activity",
     },
     {
-      text: "پیش بینی آب و هوا",
+      text: "آب و هوا",
       icon: <CloudyDay fill="currentColor" />,
       path: "/weatherforcast",
     },

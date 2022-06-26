@@ -219,8 +219,8 @@ export const MoneyIcon = (props) => {
     <svg
       fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
-      width="17"
-      height="17"
+      width="15"
+      height="15"
       viewBox="0 0 22.437 22.447"
     >
       <g id="_002-money" data-name="002-money" transform="translate(-0.116)">
@@ -247,8 +247,8 @@ export const PencilIcon = (props) => {
     <svg
       fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
-      width="20.273"
-      height="20.501"
+      width="15"
+      height="15"
       viewBox="0 0 20.273 20.501"
     >
       <g id="_001-pencil" data-name="001-pencil" transform="translate(0 0)">
@@ -271,8 +271,8 @@ export const ExitlIcon = (props) => {
     <svg
       fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
-      width="22.023"
-      height="22.024"
+      width="15"
+      height="15"
       viewBox="0 0 22.023 22.024"
     >
       <path
@@ -282,6 +282,119 @@ export const ExitlIcon = (props) => {
         transform="translate(-0.5)"
         fill="#e21f00"
       />
+    </svg>
+  );
+};
+
+export const AcceptNotification = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="17"
+      viewBox="0 0 33 33"
+    >
+      <g id="Accept-notification" transform="translate(-1317.866 -202.866)">
+        <path
+          id="Path_47"
+          data-name="Path 47"
+          d="M15.33,91.051h0a.686.686,0,0,0-.964,0l-9.64,9.576-3.564-3.5a.685.685,0,0,0-.963,0,.67.67,0,0,0,0,.954l4.048,3.98a.693.693,0,0,0,.964,0L15.33,92A.67.67,0,0,0,15.33,91.051Z"
+          transform="translate(1327.398 122.249)"
+          fill="#16db93"
+          stroke="#16db93"
+          stroke-width="1"
+        />
+        <g
+          id="Ellipse_32"
+          data-name="Ellipse 32"
+          transform="translate(1317.866 202.866)"
+          fill="none"
+          stroke="#16db93"
+          stroke-width="2.4"
+        >
+          <circle cx="16.5" cy="16.5" r="16.5" stroke="none" />
+          <circle cx="16.5" cy="16.5" r="15.3" fill="none" />
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const WarningNotification = (props) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="17"
+      viewBox="0 0 29 29"
+    >
+      <g id="warning-notfication" transform="translate(-3.075 -3.7)">
+        <g id="Group_26" data-name="Group 26" transform="translate(0 0)">
+          <g id="Group_392" data-name="Group 392">
+            <g
+              id="Ellipse_31"
+              data-name="Ellipse 31"
+              transform="translate(3.075 3.7)"
+              fill="none"
+              stroke="#2c699a"
+              stroke-width="2.4"
+            >
+              <circle cx="14.5" cy="14.5" r="14.5" stroke="none" />
+              <circle cx="14.5" cy="14.5" r="13.3" fill="none" />
+            </g>
+            <path
+              id="Path_41"
+              data-name="Path 41"
+              d="M220.048,333.382a1.823,1.823,0,0,0,0,3.646,1.824,1.824,0,0,0,0-3.646Z"
+              transform="translate(-202.31 -310.592)"
+              fill="#2c699a"
+            />
+            <path
+              id="Path_43"
+              data-name="Path 43"
+              d="M219.132,157.228a1.983,1.983,0,0,0-1.408,1.991c.044.576.08,1.16.124,1.736.124,2.2.248,4.346.372,6.542a1.336,1.336,0,0,0,1.364,1.284,1.364,1.364,0,0,0,1.364-1.327c0-.452,0-.868.044-1.327.08-1.408.168-2.815.248-4.223.044-.912.124-1.823.168-2.735a2.252,2.252,0,0,0-.168-.912A1.828,1.828,0,0,0,219.132,157.228Z"
+              transform="translate(-201.847 -147.237)"
+              fill="#2c699a"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
+  );
+};
+
+export const RedWarningNotification = (props) => {
+  return (
+    <svg
+      id="red-warning-notfication"
+      xmlns="http://www.w3.org/2000/svg"
+      width="17"
+      height="17"
+      viewBox="0 0 35.477 32.431"
+    >
+      <g id="Group_26" data-name="Group 26" transform="translate(0 0)">
+        <path
+          id="Path_41"
+          data-name="Path 41"
+          d="M220.048,333.382a1.823,1.823,0,0,0,0,3.646,1.824,1.824,0,0,0,0-3.646Z"
+          transform="translate(-202.31 -310.592)"
+          fill="#f2634c"
+        />
+        <path
+          id="Path_42"
+          data-name="Path 42"
+          d="M34.613,50.133a6.226,6.226,0,0,0,.015-6.3L23.207,24.054a6.292,6.292,0,0,0-10.925-.007L.847,43.847a6.316,6.316,0,0,0,5.47,9.466H29.129A6.28,6.28,0,0,0,34.613,50.133ZM32.133,48.7a3.446,3.446,0,0,1-3.012,1.743H6.31A3.4,3.4,0,0,1,3.334,48.74a3.451,3.451,0,0,1-.007-3.479L14.762,25.469a3.434,3.434,0,0,1,5.965.007L32.155,45.269A3.405,3.405,0,0,1,32.133,48.7Z"
+          transform="translate(0 -20.882)"
+          fill="#f2634c"
+        />
+        <path
+          id="Path_43"
+          data-name="Path 43"
+          d="M219.132,157.228a1.983,1.983,0,0,0-1.408,1.991c.044.576.08,1.16.124,1.736.124,2.2.248,4.346.372,6.542a1.336,1.336,0,0,0,1.364,1.284,1.364,1.364,0,0,0,1.364-1.327c0-.452,0-.868.044-1.327.08-1.408.168-2.815.248-4.223.044-.912.124-1.823.168-2.735a2.252,2.252,0,0,0-.168-.912A1.828,1.828,0,0,0,219.132,157.228Z"
+          transform="translate(-201.847 -147.237)"
+          fill="#f2634c"
+        />
+      </g>
     </svg>
   );
 };
