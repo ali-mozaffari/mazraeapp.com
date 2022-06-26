@@ -9,9 +9,6 @@ const ViewApp = React.lazy(() =>
 const App = () => {
     return (
         <div>
-            {/*<Main/>*/}
-
-            {/* routing base file */}
             <ViewApp/>
         </div>
     );
