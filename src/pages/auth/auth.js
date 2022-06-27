@@ -48,13 +48,18 @@ export default function Auth() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid
-        container
-        component="main"
-        sx={{ height: "100vh" }}
-      >
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{borderRadius: 0}}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          style={{ borderRadius: 0 }}
+        >
           <Box
             sx={{
               my: 8,
@@ -64,8 +69,7 @@ export default function Auth() {
               alignItems: "center",
               mr: "auto",
               ml: "auto",
-              width:{md: "60%"}
-              // width: "60%"
+              width: { md: "60%" },
             }}
           >
             <img src={logo} style={{ height: "75px", color: "#16db93" }} />
@@ -93,7 +97,7 @@ export default function Auth() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 7 }}
+              sx={{ mt: 7, width: "90%" }}
             >
               <Input
                 disableUnderline
@@ -108,7 +112,7 @@ export default function Auth() {
                   paddingRight: "10px",
                   paddingLeft: "10px",
                   fontSize: "13px",
-                  marginBottom: "20px"
+                  marginBottom: "20px",
                 }}
               />
 
@@ -125,9 +129,15 @@ export default function Auth() {
                   fontSize: "13px",
                 }}
               >
-                Sign In
+                ورود
               </Button>
-              <Grid container>
+
+              {/* <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
+
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
@@ -138,7 +148,7 @@ export default function Auth() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
