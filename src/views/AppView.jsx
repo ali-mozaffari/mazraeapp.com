@@ -15,8 +15,7 @@ const ActivitiesPage = React.lazy(() =>
 
 const AppView = () => {
   const location = useLocation();
-  console.log(location)
-  if (location.path === "/sendcode") {
+  if (location.pathname === "/sendcode") {
     return(
     <Routes>
       <Route path="sendcode" element={<Auth />} />
