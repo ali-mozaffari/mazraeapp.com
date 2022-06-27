@@ -16,20 +16,17 @@ const FilterFarmServiceBar = () => {
                 <div>
                     <h5 className="fw-bolder">
                         <strong>
-                            فعالیت
+                            خدمات فنی ،مالی و حسابداری
                         </strong>
                     </h5>
                     <br/>
                     <p>
-                        شما با اضافه کردن فعالیت حدید میتوانید کارها رو بهتر مدیریت نمایید
+                        برای مدیریت بهتر خدمات میتونید از لیست زیر استفاده نمایید
                     </p>
                 </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn-outline-light-blue mx-1" onClick={() => dispatch(increment())}>
-                        گزارش فعالیت ها
-                    </button>
                     <button className="btn-dark-blue mx-1">
-                        فعالیت جدید
+                        خدمت جدید
                     </button>
                 </div>
             </div>
