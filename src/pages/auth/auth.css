@@ -30,7 +30,7 @@
     color: #fff;
 }
 
-.authSocialIcon {
+.authSocialIconTop {
     height: 35px;
     width: 36px;
     background-color: rgb( 0, 0, 0, 0.1);
@@ -39,5 +39,21 @@
     margin: 5px !important;
     border-radius: 8px;
     color: #fff;
+    cursor: pointer;
 }
 
+.authSocialIconTop:hover {
+    background-color: rgb( 0, 0, 0, 0.2);
+}
+
+.authSocialIconMoble {
+    height: 35px;
+    width: 36px;
+    background-color: rgb( 0, 0, 0, 0.1);
+    padding-right: 8px;
+    padding-top: 5px;
+    margin: 5px !important;
+    border-radius: 8px;
+    color: #000;
+    cursor: pointer;
+}

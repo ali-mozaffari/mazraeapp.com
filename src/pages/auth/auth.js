@@ -137,10 +137,42 @@ export default function Auth() {
                   </Link>
                 </Grid>
               </Grid> */}
-              <Copyright sx={{ mt: 5 }} />
+
+          <Grid
+            container
+            className="authImgTopBar"
+            sx={{ display: { xs: "flex", sm: "none" } }}
+          >
+            <Grid item className="authImgTopBarText">
+              اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به
+              support@mazraeapp.com ایمیل بزنید
+            </Grid>
+          </Grid>
+
+              <Grid
+                container
+                sx={{ display: { xs: "flex", sm: "none" } }}
+                style={{ justifyContent: "center" }}
+              >
+                <Grid item className="authSocialIconMoble">
+                  <TelegramIcon />
+                </Grid>
+                <Grid item className="authSocialIconMoble">
+                  <InstagramIcon />
+                </Grid>
+                <Grid item className="authSocialIconMoble">
+                  <WhatsappIcon />
+                </Grid>
+              </Grid>
+
+
+
+              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
+          <Copyright sx={{ mt: 5 }} />
         </Grid>
+        
 
         <Grid
           item
@@ -158,25 +190,34 @@ export default function Auth() {
             backgroundPosition: "center",
           }}
         >
-          <Grid container className="authImgTopBar" sx={{display:{xs:"none", sm:"flex"}}}>
+          <Grid
+            container
+            className="authImgTopBar"
+            sx={{ display: { xs: "none", sm: "flex" } }}
+          >
             <Grid item className="authImgTopBarText">
-              اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به support@mazraeapp.com ایمیل بزنید
+              اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به
+              support@mazraeapp.com ایمیل بزنید
             </Grid>
           </Grid>
-         
+
           {/* <div className="authImgTopBar d-flex">
           <p>
           اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به support@mazraeapp.com ایمیل بزنید
           </p>
           </div> */}
-          <Grid container sx={{display:{xs:"none"}}} style={{paddingRight: "20px"}}>
-            <Grid item className="authSocialIcon">
+          <Grid
+            container
+            sx={{ display: { xs: "none", sm: "flex" } }}
+            style={{ paddingRight: "20px" }}
+          >
+            <Grid item className="authSocialIconTop">
               <TelegramIcon />
             </Grid>
-            <Grid item className="authSocialIcon">
+            <Grid item className="authSocialIconTop">
               <InstagramIcon />
             </Grid>
-            <Grid item className="authSocialIcon">
+            <Grid item className="authSocialIconTop">
               <WhatsappIcon />
             </Grid>
           </Grid>
