@@ -56,6 +56,7 @@ const Topbar = () => {
       position="relative !important"
     >
       <Grid
+        item
         className="topLogo"
         sx={{
           display: {
@@ -132,19 +133,28 @@ const Topbar = () => {
       >
         <MenuItem className="menuItemNoti">
           <AcceptNotification className="iconNoti" />
-          <span style={{paddingRight: "5px"}}>با آپدیت جدید سیستم شما امکان شماره یک رو نیز دارید</span>
+          <span style={{ paddingRight: "5px" }}>
+            با آپدیت جدید سیستم شما امکان شماره یک رو نیز دارید
+          </span>
         </MenuItem>
         <MenuItem className="menuItemNoti">
           <AcceptNotification className="iconNoti" />
-          <span style={{paddingRight: "5px"}}>شما یک آدم جدید به سیستم اضافه کردید</span>
+          <span style={{ paddingRight: "5px" }}>
+            شما یک آدم جدید به سیستم اضافه کردید
+          </span>
         </MenuItem>
         <MenuItem className="menuItemNoti">
           <WarningNotification className="iconNoti" />
-          <span style={{paddingRight: "5px"}}>شما یک مزرعه اضافه کردید</span>
+          <span style={{ paddingRight: "5px" }}>شما یک مزرعه اضافه کردید</span>
         </MenuItem>
-        <MenuItem className="menuItemNoti" style={{paddingBottom: "15px !important"}}>
+        <MenuItem
+          className="menuItemNoti"
+          style={{ paddingBottom: "15px !important" }}
+        >
           <RedWarningNotification className="iconNoti" />
-          <span style={{paddingRight: "5px"}}>با آپدیت جدید سیستم شما امکان شماره یک رو نیز دارید</span>
+          <span style={{ paddingRight: "5px" }}>
+            با آپدیت جدید سیستم شما امکان شماره یک رو نیز دارید
+          </span>
         </MenuItem>
         <MenuItem className="menuItemLastNoti">
           <span>نمایش کامل اعلان ها</span>
@@ -153,6 +163,7 @@ const Topbar = () => {
 
       <div style={{ position: "absolute", left: "0", width: "20%" }}>
         <Grid
+          item
           onClick={toggling}
           sx={{
             bgcolor: {
@@ -192,9 +203,9 @@ const Topbar = () => {
             pr="7px"
           >
             <span>آرمان قربانی</span>
-
           </Grid>
           <Grid
+            item
             xs={3}
             pt="10px"
             maxWidth="7px !important"
@@ -205,6 +216,7 @@ const Topbar = () => {
         </Grid>
         {isOpen && (
           <Grid
+            item
             className="dorpdownBox"
             sx={{
               bgcolor: { xs: "#f2f8f6", sm: "#f2f8f6", md: "#fff" },

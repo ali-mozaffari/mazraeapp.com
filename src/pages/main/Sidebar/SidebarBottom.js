@@ -137,6 +137,7 @@ const SidebarBottom = () => {
 
   return (
     <Grid
+      item
       sx={{
         display: {
           xs: "flex",
@@ -166,7 +167,6 @@ const SidebarBottom = () => {
             }
             className="sidebarli"
           >
-            
             <ListItem disablePadding onClick={() => navigate(item.path)}>
               <ListItemButton sx={{ display: "block", textAlign: "center" }}>
                 <ListItemIcon
@@ -178,15 +178,19 @@ const SidebarBottom = () => {
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
-            
           </div>
         </List>
       ))}
       {["bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)} style={{paddingLeft: "8%"}}>
-          <span style={{position: "absolute", top: "12px"}}><ThreeDots fill={"#383838"} /></span>
-            <span style={{color:"#383838", paddingTop:"20px"}}>بیشتر</span>
+          <Button
+            onClick={toggleDrawer(anchor, true)}
+            style={{ paddingLeft: "8%" }}
+          >
+            <span style={{ position: "absolute", top: "12px" }}>
+              <ThreeDots fill={"#383838"} />
+            </span>
+            <span style={{ color: "#383838", paddingTop: "20px" }}>بیشتر</span>
           </Button>
           <Drawer
             anchor={anchor}
