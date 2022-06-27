@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import loginIMG from "./../../assets/img/loginIMG.png";
 import logo from "./../../assets/img/logo.png";
+import { Input } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -47,9 +48,13 @@ export default function Auth() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh" }}
+      >
         <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square style={{borderRadius: 0}}>
           <Box
             sx={{
               my: 8,
@@ -57,13 +62,17 @@ export default function Auth() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              mr: "auto",
+              ml: "auto",
+              width:{md: "60%"}
+              // width: "60%"
             }}
           >
             <img src={logo} style={{ height: "75px", color: "#16db93" }} />
 
             <Typography
               component="h1"
-              variant="h5"
+              variant="h6"
               style={{
                 paddingTop: "30px",
                 paddingBottom: "20px",
@@ -76,50 +85,45 @@ export default function Auth() {
             <Typography
               component="p"
               variant="p"
-              style={{ color: "#a3a3a3", fontWeight: "800" }}
+              style={{ color: "#a3a3a3", fontSize: "13px" }}
             >
-              برای ورود در سامانه مزرعه شماره تماس خورد را وارد کنید
+              برای ورود در سامانه مزرعه شماره تماس خود را وارد کنید
             </Typography>
             <Box
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
+              sx={{ mt: 7 }}
             >
-              <TextField
+              <Input
+                disableUnderline
                 required
                 fullWidth
-                style={{ backgroundColor: "#f6f8f7", outline: "none !important", border: "none !important" }}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
                 autoFocus
+                placeholder="شماره تماس"
+                style={{
+                  backgroundColor: "#f6f8f7",
+                  borderRadius: "8px",
+                  height: "50px",
+                  paddingRight: "10px",
+                  paddingLeft: "10px",
+                  fontSize: "13px",
+                  marginBottom: "20px"
+                }}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                style={{
+                  backgroundColor: "#16db93",
+                  borderRadius: "8px",
+                  height: "50px",
+                  paddingRight: "10px",
+                  paddingLeft: "10px",
+                  fontSize: "13px",
+                }}
               >
                 Sign In
               </Button>
