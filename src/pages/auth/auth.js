@@ -169,7 +169,7 @@ export default function Auth() {
           اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به support@mazraeapp.com ایمیل بزنید
           </p>
           </div> */}
-          <Grid container style={{paddingRight: "20px"}}>
+          <Grid container sx={{display:{xs:"none"}}} style={{paddingRight: "20px"}}>
             <Grid item className="authSocialIcon">
               <TelegramIcon />
             </Grid>
