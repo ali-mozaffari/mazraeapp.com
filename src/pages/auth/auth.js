@@ -27,12 +27,12 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {"تمام حقوق مادی و معنوی این سایت متعلق است به "}
       <Link color="inherit" href="https://mazraeapp.com//">
-        mazraeapp
+        mazraeapp.com
       </Link>{" "}
-      {new Date().getFullYear()}
-      {/* {"."} */}
+      {/* {new Date().getFullYear()}
+      {"."} */}
     </Typography>
   );
 }
