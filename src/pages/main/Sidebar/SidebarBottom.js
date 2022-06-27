@@ -184,7 +184,7 @@ const SidebarBottom = () => {
       ))}
       {["bottom"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
+          <Button onClick={toggleDrawer(anchor, true)} style={{paddingLeft: "8%"}}>
           <span style={{position: "absolute", top: "12px"}}><ThreeDots fill={"#383838"} /></span>
             <span style={{color:"#383838", paddingTop:"20px"}}>بیشتر</span>
           </Button>
