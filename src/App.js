@@ -1,4 +1,5 @@
 import React from "react";
+import AuthView from "./views/AuthView";
 
 
 const ViewApp = React.lazy(() =>
@@ -9,7 +10,8 @@ const ViewApp = React.lazy(() =>
 const App = () => {
     return (
         <div>
-            <ViewApp/>
+            <ViewApp />
+            {/* <AuthView /> */}
         </div>
     );
 }

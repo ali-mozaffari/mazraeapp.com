@@ -75,8 +75,6 @@ const Sidebar = () => {
   return (
     <Grid
       item
-      // p={2}
-      // pt={0}
       xs={12}
       sm={12}
       md={3}
