@@ -13,6 +13,12 @@ const ActivitiesPage = React.lazy(() =>
   )
 );
 
+
+const FarmServicePage = React.lazy(() =>
+  import(
+    /* webpackChunkName: "views-user" */ "../pages/farmService/farmServicesPage"
+  )
+);
 const AppView = () => {
   const location = useLocation();
   if (location.pathname === "/sendcode") {
@@ -29,6 +35,7 @@ const AppView = () => {
         <Route path="/" element={<Navigate replace to="home" />} />
         <Route path="home" element={<Main />} />
         <Route path="activities" element={<ActivitiesPage />} />
+        <Route path="farm-services" element={<FarmServicePage />} />
       </Routes>
     </AppLayout>
   );
