@@ -5,10 +5,14 @@ import {BrowserRouter} from 'react-router-dom';
 import '../src/assets/css/fontiran.css';
 import './index.css';
 import './assets/css/main.css';
+import {store} from './redux/store'
+import {Provider} from 'react-redux'
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>);
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </Provider>);

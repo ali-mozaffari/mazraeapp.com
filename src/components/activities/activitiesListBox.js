@@ -1,14 +1,11 @@
 import React from 'react';
-import filterIcon from './../../assets/img/filterIcon.png';
-import sortIcon from './../../assets/img/sort-down.svg';
-import calendarIcon from './../../assets/img/calendar.png';
-import copyIcon from './../../assets/img/copy-gray.png';
-import menuIcon from './../../assets/img/menu.png';
-import editIcon from './../../assets/img/edit.png';
-import trashIcon from './../../assets/img/trash.png';
 import {Badge} from "react-bootstrap";
+import calendarIcon from "../../assets/img/calendar.png";
+import menuIcon from "../../assets/img/menu.png";
 import {Menu, MenuItem, Tooltip} from "@mui/material";
-
+import copyIcon from "../../assets/img/copy-gray.png";
+import editIcon from "../../assets/img/edit.png";
+import trashIcon from "../../assets/img/trash.png";
 
 const options = [
     'علامت گذاری به عنوان انجام شده',
@@ -19,7 +16,8 @@ const options = [
 const ITEM_HEIGHT = 48;
 
 
-const ActivitiesListPage = () => {
+
+const ActivitiesListBox = () => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -30,53 +28,9 @@ const ActivitiesListPage = () => {
         setAnchorEl(null);
     };
 
+
     return (
-        <div className="page-container container-fluid">
-            <div className="d-md-flex justify-content-between">
-                <div>
-                    <h5 className="fw-bolder">
-                        <strong>
-                            فعالیت
-                        </strong>
-                    </h5>
-                    <br/>
-                    <p>
-                        شما با اضافه کردن فعالیت حدید میتوانید کارها رو بهتر مدیریت نمایید
-                    </p>
-                </div>
-                <div className="d-flex align-items-center">
-                    <button className="btn-outline-light-blue mx-1">
-                        گزارش فعالیت ها
-                    </button>
-                    <button className="btn-dark-blue mx-1">
-                        فعالیت جدید
-                    </button>
-                </div>
-            </div>
-
-            <hr/>
-
-            <div className="row d-flex align-items-center">
-                <div className="col-md-6 mx-auto">
-                    <input className="search-input w-100" type="search" placeholder="جستجو . . ."/>
-                </div>
-                <div className="col-md-6 mx-auto d-flex justify-content-around mt-3 mt-md-0">
-                    <div>
-                        <img src={filterIcon} alt="filter" className="mx-2"/>
-                        <p className="d-inline">
-                            فیلتر کردن
-                        </p>
-                    </div>
-                    <div>
-                        <img src={sortIcon} alt="filter" className="mx-2"/>
-                        <p className="d-inline">
-                            مرتب سازی
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div>
+        <div>
 
                 <table className="table table-borderless mt-4 d-none d-md-table">
                     <thead>
@@ -494,9 +448,7 @@ const ActivitiesListPage = () => {
 
                 </div>
             </div>
-
-        </div>
     );
 };
 
-export default ActivitiesListPage;
+export default ActivitiesListBox;

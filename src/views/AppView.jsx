@@ -9,7 +9,7 @@ const Main = React.lazy(() =>
 
 const ActivitiesPage = React.lazy(() =>
   import(
-    /* webpackChunkName: "views-user" */ "./../pages/activities/activitiesListPage"
+    /* webpackChunkName: "views-user" */ "../pages/activities/activitiesPage"
   )
 );
 
