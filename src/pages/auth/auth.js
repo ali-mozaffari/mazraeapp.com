@@ -15,6 +15,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import loginIMG from "./../../assets/img/loginIMG.png";
 import logo from "./../../assets/img/logo.png";
 import { Input } from "@mui/material";
+import "./auth.css";
+import { display } from "@mui/system";
+import { InstagramIcon, TelegramIcon, WhatsappIcon } from "../../assets/icon";
 
 function Copyright(props) {
   return (
@@ -29,7 +32,7 @@ function Copyright(props) {
         mazraeapp
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
+      {/* {"."} */}
     </Typography>
   );
 }
@@ -105,29 +108,14 @@ export default function Auth() {
                 fullWidth
                 autoFocus
                 placeholder="شماره تماس"
-                style={{
-                  backgroundColor: "#f6f8f7",
-                  borderRadius: "8px",
-                  height: "50px",
-                  paddingRight: "10px",
-                  paddingLeft: "10px",
-                  fontSize: "13px",
-                  marginBottom: "20px",
-                }}
+                className="authInput"
               />
 
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                style={{
-                  backgroundColor: "#16db93",
-                  borderRadius: "8px",
-                  height: "50px",
-                  paddingRight: "10px",
-                  paddingLeft: "10px",
-                  fontSize: "13px",
-                }}
+                className="authSubmitBtn"
               >
                 ورود
               </Button>
@@ -153,6 +141,7 @@ export default function Auth() {
             </Box>
           </Box>
         </Grid>
+
         <Grid
           item
           xs={false}
@@ -168,7 +157,30 @@ export default function Auth() {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-        />
+        >
+          <Grid container className="authImgTopBar" sx={{display:{xs:"none", sm:"flex"}}}>
+            <Grid item className="authImgTopBarText">
+              اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به support@mazraeapp.com ایمیل بزنید
+            </Grid>
+          </Grid>
+         
+          {/* <div className="authImgTopBar d-flex">
+          <p>
+          اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید یا به support@mazraeapp.com ایمیل بزنید
+          </p>
+          </div> */}
+          <Grid container>
+            <Grid item className="authSocialIcon">
+              <TelegramIcon />
+            </Grid>
+            <Grid item className="authSocialIcon">
+              <InstagramIcon />
+            </Grid>
+            <Grid item className="authSocialIcon">
+              <WhatsappIcon />
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </ThemeProvider>
   );
