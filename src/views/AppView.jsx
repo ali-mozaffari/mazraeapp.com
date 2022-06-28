@@ -1,7 +1,11 @@
 import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import AppLayout from "../layouts/appLayout";
-import Auth from "../pages/auth/auth";
+import AuthLayout from "../layouts/authLayout";
+
+
+const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
+const Login = React.lazy(() => import("./../pages/auth/login"));
 
 const Main = React.lazy(() =>
   import(/* webpackChunkName: "views-user" */ "./../pages/main/main")
@@ -12,7 +16,6 @@ const ActivitiesPage = React.lazy(() =>
     /* webpackChunkName: "views-user" */ "../pages/activities/activitiesPage"
   )
 );
-
 
 const FarmServicePage = React.lazy(() =>
   import(
@@ -28,11 +31,15 @@ const InvitationPage = React.lazy(() =>
 
 const AppView = () => {
   const location = useLocation();
-  if (location.pathname === "/sendcode") {
-    return(
-    <Routes>
-      <Route path="sendcode" element={<Auth />} />
-    </Routes>
+
+  if (location.pathname === "/sendcode" || location.pathname === "/login") {
+    return (
+      <AuthLayout>
+        <Routes>
+          <Route path="/sendcode" element={<SendCode />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </AuthLayout>
     );
   }
 
@@ -40,14 +47,13 @@ const AppView = () => {
     <AppLayout>
       <Routes>
         <Route path="/" element={<Navigate replace to="home" />} />
-        <Route path="home" element={<Main />} />
-        <Route path="activities" element={<ActivitiesPage />} />
-        <Route path="farm-services" element={<FarmServicePage />} />
-        <Route path="invitation" element={<InvitationPage />} />
+        <Route path="/home" element={<Main />} />
+        <Route path="/activities" element={<ActivitiesPage />} />
+        <Route path="/farm-services" element={<FarmServicePage />} />
+        <Route path="/invitation" element={<InvitationPage />} />
       </Routes>
     </AppLayout>
   );
-
 };
 
 export default AppView;
