@@ -13,7 +13,7 @@
     border-radius: 15px;
 }
 
-.purple-outline-btn{
+.btn-outline-purple{
     color: #54478c;
     border: 1px solid #54478c;
     background-color: white;
@@ -32,11 +32,44 @@
 }
 
 
+.cus-alert-info{
+    background-color: rgba(235,245,255,1);
+    padding: 20px 30px ;
+    border-radius: 15px;
+    color: #2c699a;
+}
+
+.btn-help{
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #2c699a;
+    color: #2c699a;
+    padding: 5px 50px;
+}
+
+.text-dark-blue{
+    color: #2c699a;
+}
+
+.text-gray{
+    color: #999;
+}
+
+
 .search-input {
     background-color: #f6f8f7;
     border-radius: 15px;
     border: none;
     padding: 20px 25px;
+}
+
+
+.share-link-box{
+    width: max-content;
+    background-color: #16db9322;
+    color: #16db93;
+    padding: 10px 20px;
+    border-radius: 15px;
 }
 
 .table-test {
