@@ -18,7 +18,7 @@ import {
 } from "../../../assets/icon";
 import "./Sidebar.css";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "./../../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 
 const Sidebar = () => {
   const navigate = useNavigate();

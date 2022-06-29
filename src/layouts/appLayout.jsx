@@ -1,9 +1,8 @@
 import React from 'react';
 import {Container, Grid} from "@mui/material";
-import Topbar from "../pages/main/topbar/Topbar";
-import Content from "../pages/main/content/Content";
-import Sidebar from "../pages/main/Sidebar/Sidebar";
-import SidebarBottom from "../pages/main/Sidebar/SidebarBottom";
+import Topbar from "../components/main/topbar/Topbar";
+import Sidebar from "../components/main/Sidebar/Sidebar";
+import SidebarBottom from "../components/main/Sidebar/SidebarBottom";
 
 const AppLayout = ({children}) => {
     return (
@@ -15,8 +14,9 @@ const AppLayout = ({children}) => {
                     direction="row-reverse"
                     justifyContent="space-between"
                 >
-                    <Grid xs={12} sm={12} md={9} lg={8} className="mx-auto">
-                        <Topbar/>
+                    
+                    <Grid xs={12} sm={12} md={9} lg={8} px={2} className="mx-auto">
+                    <Topbar/>
                         {children}
                     </Grid>
 

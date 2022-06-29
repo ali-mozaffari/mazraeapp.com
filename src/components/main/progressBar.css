@@ -1,0 +1,146 @@
+.active-button-farm {
+    background-color: #2d9eff;
+    color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 3px;
+    border: 2px solid #2d9eff !important;
+}
+
+.default-button-farm {
+    background-color: #fff;
+    color: #2d9eff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-left: 3px;
+    border: 2px solid #2d9eff !important;
+    margin-bottom: 6px;
+}
+
+@media only screen and (max-width: 350px) {
+    .default-button-farm {
+        background-color: #fff;
+        color: #2d9eff;
+        border-radius: 4px;
+        padding: 5px 2px;
+        font-size: 12px;
+        margin-left: 3px;
+        border: 2px solid #2d9eff !important;
+        margin-bottom: 6px;
+    }
+}
+
+.default-button-farm:hover {
+    color: #fff;
+}
+
+.progress-part {
+    width: 100%;
+    height: 12px;
+
+    cursor: pointer;
+}
+
+.progress-complete {
+    display: inline-block;
+    /*line-height: 1;*/
+    /*margin-top: 5px;*/
+}
+
+.progress-complete-2 {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.culti-circle-percent {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+}
+
+/*.hektar-farm {*/
+/*    text-align: start;*/
+/*    font-size: 13px !important;*/
+/*    !*direction: rtl;*!*/
+/*    !*margin-top: 5px !important;*!*/
+/*}*/
+
+.sal-farm {
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+    text-align: center;
+    font-size: 13px;
+    direction: rtl;
+    margin-bottom: 0px !important;
+    margin-top: 0px;
+    color: gray;
+}
+
+.farm-percent {
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    /*margin-top: 0px;*/
+    color: black;
+    font-weight: 900;
+    /* margin-bottom: 35px; */
+    direction: rtl;
+    margin-left: 5px;
+    margin-top: 7px;
+}
+
+@media only screen and (max-width: 768px) {
+    .low-res {
+        display: block;
+        text-align: start;
+    }
+    .high-res {
+        display: none;
+    }
+    .top-title {
+        font-size: 13px;
+        text-align: center;
+        font-weight: 900;
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .low-res {
+        display: none;
+    }
+    .high-res {
+        display: block;
+    }
+    .top-title {
+        font-size: 17px;
+        font-weight: 900;
+        text-align: center !important;
+    }
+    .sub-title{
+        text-align: center !important;
+    }
+}
+
+.color-circle {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin-right: 4px;
+    border-radius: 5px;
+}
+
+.cul-tooltip {
+    background-color: #fff8f8;
+    padding: 4px;
+    border-radius: 5px;
+    width: auto;
+    border: 1px solid #d2d2d2;
+    position: absolute;
+    top: 0px;
+    box-shadow: 0 0 1px gray;
+}

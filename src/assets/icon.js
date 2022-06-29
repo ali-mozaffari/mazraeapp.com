@@ -1,5 +1,5 @@
 import React from "react";
-import "./../pages/main/Sidebar/Sidebar";
+import "../components/main/Sidebar/Sidebar";
 
 export const StayHome = (props) => {
     return (

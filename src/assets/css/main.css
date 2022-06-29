@@ -13,7 +13,7 @@
     border-radius: 15px;
 }
 
-.btn-outline-purple{
+.btn-outline-purple {
     color: #54478c;
     border: 1px solid #54478c;
     background-color: white;
@@ -32,14 +32,14 @@
 }
 
 
-.cus-alert-info{
-    background-color: rgba(235,245,255,1);
-    padding: 20px 30px ;
+.cus-alert-info {
+    background-color: rgba(235, 245, 255, 1);
+    padding: 20px 30px;
     border-radius: 15px;
     color: #2c699a;
 }
 
-.btn-help{
+.btn-help {
     background-color: white;
     border-radius: 10px;
     border: 1px solid #2c699a;
@@ -47,14 +47,17 @@
     padding: 5px 50px;
 }
 
-.text-dark-blue{
+.text-dark-blue {
     color: #2c699a;
 }
 
-.text-gray{
+.text-gray {
     color: #999;
 }
 
+.text-bold{
+    font-weight: 800;
+}
 
 .search-input {
     background-color: #f6f8f7;
@@ -64,7 +67,7 @@
 }
 
 
-.share-link-box{
+.share-link-box {
     width: max-content;
     background-color: #16db9322;
     color: #16db93;
@@ -106,6 +109,21 @@ table thead {
 
 
 @media screen and (max-width: 762px) {
+
+    .page-container {
+        background-color: white;
+        border-radius: 20px;
+        padding: 5px 10px 10px 10px;
+        margin: 10px 0 0 0;
+    }
+
+
+    .search-input {
+        background-color: #f6f8f7;
+        border-radius: 15px;
+        border: none;
+        padding: 10px 15px;
+    }
 
 
     .btn-outline-light-blue {
