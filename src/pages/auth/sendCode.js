@@ -56,7 +56,9 @@ const SendCode = () => {
           label="شماره تماس"
           variant="standard"
           InputLabelProps={{
-            
+            style: {
+              "& label-focused":{color: "red"}
+            }
           }}
           InputProps={{
             disableUnderline: true,
@@ -69,7 +71,6 @@ const SendCode = () => {
               right: "10px",
               fontSize: "13px",
               color: "#6ca271",
-              "& label-focused":{color: "red"},
               "&.Mui-focused": {
                 right: 0,
                 color: "#6ca271",
