@@ -1,0 +1,47 @@
+.message-box {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/*.message-box ul{*/
+
+/*    list-style: none !important;*/
+
+/*}*/
+
+.message-item {
+    width: 100%;
+    padding: 10px;
+    background: #f2f2f2;
+    margin-top: 50px;
+    border: 1px solid #bbbbbb42;
+    border-radius: 25px;
+    border-top-right-radius: 0px;
+}
+
+.message-item span {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.message-item p {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.8;
+    direction: rtl;
+    color: #4d4d4d;
+}
+
+.help-list {
+    direction: rtl;
+    list-style: none;
+    padding: 0 1px;
+    font-size: 13px;
+    line-height: 2.0;
+}
