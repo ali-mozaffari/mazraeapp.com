@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Grid } from "@mui/material";
-import Topbar from "../pages/main/topbar/Topbar";
-import Content from "../pages/main/content/Content";
-import Sidebar from "../pages/main/Sidebar/Sidebar";
-import SidebarBottom from "../pages/main/Sidebar/SidebarBottom";
+import Topbar from "../components/main/topbar/Topbar";
+// import Content from "../pages/main/content/Content";
+import Sidebar from "../components/main/Sidebar/Sidebar";
+import SidebarBottom from "../components/main/Sidebar/SidebarBottom";
 
 const AppLayout = ({ children }) => {
   return (

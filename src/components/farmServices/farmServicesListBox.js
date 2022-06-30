@@ -39,7 +39,7 @@ const FarmServicesListBox = () => {
                         {/*<img src={calendarIcon} alt="calendar" className="mx-2"/>*/}
                     </td>
                     <td className="d-flex">
-                        <button className="btn purple-outline-btn mx-2">
+                        <button className="btn btn-outline-purple mx-2">
                             <img  src={downloadIcon} className="mx-2"/>
                             دانلود
                         </button>
@@ -62,7 +62,7 @@ const FarmServicesListBox = () => {
                         {/*<img src={calendarIcon} alt="calendar" className="mx-2"/>*/}
                     </td>
                     <td className="d-flex">
-                        <button className="btn purple-outline-btn mx-2">
+                        <button className="btn btn-outline-purple mx-2">
                             <img  src={downloadIcon} className="mx-2"/>
                             دانلود
                         </button>
@@ -85,7 +85,7 @@ const FarmServicesListBox = () => {
                         {/*<img src={calendarIcon} alt="calendar" className="mx-2"/>*/}
                     </td>
                     <td className="d-flex">
-                        <button className="btn purple-outline-btn mx-2">
+                        <button className="btn btn-outline-purple mx-2">
                             <img  src={downloadIcon} className="mx-2"/>
                             دانلود
                         </button>

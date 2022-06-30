@@ -23,11 +23,11 @@ import {
   RedWarningNotification,
 } from "../../../assets/icon";
 import "./Topbar.css";
-import avatarIcon from "./../../../assets/img/avatarIcon.png";
+import avatarIcon from "../../../assets/img/avatarIcon.png";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import styled from "@emotion/styled";
 import { bgcolor, borderRadius, Box } from "@mui/system";
-import logo from "./../../../assets/img/logo.png";
+import logo from "../../../assets/img/logo.png";
 
 const ListItem = styled("li")`
   list-style: none;
@@ -52,7 +52,7 @@ const Topbar = () => {
       container
       sx={{ bgcolor: { xs: "#fff", sm: "#fff", md: "transparent" } }}
       p={2}
-      mt={2}
+      // mt={2}
       position="relative !important"
     >
       <Grid

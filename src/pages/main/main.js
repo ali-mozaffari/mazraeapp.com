@@ -1,8 +1,16 @@
-import Content from "./content/Content";
+import React from "react";
+import MainPageHeader from "../../components/main/mainPageHeader";
+import FarmListBox from "../../components/main/farmListBox";
 
 const Main = () => {
     return (
-        <Content/>
+        <div className="page-container container-fluid">
+
+                <MainPageHeader/>
+
+                <FarmListBox/>
+
+        </div>
     );
 };
 
