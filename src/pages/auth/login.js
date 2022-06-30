@@ -60,7 +60,6 @@ const Login = () => {
             className="authInput"
             variant="standard"
             placeholder="-"
-            type="number"
             InputProps={{
               disableUnderline: true,
             }}
@@ -73,7 +72,9 @@ const Login = () => {
             className="authInput"
             variant="standard"
             placeholder="-"
-            type="number"
+            InputLabelProps={{
+              marginRight: "20px"
+            }}
             InputProps={{
               disableUnderline: true,
             }}
@@ -86,7 +87,6 @@ const Login = () => {
             className="authInput"
             variant="standard"
             placeholder="-"
-            type="number"
             InputProps={{
               disableUnderline: true,
             }}
@@ -99,7 +99,9 @@ const Login = () => {
             className="authInput"
             variant="standard"
             placeholder="-"
-            type="number"
+            InputLabelProps={{
+              marginRight: "20px"
+            }}
             InputProps={{
               disableUnderline: true,
             }}

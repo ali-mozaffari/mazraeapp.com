@@ -55,18 +55,28 @@ const SendCode = () => {
           className="authInput"
           label="شماره تماس"
           variant="standard"
+          InputLabelProps={{
+            
+          }}
           InputProps={{
             disableUnderline: true,
+            style:{
+                width: "100%"
+            }
           }}
           sx={{
             "& label": {
               right: "10px",
               fontSize: "13px",
               color: "#6ca271",
+              "& label-focused":{color: "red"},
               "&.Mui-focused": {
                 right: 0,
                 color: "#6ca271",
                 marginTop: "8px",
+                style:{
+                    right: "5px"
+                }
               },
             },
             input: {
