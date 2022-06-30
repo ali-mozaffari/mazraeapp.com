@@ -10,12 +10,13 @@ const AppLayout = ({ children }) => {
     <div>
       <div>
         <Grid
+          item
           container
           spacing={0}
           direction="row-reverse"
           justifyContent="space-between"
         >
-          <Grid xs={12} sm={12} md={9} lg={8} className="mx-auto">
+          <Grid item xs={12} sm={12} md={9} lg={8} className="mx-auto">
             <Topbar />
             {children}
           </Grid>

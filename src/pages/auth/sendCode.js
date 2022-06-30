@@ -57,31 +57,36 @@ const SendCode = () => {
           variant="standard"
           InputLabelProps={{
             style: {
-              "& label-focused":{color: "red"}
-            }
+              // "label + .css-1x51dt5-MuiInputBase-input-MuiInput-input":{color: "red !important"}
+              // "& .MuiFormLabel-root":{color: "red !important"}
+            },
           }}
           InputProps={{
             disableUnderline: true,
-            style:{
-                width: "100%"
-            }
+            style: {
+              width: "100%",
+            },
           }}
           sx={{
             "& label": {
-              right: "10px",
+              right: "10px !important",
               fontSize: "13px",
               color: "#6ca271",
               "&.Mui-focused": {
                 right: 0,
                 color: "#6ca271",
                 marginTop: "8px",
-                style:{
-                    right: "5px"
-                }
+                style: {
+                  // right: "5px",
+                },
               },
             },
             input: {
               color: "#6ca271",
+            },
+            ".MuiFormLabel-root.Mui-focused": {
+              marginRight: "-29% !important",
+              // color: 'red !important'
             },
           }}
         />

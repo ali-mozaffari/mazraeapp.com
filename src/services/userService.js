@@ -18,3 +18,4 @@ export const getProfile = () => {
 export const putProfile = user => {
     return formDataHttp.put(`${apiUrl}auth/edit-profile`, user);
 };
+

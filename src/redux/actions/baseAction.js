@@ -1,15 +1,15 @@
-// const INCREMENT = 'counter/increment'
-//
-// export default function increment(amount) {
-//   return {
-//     type: INCREMENT,
-//     payload: amount,
-//   }
-// }
+// // const INCREMENT = 'counter/increment'
+// //
+// // export default function increment(amount) {
+// //   return {
+// //     type: INCREMENT,
+// //     payload: amount,
+// //   }
+// // }
 
-import {createAction} from "@reduxjs/toolkit";
+// import {createAction} from "@reduxjs/toolkit";
 
-const increment = createAction('increment')
+// const increment = createAction('increment')
 
-export default increment;
-// const action = increment(3)
+// export default increment;
+// // const action = increment(3)

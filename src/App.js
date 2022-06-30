@@ -4,10 +4,7 @@ const ViewApp = React.lazy(() =>
     import(/* webpackChunkName: "views-user" */ './views/AppView')
 );
 
-
 const App = () => {
-
-
 
     return (
         <div>

@@ -1,2 +1,2 @@
-export const apiUrl = 'http://127.0.0.1:8000'
+export const apiUrl = 'https://ea65-185-16-206-238.eu.ngrok.io'
 

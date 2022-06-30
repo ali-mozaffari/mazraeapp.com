@@ -53,18 +53,11 @@ const AppView = () => {
     <AppLayout>
       <Routes>
         <Route path="/" element={<Navigate replace to="home" />} />
-<<<<<<< Updated upstream
-        <Route path="/home" element={<Main />} />
-        <Route path="/activities" element={<ActivitiesPage />} />
-        <Route path="/farm-services" element={<FarmServicePage />} />
-        <Route path="/invitation" element={<InvitationPage />} />
-=======
         <Route path="home" element={<Main />} />
         <Route path="add-farm" element={<AddFarmPage />} />
         <Route path="activities" element={<ActivitiesPage />} />
         <Route path="farm-services" element={<FarmServicePage />} />
         <Route path="invitation" element={<InvitationPage />} />
->>>>>>> Stashed changes
       </Routes>
     </AppLayout>
   );
