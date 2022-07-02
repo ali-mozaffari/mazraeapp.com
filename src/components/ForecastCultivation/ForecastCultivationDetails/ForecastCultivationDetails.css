@@ -1,0 +1,90 @@
+.reg-page {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    background: url('../../../../../assets/img/ui.png') no-repeat center center;
+    background-size: cover;
+    overflow-y: scroll;
+    /* padding-bottom: 60px; */
+}
+
+.reg-page form {
+    width: 80%;
+    background: white;
+    margin: 0 auto;
+    padding: 0 40px 60px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 29px 10px #3e3e3e1c;
+}
+
+.reg-page h2 {
+    padding: 30px 20px;
+    display: block;
+    text-align: right;
+    width: 80%;
+    margin: 0 auto;
+    background: white !important;
+}
+
+.det-icon {
+    display: block;
+    height: 20px;
+    position: absolute;
+    top: 7px;
+    right: 12px;
+}
+
+.add-farm {
+    width: 100%;
+    padding: 20px;
+}
+
+.add-farm h2 {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    font-size: 14px;
+    color: white;
+    background: #2d8549;
+}
+
+@media only screen and (min-width: 960px) {
+    .add-farm h2 {
+        position: fixed;
+        top: 0;
+        right: 279px;
+        font-size: 14px;
+        color: white;
+        background: #2d8549;
+    }
+    .btn-primary {
+        width: 200px;
+        display: inline-block;
+        margin-top: 20px !important;
+        margin-right: 10px;
+    }
+}
+
+
+
+.btn-container {
+    position: relative;
+    text-align: right;
+}
+
+.mr-auto {
+    margin: 0 auto
+}
+
+.close-btn {
+    border: none;
+    background: white;
+    cursor: pointer;
+}
+
+.btn-form {
+    width: 240px !important;
+    font-size: 15px !important;
+}
