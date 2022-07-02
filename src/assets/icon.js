@@ -165,7 +165,7 @@ export const ThreeDots = (props) => {
             </defs>
             <title>3-horizontal-dots</title>
             <path
-                class="cls-1"
+                className="cls-1"
                 d="M0,15A15,15,0,1,1,15,30,15,15,0,0,1,0,15Zm92.93,0a15,15,0,1,1,15,15,15,15,0,0,1-15-15ZM46.46,15a15,15,0,1,1,15,15,15,15,0,0,1-15-15Z"
             />
         </svg>

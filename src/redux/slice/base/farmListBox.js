@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import "./../../../services/config"
 
-axios.defaults.baseURL = "https://ea65-185-16-206-238.eu.ngrok.io";
+// axios.defaults.baseURL = "https://ea65-185-16-206-238.eu.ngrok.io";
 
 // export const getFarmListBoxAPI = async () => axios.get('/api/v2/farm/farms');
 export const getFarmListBoxAPI = createAsyncThunk(
@@ -26,7 +27,7 @@ const initialState = {
 };
 
 const farmListBoxSlice = createSlice({
-  name: "farmListBox",
+  name: "farmList",
   initialState,
   // reducers: {},
   extraReducers: {

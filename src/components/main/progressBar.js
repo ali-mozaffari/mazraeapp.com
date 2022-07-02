@@ -113,7 +113,7 @@ function ForecastCultivationProgressItem(props) {
             {main ? (
                 <div className='col-10 low-res'>
                     <p className='top-title'>
-                        {data.masahat.toFixed(2)}
+                        {data.masahat.toFixed(2)} 
                         {' هکتار '}
                         <span className="small text-gray">
                         مجموع مزارع
@@ -203,7 +203,7 @@ function ForecastCultivationProgressItem(props) {
 
                             {item.title && (
                                 <span className='farm-percent'>
-                                    <div className='color-circle' style={{'background-color': item.color,}}>
+                                    <div className='color-circle' style={{'backgroundColor': item.color,}}>
 
                                     </div>
                                     {' '}
@@ -280,7 +280,7 @@ function ForecastCultivationProgressItem(props) {
 
                             {item.title && (
                                 <span className='farm-percent'>
-                                    <div className='color-circle' style={{'background-color': item.color,}}>
+                                    <div className='color-circle' style={{'backgroundColor': item.color,}}>
 
                                     </div>
                                     {' '}
