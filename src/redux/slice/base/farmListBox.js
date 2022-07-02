@@ -1,47 +1,43 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import "./../../../services/config"
+import "./../../../services/config";
 
-// axios.defaults.baseURL = "https://ea65-185-16-206-238.eu.ngrok.io";
+// axios.defaults.baseURL = "https://cc15-185-16-206-237.eu.ngrok.io";
 
-// export const getFarmListBoxAPI = async () => axios.get('/api/v2/farm/farms');
 export const getFarmListBoxAPI = createAsyncThunk(
   "get/farmListBox",
-  async () => {
+  async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
-        const {data} = await axios.get("/api/v2/farm/farms", {
-          headers: {
-            'Authorization': "Token 533feb77d1c5a47aa05c5c433c23805987b591cb"
-          }
-        });
-        // console.log(response.data.results)
-        return data.results;
+      const { data } = await axios.get("https://cargo.jadeh.co/cargo/cargoSearch?searchValue=%D8%AA%D9%87%D8%B1%D8%A7%D9%86&page=4", {
+        // headers: {
+        //   Authorization: "Token 533feb77d1c5a47aa05c5c433c23805987b591cb",
+        // },
+      });
+      console.log(data.data)
+      return data.data;
     } catch (error) {
-        console.log(error);
+      return error?.response;
     }
   }
 );
 
-const initialState = {
-  value: {},
-};
 
 const farmListBoxSlice = createSlice({
   name: "farmList",
-  initialState,
+  initialState: {},
   // reducers: {},
   extraReducers: {
     [getFarmListBoxAPI.fulfilled]: (state, action) => {
-        state.postList = action.payload;
-        state.loading = false;
+      state.postList = action.payload;
+      state.loading = false;
     },
     [getFarmListBoxAPI.pending]: (state, action) => {
-        state.loading = true;
+      state.loading = true;
     },
     [getFarmListBoxAPI.rejected]: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-    }
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
