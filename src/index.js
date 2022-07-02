@@ -6,7 +6,7 @@ import '../src/assets/css/fontiran.css';
 import './index.css';
 import './assets/css/main.css';
 import {store} from './redux/store'
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux';
 
 const container = document.getElementById('root');
 const root = createRoot(container);

@@ -13,7 +13,7 @@ const AddFarmPage = () => {
     return (
         <div className='add-farm'>
 
-            {/* <Map/> */}
+             <Map/>
 
         </div>
     );
