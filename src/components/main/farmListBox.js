@@ -9,6 +9,7 @@ import { Menu, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getFarmListBoxAPI } from "./../../redux/slice/base/farmListBox";
 import { useEffect } from "react";
+import { far } from "@fortawesome/free-regular-svg-icons";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -24,9 +25,13 @@ const FarmListBox = () => {
     dispatch(getFarmListBoxAPI());
   }, []);
 
-  const farmlist = useSelector(state => state.farmlist);
+  const farmlist = useSelector((state) => state.farmlist);
   const { postList, loading } = farmlist;
-  console.log({ postList, loading });
+  //   console.log({ postList, loading });
+  // const name = postList.name;
+  // console.log(name)
+  //   const farmBox = postList;
+  //   console.log(farmBox.guid)
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -39,11 +44,13 @@ const FarmListBox = () => {
 
   return (
     <div className="container-fluid mt-4">
+      {/* {postList?.map(x=>(<h1>{x.name}</h1>))} */}
+
       <div className="row d-md-flex justify-content-center">
-        {/* {loading ? ( */}
-          <h1>درحال بازگذاری ...</h1>
-         {/* ) : ( */}
-          {farmlist?.map((item) => {
+        {loading ? (
+          <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>
+        ) : (
+          postList?.map((item) => (
             <div
               key={item?.guid}
               className="col-11 col-md-3 mx-md-4 farm-item-box"
@@ -143,9 +150,9 @@ const FarmListBox = () => {
                         // data={data}
                         data={calculateFarmsProgressData(data2)}
                     /> */}
-            </div>;
-          })}
-         {/* )} */}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
