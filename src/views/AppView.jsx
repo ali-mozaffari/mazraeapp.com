@@ -47,6 +47,12 @@ const AppView = () => {
         </Routes>
       </AuthLayout>
     );
+  }else if (location.pathname === '/add-farm'){
+    return (
+        <Routes>
+          <Route path="add-farm" element={<AddFarmPage />} />
+        </Routes>
+    );
   }
 
   return (
@@ -54,7 +60,7 @@ const AppView = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="home" />} />
         <Route path="home" element={<Main />} />
-        <Route path="add-farm" element={<AddFarmPage />} />
+        {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
         <Route path="activities" element={<ActivitiesPage />} />
         <Route path="farm-services" element={<FarmServicePage />} />
         <Route path="invitation" element={<InvitationPage />} />
