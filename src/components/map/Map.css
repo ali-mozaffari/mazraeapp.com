@@ -59,6 +59,18 @@
 }
 
 
+.btn-tools-checked {
+
+    margin: 0 10px 10px 0;
+    width: 50%;
+    height: 50px;
+    background-color: #0a53be;
+    color: white;
+    border-radius: 10px;
+
+}
+
+
 @media screen and (max-width: 762px) {
 
 
@@ -82,6 +94,19 @@
         background-color: #ffffffcc;
         color: black;
         border-radius: 10px;
+
+    }
+
+
+    .btn-tools-checked {
+
+        margin: 0 10px 10px 0;
+        width: 50%;
+        height: 50px;
+        background-color: #0a53be;
+        color: white;
+        border-radius: 10px;
+
 
     }
 

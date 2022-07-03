@@ -35,7 +35,7 @@ const AddFarmPage = React.lazy(() =>
   )
 );
 
-const AddCultivation = React.lazy(() => import("./../components/farm/Cultivation/AddCultivation/AddCultivation"))
+// const AddCultivation = React.lazy(() => import("./../components/farm/Cultivation/AddCultivation/AddCultivation"))
 
 const AppView = () => {
   const location = useLocation();
@@ -66,7 +66,7 @@ const AppView = () => {
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/farm-services" element={<FarmServicePage />} />
         <Route path="/invitation" element={<InvitationPage />} />
-        <Route path={'/add-cultivation/:guid/:name'} component={AddCultivation}/>
+        {/*<Route path={'/add-cultivation/:guid/:name'} component={AddCultivation}/>*/}
       </Routes>
     </AppLayout>
   );
