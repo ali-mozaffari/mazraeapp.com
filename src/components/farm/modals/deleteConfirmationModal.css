@@ -1,0 +1,6 @@
+.modal-header {
+    display: grid !important;
+    border-bottom: none;
+    position: relative;
+    justify-content: center;
+  };

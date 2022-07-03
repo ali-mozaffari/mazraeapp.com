@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import "./../../../services/config";
+import "../../../services/config";
 
 // axios.defaults.baseURL = "https://cc15-185-16-206-237.eu.ngrok.io";
 
@@ -20,6 +20,10 @@ export const getFarmListBoxAPI = createAsyncThunk(
     }
   }
 );
+
+// export const deleteFarmListAPI = createAsyncThunk(
+//   "delete/farmList", async ()
+// )
 
 const farmListBoxSlice = createSlice({
   name: "farmList",

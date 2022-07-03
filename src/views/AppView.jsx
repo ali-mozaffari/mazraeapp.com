@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import AppLayout from "../layouts/appLayout";
 import AuthLayout from "../layouts/authLayout";
 
-
 const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
 const Login = React.lazy(() => import("./../pages/auth/login"));
 
@@ -30,12 +29,12 @@ const InvitationPage = React.lazy(() =>
 );
 
 const AddFarmPage = React.lazy(() =>
-  import(
-    /* webpackChunkName: "views-user" */ "../pages/main/addFarmPage"
-  )
+  import(/* webpackChunkName: "views-user" */ "../pages/main/addFarmPage")
 );
 
-const AddCultivation = React.lazy(() => import("./../components/farm/Cultivation/AddCultivation/AddCultivation"))
+// const AddCultivation = React.lazy(() =>
+//   import("./../components/farm/Cultivation/AddCultivation/AddCultivation")
+// );
 
 const AppView = () => {
   const location = useLocation();
@@ -49,11 +48,11 @@ const AppView = () => {
         </Routes>
       </AuthLayout>
     );
-  }else if (location.pathname === '/add-farm'){
+  } else if (location.pathname === "/add-farm") {
     return (
-        <Routes>
-          <Route path="add-farm" element={<AddFarmPage />} />
-        </Routes>
+      <Routes>
+        <Route path="add-farm" element={<AddFarmPage />} />
+      </Routes>
     );
   }
 
@@ -66,7 +65,7 @@ const AppView = () => {
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/farm-services" element={<FarmServicePage />} />
         <Route path="/invitation" element={<InvitationPage />} />
-        <Route path={'/add-cultivation/:guid/:name'} component={AddCultivation}/>
+        {/* <Route path={'/add-cultivation/:guid/:name'} component={AddCultivation}/> */}
       </Routes>
     </AppLayout>
   );

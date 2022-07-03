@@ -2,7 +2,7 @@ import React from 'react';
 import filterIcon from "../../assets/img/filterIcon.png";
 import sortIcon from "../../assets/img/sort-down.svg";
 import {useDispatch, useSelector} from "react-redux";
-import increment from "../../redux/actions/baseAction";
+// import increment from "../../redux/actions/baseAction";
 
 const FilterFarmServiceBar = () => {
 

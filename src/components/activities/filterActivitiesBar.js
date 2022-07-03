@@ -2,7 +2,7 @@ import React from 'react';
 import filterIcon from "../../assets/img/filterIcon.png";
 import sortIcon from "../../assets/img/sort-down.svg";
 import {useDispatch, useSelector} from "react-redux";
-import increment from "../../redux/actions/baseAction";
+// import increment from "../../redux/actions/baseAction";
 
 const FilterActivitiesBar = () => {
 
@@ -25,7 +25,7 @@ const FilterActivitiesBar = () => {
                     </p>
                 </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn-outline-light-blue mx-1" onClick={() => dispatch(increment())}>
+                    <button className="btn-outline-light-blue mx-1" onClick={() => dispatch()}>
                         گزارش فعالیت ها
                     </button>
                     <button className="btn-dark-blue mx-1">
