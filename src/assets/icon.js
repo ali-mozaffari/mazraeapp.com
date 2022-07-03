@@ -238,10 +238,36 @@ export const LocationIcon = (props) => {
 
     );
 };
+export const InfoIcon = (props) => {
+    return (
+        <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29">
+            <g id="warning-notfication" transform="translate(-3.075 -3.7)">
+                <g id="Group_26" data-name="Group 26" transform="translate(0 0)">
+                    <g id="Group_392" data-name="Group 392">
+                        <g id="Ellipse_31" data-name="Ellipse 31" transform="translate(3.075 3.7)" fill="none"
+                           stroke="#2c699a" stroke-width="2.4">
+                            <circle cx="14.5" cy="14.5" r="14.5" stroke="none"/>
+                            <circle cx="14.5" cy="14.5" r="13.3" fill="none"/>
+                        </g>
+                        <path id="Path_41" data-name="Path 41"
+                              d="M220.048,333.382a1.823,1.823,0,0,0,0,3.646,1.824,1.824,0,0,0,0-3.646Z"
+                              transform="translate(-202.31 -310.592)" fill="#2c699a"/>
+                        <path id="Path_43" data-name="Path 43"
+                              d="M219.132,157.228a1.983,1.983,0,0,0-1.408,1.991c.044.576.08,1.16.124,1.736.124,2.2.248,4.346.372,6.542a1.336,1.336,0,0,0,1.364,1.284,1.364,1.364,0,0,0,1.364-1.327c0-.452,0-.868.044-1.327.08-1.408.168-2.815.248-4.223.044-.912.124-1.823.168-2.735a2.252,2.252,0,0,0-.168-.912A1.828,1.828,0,0,0,219.132,157.228Z"
+                              transform="translate(-201.847 -147.237)" fill="#2c699a"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+
+
+    );
+};
 
 export const PolygonIcon = (props) => {
     return (
-        <svg fill={props.fill} id="_003-location" data-name="003-location" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+        <svg fill={props.fill} id="_003-location" data-name="003-location" xmlns="http://www.w3.org/2000/svg" width="26"
+             height="26"
              viewBox="0 0 36.923 30">
             <g id="Group_72" data-name="Group 72">
                 <g id="Group_71" data-name="Group 71">

@@ -47,6 +47,14 @@
     padding: 5px 50px;
 }
 
+.btn-gray {
+    background-color: gray;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 50px;
+    margin: 10px 20px;
+}
+
 .text-dark-blue {
     color: #2c699a;
 }
