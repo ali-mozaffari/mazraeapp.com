@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from "./../../components/main/map/map";
+import Map from "../../components/map/map";
 import {useParams} from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";

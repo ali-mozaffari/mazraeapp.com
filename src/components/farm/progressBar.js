@@ -113,7 +113,7 @@ function ForecastCultivationProgressItem(props) {
             {main ? (
                 <div className='col-10 low-res'>
                     <p className='top-title'>
-                        {data.masahat.toFixed(2)} 
+                        {data.masahat.toFixed(2)}
                         {' هکتار '}
                         <span className="small text-gray">
                         مجموع مزارع
@@ -128,9 +128,9 @@ function ForecastCultivationProgressItem(props) {
 
             {/*{!isItem && (*/}
             {/*    <span className='sal-farm'>*/}
-            {/*        {main ? '' : all ? 'سال زراعی' : 'الگوی کشت سال'}*/}
+            {/*        {farm ? '' : all ? 'سال زراعی' : 'الگوی کشت سال'}*/}
 
-            {/*        {(all && !main) ? '1397-1400' : ''}*/}
+            {/*        {(all && !farm) ? '1397-1400' : ''}*/}
 
             {/*        {!all && data.years.map(item => {*/}
             {/*            return (*/}
@@ -317,11 +317,11 @@ function ForecastCultivationProgressItem(props) {
 
                 {/*{!isItem && isLevelOneProgress && (*/}
                 {/*    <span className='sal-farm'>*/}
-                {/*        {main ? '' : all ? 'سال زراعی' : 'الگوی کشت سال'}*/}
+                {/*        {farm ? '' : all ? 'سال زراعی' : 'الگوی کشت سال'}*/}
 
-                {/*        {(all && !main) ? CONST.LAST_YEAR_TITLE : ''}*/}
+                {/*        {(all && !farm) ? CONST.LAST_YEAR_TITLE : ''}*/}
 
-                {/*        {!all && main !== true && data.years.map(item => {*/}
+                {/*        {!all && farm !== true && data.years.map(item => {*/}
                 {/*            return (*/}
                 {/*                <div>*/}
                 {/*                    {item}*/}

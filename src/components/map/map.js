@@ -3,9 +3,9 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import {MapContainer, Marker, Polygon, Popup, TileLayer, useMap} from "react-leaflet";
 import './Map.css'
-import {InfoIcon, LocationIcon, PolygonIcon} from "../../../assets/icon";
-import InfoModal from "../modals/infoModal";
-import getLocation from "../utils/getLocation";
+import {InfoIcon, LocationIcon, PolygonIcon} from "../../assets/icon";
+import InfoModal from "../farm/modals/infoModal";
+import getLocation from "../farm/utils/getLocation";
 
 
 delete L.Icon.Default.prototype._getIconUrl;

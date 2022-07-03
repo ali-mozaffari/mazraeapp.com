@@ -1,6 +1,6 @@
 import React from "react";
-import MainPageHeader from "../../components/main/mainPageHeader";
-import FarmListBox from "../../components/main/farmListBox";
+import MainPageHeader from "../../components/farm/mainPageHeader";
+import FarmListBox from "../../components/farm/farmListBox";
 
 const Main = () => {
     return (

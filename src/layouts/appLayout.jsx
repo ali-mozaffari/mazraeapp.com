@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid } from "@mui/material";
 import Topbar from "../components/main/topbar/Topbar";
-// import Content from "../pages/main/content/Content";
+// import Content from "../pages/farm/content/Content";
 import Sidebar from "../components/main/Sidebar/Sidebar";
 import SidebarBottom from "../components/main/Sidebar/SidebarBottom";
 

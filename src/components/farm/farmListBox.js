@@ -155,7 +155,7 @@ const FarmListBox = () => {
           <hr />
 
           {/* <ForecastCultivationProgressItem
-                        main={false}
+                        farm={false}
                         all
                         title={'مجموع مزارع'}
                         // data={data}
