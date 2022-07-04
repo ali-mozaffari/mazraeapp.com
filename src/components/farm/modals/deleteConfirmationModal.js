@@ -4,16 +4,31 @@ import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
 // import { borderBottom, grid, padding } from "@mui/system";
 import "./deleteConfirmationModal.css";
+import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
+import { useDispatch } from "react-redux";
 
 const DeleteConfirmationModal = ({
   showModal,
   hideModal,
   confirmModal,
   id,
-  type,
+//   deleteFarmStore,
+  //   type,
 }) => {
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(deleteFarmList(id));
+    confirmModal();
+    hideModal();
+    // deleteFarmStore(id);
+  };
+
   return (
-    <Modal show={showModal} onHide={hideModal} sx={{borderRadius:"25px !important"}} style={{borderRadius:"25px !important"}}>
+    <Modal
+      show={showModal}
+      sx={{ borderRadius: "25px !important" }}
+      style={{ borderRadius: "25px !important" }}
+    >
       <div className="modal-header">
         <img
           src={closeNotification}
@@ -22,7 +37,9 @@ const DeleteConfirmationModal = ({
             left: "20px",
             top: "20px",
             height: "20px",
+            cursor: "pointer",
           }}
+          onClick={hideModal}
         />
         <img
           src={warning}
@@ -48,7 +65,8 @@ const DeleteConfirmationModal = ({
       <Modal.Footer className="justify-content-center border-top-0">
         <Button
           variant="danger"
-          onClick={() => confirmModal(type, id)}
+          //   onClick={() => confirmModal(id)}
+          onClick={() => handleDelete(id)}
           style={{
             fontWeight: "800",
             backgroundColor: "#f1634b",
