@@ -7,6 +7,8 @@ import {DeleteIcon, InfoIcon, LocationIcon, PolygonIcon} from "../../assets/icon
 import InfoModal from "../farm/modals/infoModal";
 import getLocation from "../farm/utils/getLocation";
 import moment from "moment";
+import FormBottom from "./formBottom";
+import * as turf from '@turf/turf'
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -21,31 +23,47 @@ function MapClickHandler(props) {
         if (props.addPoly) {
             let new_list = [...props.pointsState]
             new_list.push(e.latlng)
+            props.refreshArea(new_list)
             props.setPointsState(new_list)
         }
     })
 }
 
 const Map = () => {
+
+        let area_points = []
         const mapBoxUrl = 'https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGVzdC1tYXoiLCJhIjoiY2trMnd4MHV2MTVjaTJ2cXMxemY1ZXRtZiJ9.FQEAeAkNLH7t2BAYLUBf-g'
         const [pointsState, setPointsState] = useState([]);
         const [addPoly, setAddPoly] = useState(false)
         const [_center, setCenter] = useState();
-        const dragging = useRef(false)
         const [infoModalOpen, setInfoModalOpen] = React.useState(false);
-        let lastMapClickTime = moment();
-
-        const handleInfoModalClickOpen = () => {
-            setInfoModalOpen(true);
-        };
-
-        const handleInfoModalClose = () => {
-            setInfoModalOpen(false);
-        };
+        const [realArea, setRealArea] = useState('');
 
         useEffect(() => {
             getLocation({setCenter})
         }, [_center])
+
+
+        useEffect(() => {
+
+            console.error(pointsState)
+
+        }, [pointsState])
+
+
+        const refreshArea = (list) => {
+            if (list.length >= 3) {
+                for (let i = 0; i < list.length; i++) {
+                    area_points.push([list[i]['lat'], list[i]['lng']])
+                }
+                const polygon = turf.polygon([[...area_points, area_points[0]]]);
+                const area = turf.area(polygon);
+                setRealArea(area.toFixed(2))
+                // console.error(area.toFixed(2) / 10000)
+                // onPointsAdd(pointsState, area / 10000)
+
+            }
+        }
 
 
         return (
@@ -65,7 +83,8 @@ const Map = () => {
                                       style={{width: '100%', height: '100vh'}} easeLinearity={0.35}
                         >
 
-                            <MapClickHandler addPoly={addPoly} pointsState={pointsState} setPointsState={setPointsState}/>
+                            <MapClickHandler addPoly={addPoly} pointsState={pointsState} setPointsState={setPointsState}
+                                             refreshArea={refreshArea}/>
 
                             <TileLayer
                                 attribution="[Mapbox]"
@@ -86,8 +105,9 @@ const Map = () => {
                                         eventHandlers={{
                                             drag: (e) => {
                                                 const _points = [...pointsState];
-                                                _points[index] = [e.latlng.lat, e.latlng.lng]
+                                                _points[index] = {lat: e.latlng.lat, lng: e.latlng.lng}
                                                 setPointsState(_points)
+                                                refreshArea(_points)
                                             },
                                             click: (e) => {
                                                 let filtered_list = pointsState.filter(function (value, index2, arr) {
@@ -112,60 +132,9 @@ const Map = () => {
                     </Suspense>
                 </div>
 
-
-                <div className="map-tools">
-
-                    <div style={{width: '100px', display: 'flex', flexDirection: 'column-reverse'}}>
-                        <button className="btn btn-tools"
-                                type="button"
-                                onClick={() => {
-                                    getLocation({setCenter})
-                                }}>
-                            <LocationIcon/>
-                        </button>
-                        <button className={addPoly ? "btn btn-tools-checked" : "btn btn-tools"} onClick={() => setAddPoly(!addPoly)}>
-                            {
-                                addPoly ? <PolygonIcon fill={'white'}/> : <PolygonIcon/>
-                            }
-                        </button>
-
-                        {
-                            pointsState.length > 3 ? (
-                                <button className="btn btn-tools" onClick={() => {
-                                    setPointsState([]);
-                                }}>
-                                    <DeleteIcon fill={'#000'}/>
-                                </button>
-                            ) : null
-                        }
-                    </div>
-
-
-                    <div className="container-fluid">
-                        <div className='row'>
-                            <div className="col-md-6 mx-auto">
-                                <input className="farm-name-input w-100" placeholder="نام مزرعه ..."/>
-                            </div>
-                            <div className="col-md-5 mx-auto d-md-block d-flex justify-content-between mt-3 mt-md-0">
-                                <button className="btn-farm-add mx-md-2 py-2 py-md-0">
-                                    ذخیره
-                                </button>
-                                <button className="btn-farm-cancel mx-md-2 py-2 py-md-0">
-                                    بازگشت
-                                </button>
-                            </div>
-                            <div className="col-md-1">
-                                <button className="btn btn-tools h-100 d-none d-md-block mx-md-2 py-2 py-md-0"
-                                        onClick={handleInfoModalClickOpen}>
-                                    <InfoIcon/>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <InfoModal open={infoModalOpen} handleClose={handleInfoModalClose}/>
+                <FormBottom pointsState={pointsState} area={realArea}
+                            setPointsState={setPointsState} addPoly={addPoly} infoModalOpen={infoModalOpen}
+                            setAddPoly={setAddPoly} setInfoModalOpen={setInfoModalOpen} setCenter={setCenter}/>
 
             </div>
         );
