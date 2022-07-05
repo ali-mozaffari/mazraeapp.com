@@ -28,6 +28,7 @@ const DeleteConfirmationModal = ({
       show={showModal}
       sx={{ borderRadius: "25px !important" }}
       style={{ borderRadius: "25px !important" }}
+      centered
     >
       <div className="modal-header">
         <img

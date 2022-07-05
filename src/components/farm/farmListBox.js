@@ -106,7 +106,7 @@ const FarmListBox = () => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/edit-farm/"} className="dropdownItem">
+                          <Link to={"/edit-farm"} className="dropdownItem">
                             ویرایش مشخصات مزرعه
                           </Link>
                         </Dropdown.Item>
