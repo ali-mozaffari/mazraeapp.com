@@ -36,6 +36,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-leaflet": "^4.0.1",
+    "react-lottie": "^1.2.3",
     "react-mapbox-gl": "^5.1.1",
     "react-mapbox-gl-draw": "^2.0.4",
     "react-number-format": "^4.9.3",

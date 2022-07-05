@@ -41,12 +41,12 @@ const BreadCrumbs = (props) => {
   return (
     <Breadcrumbs aria-label="breadcrumb">
       {props.crumbs.map((name, ci) => {
-        const lastTitle = isLast(ci) ? "fs-5" : "";
+        const lastTitle = isLast(ci) ? "fw-bolder !important" : "";
         return (
           <ul key={ci} style={{padding: "0"}}>
             <li
               className={`btn btn-link ${lastTitle}`}
-              style={{ textDecoration: "none", color: "inherit", padding:"0", cursor: "auto" }}
+              style={{ textDecoration: "none", color: "inherit", padding:"0", cursor: "auto", fontSize:"14px" }}
             >
               {name}
             </li>
