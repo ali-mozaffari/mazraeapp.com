@@ -1,20 +1,17 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk, createAction} from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
-import {toast} from "react-toastify";
-
-// axios.defaults.baseURL = "https://cc15-185-16-206-237.eu.ngrok.io";
 
 export const addFarm = createAsyncThunk(
-    "post/addFarm",
+    "farm/addFarm",
     async (payload, {rejectWithValue, getState, dispatch}) => {
         try {
-            const {data} = await axios.post("/api/v2/farm/farm", payload,{
+            const {data, status} = await axios.post("/api/v2/farm/farm", payload, {
                 headers: {
                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
                 },
             });
-            return data;
+            return {data, status};
 
         } catch (error) {
             return error?.response;
@@ -22,27 +19,26 @@ export const addFarm = createAsyncThunk(
     }
 );
 
+export const clearFarm = createAction('farm/clearFarm')
+
 const addFarmSlice = createSlice({
-    name: "addFarm",
+    name: "farm",
     initialState: {},
-    // reducers: {},
     extraReducers: {
+        [clearFarm]: (state, action) => {
+            state.loading = false;
+            state.data = null;
+        },
         [addFarm.pending]: (state, action) => {
             state.loading = true;
         },
         [addFarm.fulfilled]: (state, action) => {
-            if (action.payload.status === 400){
-                toast.error(action.payload.data.message, {position:'top-center', theme:'dark'})
-            }
-
-            if (action.payload.guid){
-                toast.success('مزرعه با موفقیت ایجاد شد', {position: 'top-center', theme: 'dark'})
-            }
             state.loading = false;
+            state.data = action.payload.data;
         },
         [addFarm.rejected]: (state, action) => {
             state.loading = false;
-        },
+        }
     },
 });
 

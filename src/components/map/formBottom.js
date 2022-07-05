@@ -4,10 +4,12 @@ import {DeleteIcon, InfoIcon, LocationIcon, PolygonIcon} from "../../assets/icon
 import InfoModal from "../farm/modals/infoModal";
 import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {getFarmListBoxAPI} from "../../redux/slice/farm/farmListBox";
-import {addFarm} from "../../redux/slice/farm/addFarm";
+import {useDispatch, useSelector} from "react-redux";
+import {addFarm, clearFarm} from "../../redux/slice/farm/addFarm";
 import * as turf from "@turf/turf";
+import Loading from "../loading/loading";
+import {startLoading, stopLoading} from "../../redux/slice/loading/loading";
+
 
 const FormBottom = ({
                         setCenter,
@@ -21,8 +23,33 @@ const FormBottom = ({
                     }) => {
 
     const dispatch = useDispatch();
+    const data = useSelector((state) => state.addFarm);
     const navigate = useNavigate();
     const [farmName, setFarmName] = useState('');
+
+
+    useEffect(() => {
+
+        if (data['loading']) {
+            dispatch(startLoading(data['loading']))
+        } else {
+            if (data['data']) {
+                if (Number(data['status']) === 400) {
+                    dispatch(startLoading(data['loading']))
+                    toast.error(data['data']['data']['message'], {position: 'top-center', theme: 'dark'})
+                    // dispatch(clearFarm())
+                }
+                if (data['data']['guid']) {
+                    dispatch(startLoading(data['loading']))
+                    toast.success('مزرعه با موفقیت ایجاد شد', {position: 'top-center', theme: 'dark'})
+                    // dispatch(clearFarm())
+                    navigate('/home')
+                }
+            }
+        }
+    }, [data])
+
+
     const handleInfoModalClickOpen = () => {
         setInfoModalOpen(true);
     };
@@ -42,6 +69,7 @@ const FormBottom = ({
                     });
                     return
                 }
+
                 const points = pointsState
 
                 let fd = {
@@ -60,8 +88,8 @@ const FormBottom = ({
                     'name': farmName
                 }
 
-                const response = dispatch(addFarm(new_farm));
-
+                // dispatch(startLoading(true))
+                dispatch(addFarm(new_farm));
             } else {
                 toast.error('نام مزرعه خود را وارد نمایید', {position: 'top-center', theme: 'dark'})
             }
@@ -114,7 +142,7 @@ const FormBottom = ({
                                 ذخیره
                             </button>
                             <button className="btn-farm-cancel mx-md-2 py-2 py-md-0"
-                                    onClick={() => navigate("/home", {push: true})}>
+                                    onClick={() => navigate("/home")}>
                                 بازگشت
                             </button>
                         </div>

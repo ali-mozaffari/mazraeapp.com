@@ -44,13 +44,6 @@ const Map = () => {
         }, [_center])
 
 
-        useEffect(() => {
-
-            console.error(pointsState)
-
-        }, [pointsState])
-
-
         const refreshArea = (list) => {
             if (list.length >= 3) {
                 for (let i = 0; i < list.length; i++) {
@@ -70,6 +63,13 @@ const Map = () => {
             <div className="map-container">
 
                 <div>
+
+                    <div className="area-box">
+                        {'مساحت مزرعه :'}
+                        {' '}
+                        { realArea / 1000 }
+                    </div>
+
                     <Suspense fallback={<div></div>}>
                         <MapContainer attributionControl={true}
                                       zoomControl={true}

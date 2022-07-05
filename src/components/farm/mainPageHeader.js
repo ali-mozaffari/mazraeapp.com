@@ -225,7 +225,7 @@ const MainPageHeader = () => {
     },
   ];
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="container-fluid">
@@ -237,7 +237,7 @@ const MainPageHeader = () => {
         <div>
           <button
             className="btn-dark-blue mx-1"
-            onClick={() => history("/add-farm")}
+            onClick={() => navigate("/add-farm")}
           >
             مزرعه جدید
           </button>

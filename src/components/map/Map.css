@@ -11,6 +11,20 @@
 }
 
 
+.area-box {
+    background-color: #ffffffee;
+    color: black;
+    position: absolute !important;
+    top: 0 !important;
+    width: 15%;
+    font-weight: 900;
+    z-index: 1000;
+    padding: 15px 15px;
+    margin: 10px 10px;
+    border-radius: 15px;
+}
+
+
 .farm-name-input {
 
     background-color: #ffffffcc;
@@ -28,6 +42,19 @@
     border-radius: 15px;
     padding: 0 50px;
     background-color: #16db93;
+    color: white;
+    height: 100%;
+    font-weight: 900;
+
+}
+
+
+.btn-farm-add-disabled {
+
+    border: none;
+    border-radius: 15px;
+    padding: 0 50px;
+    background-color: gray;
     color: white;
     height: 100%;
     font-weight: 900;
@@ -117,6 +144,18 @@
         width: 100%;
         z-index: 1000;
         padding: 10px 10px;
+    }
+
+    .area-box {
+        background-color: white;
+        color: black;
+        position: absolute !important;
+        top: 0 !important;
+        width: 70%;
+        z-index: 1000;
+        padding: 15px 15px;
+        margin: 10px 10px;
+        border-radius: 15px;
     }
 
 
