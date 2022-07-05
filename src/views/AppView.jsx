@@ -34,6 +34,8 @@ const AddFarmPage = React.lazy(() =>
     import(/* webpackChunkName: "views-user" */ "../pages/main/addFarmPage")
 );
 
+const EditFarm = React.lazy(() => import("../components/farm/editFarm/editFarm"));
+
 
 const AppView = () => {
     const location = useLocation();
@@ -71,7 +73,7 @@ const AppView = () => {
                 <Route path="/activities" element={<ActivitiesPage/>}/>
                 <Route path="/farm-services" element={<FarmServicePage/>}/>
                 <Route path="/invitation" element={<InvitationPage/>}/>
-
+                <Route path="/edit-farm" element={<EditFarm />} />
             </Routes>
         </AppLayout>
     );
