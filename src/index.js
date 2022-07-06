@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 import '../src/assets/css/fontiran.css';
 import './index.css';
 import './assets/css/main.css';
+import './assets/css/activitiesPage.css';
 import './assets/css/modals.css';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
