@@ -1,5 +1,20 @@
-.btn-orange{
-     background-color: #0a53be;
+.btn-back-orange {
+    background-color: #f2634c33;
+    border-radius: 10px;
+    padding: 10px 30px;
+    color: #f2634c;
 }
 
+.w-40{
+    width: 40%;
+}
 
+@media screen and (max-width: 762px) {
+    .btn-back-orange {
+        background-color: #f2634c33;
+        border-radius: 10px;
+        padding: 10px 30px;
+        color: #f2634c;
+        margin: 10px;
+    }
+}
