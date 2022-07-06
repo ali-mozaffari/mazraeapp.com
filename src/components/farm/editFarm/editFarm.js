@@ -2,7 +2,7 @@ import {useState} from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {NavLink} from "react-router-dom";
-import BreadCrumbs from "./../../tools/breadcrumbs/breadcrumbs";
+import BreadCrumbs from "./../../tools/breadcrumbs";
 import "./../main.css";
 
 const EditFarm = () => {

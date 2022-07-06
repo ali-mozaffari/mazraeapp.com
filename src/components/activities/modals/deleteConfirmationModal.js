@@ -4,8 +4,8 @@ import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
 // import { borderBottom, grid, padding } from "@mui/system";
 import "./deleteConfirmationModal.css";
+import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
 import { useDispatch } from "react-redux";
-import { deleteActivityList } from "../../../redux/slice/activities/activitiesListBox";
 
 const DeleteConfirmationModal = ({
   showModal,
@@ -15,7 +15,7 @@ const DeleteConfirmationModal = ({
 }) => {
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    dispatch(deleteActivityList(id));
+    dispatch(deleteFarmList(id));
     confirmModal();
     hideModal();
   };

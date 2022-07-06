@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from "yup";
-import BreadCrumbs from "../tools/breadcrumbs/breadcrumbs";
+import BreadCrumbs from "../tools/breadcrumbs";
 import {Field, Form, Formik} from "formik";
 import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";

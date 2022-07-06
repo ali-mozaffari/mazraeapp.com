@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getActivitiesList } from "../../redux/slice/activities/activitiesListBox";
 import { toast } from "react-toastify";
+import DateCalculator from "../tools/dateCalculator";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -74,38 +75,43 @@ const ActivitiesListBox = () => {
           </tr>
         </thead>
         <tbody>
-          {data?.details.map((item) => (
-            <tr>
+          {data?.details.map((item, index) => (
+            <tr key={index}>
               <td className="py-3">
                 <Badge pill bg={"success"} className="p-2">
                   {item.vaziat}
                 </Badge>
               </td>
               <td className="py-3">{item.noe_faaliat}</td>
-              <td className="py-3">
-                {item.tarikh_mohlat_anjam}
+              <td
+                className="py-3"
+                style={{ fontSize: "13px" }}
+              >
+                {/* date subtraction Farsi */}
+                <span className="d-inline-flex">
+                <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
+                </span>
+                
+                <span className="px-1">روز دیگر</span>
+
                 <img src={calendarIcon} alt="calendar" className="mx-2" />
               </td>
               <td className="py-3">
-                {/* 17.5 گندم */}
-                {item.cultivation.map((item2) => (
-                  //   <Badge pill bg={`${item2.mahsul.color}`} className="p-2">
-                  //     <span> {item2.sathe_zire_kesht} </span>
-                  //     <span> {item2.mahsul.title} </span>
-                  //   </Badge>
+                {item.cultivation.map((item2, index) => (
                   <span
+                    key={index}
                     style={{
                       backgroundColor: `${item2.mahsul.color}`,
                       color: "#fff",
-                      borderRadius: "5px",
-                      padding: "0.5rem"
+                      borderRadius: "15px",
+                      padding: "7px",
+                      fontSize: "13px",
                     }}
                   >
                     <span> {item2.sathe_zire_kesht} </span>
                     <span> {item2.mahsul.title} </span>
                   </span>
                 ))}
-                {/* {item.cultivation.mahsul.title} */}
               </td>
               <td className="d-flex">
                 <div

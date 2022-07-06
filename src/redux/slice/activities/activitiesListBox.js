@@ -11,7 +11,7 @@ export const getActivitiesList = createAsyncThunk(
                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
                 },
             });
-            console.log(data.results.details)
+            // console.log(data.results.details)
             return data.results;
         } catch (error) {
             // return error?.response;
@@ -21,26 +21,26 @@ export const getActivitiesList = createAsyncThunk(
     }
 );
 
-// export const deleteFarmList = createAsyncThunk(
-//     "farmlist/deleteFarmList",
-//     async (id, {rejectWithValue}) => {
-//         try {
-//             const {data} = await axios.delete("/api/v2/farm/farm", {
-//                 data: {
-//                     'guid': id
-//                 },
-//                 headers: {
-//                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
-//                 }
+export const deleteActivityList = createAsyncThunk(
+    "farmlist/deleteActivityList",
+    async (id, {rejectWithValue}) => {
+        try {
+            const {data} = await axios.delete("/api/v2/farm/activity", {
+                data: {
+                    'guid': id
+                },
+                headers: {
+                    Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+                }
 
-//             });
-//             return data.results;
-//         } catch (error) {
-//             console.log(error);
-//             return rejectWithValue(error.data.results);
-//         }
-//     }
-// );
+            });
+            return data.results;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.data.results);
+        }
+    }
+);
 
 const activitiesListBoxSlice = createSlice({
     name: "activitiesList",
