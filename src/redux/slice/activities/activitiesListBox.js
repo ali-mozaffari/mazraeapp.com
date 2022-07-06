@@ -3,10 +3,10 @@ import axios from "axios";
 import "../../../services/config";
 
 export const getActivitiesList = createAsyncThunk(
-    "farmlist/getFarmList",
+    "activitiesList/getActivitiesList",
     async (payload, {rejectWithValue, getState, dispatch}) => {
         try {
-            const {data} = await axios.get("/api/v2/farm/farms", {
+            const {data} = await axios.get("/api/v2/farm/activities", {
                 headers: {
                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
                 },
