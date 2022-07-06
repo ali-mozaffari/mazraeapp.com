@@ -6,10 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 
 const FilterActivitiesBar = () => {
 
-    // const count = useSelector((state) => state.counter.value)
-    const dispatch = useDispatch()
-
-    // console.log(count)
     return (
         <div>
             <div className="d-md-flex justify-content-between">
@@ -25,7 +21,7 @@ const FilterActivitiesBar = () => {
                     </p>
                 </div>
                 <div className="d-flex align-items-center">
-                    <button className="btn-outline-light-blue mx-1" onClick={() => dispatch()}>
+                    <button className="btn-outline-light-blue mx-1">
                         گزارش فعالیت ها
                     </button>
                     <button className="btn-dark-blue mx-1">
