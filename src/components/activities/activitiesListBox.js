@@ -19,6 +19,40 @@ const ITEM_HEIGHT = 48;
 
 const ActivitiesListBox = () => {
 
+    const FarmListBox = () => {
+        const navigate = useNavigate();
+      
+        const dispatch = useDispatch();
+        useEffect(() => {
+          dispatch(getFarmList());
+        }, []);
+      
+        const farmlist = useSelector((state) => state.farmlist);
+        const { postList, loading } = farmlist;
+      
+        const [id, setId] = useState(null);
+        const [displayConfirmationModal, setDisplayConfirmationModal] =
+          useState(false);
+      
+        // Handle the displaying of the modal based on type and id
+        const showDeleteModal = (id) => {
+          setId(id);
+          setDisplayConfirmationModal(true);
+        };
+      
+        // Hide the modal
+        const hideConfirmationModal = () => {
+          setDisplayConfirmationModal(false);
+        };
+      
+        // Handle the actual deletion of the item
+        const submitDelete = (id) => {
+          toast.success("مزرعه حذف شد")
+          setDisplayConfirmationModal(false);
+        };
+
+
+
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
