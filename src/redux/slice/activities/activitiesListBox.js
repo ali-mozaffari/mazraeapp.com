@@ -11,7 +11,7 @@ export const getActivitiesList = createAsyncThunk(
                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
                 },
             });
-            // console.log(data.results)
+            console.log(data.results.details)
             return data.results;
         } catch (error) {
             // return error?.response;
@@ -55,7 +55,7 @@ const activitiesListBoxSlice = createSlice({
             state.loading = true;
         },
         [getActivitiesList.fulfilled]: (state, action) => {
-            state.postList = action.payload;
+            state.data = action.payload;
             state.loading = false;
         },
         [getActivitiesList.rejected]: (state, action) => {
