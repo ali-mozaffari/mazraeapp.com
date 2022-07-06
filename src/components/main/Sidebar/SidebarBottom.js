@@ -39,7 +39,7 @@ const SidebarBottom = () => {
         {
             text: "فعالیت ها",
             icon: <News fill="currentColor"/>,
-            path: "/activity",
+            path: "/activities",
         },
         {
             text: "آب و هوا",

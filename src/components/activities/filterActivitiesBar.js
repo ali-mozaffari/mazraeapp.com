@@ -6,10 +6,10 @@ import {useDispatch, useSelector} from "react-redux";
 
 const FilterActivitiesBar = () => {
 
-    const count = useSelector((state) => state.counter.value)
+    // const count = useSelector((state) => state.counter.value)
     const dispatch = useDispatch()
 
-    console.log(count)
+    // console.log(count)
     return (
         <div>
             <div className="d-md-flex justify-content-between">

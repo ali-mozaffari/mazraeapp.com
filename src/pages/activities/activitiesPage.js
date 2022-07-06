@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const ActivitiesPage = () => {
 
-    const count = useSelector((state) => state.counter.value)
+    // const count = useSelector((state) => state.counter.value)
     const dispatch = useDispatch()
 
 
