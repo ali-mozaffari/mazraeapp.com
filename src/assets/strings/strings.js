@@ -109,27 +109,6 @@ export const meghdar_ab_zaman_items = [
         title: 'کل', key: 'کل',
     },
 ]
-
-export const vahede_meghdar_items = [
-    {
-        title: 'کیلوگرم', key: 'kg',
-    },
-    {
-        title: 'لیتر', key: 'liter',
-    },
-    {
-        title: 'عدد', key: 'adad',
-    },
-    {
-        title: 'مترمکعب', key: 'metr_mokaab',
-    },
-    {
-        title: 'کیلو وات', key: 'kw',
-    },
-]
-
-
-
 export const abiyari_type_items = [
     {
         title: 'آبی',
@@ -206,6 +185,34 @@ export const sathe_dastresi_items = [
         key: 'namahdood'
     },
 ]
+
+export const vahede_meghdar_items = [
+    {
+        title: 'کیلوگرم', key: 'kg',
+    },
+    {
+        title: 'لیتر', key: 'liter',
+    },
+    {
+        title: 'عدد', key: 'adad',
+    },
+    {
+        title: 'مترمکعب', key: 'metr_mokaab',
+    },
+    {
+        title: 'کیلو وات', key: 'kw',
+    },
+]
+
+export const vahede_masahat_items = [
+    {
+        title: 'هکتار', key: 'hektar',
+    },
+    {
+        title: 'مزرعه', key: 'mazrae',
+    },
+]
+
 
 export const khadamat_fanni_items = [
     {

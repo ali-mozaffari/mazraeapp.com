@@ -2,6 +2,7 @@ import { configureStore} from '@reduxjs/toolkit'
 import farmListReducer from './slice/farm/farmListBox'
 import addFarmReducer from './slice/farm/addFarm'
 import toolsReducer from './slice/activities/toolsList'
+import nahadeToolsReducer from './slice/activities/nahadeItemsList'
 import loadingReducer from './slice/loading/loading'
 import activitiesListReducer from './slice/activities/activitiesListBox'
 import storage from 'redux-persist/lib/storage';
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     addFarm: addFarmReducer,
     loading: loadingReducer,
     activitiesList: activitiesListReducer,
-    tools: toolsReducer
+    tools: toolsReducer,
+    nahadeTools: nahadeToolsReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -9,6 +9,7 @@ import {noe_faaliat_items, vaziat_items} from '../../assets/strings/strings';
 import DatePicker, {Calendar} from 'react-datepicker2';
 import {Modal} from "react-bootstrap";
 import {getToolsList} from "../../redux/slice/activities/toolsList";
+import AddNahadeModal from "./modals/addNahadeModal";
 
 const AddActivityForm = () => {
     const title = ["مزرعه من", "ویرایش مشخصات مزرعه"];
@@ -20,6 +21,7 @@ const AddActivityForm = () => {
     const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
     const [anjam_dahande_list, set_anjam_dahande_list] = useState();
     const [showCalendar, setShowCalendar] = useState(false);
+    const [showNahadeModal, setShowNahadeModal] = useState(false);
     const dispatch = useDispatch();
     const tools = useSelector((state) => state.tools);
 
@@ -33,6 +35,9 @@ const AddActivityForm = () => {
 
     const onCalendarHandler = () => {
         setShowCalendar(!showCalendar)
+    }
+    const onNahadeModalHandler = () => {
+        setShowNahadeModal(!showNahadeModal)
     }
 
     const validation = Yup.object().shape({
@@ -218,10 +223,10 @@ const AddActivityForm = () => {
                             <Field
                                 as="select"
                                 name="vaziat"
-                                className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
+                                className="search-input  col-md-5 mx-auto mt-4 pl-5 py-4"
                                 onClick={(e) => setSelectedFarm(e.target.value)}
                             >
-                                <option value="" label="تجهیزات و ابزار">
+                                <option value="" className="text-gray" label="تجهیزات و ابزار">
                                     تجهیزات و ابزار{" "}
                                 </option>
 
@@ -235,7 +240,9 @@ const AddActivityForm = () => {
 
                             </Field>
 
-                            <div className="search-input col-md-5 mx-auto mt-4 py-4 d-flex justify-content-between">
+                            <div
+                                onClick={onNahadeModalHandler}
+                                className="search-input col-md-5 mx-auto mt-4 py-4 d-flex justify-content-between">
 
                             <span className="text-gray">
                                 نهاده
@@ -280,6 +287,9 @@ const AddActivityForm = () => {
                     </div>
                 )}
             </Formik>
+
+
+            <AddNahadeModal showNahadeModal={showNahadeModal} onNahadeModalHandler={onNahadeModalHandler}/>
 
 
             <Modal show={showCalendar} centered onHide={onCalendarHandler}>
