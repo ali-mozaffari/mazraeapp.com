@@ -62,18 +62,18 @@ const activitiesListBoxSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
-        // [deleteFarmList.pending]: (state, action) => {
-        //     state.loading = true;
-        // },
-        // [deleteFarmList.fulfilled]: (state, action) => {
-        //     state.postList = action.payload;
-        //     state.loading = false;
-        // },
-        // [deleteFarmList.rejected]: (state, action) => {
-        //     state.loading = false;
-        //     state.error = action.payload;
-        //     console.log(state.error)
-        // },
+        [deleteActivityList.pending]: (state, action) => {
+            state.loading = true;
+        },
+        [deleteActivityList.fulfilled]: (state, action) => {
+            state.postList = action.payload;
+            state.loading = false;
+        },
+        [deleteActivityList.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+            console.log(state.error)
+        },
     },
 });
 
