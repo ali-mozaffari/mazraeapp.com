@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getActivitiesList } from "../../redux/slice/activities/activitiesListBox";
 import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
+import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -48,7 +49,7 @@ const ActivitiesListBox = () => {
 
   // Handle the actual deletion of the item
   const submitDelete = (id) => {
-    toast.success("مزرعه حذف شد");
+    toast.success("فعالیت حذف شد");
     setDisplayConfirmationModal(false);
   };
 
@@ -83,15 +84,12 @@ const ActivitiesListBox = () => {
                 </Badge>
               </td>
               <td className="py-3">{item.noe_faaliat}</td>
-              <td
-                className="py-3"
-                style={{ fontSize: "13px" }}
-              >
+              <td className="py-3" style={{ fontSize: "13px" }}>
                 {/* date subtraction Farsi */}
                 <span className="d-inline-flex">
-                <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
+                  <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
                 </span>
-                
+
                 <span className="px-1">روز دیگر</span>
 
                 <img src={calendarIcon} alt="calendar" className="mx-2" />
@@ -115,7 +113,7 @@ const ActivitiesListBox = () => {
               </td>
               <td className="d-flex">
                 <div
-                  className="tableToolIconBgGray d-flex align-items-center"
+                  className="btn tableToolIconBgGray d-flex align-items-center"
                   aria-label="more"
                   id="long-button"
                   aria-controls={open ? "long-menu" : undefined}
@@ -152,18 +150,22 @@ const ActivitiesListBox = () => {
                   ))}
                 </Menu>
 
-                <div className="tableToolIconBgGray d-flex align-items-center">
+                <div className="btn tableToolIconBgGray d-flex align-items-center justify-content-center">
                   <Tooltip title="کپی کردن فعالیت">
                     <img src={copyIcon} alt="menu" className="mx-auto" />
                   </Tooltip>
                 </div>
-                <div className="tableToolIconBgBlue d-flex align-items-center">
+                <div className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center">
                   <Tooltip title="ویرایش فعالیت">
                     <img src={editIcon} alt="menu" className="mx-auto" />
                   </Tooltip>
                 </div>
-                <div className="tableToolIconBgOrange d-flex align-items-center">
+                <div
+                  className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
+                  onClick={() => showDeleteModal(item?.guid)}
+                >
                   <Tooltip title="حدف فعالیت">
+                    {/* {item.guid} */}
                     <img src={trashIcon} alt="menu" className="mx-auto" />
                   </Tooltip>
                 </div>
@@ -444,7 +446,12 @@ const ActivitiesListBox = () => {
         </tbody>
       </table>
 
-      <div></div>
+      <DeleteConfirmationModal
+        showModal={displayConfirmationModal}
+        confirmModal={submitDelete}
+        hideModal={hideConfirmationModal}
+        id={id}
+      />
     </div>
   );
 };
