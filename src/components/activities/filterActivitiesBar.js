@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import filterIcon from "../../assets/img/filterIcon.png";
 import sortIcon from "../../assets/img/sort-down.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import increment from "../../redux/actions/baseAction";
+import { toast } from "react-toastify";
+import ActivitiesReportModal from "./modals/activitiesReportModal";
+import { Box } from "@mui/material";
 
 const FilterActivitiesBar = () => {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const [id, setId] = useState(null);
+  const [displayConfirmationModal, setDisplayConfirmationModal] =
+    useState(false);
+
+  // Handle the displaying of the modal based on type and id
+  const showActivitiesModal = (id) => {
+    setId(id);
+    setDisplayConfirmationModal(true);
+  };
+
+  // Hide the modal
+  const hideConfirmationModal = () => {
+    setDisplayConfirmationModal(false);
+  };
+
+  // Handle the actual deletion of the item
+  const submitDelete = (id) => {
+    toast.success("فعالیت حذف شد");
+    setDisplayConfirmationModal(false);
+  };
+
   return (
     <div>
       <div
@@ -23,21 +46,25 @@ const FilterActivitiesBar = () => {
             شما با اضافه کردن فعالیت حدید میتوانید کارها رو بهتر مدیریت نمایید
           </p>
         </div>
-        <div className="d-flex align-items-center justify-content-end" style={{width: "45%"}}>
+        <Box
+          className="d-flex align-items-center justify-content-end"
+          sx={{ width: { xs: "100%", sm: "40%" } }}
+          onClick={() => showActivitiesModal()}
+        >
           <button
             className="btn-outline-light-blue mx-1"
-            style={{ width: "50%", padding: "10px 25px", fontSize: "14px" }}
+            style={{ width: "70%", padding: "10px 10px", fontSize: "13px" }}
           >
             گزارش فعالیت ها
           </button>
           <button
             className="btn-dark-blue mx-1"
-            style={{ width: "50%", padding: "10px 25px", fontSize: "14px" }}
+            style={{ width: "70%", padding: "10px 10px", fontSize: "13px" }}
             onClick={() => navigate("/add-activity")}
           >
             فعالیت جدید
           </button>
-        </div>
+        </Box>
       </div>
 
       <hr />
@@ -61,6 +88,14 @@ const FilterActivitiesBar = () => {
           </div>
         </div>
       </div>
+
+      <ActivitiesReportModal
+        showModal={displayConfirmationModal}
+        confirmModal={submitDelete}
+        hideModal={hideConfirmationModal}
+        id={id}
+      />
+
     </div>
   );
 };

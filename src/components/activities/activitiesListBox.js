@@ -62,6 +62,21 @@ const ActivitiesListBox = () => {
     setAnchorEl(null);
   };
 
+  const vaziatColor = (vaziat) => {
+    switch (vaziat) {
+      case 'barname':
+        return "#";
+      case 'jari':
+        return "#";
+      case 'anjamshode':
+        return "#";
+      case 'moavvagh':
+        return "#";
+      default:
+        return "#";
+    }
+  };
+
   return (
     <div>
       <table className="table table-borderless mt-4 d-none d-md-table">
@@ -79,9 +94,14 @@ const ActivitiesListBox = () => {
           {data?.details.map((item, index) => (
             <tr key={index}>
               <td className="py-3">
-                <Badge pill bg={"success"} className="p-2">
+                <span
+                  style={{ backgroundColor: `${vaziatColor(item.vaziat)}` }}
+                >
+                  {item.vazita}
+                </span>
+                {/* <Badge pill bg={"success"} className="p-2">
                   {item.vaziat}
-                </Badge>
+                </Badge> */}
               </td>
               <td className="py-3">{item.noe_faaliat}</td>
               <td className="py-3" style={{ fontSize: "13px" }}>
