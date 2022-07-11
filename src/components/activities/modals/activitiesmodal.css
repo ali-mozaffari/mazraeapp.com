@@ -1,3 +1,8 @@
+.modal-content{
+  border-radius: 25px !important;
+  padding: 25px !important;
+}
+
 .modal-header {
     display: grid !important;
     border-bottom: none;

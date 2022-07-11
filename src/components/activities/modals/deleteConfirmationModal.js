@@ -2,10 +2,9 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
-// import { borderBottom, grid, padding } from "@mui/system";
 import "./activitiesModal.css";
-import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
 import { useDispatch } from "react-redux";
+import { deleteActivityList } from "../../../redux/slice/activities/activitiesListBox";
 
 const DeleteConfirmationModal = ({
   showModal,
@@ -15,7 +14,7 @@ const DeleteConfirmationModal = ({
 }) => {
   const dispatch = useDispatch();
   const handleDelete = (id) => {
-    dispatch(deleteFarmList(id));
+    dispatch(deleteActivityList(id));
     confirmModal();
     hideModal();
   };

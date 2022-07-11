@@ -5,43 +5,44 @@ import closeNotification from "./../../../assets/img/close-notification.png";
 // import { borderBottom, grid, padding } from "@mui/system";
 import "./activitiesModal.css";
 import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PieChart } from "react-minimal-pie-chart";
 
+/* Pie Chart */
 const labels = [
-  ["", "#505050"],
-  ["", "#ff0000"],
-  ["", "#07b9a2"],
-  ["", "#18cc12"],
+  ["", "#16db93"],
+  ["", "#f29e4c"],
+  ["", "#2c699a"],
+  ["", "#f2634c"],
 ];
 
 // https://www.gsma.com/mobileeconomy/#trends
-const data = [
+const items = [
+  {
+    name: "anjamshode",
+    numbers: [25, 20, 20, 35],
+    color: "#16db93",
+  },
   {
     name: "barname",
-    numbers: [25, 20, 20, 35],
-    color: "#505050",
+    // numbers: [25, 20, 20, 35],
+    color: "#f29e4c",
   },
   {
     name: "jari",
     // numbers: [6, 12, 82, 20],
-    color: "#ff0000",
-  },
-  {
-    name: "anjamshode",
-    // numbers: [6, 12, 82],
-    color: "#07b9a2",
+    color: "#2c699a",
   },
   {
     name: "moavvagh",
     // numbers: [6, 12, 82],
-    color: "#18cc12",
+    color: "#f2634c",
   },
 ];
 
 const dataByName = new Map(
   Object.entries(
-    data.reduce((o, c) => {
+    items.reduce((o, c) => {
       o[c.name] = c.numbers;
       return o;
     }, {})
@@ -97,18 +98,19 @@ const DeleteConfirmationModal = ({
     hideModal();
   };
 
-  const [selected, setSelected] = useState(data[0].name);
-
+  const [selected, setSelected] = useState(items[0].name);
   const onSelect = (name) => {
     console.log(name);
     setSelected(name);
   };
 
+  const activitiesList = useSelector((state) => state.activitiesList);
+  const { data, loading } = activitiesList;
+  console.log(activitiesList)
+
   return (
     <Modal
       show={showModal}
-      sx={{ borderRadius: "25px !important" }}
-      style={{ borderRadius: "25px !important" }}
     >
       <div className="modal-header justify-content-start">
         <img
@@ -116,7 +118,7 @@ const DeleteConfirmationModal = ({
           style={{
             position: "absolute",
             left: "20px",
-            top: "20px",
+            top: "15px",
             height: "20px",
             cursor: "pointer",
           }}
@@ -125,6 +127,7 @@ const DeleteConfirmationModal = ({
 
         <h6 style={{ fontWeight: "800", color: "#676767" }}>گزارش فعالیت ها</h6>
       </div>
+      <hr />
       <Modal.Body
         style={{
           textAlign: "center",
@@ -134,11 +137,11 @@ const DeleteConfirmationModal = ({
         }}
       >
         <div className="d-flex justify-content-around">
-          {data.map((item) => {
+          {items.map((item) => {
             return (
               <div>
-                  <span>{item.name}</span>
-                  <span
+                <div></div>
+                  <div
                     style={{
                       backgroundColor: `${item.color}`,
                       height: "10px",
@@ -147,7 +150,8 @@ const DeleteConfirmationModal = ({
                       borderRadius: "5px",
                       margin: "5px"
                     }}
-                  ></span>
+                  ></div>
+                  <div style={{paddingRight:"20px", color: "#676767"}}>{item.name}</div>
               </div>
             );
           })}
@@ -160,15 +164,16 @@ const DeleteConfirmationModal = ({
           />
         </div>
       </Modal.Body>
-      <Modal.Footer className="justify-content-start border-top-0">
+      <Modal.Footer className="justify-content-center border-top-0">
         <Button
-          variant="secondary"
           onClick={hideModal}
           style={{
             fontWeight: "800",
-            padding: "10px",
-            width: "25%",
+            padding: "15px",
+            width: "90%",
             borderRadius: "10px",
+            backgroundColor: "#B7B7B7",
+            border: "none",
           }}
         >
           باشه

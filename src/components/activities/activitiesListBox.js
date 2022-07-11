@@ -12,6 +12,7 @@ import { getActivitiesList } from "../../redux/slice/activities/activitiesListBo
 import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
+// import vaziat_items from "./../../assets/strings/strings";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -64,22 +65,22 @@ const ActivitiesListBox = () => {
 
   const vaziatColor = (vaziat) => {
     switch (vaziat) {
-      case 'barname':
-        return "#";
-      case 'jari':
-        return "#";
-      case 'anjamshode':
-        return "#";
-      case 'moavvagh':
-        return "#";
+      case "anjamshode":
+        return "#16db93";
+      case "barname":
+        return "#f29e4c";
+      case "jari":
+        return "#54478c";
+      case "moavvagh":
+        return "#f2634c";
       default:
-        return "#";
+        return "#2c6993";
     }
   };
 
   return (
-    <div>
-      <table className="table table-borderless mt-4 d-none d-md-table">
+    <div style={{ overflow: "overlay" }}>
+      <table className="table table-borderless d-md-table">
         <thead>
           <tr>
             <th className="py-3">وضعیت</th>
@@ -95,16 +96,24 @@ const ActivitiesListBox = () => {
             <tr key={index}>
               <td className="py-3">
                 <span
-                  style={{ backgroundColor: `${vaziatColor(item.vaziat)}` }}
+                  style={{
+                    backgroundColor: `${vaziatColor(item.vaziat)}`,
+                    borderRadius: "15px",
+                    padding: "5px",
+                    fontSize: "13px",
+                  }}
                 >
-                  {item.vazita}
+                  {item.vaziat}
                 </span>
                 {/* <Badge pill bg={"success"} className="p-2">
                   {item.vaziat}
                 </Badge> */}
               </td>
               <td className="py-3">{item.noe_faaliat}</td>
-              <td className="py-3" style={{ fontSize: "13px" }}>
+              <td
+                className="py-3"
+                style={{ fontSize: "13px", whiteSpace: "nowrap" }}
+              >
                 {/* date subtraction Farsi */}
                 <span className="d-inline-flex">
                   <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
@@ -114,7 +123,7 @@ const ActivitiesListBox = () => {
 
                 <img src={calendarIcon} alt="calendar" className="mx-2" />
               </td>
-              <td className="py-3">
+              <td className="py-3" style={{ whiteSpace: "nowrap" }}>
                 {item.cultivation.map((item2, index) => (
                   <span
                     key={index}

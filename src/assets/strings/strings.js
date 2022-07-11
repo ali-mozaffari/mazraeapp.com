@@ -63,6 +63,9 @@ export const vaziat_items = [
     {
         title: 'انجام شده', key: 'anjamshode',
     },
+    {
+        title: 'معوق', key: 'moavvagh',
+    },
 ]
 
 export const moddat_zaman_vahed_items = [

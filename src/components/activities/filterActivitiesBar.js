@@ -53,13 +53,13 @@ const FilterActivitiesBar = () => {
         >
           <button
             className="btn-outline-light-blue mx-1"
-            style={{ width: "70%", padding: "10px 10px", fontSize: "13px" }}
+            style={{ width: "70%", padding: "14px 10px", fontSize: "13px" }}
           >
             گزارش فعالیت ها
           </button>
           <button
             className="btn-dark-blue mx-1"
-            style={{ width: "70%", padding: "10px 10px", fontSize: "13px" }}
+            style={{ width: "70%", padding: "14px 10px", fontSize: "13px" }}
             onClick={() => navigate("/add-activity")}
           >
             فعالیت جدید
