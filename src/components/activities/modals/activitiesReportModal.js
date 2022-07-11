@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
 // import { borderBottom, grid, padding } from "@mui/system";
-import "./activitiesModal.css";
+import "./activitiesmodal.css";
 import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
 import { useDispatch, useSelector } from "react-redux";
 import { PieChart } from "react-minimal-pie-chart";

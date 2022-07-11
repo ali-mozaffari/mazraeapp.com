@@ -1,4 +1,4 @@
 import axios from 'axios';
 // export const apiUrl = 'https://ea65-185-16-206-238.eu.ngrok.io'
-axios.defaults.baseURL = "https://a154-185-16-206-238.eu.ngrok.io"
+axios.defaults.baseURL = "https://02e6-104-237-224-205.ngrok.io"
 

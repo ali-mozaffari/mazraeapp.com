@@ -13,6 +13,16 @@
     border-radius: 15px;
 }
 
+.btn-light-green {
+    color: white;
+    background-color: #16db93;
+    padding: 15px 60px;
+    border-radius: 15px;
+}
+
+
+
+
 .btn-outline-purple {
     color: #54478c;
     border: 1px solid #54478c;
@@ -82,6 +92,14 @@
     padding: 20px 25px;
 }
 
+.nahade-item {
+    background-color: #0a53be22;
+    border-radius: 15px;
+    border: 1px solid #0a53be77;
+    padding: 20px 25px;
+    color: #0a53be;
+    font-weight: 900;
+}
 
 .share-link-box {
     width: max-content;

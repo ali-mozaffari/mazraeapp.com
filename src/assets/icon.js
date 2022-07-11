@@ -148,6 +148,20 @@ export const Insect = (props) => {
         </svg>
     );
 };
+export const CloseIcon = (props) => {
+    return (
+        <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="13.366" height="13.093" viewBox="0 0 13.366 13.093">
+            <g id="close-5" transform="translate(2.121 2.121)">
+                <path id="Path_161" data-name="Path 161" d="M4995.451,5250.286l-9.124,8.851"
+                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" stroke-linecap="round"
+                      stroke-width="3"/>
+                <path id="Path_162" data-name="Path 162" d="M4986.327,5250.286l9.124,8.851"
+                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" stroke-linecap="round"
+                      stroke-width="3"/>
+            </g>
+        </svg>
+    );
+};
 export const PlusIcon = (props) => {
     return (
         <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 19.466 19.466">
@@ -160,7 +174,8 @@ export const PlusIcon = (props) => {
 
 export const CalendarIcon = (props) => {
     return (
-        <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="23.678" height="21.1" viewBox="0 0 23.678 21.1">
+        <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="23.678" height="21.1"
+             viewBox="0 0 23.678 21.1">
             <g id="_001-calendar" data-name="001-calendar" transform="translate(0 -20.9)">
                 <g id="Group_224" data-name="Group 224" transform="translate(0 20.9)">
                     <g id="Group_223" data-name="Group 223" transform="translate(0 0)">

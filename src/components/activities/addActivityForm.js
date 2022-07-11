@@ -4,16 +4,23 @@ import BreadCrumbs from "../tools/breadcrumbs";
 import {Field, Form, Formik} from "formik";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {CalendarIcon, PlusIcon} from "../../assets/icon";
-import {noe_faaliat_items, vaziat_items} from '../../assets/strings/strings';
+import {CalendarIcon, CloseIcon, PlusIcon} from "../../assets/icon";
+import {
+    noe_faaliat_items,
+    vahede_masahat_items,
+    vahede_meghdar_items,
+    vaziat_items
+} from '../../assets/strings/strings';
 import DatePicker, {Calendar} from 'react-datepicker2';
 import {Modal} from "react-bootstrap";
 import {getToolsList} from "../../redux/slice/activities/toolsList";
 import AddNahadeModal from "./modals/addNahadeModal";
+import {deleteNahade} from "../../redux/slice/activities/nahade";
 
 const AddActivityForm = () => {
     const title = ["مزرعه من", "ویرایش مشخصات مزرعه"];
     const farms = useSelector((state) => state.farmlist);
+    const nahades = useSelector((state) => state.nahade);
     const [selectedFarm, setSelectedFarm] = useState();
     const [selectedCultivation, setSelectedCultivation] = useState();
     const [noe_faaliat, set_noe_faaliat] = useState();
@@ -61,6 +68,10 @@ const AddActivityForm = () => {
         anjam_dahande_list: anjam_dahande_list,
     };
 
+
+    const clearNahade = ({item}) => {
+        dispatch(deleteNahade(item))
+    }
 
     console.error(selectedFarm)
     return (
@@ -223,7 +234,7 @@ const AddActivityForm = () => {
                             <Field
                                 as="select"
                                 name="vaziat"
-                                className="search-input  col-md-5 mx-auto mt-4 pl-5 py-4"
+                                className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                                 onClick={(e) => setSelectedFarm(e.target.value)}
                             >
                                 <option value="" className="text-gray" label="تجهیزات و ابزار">
@@ -240,21 +251,46 @@ const AddActivityForm = () => {
 
                             </Field>
 
-                            <div
-                                onClick={onNahadeModalHandler}
-                                className="search-input col-md-5 mx-auto mt-4 py-4 d-flex justify-content-between">
+                            <div onClick={onNahadeModalHandler}
+                                 className="search-input col-md-5 mx-auto mt-4 py-4 d-flex justify-content-between">
 
-                            <span className="text-gray">
-                                نهاده
-                            </span>
+                                <span className="text-gray">
+                                    نهاده
+                                </span>
 
                                 <PlusIcon fill={'gray'}/>
 
                             </div>
 
 
-                            {/*<hr className="my-4"/>*/}
+                            {
+                                nahades?.nahades?.length > 0 ? (
+                                    nahades?.nahades?.map((item) => (
+                                        <div className="nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between">
+                                            <div>
+                                                {
+                                                    nahades?.items?.map((nahadeItem) =>
+                                                        nahadeItem.guid === item.nahade_item_guid ? nahadeItem.title : null
+                                                    )
+                                                }
+                                                {' - '}
+                                                {
+                                                    item.meghdar
+                                                }
+                                                {' - '}
+                                                {
+                                                    vahede_meghdar_items.map((i) => i.key === item.vahede_meghdar ? i.title : null)
+                                                }
+                                            </div>
+                                            <div onClick={() => clearNahade(item.id)}>
+                                                <CloseIcon/>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : null
+                            }
 
+                            <hr style={{backgroundColor:'transparent'}}/>
                             <Field
                                 name="malekiat"
                                 type="text"
@@ -289,7 +325,7 @@ const AddActivityForm = () => {
             </Formik>
 
 
-            <AddNahadeModal showNahadeModal={showNahadeModal} onNahadeModalHandler={onNahadeModalHandler}/>
+            <AddNahadeModal show={showNahadeModal} onNahadeModalHandler={onNahadeModalHandler}/>
 
 
             <Modal show={showCalendar} centered onHide={onCalendarHandler}>
