@@ -1,24 +1,68 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography, Link, Button } from "@mui/material";
 import { Box } from "@mui/system";
+import { useState } from "react";
 import { InstagramIcon, TelegramIcon, WhatsappIcon } from "../../assets/icon";
-import { Link, Button } from "@mui/material";
 import "./auth.css";
+import SiteRulesModal from './siteRulesModal';
 
-function Copyright(props) {
+function SiteRules(props) {
+  // const [id, setId] = useState(null);
+  const [displayConfirmationModal, setDisplayConfirmationModal] =
+    useState(false);
+
+  // Handle the displaying of the modal based on type and id
+  const showActivitiesModal = () => {
+    // setId();
+    setDisplayConfirmationModal(true);
+  };
+
+  // Hide the modal
+  const hideConfirmationModal = () => {
+    setDisplayConfirmationModal(false);
+  };
+
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"تمام حقوق مادی و معنوی این سایت متعلق است به "}
-      <Link color="inherit" href="https://mazraeapp.com//">
-        mazraeapp.com
-      </Link>{" "}
-      {/* {new Date().getFullYear()}
-        {"."} */}
-    </Typography>
+    <div>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        fontSize={"13px !important"}
+        {...props}
+      >
+        {"با ورود به سایت مزرعه، "}
+        <Link
+          color="#16db93"
+          style={{ cursor: "pointer" }}
+          onClick={() => showActivitiesModal()}
+          // href="https://mazraeapp.com//"
+        >
+          قوانین و مقررات
+        </Link>
+        {" سایت را پذیرفته ام."}
+      </Typography>
+
+      {/* <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {"تمام حقوق مادی و معنوی این سایت متعلق است به "}
+        <Link color="inherit" href="https://mazraeapp.com//">
+          mazraeapp.com
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography> */}
+
+      <SiteRulesModal
+        showModal={displayConfirmationModal}
+        // confirmModal={submitDelete}
+        hideModal={hideConfirmationModal}
+        // id={id}
+      />
+    </div>
   );
 }
 
@@ -149,7 +193,7 @@ const SendCode = () => {
             </Grid>
           </Grid>
 
-          <Copyright style={{ fontSize: "10px" }} />
+          <SiteRules style={{ fontSize: "10px" }} />
         </Grid>
       </Box>
     </Grid>

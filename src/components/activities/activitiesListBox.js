@@ -94,13 +94,14 @@ const ActivitiesListBox = () => {
         <tbody>
           {data?.details.map((item, index) => (
             <tr key={index}>
-              <td className="py-3">
+              <td className="py-3" style={{ whiteSpace: "nowrap" }}>
                 <span
                   style={{
                     backgroundColor: `${vaziatColor(item.vaziat)}`,
                     borderRadius: "15px",
-                    padding: "5px",
+                    padding: "5px 10px",
                     fontSize: "13px",
+                    color: "#fff"
                   }}
                 >
                   {vaziat_items.map((item2) =>
@@ -139,7 +140,7 @@ const ActivitiesListBox = () => {
                       backgroundColor: `${item2.mahsul.color}`,
                       color: "#fff",
                       borderRadius: "15px",
-                      padding: "7px",
+                      padding: "7px 10px",
                       fontSize: "13px",
                     }}
                   >

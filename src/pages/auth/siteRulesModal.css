@@ -1,0 +1,32 @@
+.modal-dialog {
+  max-width: 90%;
+  height: 95% !important;
+  margin-bottom: 0 !important;
+}
+
+.modal-content{
+  border-radius: 25px !important;
+  padding: 25px !important;
+  height: 95% !important;
+}
+
+.modal-header {
+    display: grid !important;
+    border-bottom: none;
+    position: relative;
+    justify-content: center;
+}
+
+.title-text {
+  font-weight: 800 !important;
+  margin-top: 30px !important;
+}
+
+.text {
+  text-align: justify !important;
+}
+
+.text ul li{
+  margin-bottom: 10px !important;
+}
+
