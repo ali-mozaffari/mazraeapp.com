@@ -12,7 +12,7 @@ import { getActivitiesList } from "../../redux/slice/activities/activitiesListBo
 import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
-// import vaziat_items from "./../../assets/strings/strings";
+
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -32,6 +32,45 @@ const ActivitiesListBox = () => {
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
   //   console.log(data)
+
+  const items = [
+    {
+      name: "anjamshode",
+      fName: 'انجام شده',
+      numbers: [25, 20, 20, 35],
+      color: "#16db93",
+      // count: {countVaziat(anjamshode)},
+    },
+    {
+      name: "barname",
+      fName: 'برنامه',
+      // numbers: [25, 20, 20, 35],
+      color: "#f29e4c",
+    },
+    {
+      name: "jari",
+      fName: 'جاری',
+      // numbers: [6, 12, 82, 20],
+      color: "#2c699a",
+    },
+    {
+      name: "moavvagh",
+      fName: 'معوق',
+      // numbers: [6, 12, 82],
+      color: "#f2634c",
+    },
+  ];
+  
+  const dataByName = new Map(
+    Object.entries(
+      items.reduce((o, c) => {
+        o[c.name] = c.numbers;
+        return o;
+      }, {})
+    )
+  );
+
+
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -202,276 +241,7 @@ const ActivitiesListBox = () => {
             </tr>
           ))}
 
-          {/* <tr>
-            <td className="py-3">
-              <Badge pill bg={"danger"} className="p-2">
-                معوق شده
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"warning"} className="p-2">
-                جاری
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td className="py-3">
-              <Badge pill bg={"primary"} className="p-2">
-                برنامه
-              </Badge>
-            </td>
-            <td className="py-3">کودهی</td>
-            <td className="py-3">
-              3 روز دیگر
-              <img src={calendarIcon} alt="calendar" className="mx-2" />
-            </td>
-            <td className="py-3">17.5 گندم</td>
-            <td className="d-flex">
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={menuIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgGray d-flex align-items-center">
-                <img src={copyIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgBlue d-flex align-items-center">
-                <img src={editIcon} alt="menu" className="mx-auto" />
-              </div>
-              <div className="tableToolIconBgOrange d-flex align-items-center">
-                <img src={trashIcon} alt="menu" className="mx-auto" />
-              </div>
-            </td>
-          </tr> */}
+        
         </tbody>
       </table>
 
@@ -480,6 +250,8 @@ const ActivitiesListBox = () => {
         confirmModal={submitDelete}
         hideModal={hideConfirmationModal}
         id={id}
+        items={items}
+        dataByName={dataByName}
       />
     </div>
   );

@@ -7,10 +7,8 @@ import "./activitiesModal.css";
 import { deleteFarmList } from "./../../../redux/slice/farm/farmListBox";
 import { useDispatch, useSelector } from "react-redux";
 import { PieChart } from "react-minimal-pie-chart";
-import { data } from "../../farm/rainChart";
 
-let listTest = []
-console.log(listTest)
+
 /* Pie Chart */
 const labels = [
   ["", "#16db93"],
@@ -20,53 +18,53 @@ const labels = [
 ];
 
 // https://www.gsma.com/mobileeconomy/#trends
-const items = [
-  {
-    name: "anjamshode",
-    fName: 'انجام شده',
-    numbers: [25, 20, 20, 35],
-    color: "#16db93",
-    // count: {countVaziat(anjamshode)},
-  },
-  {
-    name: "barname",
-    fName: 'برنامه',
-    // numbers: [25, 20, 20, 35],
-    color: "#f29e4c",
-  },
-  {
-    name: "jari",
-    fName: 'جاری',
-    // numbers: [6, 12, 82, 20],
-    color: "#2c699a",
-  },
-  {
-    name: "moavvagh",
-    fName: 'معوق',
-    // numbers: [6, 12, 82],
-    color: "#f2634c",
-  },
-];
+// const items = [
+//   {
+//     name: "anjamshode",
+//     fName: 'انجام شده',
+//     numbers: [25, 20, 20, 35],
+//     color: "#16db93",
+//     // count: {countVaziat(anjamshode)},
+//   },
+//   {
+//     name: "barname",
+//     fName: 'برنامه',
+//     // numbers: [25, 20, 20, 35],
+//     color: "#f29e4c",
+//   },
+//   {
+//     name: "jari",
+//     fName: 'جاری',
+//     // numbers: [6, 12, 82, 20],
+//     color: "#2c699a",
+//   },
+//   {
+//     name: "moavvagh",
+//     fName: 'معوق',
+//     // numbers: [6, 12, 82],
+//     color: "#f2634c",
+//   },
+// ];
 
+// const dataByName = new Map(
+//   Object.entries(
+//     items.reduce((o, c) => {
+//       o[c.name] = c.numbers;
+//       return o;
+//     }, {})
+//   )
+// );
 
-const dataByName = new Map(
-  Object.entries(
-    items.reduce((o, c) => {
-      o[c.name] = c.numbers;
-      return o;
-    }, {})
-  )
-);
-
-const Select = memo(({ data, onSelect }) => (
-  <select onChange={(e) => onSelect(e.target.value)}>
-    {data.map(({ name }) => (
-      <option key={name} value={name}>
-        {name}
-      </option>
-    ))}
-  </select>
-));
+/* ---------------Not Usable----------------- */
+// const Select = memo(({ data, onSelect }) => (
+//   <select onChange={(e) => onSelect(e.target.value)}>
+//     {data.map(({ name }) => (
+//       <option key={name} value={name}>
+//         {name}
+//       </option>
+//     ))}
+//   </select>
+// ));
 
 const Chart = memo(({ data }) => {
   const pieChartData = data.map((value, index) => ({
@@ -94,17 +92,21 @@ const Chart = memo(({ data }) => {
   );
 });
 
-const DeleteConfirmationModal = ({
+const ActivitiesReportModal = ({
   showModal,
   hideModal,
   confirmModal,
   id,
+  items,
+  dataByName,
 }) => {
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(deleteFarmList(id));
     confirmModal();
     hideModal();
+    items();
+    dataByName();
   };
 
   const [selected, setSelected] = useState(items[0].name);
@@ -112,28 +114,9 @@ const DeleteConfirmationModal = ({
     console.log(name);
     setSelected(name);
   };
+  // console.warn(items)
+  // console.log(items)
 
-/* results.total */
-  const activitiesList = useSelector((state) => state.activitiesList);
-  const { data, loading } = activitiesList;
-
-  // console.log(data.total);
-  listTest = data.total
-
-
-  // const twoArray = {
-  //   items: [
-  //     items.map(item => {
-  //       return item.name
-  //     })
-  //   ],
-  //    numbers: [
-  //      data.total.map(num =>{
-  //        return num.jari
-  //      })
-  //    ]
-  //  }
-  //  console.log(twoArray)
 
   return (
     <Modal show={showModal}>
@@ -163,10 +146,9 @@ const DeleteConfirmationModal = ({
       >
         <div className="d-flex justify-content-around">
           {items.map((item) => {
-          {/* {items.map((items, data) => { */}
             return (
               <div style={{ color: "#676767" }}>
-                {/* <div>{data.total}</div> */}
+                <div>{item.count}</div>
                 <div>
                   <div
                     style={{
@@ -213,4 +195,4 @@ const DeleteConfirmationModal = ({
   );
 };
 
-export default DeleteConfirmationModal;
+export default ActivitiesReportModal;

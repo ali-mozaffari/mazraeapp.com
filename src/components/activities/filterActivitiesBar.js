@@ -31,6 +31,52 @@ const FilterActivitiesBar = () => {
     setDisplayConfirmationModal(false);
   };
 
+
+  const activitiesList = useSelector((state) => state.activitiesList);
+  const { data, loading } = activitiesList;
+
+  const items = [
+    {
+      name: "anjamshode",
+      fName: 'انجام شده',
+      numbers: [data.total.anjamshode, data.total.barname, data.total.jari, data.total.moavvagh],
+      color: "#16db93",
+      // count: data.total.anjamshode,
+      count: data.total.anjamshode,
+    },
+    {
+      name: "barname",
+      fName: 'برنامه',
+      // numbers: [25, 20, 20, 35],
+      color: "#f29e4c",
+      count: data.total.barname,
+    },
+    {
+      name: "jari",
+      fName: 'جاری',
+      // numbers: [6, 12, 82, 20],
+      color: "#2c699a",
+      count: data.total.jari,
+    },
+    {
+      name: "moavvagh",
+      fName: 'معوق',
+      // numbers: [6, 12, 82],
+      color: "#f2634c",
+      count: data.total.moavvagh,
+    },
+  ];
+  
+  const dataByName = new Map(
+    Object.entries(
+      items.reduce((o, c) => {
+        o[c.name] = c.numbers;
+        return o;
+      }, {})
+    )
+  );
+
+
   return (
     <div>
       <div
@@ -94,6 +140,8 @@ const FilterActivitiesBar = () => {
         confirmModal={submitDelete}
         hideModal={hideConfirmationModal}
         id={id}
+        items={items}
+        dataByName={dataByName}
       />
 
     </div>
