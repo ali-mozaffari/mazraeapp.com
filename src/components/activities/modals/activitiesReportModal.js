@@ -17,54 +17,6 @@ const labels = [
   ["", "#f2634c"],
 ];
 
-// https://www.gsma.com/mobileeconomy/#trends
-// const items = [
-//   {
-//     name: "anjamshode",
-//     fName: 'انجام شده',
-//     numbers: [25, 20, 20, 35],
-//     color: "#16db93",
-//     // count: {countVaziat(anjamshode)},
-//   },
-//   {
-//     name: "barname",
-//     fName: 'برنامه',
-//     // numbers: [25, 20, 20, 35],
-//     color: "#f29e4c",
-//   },
-//   {
-//     name: "jari",
-//     fName: 'جاری',
-//     // numbers: [6, 12, 82, 20],
-//     color: "#2c699a",
-//   },
-//   {
-//     name: "moavvagh",
-//     fName: 'معوق',
-//     // numbers: [6, 12, 82],
-//     color: "#f2634c",
-//   },
-// ];
-
-// const dataByName = new Map(
-//   Object.entries(
-//     items.reduce((o, c) => {
-//       o[c.name] = c.numbers;
-//       return o;
-//     }, {})
-//   )
-// );
-
-/* ---------------Not Usable----------------- */
-// const Select = memo(({ data, onSelect }) => (
-//   <select onChange={(e) => onSelect(e.target.value)}>
-//     {data.map(({ name }) => (
-//       <option key={name} value={name}>
-//         {name}
-//       </option>
-//     ))}
-//   </select>
-// ));
 
 const Chart = memo(({ data }) => {
   const pieChartData = data.map((value, index) => ({
@@ -100,9 +52,9 @@ const ActivitiesReportModal = ({
   items,
   dataByName,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const handleDelete = (id) => {
-    dispatch(deleteFarmList(id));
+    // dispatch(deleteFarmList(id));
     confirmModal();
     hideModal();
     items();
@@ -147,7 +99,7 @@ const ActivitiesReportModal = ({
         <div className="d-flex justify-content-around">
           {items.map((item) => {
             return (
-              <div style={{ color: "#676767" }}>
+              <div key={item.name} style={{ color: "#676767" }}>
                 <div>{item.count}</div>
                 <div>
                   <div

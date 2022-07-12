@@ -11,7 +11,7 @@ export const getActivitiesList = createAsyncThunk(
           Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
         },
       });
-      // console.log(data.results.details)
+    //   console.log(data.results)
       return data.results;
     } catch (error) {
       // return error?.response;

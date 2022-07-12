@@ -33,44 +33,6 @@ const ActivitiesListBox = () => {
   const { data, loading } = activitiesList;
   //   console.log(data)
 
-  const items = [
-    {
-      name: "anjamshode",
-      fName: 'انجام شده',
-      numbers: [25, 20, 20, 35],
-      color: "#16db93",
-      // count: {countVaziat(anjamshode)},
-    },
-    {
-      name: "barname",
-      fName: 'برنامه',
-      // numbers: [25, 20, 20, 35],
-      color: "#f29e4c",
-    },
-    {
-      name: "jari",
-      fName: 'جاری',
-      // numbers: [6, 12, 82, 20],
-      color: "#2c699a",
-    },
-    {
-      name: "moavvagh",
-      fName: 'معوق',
-      // numbers: [6, 12, 82],
-      color: "#f2634c",
-    },
-  ];
-  
-  const dataByName = new Map(
-    Object.entries(
-      items.reduce((o, c) => {
-        o[c.name] = c.numbers;
-        return o;
-      }, {})
-    )
-  );
-
-
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -250,8 +212,6 @@ const ActivitiesListBox = () => {
         confirmModal={submitDelete}
         hideModal={hideConfirmationModal}
         id={id}
-        items={items}
-        dataByName={dataByName}
       />
     </div>
   );

@@ -34,36 +34,37 @@ const FilterActivitiesBar = () => {
 
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
+  // console.warn(data)
 
   const items = [
     {
       name: "anjamshode",
       fName: 'انجام شده',
-      numbers: [data.total.anjamshode, data.total.barname, data.total.jari, data.total.moavvagh],
+      numbers: [data?.total?.anjamshode, data?.total?.barname, data?.total?.jari, data?.total?.moavvagh],
       color: "#16db93",
       // count: data.total.anjamshode,
-      count: data.total.anjamshode,
+      count: data?.total?.anjamshode,
     },
     {
       name: "barname",
       fName: 'برنامه',
       // numbers: [25, 20, 20, 35],
       color: "#f29e4c",
-      count: data.total.barname,
+      count: data?.total?.barname,
     },
     {
       name: "jari",
       fName: 'جاری',
       // numbers: [6, 12, 82, 20],
       color: "#2c699a",
-      count: data.total.jari,
+      count: data?.total?.jari,
     },
     {
       name: "moavvagh",
       fName: 'معوق',
       // numbers: [6, 12, 82],
       color: "#f2634c",
-      count: data.total.moavvagh,
+      count: data?.total?.moavvagh,
     },
   ];
   
