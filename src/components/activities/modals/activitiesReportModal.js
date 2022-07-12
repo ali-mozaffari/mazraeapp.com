@@ -87,7 +87,7 @@ const ActivitiesReportModal = ({
 
         <h6 style={{ fontWeight: "800", color: "#676767" }}>گزارش فعالیت ها</h6>
       </div>
-      <hr />
+      <hr style={{height: "2px"}} />
       <Modal.Body
         style={{
           textAlign: "center",
@@ -122,7 +122,7 @@ const ActivitiesReportModal = ({
         </div>
 
         {/* <Select data={data} onSelect={onSelect} /> */}
-        <div style={{ padding: "20%" }}>
+        <div style={{ width: "60%", margin: "0 auto", marginTop: "30px" }}>
           <Chart
             data={dataByName.has(selected) ? dataByName.get(selected) : []}
           />

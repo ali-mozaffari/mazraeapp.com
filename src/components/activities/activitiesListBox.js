@@ -12,7 +12,7 @@ import { getActivitiesList } from "../../redux/slice/activities/activitiesListBo
 import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
-
+import { noe_faaliat_items, vaziat_items } from "../../assets/strings/strings";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -32,7 +32,6 @@ const ActivitiesListBox = () => {
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
   //   console.log(data)
-
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -104,13 +103,21 @@ const ActivitiesListBox = () => {
                     fontSize: "13px",
                   }}
                 >
-                  {item.vaziat}
+                  {vaziat_items.map((item2) =>
+                    item2.key === item.vaziat ? item2.title : null
+                  )}
+                  {/* {item.vaziat} */}
                 </span>
                 {/* <Badge pill bg={"success"} className="p-2">
                   {item.vaziat}
                 </Badge> */}
               </td>
-              <td className="py-3">{item.noe_faaliat}</td>
+              <td className="py-3" style={{ fontSize: "13px" }}>
+                {noe_faaliat_items.map((item3) =>
+                  item3.key === item.noe_faaliat ? item3.title : null
+                )}
+                {/* {item.noe_faaliat} */}
+              </td>
               <td
                 className="py-3"
                 style={{ fontSize: "13px", whiteSpace: "nowrap" }}
@@ -202,8 +209,6 @@ const ActivitiesListBox = () => {
               </td>
             </tr>
           ))}
-
-        
         </tbody>
       </table>
 
