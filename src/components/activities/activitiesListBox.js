@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { noe_faaliat_items, vaziat_items } from "../../assets/strings/strings";
+import Loading from "../loading/loading";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -80,6 +81,9 @@ const ActivitiesListBox = () => {
 
   return (
     <div style={{ overflow: "overlay" }}>
+      {loading ? (
+          <div style={{ height: "40%", width: "40%", margin: "0 auto" }}><Loading /></div>
+        ) : (
       <table className="table table-borderless d-md-table">
         <thead>
           <tr>
@@ -213,12 +217,15 @@ const ActivitiesListBox = () => {
         </tbody>
       </table>
 
+)}
+
       <DeleteConfirmationModal
         showModal={displayConfirmationModal}
         confirmModal={submitDelete}
         hideModal={hideConfirmationModal}
         id={id}
       />
+
     </div>
   );
 };

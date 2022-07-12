@@ -12,6 +12,7 @@ import { useNavigate, Link, NavLink } from "react-router-dom";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { Dropdown, ToastContainer } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Loading from "../loading/loading";
 
 
 const ITEM_HEIGHT = 48;
@@ -82,7 +83,8 @@ const FarmListBox = () => {
       <div className="row d-md-flex justify-content-center">
 
         {loading ? (
-          <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>
+          // <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>
+          <div style={{ height: "40%", width: "40%" }}><Loading /></div>
         ) : (
           postList?.map((item) => (
             <div

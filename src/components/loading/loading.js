@@ -14,13 +14,13 @@ const Loading = () => {
     };
 
     return (
-        <div className="d-flex align-items-center" style={{height:'100vh'}}>
+        <div className="d-flex align-items-center" style={{height:'100%'}}>
             <div className="align-content-center px-5">
 
                 <Lottie
                     options={defaultOptions}
                 />
-                <p className="text-center mt-5 text-dark-blue" style={{fontWeight:'900'}}>
+                <p className="text-center mt-5 text-dark-blue" style={{fontWeight:'900', whiteSpace: "nowrap"}}>
                     لطفا کمی منتظر باشید ...
                 </p>
 
