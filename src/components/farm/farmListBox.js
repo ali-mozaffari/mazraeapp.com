@@ -84,7 +84,7 @@ const FarmListBox = () => {
 
         {loading ? (
           // <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>
-          <div style={{ height: "40%", width: "40%" }}><Loading /></div>
+          <div style={{ height: "40%", width: "40%", paddingTop: "30px" }}><Loading /></div>
         ) : (
           postList?.map((item) => (
             <div

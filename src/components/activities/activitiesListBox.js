@@ -82,7 +82,7 @@ const ActivitiesListBox = () => {
   return (
     <div style={{ overflow: "overlay" }}>
       {loading ? (
-          <div style={{ height: "40%", width: "40%", margin: "0 auto" }}><Loading /></div>
+          <div style={{ height: "40%", width: "40%", margin: "0 auto", paddingTop: "30px" }}><Loading /></div>
         ) : (
       <table className="table table-borderless d-md-table">
         <thead>
