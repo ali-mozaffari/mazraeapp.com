@@ -77,7 +77,7 @@ const Topbar = () => {
         sx={{
           bgcolor: { xs: "#f2f8f6", sm: "#f2f8f6", md: "#fff" },
           position: { xs: "absolute", sm: "absolute", md: "unset" },
-          left: { xs: "18%", sm: "18%" },
+          left: { xs: "21%", sm: "21%" },
         }}
         className="bellBadge"
         onClick={handleClick}
@@ -161,7 +161,7 @@ const Topbar = () => {
         </MenuItem>
       </Menu>
 
-      <div style={{ position: "absolute", left: "0", width: "15%" }}>
+      <div style={{ position: "absolute", left: "0", width: "20%" }}>
         <Grid
           item
           onClick={toggling}
