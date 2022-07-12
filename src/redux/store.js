@@ -3,6 +3,7 @@ import farmListReducer from './slice/farm/farmListBox'
 import addFarmReducer from './slice/farm/addFarm'
 import toolsReducer from './slice/activities/toolsList'
 import nahadeToolsReducer from './slice/activities/nahade'
+import activityReducer from './slice/activities/activity'
 import loadingReducer from './slice/loading/loading'
 import activitiesListReducer from './slice/activities/activitiesListBox'
 import storage from 'redux-persist/lib/storage';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     loading: loadingReducer,
     activitiesList: activitiesListReducer,
     tools: toolsReducer,
+    activity: activityReducer,
     nahade: nahadeToolsReducer
 })
 

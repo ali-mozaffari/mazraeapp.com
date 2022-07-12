@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Modal} from "react-bootstrap";
 import './addNahadeModalCss.css';
+import './activitiesmodal.css'
 import * as Yup from "yup"
 import {Field, Formik} from "formik";
 import {vahede_masahat_items, vahede_meghdar_items} from '../../../assets/strings/strings'
@@ -112,7 +113,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                             onBlur={handleBlur}
                                             value={values.nahade_item}
                                             className={"w-100 search-input mt-4 pl-5 py-4"}
-                                            style={errors.farm && touched.farm ? {border: '1px solid #f00'} : {border: 'none'}}
+                                            style={errors.nahade_item && touched.nahade_item ? {border: '1px solid #f00'} : {border: 'none'}}
                                             onChange={handleChange}
                                         >
                                             <option value="" label="نوع نهاده">
@@ -147,7 +148,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                                 value={values.meghdar}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                style={{borderRadius: '15px'}}
+                                                style={errors.meghdar && touched.meghdar ? {border: '1px solid #f00', borderRadius: '15px'} : {border: 'none', borderRadius: '15px'}}
                                                 className="w-100 search-input mt-4 py-4"
                                             />
                                             <select id="vahede_meghdar"
@@ -175,6 +176,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                             <select id="vahede_masahat"
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
+
                                                     value={values.vahede_masahat}
                                                     style={{
                                                         border: '1px solid #2c699a',
@@ -207,11 +209,13 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
 
                                         <Field
                                             id="gheimat"
+                                            name="gheimat"
                                             type="number"
                                             placeholder="قیمت یا هزینه نهاده (تومان)"
                                             thousandSeparator={true}
                                             onBlur={handleBlur}
                                             value={values.gheimat}
+                                            style={errors.gheimat && touched.gheimat ? {border: '1px solid #f00'} : {border: 'none'}}
                                             onValueChange={(event) => {
                                                 setFieldValue('gheimat', event.value)
                                             }}
@@ -221,11 +225,6 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                                     : "text-input form-control w-100 search-input w-100 mt-4 pl-5 py-4"
                                             }
                                         />
-
-                                        {/*<div className="warning">{errors.gheimat && touched.gheimat && (*/}
-                                        {/*    <span> {errors.gheimat}</span>*/}
-                                        {/*)}*/}
-                                        {/*</div>*/}
                                     </div>
 
                                     <div className="col-12">
@@ -234,6 +233,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                             placeholder="نام و نوع نهاده"
                                             type="text"
                                             name="name_nahade"
+                                            style={errors.name_nahade && touched.name_nahade ? {border: '1px solid #f00'} : {border: 'none'}}
                                             value={values.name_nahade}
                                             onChange={handleChange}
                                             onBlur={handleBlur}

@@ -22,28 +22,31 @@ export const getNahadeItemsList = createAsyncThunk(
 );
 
 
-// export const addNahade = createAsyncThunk(
-//     "nahadeTools/addNahade",
-//     async (payload, {rejectWithValue, getState, dispatch}) => {
-//         try {
-//             const {data} = await axios.get("/api/v2/farm/nahade", {
-//                 headers: {
-//                     Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
-//                 },
-//             });
-//             console.warn(data)
-//             return data;
-//         } catch (error) {
-//             // return error?.response;
-//             console.log(error);
-//             return rejectWithValue(error.data.results);
-//         }
-//     }
-// );
+
+
+export const addNahade = createAsyncThunk(
+    "nahade/addNahade",
+    async (payload, {rejectWithValue, getState, dispatch}) => {
+        try {
+            const {data} = await axios.post("/api/v2/farm/nahade", JSON.stringify(payload), {
+                headers: {
+                    'Authorization': "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+                    'Content-Type': 'application/json'
+                },
+            });
+            return data;
+        } catch (error) {
+            // return error?.response;
+            console.log(error);
+            return rejectWithValue(error.data.results);
+        }
+    }
+);
 
 
 export const addNahadeToList = createAction('nahade/addNahadeToList')
 export const deleteNahade = createAction('nahade/deleteNahade')
+export const clearNahadeList = createAction('nahade/clearNahadeList')
 
 const nahade = createSlice({
     name: "nahade",
@@ -53,7 +56,10 @@ const nahade = createSlice({
             state.nahades = [...state.nahades, action.payload]
         },
         [deleteNahade]: (state, action) => {
-            state.nahades = [state.nahades.filter((item) => item.id !== action.payload)]
+            state.nahades = state.nahades.filter(element => element.id !== action.payload)
+        },
+        [clearNahadeList]: (state, action) => {
+            state.nahades = []
         },
         [getNahadeItemsList.pending]: (state, action) => {
             state.loading = true;
@@ -67,17 +73,16 @@ const nahade = createSlice({
             state.error = action.payload;
         },
 
-        // [addNahade.pending]: (state, action) => {
-        //     state.loading = true;
-        // },
-        // [addNahade.fulfilled]: (state, action) => {
-        //     state.response = action.payload;
-        //     state.loading = false;
-        // },
-        // [addNahade.rejected]: (state, action) => {
-        //     state.loading = false;
-        //     state.error = action.payload;
-        // },
+        [addNahade.pending]: (state, action) => {
+            state.addNahadeLoading = true;
+        },
+        [addNahade.fulfilled]: (state, action) => {
+            state.addNahadeLoading = false;
+        },
+        [addNahade.rejected]: (state, action) => {
+            state.addNahadeLoading = false;
+            state.error = action.payload;
+        },
     },
 });
 
