@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import * as Yup from "yup";
-import BreadCrumbs from "../tools/breadcrumbs";
 import {Field, Form, Formik} from "formik";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {CalendarIcon, CloseIcon, PlusIcon} from "../../assets/icon";
 import {
     noe_faaliat_items,
-    vahede_masahat_items,
     vahede_meghdar_items,
     vaziat_items
 } from '../../assets/strings/strings';
@@ -19,7 +17,7 @@ import {addNahade, clearNahadeList, deleteNahade} from "../../redux/slice/activi
 import {addActivity, clearActivity} from "../../redux/slice/activities/activity";
 import moment from 'moment-jalaali';
 import {toast} from "react-toastify";
-
+import folder from './../../assets/img/folder.png';
 
 const AddActivityForm = () => {
     const title = ["مزرعه من", "ویرایش مشخصات مزرعه"];
@@ -39,14 +37,22 @@ const AddActivityForm = () => {
     const dispatch = useDispatch();
     const tools = useSelector((state) => state.tools);
     const activity = useSelector((state) => state.activity);
+    const [clicked, setClicked] = useState(false);
+    const [file, setFile] = useState([]);
+    const hiddenFileInput = React.useRef(null);
 
+    const handleClick = event => {
+        hiddenFileInput.current.click();
+    };
+
+    const handleChange = event => {
+        const fileUploaded = event.target.files[0];
+        setFile([fileUploaded]);
+    };
 
     useEffect(() => {
-
         dispatch(getToolsList());
-
     }, [])
-
 
     const onCalendarHandler = () => {
         setShowCalendar(!showCalendar)
@@ -84,22 +90,18 @@ const AddActivityForm = () => {
 
     const onFormSubmit = (values) => {
         if (tarikh_mohlat_anjam) {
-            if (!activity.loading) {
-                const date = moment(tarikh_mohlat_anjam, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
-                const payload = {
-                    "vaziat": values.vaziat,
-                    "noe_faaliat": values.noe_faaliat,
-                    "tarikh_mohlat_anjam": date,
-                    "abzar_id": values.abzar_id,
-                    "cultivations": values.cultivations,
-                    "anjam_dahande_list": '1',
-                    "yaddasht": values.yaddasht
-                }
-                dispatch(addActivity(payload))
-
-            } else {
-                toast.error('لطفا صبر نمایید')
+            setClicked(true);
+            const date = moment(tarikh_mohlat_anjam, 'jYYYY/jMM/jDD').format('YYYY-MM-DD')
+            const payload = {
+                "vaziat": values.vaziat,
+                "noe_faaliat": values.noe_faaliat,
+                "tarikh_mohlat_anjam": date,
+                "abzar_id": values.abzar_id,
+                "cultivations": values.cultivations,
+                "anjam_dahande_list": '1',
+                "yaddasht": values.yaddasht
             }
+            dispatch(addActivity(payload))
         } else {
             setDateError(true);
             // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
@@ -124,9 +126,11 @@ const AddActivityForm = () => {
                         }
 
                         dispatch(addNahade(payload))
-
+                        setClicked(false)
 
                     })
+                } else {
+                    setClicked(false)
                 }
             }
         }
@@ -392,14 +396,51 @@ const AddActivityForm = () => {
                             />
 
 
-                            <div className="search-input col-md-5 mx-auto mt-4">
+                            <div className="search-input file-uploader col-md-5 mx-auto mt-4" style={{height: 200}}>
+                                {
+                                    file.length < 1 ? (
+                                        <div onClick={handleClick}>
+                                            <input
+                                                type="file"
+                                                ref={hiddenFileInput}
+                                                onChange={handleChange}
+                                                style={{display: 'none'}}
+                                            />
+                                            <img src={folder} className='d-block mx-auto mt-2 mt-md-1'/>
+                                            <h5 style={{fontWeight: '900'}} className="text-center mt-3">
+                                                آپلود مدارک
+                                            </h5>
+                                            <p className="text-center text-gray mt-3">
+                                                فایل های خود را انتخاب کنید
+                                            </p>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <img src={folder} className='d-block mx-auto mt-2 mt-md-1'/>
+                                            <div className="d-flex justify-content-between mt-3 px-4 mt-5">
+                                                <div>
+                                                    <span>
+                                                        {file[0].name}
+                                                    </span>
+                                                </div>
+                                                <div onClick={() => setFile([])}>
+                                                    <CloseIcon/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    )
+                                }
 
                             </div>
 
 
                             <div className="">
-                                <button type="submit" className="btn-dark-blue mx-1 mt-4"
-                                        onClick={() => onFormSubmit(initialValues)}>
+                                <button disabled={clicked} type="submit" className="btn-dark-blue mx-1 mt-4"
+                                        onClick={() => {
+                                            onFormSubmit(initialValues);
+
+                                        }}>
                                     افزودن
                                 </button>
                                 <NavLink

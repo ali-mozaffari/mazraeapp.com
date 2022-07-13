@@ -16,20 +16,22 @@ import {PersistGate} from "redux-persist/integration/react";
 import {persistStore} from "redux-persist";
 import Loading from "./components/loading/loading";
 
-
 let persistor = persistStore(store);
 
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <Suspense  fallback={<Loading/>}>
-        <BrowserRouter>
-            <Provider store={store}>
-                <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
-                    <App/>
-                    <ToastContainer/>
-                </PersistGate>
-            </Provider>
-        </BrowserRouter>
-    </Suspense>);
+    <React.StrictMode>
+        <Suspense fallback={<Loading/>}>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <PersistGate persistor={persistor} loading={<div>Loading...</div>}>
+
+                        <App/>
+                        <ToastContainer/>
+                    </PersistGate>
+                </Provider>
+            </BrowserRouter>
+        </Suspense>
+    </React.StrictMode>);
