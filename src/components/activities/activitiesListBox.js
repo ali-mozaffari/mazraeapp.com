@@ -32,7 +32,7 @@ const ActivitiesListBox = () => {
 
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
-  //   console.log(data)
+    // console.log(activitiesList)
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -205,18 +205,18 @@ const ActivitiesListBox = () => {
                   </Menu>
 
                   <Tooltip title="کپی کردن فعالیت">
-                    <Link
+                    <div
                       // activityId={item.guid}
                       className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
-                      to={`/edit-activity/${item?.guid}`}
+                      onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
                       <img src={copyIcon} alt="menu" className="mx-auto" />
-                    </Link>
+                    </div>
                   </Tooltip>
                   <Tooltip title="ویرایش فعالیت">
                     <div
                       className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
-                      onClick={() => navigate("/edit-activity")}
+                      onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
                       <img src={editIcon} alt="menu" className="mx-auto" />
                     </div>

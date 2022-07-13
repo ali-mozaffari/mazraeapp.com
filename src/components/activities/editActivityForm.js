@@ -45,9 +45,13 @@ const EditActivityForm = () => {
   const tools = useSelector((state) => state.tools);
   const activity = useSelector((state) => state.activity);
 
-  const params = useParams();
+  const {id} = useParams();
 //   const getActivitybyID = useSelector(state => selectPostById(state, Number(guid)))
-console.log(params.id)
+const activities = useSelector(state => state.activitiesList);
+const activityGuid = activities.data.details;
+const existingActivity = activityGuid.filter(activity => activity.guid === id)
+console.log(existingActivity)
+
 
   useEffect(() => {
     dispatch(getToolsList());
