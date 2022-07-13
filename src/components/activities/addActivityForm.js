@@ -14,13 +14,12 @@ import {Modal} from "react-bootstrap";
 import {getToolsList} from "../../redux/slice/activities/toolsList";
 import AddNahadeModal from "./modals/addNahadeModal";
 import {addNahade, clearNahadeList, deleteNahade} from "../../redux/slice/activities/nahade";
-import {addActivity, clearActivity} from "../../redux/slice/activities/activity";
+import {addActivity, addActivityFile, clearActivity} from "../../redux/slice/activities/activity";
 import moment from 'moment-jalaali';
 import {toast} from "react-toastify";
 import folder from './../../assets/img/folder.png';
 
 const AddActivityForm = () => {
-    const title = ["مزرعه من", "ویرایش مشخصات مزرعه"];
     const navigate = useNavigate();
     const farms = useSelector((state) => state.farmlist);
     const nahades = useSelector((state) => state.nahade);
@@ -83,7 +82,6 @@ const AddActivityForm = () => {
         yaddasht: yaddasht
     };
 
-
     const clearNahade = (item) => {
         dispatch(deleteNahade(item))
     }
@@ -108,7 +106,6 @@ const AddActivityForm = () => {
         }
     }
 
-
     useEffect(() => {
 
         if (activity.isDone) {
@@ -126,25 +123,40 @@ const AddActivityForm = () => {
                         }
 
                         dispatch(addNahade(payload))
-                        setClicked(false)
 
                     })
                 } else {
                     setClicked(false)
+                    setFile([]);
+                    dispatch(clearNahadeList());
+                    dispatch(clearActivity());
+                    navigate('/activities');
                 }
             }
         }
 
     }, [activity.isDone])
 
-
     useEffect(() => {
 
         if (!nahades.addNahadeLoading) {
             if (nahades.nahades.length > 0) {
-                dispatch(clearNahadeList())
-                dispatch(clearActivity())
-                navigate('/activities')
+                // if (file[0]) {
+                //     const formData = new FormData();
+                //     const guid = activity.response.guid
+                //     const image = file[0]
+                //
+                //     formData['guid'] = guid
+                //     formData['image'] = file[0]
+                //
+                //     dispatch(addActivityFile(formData))
+                // }
+                setFile([]);
+                dispatch(clearNahadeList());
+                dispatch(clearActivity());
+                setClicked(false)
+                navigate('/activities');
+
             }
         }
 
@@ -359,7 +371,7 @@ const AddActivityForm = () => {
                                 nahades?.nahades?.length > 0 ? (
                                     nahades?.nahades?.map((item) => (
                                         <div
-                                            className="nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between">
+                                            className={nahades?.nahades?.length / 2 === 0 ? "nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between" : "nahade-item col-md-5 mx-md-5 mt-4 d-flex justify-content-between"}>
                                             <div>
                                                 {
                                                     nahades?.items?.map((nahadeItem) =>
@@ -435,7 +447,7 @@ const AddActivityForm = () => {
                             </div>
 
 
-                            <div className="">
+                            <div className="d-flex justify-content-center mt-3">
                                 <button disabled={clicked} type="submit" className="btn-dark-blue mx-1 mt-4"
                                         onClick={() => {
                                             onFormSubmit(initialValues);
@@ -445,7 +457,7 @@ const AddActivityForm = () => {
                                 </button>
                                 <NavLink
                                     to={"/activities"}
-                                    className="btn-dark-blue mx-1 mt-4 text-decoration-none text-light"
+                                    className="btn-light-gray mx-1 mt-4 text-decoration-none text-light"
                                 >
                                     لغو
                                 </NavLink>
