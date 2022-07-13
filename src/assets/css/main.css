@@ -92,6 +92,19 @@
     padding: 20px 25px;
 }
 
+.file-uploader {
+    border: 1px dashed #0a53be;
+    cursor: pointer;
+}
+
+.img-selected {
+    background-color: #16db9322;
+    border: 1px solid #16db9388;
+    color: gray;
+    border-radius: 15px;
+    padding: 20px 25px;
+}
+
 .nahade-item {
     background-color: #0a53be22;
     border-radius: 15px;
