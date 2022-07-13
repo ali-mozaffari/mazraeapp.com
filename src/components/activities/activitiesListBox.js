@@ -6,7 +6,7 @@ import { Menu, MenuItem, Tooltip } from "@mui/material";
 import copyIcon from "../../assets/img/copy-gray.png";
 import editIcon from "../../assets/img/edit.png";
 import trashIcon from "../../assets/img/trash.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getActivitiesList } from "../../redux/slice/activities/activitiesListBox";
 import { toast } from "react-toastify";
@@ -80,144 +80,162 @@ const ActivitiesListBox = () => {
   };
 
   return (
-    <div style={{ overflow: "overlay" }}>
+    <div style={{ overflow: "overlay", marginBottom: "15%" }}>
       {loading ? (
-          <div style={{ height: "40%", width: "40%", margin: "0 auto", paddingTop: "30px" }}><Loading /></div>
-        ) : (
-      <table className="table table-borderless d-md-table">
-        <thead>
-          <tr>
-            <th className="py-3">وضعیت</th>
-            <th className="py-3">نوع</th>
-            <th className="py-3">مهلت انجام</th>
-            <th className="py-3">محصول</th>
-            <th className="py-3">فعالیت ها</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.details.map((item, index) => (
-            <tr key={index}>
-              <td className="py-3" style={{ whiteSpace: "nowrap" }}>
-                <span
-                  style={{
-                    backgroundColor: `${vaziatColor(item.vaziat)}`,
-                    borderRadius: "15px",
-                    padding: "5px 10px",
-                    fontSize: "13px",
-                    color: "#fff"
-                  }}
-                >
-                  {vaziat_items.map((item2) =>
-                    item2.key === item.vaziat ? item2.title : null
-                  )}
-                  {/* {item.vaziat} */}
-                </span>
-                {/* <Badge pill bg={"success"} className="p-2">
-                  {item.vaziat}
-                </Badge> */}
-              </td>
-              <td className="py-3" style={{ fontSize: "13px" }}>
-                {noe_faaliat_items.map((item3) =>
-                  item3.key === item.noe_faaliat ? item3.title : null
-                )}
-                {/* {item.noe_faaliat} */}
-              </td>
-              <td
-                className="py-3"
-                style={{ fontSize: "13px", whiteSpace: "nowrap" }}
-              >
-                {/* date subtraction Farsi */}
-                <span className="d-inline-flex">
-                  <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
-                </span>
-
-                <span className="px-1">روز دیگر</span>
-
-                <img src={calendarIcon} alt="calendar" className="mx-2" />
-              </td>
-              <td className="py-3" style={{ whiteSpace: "nowrap" }}>
-                {item.cultivation.map((item2, index) => (
+        <div
+          style={{
+            height: "40%",
+            width: "40%",
+            margin: "0 auto",
+            paddingTop: "30px",
+          }}
+        >
+          <Loading />
+        </div>
+      ) : (
+        <table className="table table-borderless d-md-table">
+          <thead>
+            <tr>
+              <th className="py-3">وضعیت</th>
+              <th className="py-3">نوع</th>
+              <th className="py-3">مهلت انجام</th>
+              <th className="py-3">محصول</th>
+              <th className="py-3">فعالیت ها</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.details.map((item, index) => (
+              <tr key={index}>
+                <td className="py-3" style={{ whiteSpace: "nowrap" }}>
                   <span
-                    key={index}
                     style={{
-                      backgroundColor: `${item2.mahsul.color}`,
-                      color: "#fff",
+                      backgroundColor: `${vaziatColor(item.vaziat)}`,
                       borderRadius: "15px",
-                      padding: "7px 10px",
+                      padding: "5px 10px",
                       fontSize: "13px",
+                      color: "#fff",
                     }}
                   >
-                    <span> {item2.sathe_zire_kesht} </span>
-                    <span> {item2.mahsul.title} </span>
+                    {vaziat_items.map((item2) =>
+                      item2.key === item.vaziat ? item2.title : null
+                    )}
+                    {/* {item.vaziat} */}
                   </span>
-                ))}
-              </td>
-              <td className="d-flex">
-                <div
-                  className="btn tableToolIconBgGray d-flex align-items-center"
-                  aria-label="more"
-                  id="long-button"
-                  aria-controls={open ? "long-menu" : undefined}
-                  aria-expanded={open ? "true" : undefined}
-                  aria-haspopup="true"
-                  onClick={handleClick}
+                  {/* <Badge pill bg={"success"} className="p-2">
+                  {item.vaziat}
+                </Badge> */}
+                </td>
+                <td
+                  className="py-3"
+                  style={{ fontSize: "13px", whiteSpace: "nowrap" }}
                 >
-                  <img src={menuIcon} alt="menu" className="mx-auto" />
-                </div>
+                  {noe_faaliat_items.map((item3) =>
+                    item3.key === item.noe_faaliat ? item3.title : null
+                  )}
+                  {/* {item.noe_faaliat} */}
+                </td>
+                <td
+                  className="py-3"
+                  style={{ fontSize: "13px", whiteSpace: "nowrap" }}
+                >
+                  {/* date subtraction Farsi */}
+                  <span className="d-inline-flex">
+                    <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
+                  </span>
 
-                <Menu
-                  id="long-menu"
-                  MenuListProps={{
-                    "aria-labelledby": "long-button",
-                  }}
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 5,
-                      width: "40ch",
-                    },
-                  }}
-                >
-                  {options.map((option) => (
-                    <MenuItem
-                      key={option}
-                      style={{ paddingTop: "20px", paddingBottom: "20px" }}
-                      onClick={() => console.log(option)}
+                  <span className="px-1">روز دیگر</span>
+
+                  <img src={calendarIcon} alt="calendar" className="mx-2" />
+                </td>
+                <td className="py-3" style={{ whiteSpace: "nowrap" }}>
+                  {item.cultivation.map((item2, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: `${item2.mahsul.color}`,
+                        color: "#fff",
+                        borderRadius: "15px",
+                        padding: "7px 10px",
+                        fontSize: "13px",
+                      }}
                     >
-                      {option}
-                    </MenuItem>
+                      <span> {item2.sathe_zire_kesht} </span>
+                      <span> {item2.mahsul.title} </span>
+                    </span>
                   ))}
-                </Menu>
+                </td>
+                <td className="d-flex">
+                  <div
+                    className="btn tableToolIconBgGray d-flex align-items-center"
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? "long-menu" : undefined}
+                    aria-expanded={open ? "true" : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <img src={menuIcon} alt="menu" className="mx-auto" />
+                  </div>
 
-                <div className="btn tableToolIconBgGray d-flex align-items-center justify-content-center">
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      "aria-labelledby": "long-button",
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 5,
+                        width: "40ch",
+                      },
+                    }}
+                  >
+                    {options.map((option) => (
+                      <MenuItem
+                        key={option}
+                        style={{ paddingTop: "20px", paddingBottom: "20px" }}
+                        onClick={() => console.log(option)}
+                      >
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+
                   <Tooltip title="کپی کردن فعالیت">
-                    <img src={copyIcon} alt="menu" className="mx-auto" />
+                    <Link
+                      // activityId={item.guid}
+                      className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
+                      to={`/edit-activity/${item?.guid}`}
+                    >
+                      <img src={copyIcon} alt="menu" className="mx-auto" />
+                    </Link>
                   </Tooltip>
-                </div>
-                <div className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center">
                   <Tooltip title="ویرایش فعالیت">
-                    <img src={editIcon} alt="menu" className="mx-auto" />
+                    <div
+                      className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
+                      onClick={() => navigate("/edit-activity")}
+                    >
+                      <img src={editIcon} alt="menu" className="mx-auto" />
+                    </div>
                   </Tooltip>
-                </div>
-                <div
-                  className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
-                  onClick={() => showDeleteModal(item?.guid)}
-                >
-                  <Tooltip title="حدف فعالیت">
-                    {/* {item.guid} */}
-                    <img src={trashIcon} alt="menu" className="mx-auto" />
+                  <Tooltip title="حذف فعالیت">
+                    <div
+                      className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
+                      onClick={() => showDeleteModal(item?.guid)}
+                    >
+                      {/* {item.guid} */}
+                      <img src={trashIcon} alt="menu" className="mx-auto" />
+                    </div>
                   </Tooltip>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       <DeleteConfirmationModal
         showModal={displayConfirmationModal}
@@ -225,7 +243,6 @@ const ActivitiesListBox = () => {
         hideModal={hideConfirmationModal}
         id={id}
       />
-
     </div>
   );
 };

@@ -1,25 +1,12 @@
-import React from 'react';
+import React from "react";
 import Map from "../../components/map/map";
-import {useParams} from "react-router-dom";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import {useMap} from "react-leaflet";
-import Loading from "../../components/loading/loading";
-
-
-
 
 const AddFarmPage = () => {
-
-
-
-    return (
-        <div className='add-farm'>
-
-             <Map/>
-
-        </div>
-    );
+  return (
+    <div className="add-farm">
+      <Map />
+    </div>
+  );
 };
 
 export default AddFarmPage;
