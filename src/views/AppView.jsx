@@ -2,8 +2,8 @@ import React from "react";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import AppLayout from "../layouts/appLayout";
 import AuthLayout from "../layouts/authLayout";
-import {useSelector} from "react-redux";
-import Loading from "../components/loading/loading";
+import EditActivityPage from "../pages/activities/editActivityPage";
+
 
 const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
 const Login = React.lazy(() => import("./../pages/auth/login"));
@@ -34,8 +34,9 @@ const AddFarmPage = React.lazy(() =>
     import(/* webpackChunkName: "views-user" */ "../pages/main/addFarmPage")
 );
 
-const EditFarm = React.lazy(() =>
-    import("../components/farm/editFarm/editFarm"))
+const EditFarmPage = React.lazy(() =>
+    import(/* webpackChunkName: "views-user" */ "../pages/main/editFarmPage")
+);
 
 const AddActivity = React.lazy(() =>
     import("../pages/activities/addActivityPage"));
@@ -77,8 +78,9 @@ const AppView = () => {
                 <Route path="/activities" element={<ActivitiesPage/>}/>
                 <Route path="/farm-services" element={<FarmServicePage/>}/>
                 <Route path="/invitation" element={<InvitationPage/>}/>
-                <Route path="/edit-farm" element={<EditFarm />} />
+                <Route path="/edit-farm" element={<EditFarmPage />} />
                 <Route path="/add-activity" element={<AddActivity />} />
+                <Route path="/edit-activity/:id" element={<EditActivityPage />} />
             </Routes>
         </AppLayout>
     );
