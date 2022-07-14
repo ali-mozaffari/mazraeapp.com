@@ -15,6 +15,7 @@ import DatePicker, { Calendar } from "react-datepicker2";
 import { Modal } from "react-bootstrap";
 import { getToolsList } from "../../redux/slice/activities/toolsList";
 import AddNahadeModal from "./modals/addNahadeModal";
+import EditNahadeModal from "./modals/editNahadeModal";
 import {
   addNahade,
   clearNahadeList,
@@ -41,6 +42,7 @@ const EditActivityForm = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
+  const [showEditNahadeModal, setShowEditNahadeModal] = useState(false);
   const dispatch = useDispatch();
   const tools = useSelector((state) => state.tools);
   const activity = useSelector((state) => state.activity);
@@ -50,7 +52,7 @@ const EditActivityForm = () => {
 const activities = useSelector(state => state.activitiesList);
 const activityGuid = activities.data.details;
 const existingActivity = activityGuid.filter(activity => activity.guid === id)
-console.log(existingActivity)
+console.log(existingActivity[0])
 
 
   useEffect(() => {
@@ -62,6 +64,9 @@ console.log(existingActivity)
   };
   const onNahadeModalHandler = () => {
     setShowNahadeModal(!showNahadeModal);
+  };
+  const onEditNahadeModalHandler = () => {
+    setShowEditNahadeModal(!showEditNahadeModal);
   };
 
   const validation = Yup.object().shape({
@@ -240,11 +245,8 @@ console.log(existingActivity)
                 }
                 className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                 onClick={(e) => set_noe_faaliat(e.target.value)}
+                default={existingActivity[0].noe_faaliat}
               >
-                <option value="" label="نوع *">
-                  نوع{" "}
-                </option>
-
                 {noe_faaliat_items?.map((item) => (
                   <option value={item.key} label={item.title}>
                     {item.title}
@@ -265,10 +267,11 @@ console.log(existingActivity)
                 }
                 className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                 onClick={(e) => setVaziat(e.target.value)}
+                default={existingActivity[0].vaziat}
               >
-                <option value="" label="وضعیت *">
+                {/* <option value="" label="وضعیت *">
                   وضعیت{" "}
-                </option>
+                </option> */}
 
                 {vaziat_items?.map((item) => (
                   <option value={item.key} label={item.title}>
@@ -290,7 +293,7 @@ console.log(existingActivity)
                   <div>{tarikh_mohlat_anjam}</div>
                 ) : (
                   <div className=" d-flex justify-content-between">
-                    <span>تاریخ مهلت انجام *</span>
+                    <span>{existingActivity[0].tarikh_mohlat_anjam}</span>
                     <CalendarIcon fill={"gray"} />
                   </div>
                 )}
@@ -309,10 +312,11 @@ console.log(existingActivity)
                 }
                 className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                 onClick={(e) => set_anjam_dahande_list(e.target.value)}
+                default={existingActivity[0].anjam_dahande_list}
               >
-                <option value="" label="انجام دهنده ها *">
+                {/* <option value="" label="انجام دهنده ها *">
                   انجام دهنده ها{" "}
-                </option>
+                </option> */}
 
                 {vaziat_items?.map((item) => (
                   <option value={item.key} label={item.title}>
@@ -328,10 +332,11 @@ console.log(existingActivity)
                 name="abzar_id"
                 className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                 onClick={(e) => setSelectedFarm(e.target.value)}
+                default={existingActivity[0].tools}
               >
-                <option value="" className="text-gray" label="تجهیزات و ابزار">
+                {/* <option value="" className="text-gray" label="تجهیزات و ابزار">
                   تجهیزات و ابزار{" "}
-                </option>
+                </option> */}
 
                 {tools?.data?.map((item) => (
                   <option value={item.id} label={item.title}>
@@ -382,7 +387,7 @@ console.log(existingActivity)
                 // value={phone}
                 // onChange={(e) => setPhone(e.target.value)}
                 className="search-input col-md-5 mx-auto mt-4"
-                placeholder="یادداشت"
+                placeholder={existingActivity[0].yaddasht}
               />
 
               <div className="search-input col-md-5 mx-auto mt-4"></div>
@@ -410,6 +415,11 @@ console.log(existingActivity)
       <AddNahadeModal
         show={showNahadeModal}
         onNahadeModalHandler={onNahadeModalHandler}
+      />
+
+      <EditNahadeModal
+        show={showEditNahadeModal}
+        onEditNahadeModalHandler={onEditNahadeModalHandler}
       />
 
       <Modal show={showCalendar} centered onHide={onCalendarHandler}>
