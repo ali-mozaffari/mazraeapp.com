@@ -8,7 +8,7 @@ export const getFarmList = createAsyncThunk(
     try {
       const { data } = await axios.get("/api/v2/farm/farms", {
         headers: {
-          Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+          Authorization: "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
         },
       });
       // console.log(data.results)
@@ -30,7 +30,7 @@ export const deleteFarmList = createAsyncThunk(
           guid: id,
         },
         headers: {
-          Authorization: "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+          Authorization: "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
         },
       });
       return data.results;

@@ -9,7 +9,7 @@ export const addActivity = createAsyncThunk(
         try {
             const {data} = await axios.post("/api/v2/farm/activity", JSON.stringify(payload), {
                 headers: {
-                    'Authorization': "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+                    'Authorization': "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
                     'Content-Type': 'application/json'
                 }
             });
@@ -31,7 +31,7 @@ export const addActivityFile = createAsyncThunk(
             console.warn(payload)
             const {data} = await axios.patch("/api/v2/farm/activity", {data: payload}, {
                 headers: {
-                    'Authorization': "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+                    'Authorization': "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
                     'Content-Type': 'multipart/form-data'
                 }
             });

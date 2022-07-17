@@ -126,9 +126,9 @@ function ForecastCultivationProgressItem(props) {
 
                         {(all && !main) ? '1397-1400' : ''}
 
-                        {!all && data.years.map(item => {
+                        {!all && data.years.map((item, index) => {
                             return (
-                                <div>
+                                <div key={index}>
                                     {item}
                                 </div>
                             )
@@ -143,7 +143,7 @@ function ForecastCultivationProgressItem(props) {
                     const masahatPercent = Math.round((item.masahat * 100) / data.masahat)
 
                     return (
-                        <div className='progress-complete'
+                        <div key={index} className='progress-complete'
                              style={{width: `${item.masahatPercent || masahatPercent}%`}}>
                             <div className='progress-complete'
                                  style={{width: '100%'}}>
@@ -189,7 +189,7 @@ function ForecastCultivationProgressItem(props) {
                     const masahatPercent = Math.round((item.masahat * 100) / data.masahat)
 
                     return (
-                        <div className='progress-complete-2'>
+                        <div key={index} className='progress-complete-2'>
 
                             <span className='culti-circle-percent'
                                   style={{backgroundColor: item.color || COLORS[index]}}/>
@@ -234,9 +234,9 @@ function ForecastCultivationProgressItem(props) {
 
                         {(all && !main) ? CONST.LAST_YEAR_TITLE : ''}
 
-                        {!all && main !== true && data.years.map(item => {
+                        {!all && main !== true && data.years.map((item, index) => {
                             return (
-                                <div>
+                                <div key={index}>
                                     {item}
                                 </div>
                             )

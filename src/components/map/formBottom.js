@@ -39,12 +39,12 @@ const FormBottom = ({
                     toast.error(data['data']['data']['message'], {position: 'top-center', theme: 'dark'})
                     // dispatch(clearFarm())
                 }
-                if (data['data']['guid']) {
-                    dispatch(startLoading(data['loading']))
-                    toast.success('مزرعه با موفقیت ایجاد شد', {position: 'top-center', theme: 'dark'})
-                    // dispatch(clearFarm())
-                    navigate('/home')
-                }
+                // if (data['data']['guid']) {
+                //     dispatch(startLoading(data['loading']))
+                //     toast.success('مزرعه با موفقیت ایجاد شد', {position: 'top-center', theme: 'dark'})
+                //     // dispatch(clearFarm())
+                //     navigate('/home')
+                // }
             }
         }
     }, [data])

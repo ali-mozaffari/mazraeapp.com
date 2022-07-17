@@ -105,7 +105,7 @@ const ActivitiesListBox = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.details.map((item, index) => (
+            {data?.details?.map((item, index) => (
               <tr key={index}>
                 <td className="py-3" style={{ whiteSpace: "nowrap" }}>
                   <span
