@@ -24,7 +24,7 @@ const AddActivityForm = () => {
     const navigate = useNavigate();
     const farms = useSelector((state) => state.farmlist);
     const nahades = useSelector((state) => state.nahade);
-    const [selectedFarm, setSelectedFarm] = useState();
+    const [selectedTool, setSelectedTool] = useState();
     const [selectedCultivation, setSelectedCultivation] = useState();
     const [noe_faaliat, set_noe_faaliat] = useState();
     const [vaziat, setVaziat] = useState();
@@ -77,7 +77,7 @@ const AddActivityForm = () => {
     });
 
     const initialValues = {
-        farm: selectedFarm,
+        abzar_id: selectedTool,
         cultivations: selectedCultivation,
         noe_faaliat: noe_faaliat,
         vaziat: vaziat,
@@ -322,7 +322,7 @@ const AddActivityForm = () => {
                                     as="select"
                                     name="abzar_id"
                                     className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                                    onClick={(e) => setSelectedFarm(e.target.value)}
+                                    onClick={(e) => setSelectedTool(e.target.value)}
                                 >
                                     <option value="" className="text-gray" label="تجهیزات و ابزار">
                                         تجهیزات و ابزار{" "}

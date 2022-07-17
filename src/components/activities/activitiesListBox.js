@@ -219,6 +219,7 @@ const ActivitiesListBox = () => {
                       onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
                       <img src={editIcon} alt="menu" className="mx-auto" />
+                      {/* {item?.guid} */}
                     </div>
                   </Tooltip>
                   <Tooltip title="حذف فعالیت">
