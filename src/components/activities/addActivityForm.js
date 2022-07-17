@@ -176,31 +176,31 @@ const AddActivityForm = () => {
                 {({errors, touched}) => (
                     <div className="container">
                         <Form className="row">
-                            <Field
-                                as="select"
-                                name="farm"
-                                validate={true}
-                                style={errors.farm && touched.farm ? {
-                                    border: '1px solid #f00',
-                                    color: 'red'
-                                } : {border: 'none'}}
-                                className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                                onClick={(e) => setSelectedFarm(e.target.value)}
-                            >
-                                <option value="" label="نام مزرعه *">
-                                    نام مزرعه{" "}
-                                </option>
+                            {/*<Field*/}
+                            {/*    as="select"*/}
+                            {/*    name="farm"*/}
+                            {/*    validate={true}*/}
+                            {/*    style={errors.farm && touched.farm ? {*/}
+                            {/*        border: '1px solid #f00',*/}
+                            {/*        color: 'red'*/}
+                            {/*    } : {border: 'none'}}*/}
+                            {/*    className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"*/}
+                            {/*    onClick={(e) => setSelectedFarm(e.target.value)}*/}
+                            {/*>*/}
+                            {/*    <option value="" label="نام مزرعه *">*/}
+                            {/*        نام مزرعه{" "}*/}
+                            {/*    </option>*/}
 
-                                {
-                                    farms?.postList?.map((item) => (
-                                        <option value={item.guid}
-                                                label={item.cultivation?.length > 0 ? item.name + ' (دارای کشت) ' : item.name}
-                                                className="m-3">
+                            {/*    {*/}
+                            {/*        farms?.postList?.map((item) => (*/}
+                            {/*            <option value={item.guid}*/}
+                            {/*                    label={item.cultivation?.length > 0 ? item.name + ' (دارای کشت) ' : item.name}*/}
+                            {/*                    className="m-3">*/}
 
-                                        </option>
-                                    ))
-                                }
-                            </Field>
+                            {/*            </option>*/}
+                            {/*        ))*/}
+                            {/*    }*/}
+                            {/*</Field>*/}
 
                             <Field
                                 as="select"
@@ -219,21 +219,18 @@ const AddActivityForm = () => {
                                 {
                                     farms?.postList?.map((item) => [
                                         (
-                                            item.guid === selectedFarm ? (
-                                                item.cultivation?.map((i) => (
-                                                    <option value={i.id}
-                                                            label={i.mahsul.title + ' ' + i.sathe_zire_kesht + ' (مساحت زیر کشت) '}
-                                                            className="m-3">
-                                                        {i.mahsul.title}
-                                                    </option>
-                                                ))
-                                            ) : null
+                                            item.cultivation?.map((i) => (
+                                                <option value={i.id}
+                                                        label={i.mahsul.title + ' ' + i.sathe_zire_kesht }
+                                                        className="m-3">
+                                                    {i.mahsul.title}
+                                                </option>
+                                            ))
                                         )
                                     ])
                                 }
                             </Field>
 
-                            <hr className="mt-5"/>
 
                             <Field
                                 as="select"
@@ -259,6 +256,7 @@ const AddActivityForm = () => {
 
                             </Field>
 
+                            <hr className="mt-5"/>
 
                             <Field
                                 as="select"
@@ -331,9 +329,6 @@ const AddActivityForm = () => {
 
                             </Field>
 
-
-                            <hr className="mt-5"/>
-
                             <Field
                                 as="select"
                                 name="abzar_id"
@@ -354,8 +349,11 @@ const AddActivityForm = () => {
 
                             </Field>
 
+                            <hr className="mt-5"/>
+
+
                             <div onClick={onNahadeModalHandler}
-                                 className="search-input col-md-5 mx-auto mt-4 py-4 d-flex justify-content-between">
+                                 className="search-input col-md-5 mx-md-5 mt-4 py-4 d-flex justify-content-between">
 
                                 <span className="text-gray">
                                     نهاده
