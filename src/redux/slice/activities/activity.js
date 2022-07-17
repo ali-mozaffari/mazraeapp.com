@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk, createAction} from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
 import {toast} from "react-toastify";
+import {token} from "../../../services/token";
 
 export const addActivity = createAsyncThunk(
     "activity/addActivity",
@@ -9,7 +10,7 @@ export const addActivity = createAsyncThunk(
         try {
             const {data} = await axios.post("/api/v2/farm/activity", JSON.stringify(payload), {
                 headers: {
-                    'Authorization': "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
+                    'Authorization': token,
                     'Content-Type': 'application/json'
                 }
             });
@@ -31,7 +32,7 @@ export const addActivityFile = createAsyncThunk(
             console.warn(payload)
             const {data} = await axios.patch("/api/v2/farm/activity", {data: payload}, {
                 headers: {
-                    'Authorization': "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
+                    'Authorization': token,
                     'Content-Type': 'multipart/form-data'
                 }
             });

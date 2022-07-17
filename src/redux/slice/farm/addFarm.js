@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk, createAction} from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
+import {token} from "../../../services/token";
 
 export const addFarm = createAsyncThunk(
     "farm/addFarm",
@@ -8,7 +9,7 @@ export const addFarm = createAsyncThunk(
         try {
             const {data, status} = await axios.post("/api/v2/farm/farm", payload, {
                 headers: {
-                    Authorization: "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
+                    Authorization: token,
                 },
             });
             return {data, status};

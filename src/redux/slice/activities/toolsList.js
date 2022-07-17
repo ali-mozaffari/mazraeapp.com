@@ -1,6 +1,7 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
+import {token} from "../../../services/token";
 
 export const getToolsList = createAsyncThunk(
     "tools/getToolsList",
@@ -8,7 +9,7 @@ export const getToolsList = createAsyncThunk(
         try {
             const {data} = await axios.get("/api/v2/farm/toolItem", {
                 headers: {
-                    Authorization: "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
+                    Authorization: token,
                 },
             });
             return data.results;

@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk, createAction} from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
 import {clearFarm} from "../farm/addFarm";
+import {token} from "../../../services/token";
 
 export const getNahadeItemsList = createAsyncThunk(
     "nahade/getNahadeToolsList",
@@ -9,7 +10,7 @@ export const getNahadeItemsList = createAsyncThunk(
         try {
             const {data} = await axios.get("/api/v2/farm/nahadeItem", {
                 headers: {
-                    Authorization: "Token 0fc6cd3614f0202043b83d095a2324be3dd68e31",
+                    Authorization: token,
                 },
             });
             return data.results;
@@ -30,7 +31,7 @@ export const addNahade = createAsyncThunk(
         try {
             const {data} = await axios.post("/api/v2/farm/nahade", JSON.stringify(payload), {
                 headers: {
-                    'Authorization': "Token 452949d0f7d9d7b366358e92eb333d5af56ad960",
+                    'Authorization': token,
                     'Content-Type': 'application/json'
                 },
             });
