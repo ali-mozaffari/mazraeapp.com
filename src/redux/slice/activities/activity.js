@@ -61,9 +61,6 @@ const activity = createSlice({
             state.response = action.payload;
             state.isDone = true;
             state.loading = false;
-            if (action.payload.guid) {
-                toast.success('فعالیت افزوده شد', {position: 'top-center', theme: 'dark'})
-            }
         },
         [addActivity.rejected]: (state, action) => {
             state.loading = false;
