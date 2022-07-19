@@ -46,7 +46,10 @@ export const noe_faaliat_items = [
         title: 'مشاوره فنی', key: 'moshavere_fanni',
     },
     {
-        title: 'هرس', key: 'haras',
+        title: 'هرس میوه', key: 'haras_mive',
+    },
+    {
+        title: 'هرس گیاه', key: 'haras_giah',
     },
     {
         title: 'سایر موارد', key: 'sayer',
