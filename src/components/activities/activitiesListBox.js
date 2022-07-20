@@ -142,6 +142,8 @@ const ActivitiesListBox = () => {
                   {/* date subtraction Farsi */}
                   <span className="d-inline-flex">
                     <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
+                    {/* <DateCalculator /> */}
+                    {/* {item.tarikh_mohlat_anjam} */}
                   </span>
 
                   <span className="px-1">روز دیگر</span>

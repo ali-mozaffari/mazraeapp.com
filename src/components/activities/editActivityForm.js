@@ -28,30 +28,42 @@ import moment from "moment-jalaali";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
+import { CompressOutlined } from "@mui/icons-material";
 
 const EditActivityForm = () => {
-    
-    const { id } = useParams();
+  const { id } = useParams();
   const activities = useSelector((state) => state.activitiesList);
   const activityGuid = activities.data.details;
   const existingActivity = activityGuid.filter(
     (activity) => activity.guid === id
   );
-//   console.log(existingActivity[0]?.guid)
-//   const mahsulTitle = existingActivity[0].cultivation[0].mahsul.title;
-    // console.log(existingActivity[0]?.abzar?.id);
-//   console.log(mahsulTitle);
+  //   console.log(existingActivity[0]?.guid)
+  //   const mahsulTitle = existingActivity[0].cultivation[0].mahsul.title;
+  // console.log(existingActivity[0]?.abzar?.id);
+  //   console.log(mahsulTitle);
 
   const navigate = useNavigate();
   const farms = useSelector((state) => state.farmlist);
   const nahades = useSelector((state) => state.nahade);
-  const [selectedTool, setSelectedTool] = useState(existingActivity[0]?.abzar?.id);
-  const [selectedCultivation, setSelectedCultivation] = useState(existingActivity[0]?.cultivation[0]?.id);
-  const [noe_faaliat, set_noe_faaliat] = useState(existingActivity[0]?.noe_faaliat);
+  const [selectedTool, setSelectedTool] = useState(
+    existingActivity[0]?.abzar?.id
+  );
+  const [selectedCultivation, setSelectedCultivation] = useState(
+    existingActivity[0]?.cultivation[0]?.id
+  );
+  const [noe_faaliat, set_noe_faaliat] = useState(
+    existingActivity[0]?.noe_faaliat
+  );
   const [vaziat, setVaziat] = useState(existingActivity[0]?.vaziat);
   const [yaddasht, setYaddasht] = useState();
-  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState(existingActivity[0]?.tarikh_mohlat_anjam);
-  const [anjam_dahande_list, set_anjam_dahande_list] = useState(existingActivity[0]?.anjam_dahande_list);
+  // const jDate = moment(existingActivity[0]?.tarikh_mohlat_anjam, "jYYYY-jMM-jDD").format("YYYY-MM-DD");
+  const jDate = moment(existingActivity[0]?.tarikh_mohlat_anjam).format('jYYYY-jMM-jDD');
+  // console.log(existingActivity[0]?.tarikh_mohlat_anjam);
+  // console.log(jDate);
+  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState(jDate);
+  const [anjam_dahande_list, set_anjam_dahande_list] = useState(
+    existingActivity[0]?.anjam_dahande_list
+  );
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
@@ -63,13 +75,13 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
 
-//   useEffect(() => {
-//     setSelectedTool(existingActivity[0]?.abzar?.id);
-//   },[]);
+  //   useEffect(() => {
+  //     setSelectedTool(existingActivity[0]?.abzar?.id);
+  //   },[]);
 
-useEffect(()=>{
-    setYaddasht(existingActivity[0]?.yaddasht)
-},[]);
+  useEffect(() => {
+    setYaddasht(existingActivity[0]?.yaddasht);
+  }, []);
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -122,20 +134,30 @@ useEffect(()=>{
     if (tarikh_mohlat_anjam) {
       setLoading(true);
       setClicked(true);
-      const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
-        "YYYY-MM-DD"
-      );
+      //   const date = existingActivity[0]?.tarikh_mohlat_anjam;
+    //   const date = moment(
+    //     existingActivity[0]?.tarikh_mohlat_anjam,
+    //     "jYYYY/jMM/jDD"
+    //   ).format("YYYY-MM-DD");
+      //   if(!existingActivity[0]?.tarikh_mohlat_anjam){
+      //     date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
+      //         "YYYY-MM-DD"
+      //       );
+      //   }
+
       const payload = {
         guid: existingActivity[0]?.guid,
         vaziat: values.vaziat,
         noe_faaliat: values.noe_faaliat,
-        tarikh_mohlat_anjam: date,
+        tarikh_mohlat_anjam: jDate,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
         anjam_dahande_list: "1",
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
+      if(editActivity?.isDone)
+      navigate("/activities");
     } else {
       setDateError(true);
       // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
@@ -143,12 +165,12 @@ useEffect(()=>{
   };
 
   useEffect(() => {
-    if (activity?.isDone) {
-      if (activity?.response.guid) {
+    if (editActivity?.isDone) {
+      if (editActivity?.response.guid) {
         if (nahades?.nahades?.length > 0) {
           nahades?.nahades?.map((item) => {
             const payload = {
-              "activity-guid": activity.response.guid,
+              "activity-guid": editActivity.response.guid,
               "nahade-item-guid": item.nahade_item_guid,
               name_nahade: item.name_nahade,
               meghdar: item.meghdar,
@@ -179,7 +201,7 @@ useEffect(()=>{
         }
       }
     }
-  }, [activity.isDone]);
+  }, [editActivity.isDone]);
 
   useEffect(() => {
     if (!nahades.addNahadeLoading) {
@@ -198,9 +220,9 @@ useEffect(()=>{
         setFile([]);
         dispatch(clearNahadeList());
         dispatch(clearActivity());
-        setClicked(false)
-        navigate('/activities');
-    }     
+        setClicked(false);
+        navigate("/activities");
+      }
     }
   }, [nahades.addNahadeLoading]);
 
@@ -236,16 +258,14 @@ useEffect(()=>{
                     {existingActivity[0].cultivation[0].sathe_zire_kesht + " " + existingActivity[0].cultivation[0].mahsul.title}
                   </option> */}
 
-
                   {farms?.postList?.map((item) => [
                     item.cultivation?.map((i) => (
                       <option
-                      key={i.id}
+                        key={i.id}
                         value={i.id}
                         label={i.sathe_zire_kesht + " " + i.mahsul.title}
                         className="m-3"
-                      >
-                      </option>
+                      ></option>
                     )),
                   ])}
                 </Field>
@@ -273,8 +293,11 @@ useEffect(()=>{
                   </option> */}
 
                   {noe_faaliat_items?.map((item) => (
-                    <option key={item.key} value={item.key} label={item.title}>
-                    </option>
+                    <option
+                      key={item.key}
+                      value={item.key}
+                      label={item.title}
+                    ></option>
                   ))}
                 </Field>
 
@@ -303,8 +326,11 @@ useEffect(()=>{
                   </option> */}
 
                   {vaziat_items?.map((item) => (
-                    <option key={item.key} value={item.key} label={item.title}>
-                    </option>
+                    <option
+                      key={item.key}
+                      value={item.key}
+                      label={item.title}
+                    ></option>
                   ))}
                 </Field>
 
@@ -364,7 +390,7 @@ useEffect(()=>{
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
                 >
-                 {/* <option>
+                  {/* <option>
                     {existingActivity[0].abzar?.title}
                   </option> */}
 
@@ -376,8 +402,6 @@ useEffect(()=>{
                 </Field>
 
                 <hr className="mt-5" />
-
-
 
                 <div
                   onClick={onNahadeModalHandler}
@@ -391,7 +415,7 @@ useEffect(()=>{
                 {nahades?.nahades?.length > 0
                   ? nahades?.nahades?.map((item) => (
                       <div
-                      key={item.nahade_item_guid}
+                        key={item.nahade_item_guid}
                         className={
                           nahades?.nahades?.length / 2 === 0
                             ? "nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between"
@@ -418,11 +442,10 @@ useEffect(()=>{
                     ))
                   : null}
 
-
                 {existingActivity[0]?.nahades?.length > 0
                   ? existingActivity[0]?.nahades?.map((item) => (
                       <div
-                      key={item.guid}
+                        key={item.guid}
                         className={
                           existingActivity[0]?.nahades?.length / 2 === 0
                             ? "nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between"
@@ -445,9 +468,6 @@ useEffect(()=>{
                       </div>
                     ))
                   : null}
-
-
-
 
                 <hr style={{ backgroundColor: "transparent" }} />
                 <Field
