@@ -1,3 +1,3 @@
 import axios from 'axios';
-axios.defaults.baseURL = "http://185.141.107.246:3000"
+axios.defaults.baseURL = "https://f259-188-40-236-92.eu.ngrok.io"
 

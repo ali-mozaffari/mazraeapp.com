@@ -56,11 +56,8 @@ const EditActivityForm = () => {
   );
   const [vaziat, setVaziat] = useState(existingActivity[0]?.vaziat);
   const [yaddasht, setYaddasht] = useState();
-  // const jDate = moment(existingActivity[0]?.tarikh_mohlat_anjam, "jYYYY-jMM-jDD").format("YYYY-MM-DD");
-  const jDate = moment(existingActivity[0]?.tarikh_mohlat_anjam).format('jYYYY-jMM-jDD');
-  // console.log(existingActivity[0]?.tarikh_mohlat_anjam);
-  // console.log(jDate);
-  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState(jDate);
+
+  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
   const [anjam_dahande_list, set_anjam_dahande_list] = useState(
     existingActivity[0]?.anjam_dahande_list
   );
@@ -69,15 +66,16 @@ const EditActivityForm = () => {
   const [showNahadeModal, setShowNahadeModal] = useState(false);
   const dispatch = useDispatch();
   const tools = useSelector((state) => state.tools);
-  const activity = useSelector((state) => state.activity);
+  // const activity = useSelector((state) => state.activity);
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
+  const activityEdit = useSelector((state) => state.activityEdit);
 
-  //   useEffect(() => {
-  //     setSelectedTool(existingActivity[0]?.abzar?.id);
-  //   },[]);
+    useEffect(() => {
+      set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
+    },[]);
 
   useEffect(() => {
     setYaddasht(existingActivity[0]?.yaddasht);
@@ -134,29 +132,23 @@ const EditActivityForm = () => {
     if (tarikh_mohlat_anjam) {
       setLoading(true);
       setClicked(true);
-      //   const date = existingActivity[0]?.tarikh_mohlat_anjam;
-    //   const date = moment(
-    //     existingActivity[0]?.tarikh_mohlat_anjam,
-    //     "jYYYY/jMM/jDD"
-    //   ).format("YYYY-MM-DD");
-      //   if(!existingActivity[0]?.tarikh_mohlat_anjam){
-      //     date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
-      //         "YYYY-MM-DD"
-      //       );
-      //   }
+
+      // const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
+      //   "YYYY-MM-DD"
+      // );
 
       const payload = {
         guid: existingActivity[0]?.guid,
         vaziat: values.vaziat,
         noe_faaliat: values.noe_faaliat,
-        tarikh_mohlat_anjam: jDate,
+        tarikh_mohlat_anjam: tarikh_mohlat_anjam,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
         anjam_dahande_list: "1",
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
-      if(editActivity?.isDone)
+      if(activityEdit?.isDone)
       navigate("/activities");
     } else {
       setDateError(true);
@@ -165,12 +157,12 @@ const EditActivityForm = () => {
   };
 
   useEffect(() => {
-    if (editActivity?.isDone) {
-      if (editActivity?.response.guid) {
+    if (activityEdit?.isDone) {
+      if (activityEdit?.response.guid) {
         if (nahades?.nahades?.length > 0) {
           nahades?.nahades?.map((item) => {
             const payload = {
-              "activity-guid": editActivity.response.guid,
+              "activity-guid": activityEdit.response.guid,
               "nahade-item-guid": item.nahade_item_guid,
               name_nahade: item.name_nahade,
               meghdar: item.meghdar,
@@ -192,8 +184,8 @@ const EditActivityForm = () => {
           //     dispatch(addActivityFile(formData))
           // }
           setLoading(false);
-          toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
-          setClicked(false);
+          // toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+          // setClicked(false);
           setFile([]);
           dispatch(clearNahadeList());
           dispatch(clearActivity());
@@ -201,7 +193,7 @@ const EditActivityForm = () => {
         }
       }
     }
-  }, [editActivity.isDone]);
+  }, [activityEdit.isDone]);
 
   useEffect(() => {
     if (!nahades.addNahadeLoading) {
@@ -344,11 +336,11 @@ const EditActivityForm = () => {
                   onClick={onCalendarHandler}
                 >
                   {tarikh_mohlat_anjam ? (
-                    <div>{tarikh_mohlat_anjam}</div>
+                    <div>{moment(tarikh_mohlat_anjam, "YYYY/MM/DD").format("jYYYY-jMM-jDD")}</div>
                   ) : (
                     <div className=" d-flex justify-content-between">
                       <span>
-                        <span>{existingActivity[0].tarikh_mohlat_anjam}</span>
+                        <span>تاریخ ثبت نشده</span>
                       </span>
                       <CalendarIcon fill={"gray"} />
                     </div>
@@ -562,14 +554,13 @@ const EditActivityForm = () => {
             className="border-0 shadow-sm my-5"
             onChange={(value) => {
               console.warn(value);
-              const month = value.jMonth() + 1;
-              set_tarikh_mohlat_anjam(
-                value.jYear() + "-" + month + "-" + value.jDate()
-              );
+              const date = value.jYear() + '-' + (value.jMonth() + 1) + '-' + value.jDate();
+              set_tarikh_mohlat_anjam(moment(date, "jYYYY-jMM-jDD").format("YYYY-MM-DD"));
               setShowCalendar(false);
               setDateError(false);
             }}
           />
+
         </Modal>
       </div>
     );

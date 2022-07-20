@@ -12,7 +12,7 @@ export const getActivitiesList = createAsyncThunk(
           Authorization: token,
         },
       });
-      console.log(data.results)
+      // console.log(data.results)
       return data.results;
     } catch (error) {
       // return error?.response;

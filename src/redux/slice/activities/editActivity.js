@@ -6,7 +6,7 @@ import { token } from "../../../services/token";
 import { getQueriesForElement } from "@testing-library/react";
 
 export const editActivity = createAsyncThunk(
-  "activity/editActivity",
+  "activityEdit/editActivity",
   async ( payload, { rejectWithValue, getState, dispatch }) => {
     console.log(payload);
     try {
@@ -27,8 +27,8 @@ export const editActivity = createAsyncThunk(
 );
 export const clearActivity = createAction("activity/clearActivity");
 
-const editActivitySlice = createSlice({
-  name: "activity",
+const activityEditSlice = createSlice({
+  name: "activityEdit",
   initialState: {},
   extraReducers: {
     [clearActivity]: (state, action) => {
@@ -40,8 +40,8 @@ const editActivitySlice = createSlice({
     },
     [editActivity.fulfilled]: (state, action) => {
       state.response = action.payload;
-      state.isDone = true;
       state.loading = false;
+      state.isDone = true;
       if (action.payload.guid) {
         toast.success("فعالیت به روز رسانی شد", {
           position: "top-center",
@@ -57,4 +57,4 @@ const editActivitySlice = createSlice({
   },
 });
 
-export default editActivitySlice.reducer;
+export default activityEditSlice.reducer;
