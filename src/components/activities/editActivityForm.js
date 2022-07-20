@@ -15,7 +15,8 @@ import { getToolsList } from "../../redux/slice/activities/toolsList";
 import AddNahadeModal from "./modals/addNahadeModal";
 import {
   addNahade,
-  clearNahadeList,
+  // clearNahadeList,
+  deleteEditNahade,
   deleteNahade,
   deleteNahadeEditActivity,
 } from "../../redux/slice/activities/nahade";
@@ -122,20 +123,18 @@ const EditActivityForm = () => {
     dispatch(deleteNahade(item));
   };
 
+
   const deleteNahadeAPI = (guid) => {
-    //   console.log(guid)
     dispatch(deleteNahadeEditActivity(guid));
-    // dispatch(deleteNahade(guid));
+    if(nahades.isDeleted){
+      dispatch(deleteEditNahade(guid));
+    }
   };
 
   const onFormSubmit = (values) => {
     if (tarikh_mohlat_anjam) {
       setLoading(true);
       setClicked(true);
-
-      // const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
-      //   "YYYY-MM-DD"
-      // );
 
       const payload = {
         guid: existingActivity[0]?.guid,
@@ -159,7 +158,6 @@ const EditActivityForm = () => {
   useEffect(() => {
     if (activityEdit?.isDone) {
       if (activityEdit?.response.guid) {
-        if (nahades?.nahades?.length > 0) {
           nahades?.nahades?.map((item) => {
             const payload = {
               "activity-guid": activityEdit.response.guid,
@@ -172,25 +170,6 @@ const EditActivityForm = () => {
             };
             dispatch(addNahade(payload));
           });
-        } else {
-          // if (file[0]) {
-          //     const formData = new FormData();
-          //     const guid = activity.response.guid
-          //     const image = file[0]
-          //
-          //     formData['guid'] = guid
-          //     formData['image'] = file[0]
-          //
-          //     dispatch(addActivityFile(formData))
-          // }
-          setLoading(false);
-          // toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
-          // setClicked(false);
-          setFile([]);
-          dispatch(clearNahadeList());
-          dispatch(clearActivity());
-          navigate("/activities");
-        }
       }
     }
   }, [activityEdit.isDone]);
@@ -210,7 +189,7 @@ const EditActivityForm = () => {
         //     dispatch(addActivityFile(formData))
         // }
         setFile([]);
-        dispatch(clearNahadeList());
+        // dispatch(clearNahadeList());
         dispatch(clearActivity());
         setClicked(false);
         navigate("/activities");
@@ -246,9 +225,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 py-4"
                   onClick={(e) => setSelectedCultivation(e.target.value)}
                 >
-                  {/* <option>
-                    {existingActivity[0].cultivation[0].sathe_zire_kesht + " " + existingActivity[0].cultivation[0].mahsul.title}
-                  </option> */}
 
                   {farms?.postList?.map((item) => [
                     item.cultivation?.map((i) => (
@@ -276,13 +252,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_noe_faaliat(e.target.value)}
                 >
-                  {/* <option>
-                    {noe_faaliat_items.map((item2) =>
-                      item2.key === existingActivity[0].noe_faaliat
-                        ? item2.title
-                        : null
-                    )}
-                  </option> */}
 
                   {noe_faaliat_items?.map((item) => (
                     <option
@@ -309,13 +278,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setVaziat(e.target.value)}
                 >
-                  {/* <option>
-                    {vaziat_items.map((item2) =>
-                      item2.key === existingActivity[0].vaziat
-                        ? item2.title
-                        : null
-                    )}
-                  </option> */}
 
                   {vaziat_items?.map((item) => (
                     <option
@@ -361,13 +323,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_anjam_dahande_list(e.target.value)}
                 >
-                  {/* <option>
-                    {vaziat_items.map((item2) =>
-                      item2.key === existingActivity[0].anjam_dahande_list
-                        ? item2.title
-                        : null
-                    )}
-                  </option> */}
 
                   {vaziat_items?.map((item) => (
                     <option key={item.key} value={item.key} label={item.title}>
@@ -382,9 +337,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
                 >
-                  {/* <option>
-                    {existingActivity[0].abzar?.title}
-                  </option> */}
 
                   {tools?.data?.map((item) => (
                     <option key={item.id} value={item.id} label={item.title}>
@@ -434,6 +386,8 @@ const EditActivityForm = () => {
                     ))
                   : null}
 
+                 {/* --------- Existing Nahade from Database ----------- */}        
+
                 {existingActivity[0]?.nahades?.length > 0
                   ? existingActivity[0]?.nahades?.map((item) => (
                       <div
@@ -460,6 +414,7 @@ const EditActivityForm = () => {
                       </div>
                     ))
                   : null}
+
 
                 <hr style={{ backgroundColor: "transparent" }} />
                 <Field

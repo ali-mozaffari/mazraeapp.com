@@ -4,6 +4,7 @@ import "../../../services/config";
 import { clearFarm } from "../farm/addFarm";
 import { token } from "../../../services/token";
 import { element } from "prop-types";
+import { guid } from "rsuite/esm/utils";
 
 export const getNahadeItemsList = createAsyncThunk(
   "nahade/getNahadeToolsList",
@@ -68,7 +69,8 @@ export const deleteNahadeEditActivity = createAsyncThunk(
 );
 
 export const addNahadeToList = createAction("nahade/addNahadeToList");
-export const deleteNahade = createAction("nahade/deleteNahade");
+export const deleteNahade = createAction("nahade/deleteNahade", guid);
+export const deleteEditNahade = createAction("nahade/deleteEditNahade");
 export const clearNahadeList = createAction("nahade/clearNahadeList");
 
 const nahade = createSlice({
@@ -82,6 +84,12 @@ const nahade = createSlice({
       state.nahades = state.nahades.filter(
         (element) => element.id !== action.payload
       );
+    },
+    [deleteEditNahade]: (state, action) => {
+      state.nahades = state.nahades.filter(
+        (item) => {return item.guid !== action.payload}
+      );
+      // console.log(state.nahade)
     },
     [clearNahadeList]: (state, action) => {
       state.nahades = [];
@@ -110,14 +118,18 @@ const nahade = createSlice({
     },
     [deleteNahadeEditActivity.pending]: (state, action) => {
       state.loading = true;
+      state.isDeleted = false;
     },
     [deleteNahadeEditActivity.fulfilled]: (state, action) => {
       state.postList = action.payload;
       state.loading = false;
+      state.isDeleted = true;
     //   state.nahades = state.nahades.filter((element) => element.guid !== action.payload)
+    // data.nahade.filter((element)=>element.guid !== id)
     },
     [deleteNahadeEditActivity.rejected]: (state, action) => {
       state.loading = false;
+      state.isDeleted = false;
       state.error = action.payload;
       console.log(state.error);
     },
