@@ -210,7 +210,7 @@ const ActivitiesListBox = () => {
                     <div
                       // activityId={item.guid}
                       className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
-                      onClick={() => navigate(`/edit-activity/${item?.guid}`)}
+                      // onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
                       <img src={copyIcon} alt="menu" className="mx-auto" />
                     </div>

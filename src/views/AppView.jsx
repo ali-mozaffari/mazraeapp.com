@@ -2,6 +2,8 @@ import React from "react";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import AppLayout from "../layouts/appLayout";
 import AuthLayout from "../layouts/authLayout";
+import AccessPage from "../pages/access/accessPage";
+import AddAccessPage from "../pages/access/addAccessPage";
 import EditActivityPage from "../pages/activities/editActivityPage";
 
 
@@ -81,6 +83,8 @@ const AppView = () => {
                 <Route path="/edit-farm" element={<EditFarmPage />} />
                 <Route path="/add-activity" element={<AddActivity />} />
                 <Route path="/edit-activity/:id" element={<EditActivityPage />} />
+                <Route path="/access" element={<AccessPage />} />
+                <Route path="/add-access" element={<AddAccessPage />} />
             </Routes>
         </AppLayout>
     );
