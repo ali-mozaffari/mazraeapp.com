@@ -3,21 +3,9 @@ import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { CloseIcon, PlusIcon } from "../../assets/icon";
-import {
-  noe_faaliat_items,
-  vahede_meghdar_items,
-  vaziat_items,
-} from "../../assets/strings/strings";
-
+import { CloseIcon } from "../../assets/icon";
 import { getToolsList } from "../../redux/slice/activities/toolsList";
-
-import {
-  addActivity,
-  addActivityFile,
-  clearActivity,
-} from "../../redux/slice/activities/activity";
-import moment from "moment-jalaali";
+import { clearActivity } from "../../redux/slice/activities/activity";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
@@ -26,13 +14,79 @@ import managerIcon from "../../assets/img/manager.png";
 import workerIcon from "../../assets/img/worker.png";
 import guestIcon from "../../assets/img/guest.png";
 import {
+  buttonUnstyledClasses,
   TabPanelUnstyled,
   TabsListUnstyled,
   TabsUnstyled,
   TabUnstyled,
+  tabUnstyledClasses,
 } from "@mui/base";
+import { Box, styled } from "@mui/system";
+import { Grid } from "rsuite";
+// import { Tab } from "@mui/material";
 
-const AddActivityForm = () => {
+
+const blue = {
+  50: '#F0F7FF',
+  100: '#C2E0FF',
+  200: '#80BFFF',
+  300: '#66B2FF',
+  400: '#3399FF',
+  500: '#007FFF',
+  600: '#0072E5',
+  700: '#0059B2',
+  800: '#004C99',
+  900: '#003A75',
+};
+
+const Tab = styled(TabUnstyled)`
+border: 1px solid #858585;
+    border-radius: 10px;
+    text-align: center;
+    cursor: Pointer;
+    /* width: 20%; */
+    padding-bottom: 5px;
+    background-color: transparent;
+
+  &:hover {
+    border-color: dodgerblue !important;
+    box-shadow: 0px 0px 3px 0px;
+  }
+
+  &:hover img {
+    width: 50px;
+    height: 53px;
+  }
+
+  &:hover :first-child {
+    margin-bottom: 6px !important;
+  }
+
+  &:hover > .user-box-title {
+    font-size: 14px !important;
+}
+
+  &.${tabUnstyledClasses.selected} {
+    border-color: dodgerblue !important;
+    box-shadow: 0px 0px 3px 0px;
+  }
+
+  &.${tabUnstyledClasses.selected} img {
+    width: 50px;
+    height: 53px;
+  }
+
+  &.${tabUnstyledClasses.selected} :first-child {
+    margin-bottom: 6px !important;
+  }
+
+  &.${tabUnstyledClasses.selected} > .user-box-title {
+    font-size: 14px !important;
+  }
+`;
+
+
+const AddAccessForm = () => {
   const navigate = useNavigate();
   const farms = useSelector((state) => state.farmlist);
   const [selectedTool, setSelectedTool] = useState();
@@ -40,7 +94,6 @@ const AddActivityForm = () => {
   const [noe_faaliat, set_noe_faaliat] = useState();
   const [vaziat, setVaziat] = useState();
   const [yaddasht, setYaddasht] = useState();
-  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
   const [anjam_dahande_list, set_anjam_dahande_list] = useState();
 
   const [dateError, setDateError] = useState(false);
@@ -51,6 +104,8 @@ const AddActivityForm = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
+
+ 
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -66,61 +121,52 @@ const AddActivityForm = () => {
   }, []);
 
   const validation = Yup.object().shape({
-    farm: Yup.string().required(true),
-    cultivations: Yup.string().required(true),
-    noe_faaliat: Yup.string().required(true),
-    vaziat: Yup.string().required(true),
-    anjam_dahande_list: Yup.string().required(true),
+    user_type: Yup.string().required(true),
+    name: Yup.string().required(true),
+    name: Yup.string().required(true),
+    phone: Yup.string().required(true),
   });
 
   const initialValues = {
-    abzar_id: selectedTool,
-    cultivations: selectedCultivation,
-    noe_faaliat: noe_faaliat,
-    vaziat: vaziat,
-    anjam_dahande_list: anjam_dahande_list,
+    user_type: selectedTool,
+    name: selectedTool,
+    name: selectedCultivation,
+    phone: noe_faaliat,
+    file: vaziat,
     yaddasht: yaddasht,
   };
 
   const onFormSubmit = (values) => {
-    if (tarikh_mohlat_anjam) {
-      setLoading(true);
-      setClicked(true);
-      const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
-        "YYYY-MM-DD"
-      );
-      const payload = {
-        vaziat: values.vaziat,
-        noe_faaliat: values.noe_faaliat,
-        tarikh_mohlat_anjam: date,
-        abzar_id: values.abzar_id,
-        cultivations: values.cultivations,
-        anjam_dahande_list: "1",
-        yaddasht: values.yaddasht,
-      };
-      dispatch(addActivity(payload));
-    } else {
-      setDateError(true);
-      // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    }
+    setLoading(true);
+    setClicked(true);
+
+    const payload = {
+      user_type: values.vaziat,
+      name: values.vaziat,
+      name: values.noe_faaliat,
+      phone: values.abzar_id,
+      file: values.cultivations,
+      yaddasht: values.yaddasht,
+    };
+    // dispatch(addAccess(payload));
   };
 
   useEffect(() => {
     if (activity.isDone) {
       if (activity.response.guid) {
         setLoading(false);
-        toast.success("فعالیت افزوده شد", { position: "top-center" });
+        toast.success("دسترسی افزوده شد", { position: "top-center" });
         setClicked(false);
         setFile([]);
         dispatch(clearActivity());
-        navigate("/activities");
+        navigate("/access");
       }
     }
   }, [activity.isDone]);
 
   if (!loading) {
     return (
-      <div className="container-fluid pb-5 mb-5">
+      <div className="container-fluid pb-5 mb-5" style={{ fontSize: "14px" }}>
         <Formik
           initialValues={initialValues}
           validationSchema={validation}
@@ -134,243 +180,194 @@ const AddActivityForm = () => {
                 از لیست زیر نوع دسترسی کاربر را انتخاب کنید
               </div>
               <Form className="row">
+              {/* <TabsUnstyled defaultValue={0}>
+          <TabsListUnstyled className="userTypeMain">
+            <Tab className="userType">مالکان</Tab>
+            <Tab className="userType">مدیران</Tab>
+            <Tab className="userType">همکاران</Tab>
+            <Tab className="userType">مهمان</Tab>
+          </TabsListUnstyled>
+          <TabPanelUnstyled value={0}>مالکان 0</TabPanelUnstyled>
+          <TabPanelUnstyled value={1}>مدیران 1</TabPanelUnstyled>
+          <TabPanelUnstyled value={2}>همکاران 2</TabPanelUnstyled>
+          <TabPanelUnstyled value={3}>مهمان 3</TabPanelUnstyled>
+          </TabsUnstyled> */}
                 {/* ------------- Start user-box ------------ */}
                 <TabsUnstyled defaultValue={0}>
-                  <TabsListUnstyled
-                    style={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <TabUnstyled value={1} className="user-box">
-                      <div className="user-img">
-                        <img src={ownerIcon} width="45px" height="48px" />
-                      </div>
+                  <TabsListUnstyled className="row">
+                    <Box className="col-6 col-sm-3">
+                      <Tab value={1} className="user-box" >
+                        <div className="user-img">
+                          <img src={ownerIcon} width="45px" height="48px" />
+                        </div>
 
-                      <p className="user-box-title">مالکان</p>
-                      <p className="user-box-text">
-                        مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
-                      </p>
-                    </TabUnstyled>
-                    <TabUnstyled value={2} className="user-box">
-                      <div className="user-img">
-                        <img src={managerIcon} width="45px" height="48px" />
-                      </div>
+                        <p className="user-box-title">مالکان</p>
+                        <p className="user-box-text">
+                          مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
+                        </p>
+                      </Tab>
+                    </Box>
 
-                      <p className="user-box-title">مدیران</p>
-                      <p className="user-box-text">
-                        مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
-                      </p>
-                    </TabUnstyled>
-                    <TabUnstyled value={3} className="user-box">
-                      <div className="user-img">
-                        <img src={workerIcon} width="45px" height="48px" />
-                      </div>
+                    <Box className="col-6 col-sm-3">
+                      <Tab value={2} className="user-box">
+                        <div className="user-img">
+                          <img src={managerIcon} width="45px" height="48px" />
+                        </div>
 
-                      <p className="user-box-title">همکاران</p>
-                      <p className="user-box-text">
-                        مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
-                      </p>
-                    </TabUnstyled>
-                    <TabUnstyled value={4} className="user-box">
-                      <div className="user-img">
-                        <img src={guestIcon} width="45px" height="48px" />
-                      </div>
+                        <p className="user-box-title">مدیران</p>
+                        <p className="user-box-text">
+                          مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
+                        </p>
+                      </Tab>
+                    </Box>
 
-                      <p className="user-box-title">مهمان</p>
-                      <p className="user-box-text">
-                        مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
-                      </p>
-                    </TabUnstyled>
+                    <Box className="col-6 col-sm-3">
+                      <Tab value={3} className="user-box">
+                        <div className="user-img">
+                          <img src={workerIcon} width="45px" height="48px" />
+                        </div>
+
+                        <p className="user-box-title">همکاران</p>
+                        <p className="user-box-text">
+                          مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
+                        </p>
+                      </Tab>
+                    </Box>
+
+                    <Box className="col-6 col-sm-3">
+                      <Tab value={4} className="user-box">
+                        <div className="user-img">
+                          <img src={guestIcon} width="45px" height="48px" />
+                        </div>
+
+                        <p className="user-box-title">مهمان</p>
+                        <p className="user-box-text">
+                          مالکان مزرعه به همه بخش های مزرعه مربوطه دسترسی دارد
+                        </p>
+                      </Tab>
+                    </Box>
                   </TabsListUnstyled>
-                  {/* <TabPanelUnstyled value={0}></TabPanelUnstyled> */}
                 </TabsUnstyled>
                 {/* ------------- End user-box ------------ */}
 
-                <hr className="mt-5" />
-                <Field
-                  as="select"
-                  name="cultivations"
-                  validate={true}
-                  style={
-                    errors.cultivations && touched.cultivations
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 py-4"
-                  onClick={(e) => setSelectedCultivation(e.target.value)}
+                <p style={{ marginTop: "25px", marginBottom: "0" }}>
+                  مشخصات را وارد کنید
+                </p>
+
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  <option value="" label="محصول *" className="m-3">
-                    نام محصول *{" "}
-                  </option>
-                  {farms?.postList?.map((item) => [
-                    item.cultivation?.map((i) => (
-                      <option
-                        value={i.id}
-                        label={i.mahsul.title + " " + i.sathe_zire_kesht}
-                        className="m-3"
-                      >
-                        {i.mahsul.title}
-                      </option>
-                    )),
-                  ])}
-                </Field>
+                  <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
+                    <Field
+                      name="name"
+                      type="text"
+                      autoComplete="off"
+                      // value={firstName}
+                      // onChange={(e) => setFirstName(e.target.value)}
+                      className="search-input mt-4 py-3"
+                      placeholder="نام مزرعه"
+                      style={{ width: "100%" }}
+                    />
+                  </Box>
+                  <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
+                    <Field
+                      name="name"
+                      type="text"
+                      autoComplete="off"
+                      // value={firstName}
+                      // onChange={(e) => setFirstName(e.target.value)}
+                      className="search-input mt-4 py-3"
+                      placeholder="نام مزرعه"
+                      style={{ width: "100%" }}
+                    />
+                  </Box>
+                </Box>
 
-                <Field
-                  as="select"
-                  name="noe_faaliat"
-                  style={
-                    errors.noe_faaliat && touched.noe_faaliat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_noe_faaliat(e.target.value)}
+                <Box
+                  style={{
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                  sx={{ display: { xs: "block", sm: "flex" } }}
                 >
-                  <option value="" label="نوع *">
-                    نوع{" "}
-                  </option>
+                  <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
+                    <Field
+                      name="phone"
+                      type="text"
+                      autoComplete="off"
+                      // value={firstName}
+                      // onChange={(e) => setFirstName(e.target.value)}
+                      className="col-md-5 search-input mt-4 pl-5 py-3"
+                      placeholder="نام مزرعه"
+                      style={{ width: "100%" }}
+                    />
 
-                  {noe_faaliat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <hr className="mt-5" />
-
-                <Field
-                  as="select"
-                  name="vaziat"
-                  style={
-                    errors.vaziat && touched.vaziat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setVaziat(e.target.value)}
-                >
-                  <option value="" label="وضعیت *">
-                    وضعیت{" "}
-                  </option>
-
-                  {vaziat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <Field
-                  as="select"
-                  name="anjam_dahande_list"
-                  style={
-                    errors.anjam_dahande_list && touched.anjam_dahande_list
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_anjam_dahande_list(e.target.value)}
-                >
-                  <option value="" label="انجام دهنده ها *">
-                    انجام دهنده ها{" "}
-                  </option>
-
-                  {vaziat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <Field
-                  as="select"
-                  name="abzar_id"
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setSelectedTool(e.target.value)}
-                >
-                  <option
-                    value=""
-                    className="text-gray"
-                    label="تجهیزات و ابزار"
-                  >
-                    تجهیزات و ابزار{" "}
-                  </option>
-
-                  {tools?.data?.map((item) => (
-                    <option value={item.id} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <hr className="mt-5" />
-
-                <hr style={{ backgroundColor: "transparent" }} />
-                <Field
-                  name="yaddasht"
-                  type="text"
-                  component="textarea"
-                  rows="4"
-                  autoComplete="off"
-                  onChange={(e) => setYaddasht(e.target.value)}
-                  className="search-input col-md-5 mx-auto mt-4"
-                  placeholder="یادداشت"
-                />
-
-                <div
-                  className="search-input file-uploader col-md-5 mx-auto mt-4"
-                  style={{ height: 200 }}
-                >
-                  {file.length < 1 ? (
-                    <div onClick={handleClick}>
-                      <input
-                        type="file"
-                        ref={hiddenFileInput}
-                        onChange={handleChange}
-                        style={{ display: "none" }}
-                      />
-                      <img
-                        src={folder}
-                        className="d-block mx-auto mt-2 mt-md-1"
-                      />
-                      <h5
-                        style={{ fontWeight: "900" }}
-                        className="text-center mt-3"
-                      >
-                        آپلود مدارک
-                      </h5>
-                      <p className="text-center text-gray mt-3">
-                        فایل های خود را انتخاب کنید
-                      </p>
-                    </div>
-                  ) : (
-                    <div>
-                      <img
-                        src={folder}
-                        className="d-block mx-auto mt-2 mt-md-1"
-                      />
-                      <div className="d-flex justify-content-between mt-3 px-4 mt-5">
+                    <div
+                      className="search-input file-uploader col-md-5 mx-auto mt-4"
+                      style={{ height: 150, width: "100%" }}
+                    >
+                      {file.length < 1 ? (
+                        <div onClick={handleClick}>
+                          <input
+                            type="file"
+                            ref={hiddenFileInput}
+                            onChange={handleChange}
+                            style={{ display: "none" }}
+                          />
+                          <img
+                            src={folder}
+                            className="d-block mx-auto mt-2 mt-md-1"
+                          />
+                          <h6
+                            style={{ fontWeight: "900" }}
+                            className="text-center mt-3"
+                          >
+                            آپلود مدارک
+                          </h6>
+                          <p className="text-center text-gray mt-3">
+                            فایل های خود را انتخاب کنید
+                          </p>
+                        </div>
+                      ) : (
                         <div>
-                          <span>{file[0].name}</span>
+                          <img
+                            src={folder}
+                            className="d-block mx-auto mt-2 mt-md-1"
+                          />
+                          <div className="d-flex justify-content-between mt-3 px-4 mt-5">
+                            <div>
+                              <span>{file[0].name}</span>
+                            </div>
+                            <div onClick={() => setFile([])}>
+                              <CloseIcon />
+                            </div>
+                          </div>
                         </div>
-                        <div onClick={() => setFile([])}>
-                          <CloseIcon />
-                        </div>
-                      </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </Box>
+
+                  <Box
+                    name="yaddasht"
+                    type="text"
+                    component="textarea"
+                    rows="4"
+                    autoComplete="off"
+                    onChange={(e) => setYaddasht(e.target.value)}
+                    className="search-input mt-4"
+                    placeholder="یادداشت"
+                    style={{}}
+                    sx={{
+                      width: { xs: "100%", sm: "45%" },
+                      marginLeft: "0",
+                      marginRigh: "0",
+                    }}
+                  />
+                </Box>
 
                 <div className="d-flex justify-content-center mt-3">
                   <button
@@ -384,7 +381,7 @@ const AddActivityForm = () => {
                     افزودن
                   </button>
                   <NavLink
-                    to={"/activities"}
+                    to={"/access"}
                     className="btn-light-gray mx-1 mt-4 text-decoration-none text-light"
                   >
                     لغو
@@ -401,4 +398,4 @@ const AddActivityForm = () => {
   }
 };
 
-export default AddActivityForm;
+export default AddAccessForm;
