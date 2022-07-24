@@ -3,8 +3,7 @@ import axios from "axios";
 import "../../../services/config";
 import { clearFarm } from "../farm/addFarm";
 import { token } from "../../../services/token";
-import { element } from "prop-types";
-import { guid } from "rsuite/esm/utils";
+// import { guid } from "rsuite/esm/utils";
 
 export const getNahadeItemsList = createAsyncThunk(
   "nahade/getNahadeToolsList",
@@ -69,7 +68,7 @@ export const deleteNahadeEditActivity = createAsyncThunk(
 );
 
 export const addNahadeToList = createAction("nahade/addNahadeToList");
-export const deleteNahade = createAction("nahade/deleteNahade", guid);
+export const deleteNahade = createAction("nahade/deleteNahade");
 export const deleteEditNahade = createAction("nahade/deleteEditNahade");
 export const clearNahadeList = createAction("nahade/clearNahadeList");
 
@@ -89,7 +88,6 @@ const nahade = createSlice({
       state.nahades = state.nahades.filter(
         (item) => {return item.guid !== action.payload}
       );
-      // console.log(state.nahade)
     },
     [clearNahadeList]: (state, action) => {
       state.nahades = [];

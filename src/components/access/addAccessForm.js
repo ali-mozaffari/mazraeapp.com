@@ -25,28 +25,27 @@ import { Box, styled } from "@mui/system";
 import { Grid } from "rsuite";
 // import { Tab } from "@mui/material";
 
-
 const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#80BFFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
-  800: '#004C99',
-  900: '#003A75',
+  50: "#F0F7FF",
+  100: "#C2E0FF",
+  200: "#80BFFF",
+  300: "#66B2FF",
+  400: "#3399FF",
+  500: "#007FFF",
+  600: "#0072E5",
+  700: "#0059B2",
+  800: "#004C99",
+  900: "#003A75",
 };
 
 const Tab = styled(TabUnstyled)`
-border: 1px solid #858585;
-    border-radius: 10px;
-    text-align: center;
-    cursor: Pointer;
-    /* width: 20%; */
-    padding-bottom: 5px;
-    background-color: transparent;
+  border: 1px solid #858585;
+  border-radius: 10px;
+  text-align: center;
+  cursor: Pointer;
+  /* width: 20%; */
+  padding-bottom: 5px;
+  background-color: transparent;
 
   &:hover {
     border-color: dodgerblue !important;
@@ -64,7 +63,7 @@ border: 1px solid #858585;
 
   &:hover > .user-box-title {
     font-size: 14px !important;
-}
+  }
 
   &.${tabUnstyledClasses.selected} {
     border-color: dodgerblue !important;
@@ -85,7 +84,6 @@ border: 1px solid #858585;
   }
 `;
 
-
 const AddAccessForm = () => {
   const navigate = useNavigate();
   const farms = useSelector((state) => state.farmlist);
@@ -104,8 +102,6 @@ const AddAccessForm = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
-
- 
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -180,7 +176,7 @@ const AddAccessForm = () => {
                 از لیست زیر نوع دسترسی کاربر را انتخاب کنید
               </div>
               <Form className="row">
-              {/* <TabsUnstyled defaultValue={0}>
+                {/* <TabsUnstyled defaultValue={0}>
           <TabsListUnstyled className="userTypeMain">
             <Tab className="userType">مالکان</Tab>
             <Tab className="userType">مدیران</Tab>
@@ -196,7 +192,7 @@ const AddAccessForm = () => {
                 <TabsUnstyled defaultValue={0}>
                   <TabsListUnstyled className="row">
                     <Box className="col-6 col-sm-3">
-                      <Tab value={1} className="user-box" >
+                      <Tab value={1} className="user-box">
                         <div className="user-img">
                           <img src={ownerIcon} width="45px" height="48px" />
                         </div>

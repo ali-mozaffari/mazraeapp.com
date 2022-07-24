@@ -120,11 +120,8 @@ const ActivitiesListBox = () => {
                     {vaziat_items.map((item2) =>
                       item2.key === item.vaziat ? item2.title : null
                     )}
-                    {/* {item.vaziat} */}
+
                   </span>
-                  {/* <Badge pill bg={"success"} className="p-2">
-                  {item.vaziat}
-                </Badge> */}
                 </td>
                 <td
                   className="py-3"
@@ -133,7 +130,7 @@ const ActivitiesListBox = () => {
                   {noe_faaliat_items.map((item3) =>
                     item3.key === item.noe_faaliat ? item3.title : null
                   )}
-                  {/* {item.noe_faaliat} */}
+
                 </td>
                 <td
                   className="py-3"
@@ -142,8 +139,6 @@ const ActivitiesListBox = () => {
                   {/* date subtraction Farsi */}
                   <span className="d-inline-flex">
                     <DateCalculator remainingDate={item.tarikh_mohlat_anjam} />
-                    {/* <DateCalculator /> */}
-                    {/* {item.tarikh_mohlat_anjam} */}
                   </span>
 
                   <span className="px-1">روز دیگر</span>
@@ -221,7 +216,6 @@ const ActivitiesListBox = () => {
                       onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
                       <img src={editIcon} alt="menu" className="mx-auto" />
-                      {/* {item?.guid} */}
                     </div>
                   </Tooltip>
                   <Tooltip title="حذف فعالیت">
@@ -229,7 +223,6 @@ const ActivitiesListBox = () => {
                       className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                       onClick={() => showDeleteModal(item?.guid)}
                     >
-                      {/* {item.guid} */}
                       <img src={trashIcon} alt="menu" className="mx-auto" />
                     </div>
                   </Tooltip>
