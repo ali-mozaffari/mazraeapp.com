@@ -206,7 +206,7 @@ const AddActivityForm = () => {
                   onClick={(e) => setSelectedCultivation(e.target.value)}
                 >
                   <option value="" label="محصول *" className="m-3">
-                    نام محصول *{" "}
+                    نام محصول *
                   </option>
                   {farms?.postList?.map((item) => [
                     item.cultivation?.map((i) => (

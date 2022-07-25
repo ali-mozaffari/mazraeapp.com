@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "../../../services/config";
 import {token} from "../../../services/token";
 
@@ -42,7 +43,7 @@ export const deleteAccessList = createAsyncThunk(
   }
 );
 
-// export const deleteAccessUser = createAction("accessUser/deleteAccessUser", guid);
+export const deleteAccessUser = createAction("accessUser/deleteAccessUser");
 
 const accessListBoxSlice = createSlice({
   name: "accessList",
@@ -64,22 +65,35 @@ const accessListBoxSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    // [deleteAccessUser]: (state, action) => {
-    //   state.nahades = state.nahades.filter(
-    //     (element) => element.id !== action.payload
-    //   );
-    // },
+    [deleteAccessUser]: (state, action) => {
+      state.nahades = state.nahades.filter(
+        (element) => element.id !== action.payload
+      );
+    },
     [deleteAccessList.pending]: (state, action) => {
       state.loading = true;
+      state.isDone = false;
     },
     [deleteAccessList.fulfilled]: (state, action) => {
-      state.postList = action.payload;
+      state.data = action.payload;
       state.loading = false;
+      state.isDone = true;
+      if (!action.payload.guid) {
+        toast.success("کاربر حذف شد", {
+          position: "top-center",
+          theme: "dark",
+        });
+      }
     },
+    // [deleteAccessList.fulfilled]: (state, action) => {
+    //   let index = state.findIndex(({ id }) => id === action.payload.id);
+    //   state.splice(index, 1);
+    // },
     [deleteAccessList.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
       console.log(state.error);
+      state.isDone = false;
     },
   },
 });

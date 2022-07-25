@@ -38,7 +38,7 @@ const Sidebar = () => {
     {
       text: "پیش بینی آب و هوا",
       icon: <CloudyDay fill="currentColor" />,
-      path: "/weatherforcast",
+      path: "/weather",
     },
     {
       text: "پیش بینی تولید",

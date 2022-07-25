@@ -176,21 +176,10 @@ const AddAccessForm = () => {
                 از لیست زیر نوع دسترسی کاربر را انتخاب کنید
               </div>
               <Form className="row">
-                {/* <TabsUnstyled defaultValue={0}>
-          <TabsListUnstyled className="userTypeMain">
-            <Tab className="userType">مالکان</Tab>
-            <Tab className="userType">مدیران</Tab>
-            <Tab className="userType">همکاران</Tab>
-            <Tab className="userType">مهمان</Tab>
-          </TabsListUnstyled>
-          <TabPanelUnstyled value={0}>مالکان 0</TabPanelUnstyled>
-          <TabPanelUnstyled value={1}>مدیران 1</TabPanelUnstyled>
-          <TabPanelUnstyled value={2}>همکاران 2</TabPanelUnstyled>
-          <TabPanelUnstyled value={3}>مهمان 3</TabPanelUnstyled>
-          </TabsUnstyled> */}
+
                 {/* ------------- Start user-box ------------ */}
                 <TabsUnstyled defaultValue={0}>
-                  <TabsListUnstyled className="row">
+                  <TabsListUnstyled className="row" style={{rowGap: "30px"}} >
                     <Box className="col-6 col-sm-3">
                       <Tab value={1} className="user-box">
                         <div className="user-img">
@@ -265,7 +254,7 @@ const AddAccessForm = () => {
                       // value={firstName}
                       // onChange={(e) => setFirstName(e.target.value)}
                       className="search-input mt-4 py-3"
-                      placeholder="نام مزرعه"
+                      placeholder="نام کشاورز"
                       style={{ width: "100%" }}
                     />
                   </Box>
@@ -277,7 +266,7 @@ const AddAccessForm = () => {
                       // value={firstName}
                       // onChange={(e) => setFirstName(e.target.value)}
                       className="search-input mt-4 py-3"
-                      placeholder="نام مزرعه"
+                      placeholder="نام شخص"
                       style={{ width: "100%" }}
                     />
                   </Box>
@@ -298,7 +287,7 @@ const AddAccessForm = () => {
                       // value={firstName}
                       // onChange={(e) => setFirstName(e.target.value)}
                       className="col-md-5 search-input mt-4 pl-5 py-3"
-                      placeholder="نام مزرعه"
+                      placeholder="شماره تماس"
                       style={{ width: "100%" }}
                     />
 

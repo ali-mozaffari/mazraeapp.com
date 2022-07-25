@@ -135,20 +135,22 @@ const AccessListBox = () => {
                     <td className="d-flex">
                       <Tooltip title="ویرایش فعالیت">
                         <div
+                        style={{width:'35px', height:'35px'}}
                           className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                           onClick={() =>
                             navigate(`/edit-activity/${item?.guid}`)
                           }
                         >
-                          <img src={editIcon} alt="menu" className="mx-auto" />
+                          <img src={editIcon} alt="menu" className="mx-auto" width="18px" height="18px" />
                         </div>
                       </Tooltip>
                       <Tooltip title="حذف فعالیت">
                         <div
+                        style={{width:'35px', height:'35px'}}
                           className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                           onClick={() => showDeleteModal(item?.guid)}
                         >
-                          <img src={trashIcon} alt="menu" className="mx-auto" />
+                          <img src={trashIcon} alt="menu" className="mx-auto" width="15px" height="15px" />
                         </div>
                       </Tooltip>
                     </td>
@@ -188,6 +190,7 @@ const AccessListBox = () => {
                         <td className="d-flex">
                           <Tooltip title="ویرایش فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
                                 navigate(`/edit-activity/${item?.guid}`)
@@ -197,11 +200,14 @@ const AccessListBox = () => {
                                 src={editIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="18px"
+                                height="18px"
                               />
                             </div>
                           </Tooltip>
                           <Tooltip title="حذف فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                               onClick={() => showDeleteModal(item?.guid)}
                             >
@@ -209,6 +215,8 @@ const AccessListBox = () => {
                                 src={trashIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="15px"
+                                height="15px"
                               />
                             </div>
                           </Tooltip>
@@ -256,6 +264,7 @@ const AccessListBox = () => {
                         <td className="d-flex">
                           <Tooltip title="ویرایش فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
                                 navigate(`/edit-activity/${item?.guid}`)
@@ -265,11 +274,14 @@ const AccessListBox = () => {
                                 src={editIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="18px"
+                                height="18px"
                               />
                             </div>
                           </Tooltip>
                           <Tooltip title="حذف فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                               onClick={() => showDeleteModal(item?.guid)}
                             >
@@ -277,6 +289,8 @@ const AccessListBox = () => {
                                 src={trashIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="15px"
+                                height="15px"
                               />
                             </div>
                           </Tooltip>
@@ -325,6 +339,7 @@ const AccessListBox = () => {
                         <td className="d-flex">
                           <Tooltip title="ویرایش فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
                                 navigate(`/edit-activity/${item?.guid}`)
@@ -334,11 +349,14 @@ const AccessListBox = () => {
                                 src={editIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="18px"
+                                height="18px"
                               />
                             </div>
                           </Tooltip>
                           <Tooltip title="حذف فعالیت">
                             <div
+                              style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                               onClick={() => showDeleteModal(item?.guid)}
                             >
@@ -346,6 +364,8 @@ const AccessListBox = () => {
                                 src={trashIcon}
                                 alt="menu"
                                 className="mx-auto"
+                                width="15px"
+                                height="15px"
                               />
                             </div>
                           </Tooltip>

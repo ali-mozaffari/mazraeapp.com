@@ -5,6 +5,7 @@ import AuthLayout from "../layouts/authLayout";
 import AccessPage from "../pages/access/accessPage";
 import AddAccessPage from "../pages/access/addAccessPage";
 import EditActivityPage from "../pages/activities/editActivityPage";
+import WeatherPage from "../pages/weather/weatherPage";
 
 
 const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
@@ -85,6 +86,7 @@ const AppView = () => {
                 <Route path="/edit-activity/:id" element={<EditActivityPage />} />
                 <Route path="/access" element={<AccessPage />} />
                 <Route path="/add-access" element={<AddAccessPage />} />
+                <Route path="/weather" element={<WeatherPage />} />
             </Routes>
         </AppLayout>
     );

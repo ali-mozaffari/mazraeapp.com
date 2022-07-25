@@ -44,7 +44,7 @@ const SidebarBottom = () => {
         {
             text: "آب و هوا",
             icon: <CloudyDay fill="currentColor"/>,
-            path: "/weatherforcast",
+            path: "/weather",
         },
     ];
     const sidebarBottomItemHide = [

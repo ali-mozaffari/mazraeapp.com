@@ -164,6 +164,7 @@ const ActivitiesListBox = () => {
                 </td>
                 <td className="d-flex">
                   <div
+                  style={{width:'35px', height:'35px'}}
                     className="btn tableToolIconBgGray d-flex align-items-center"
                     aria-label="more"
                     id="long-button"
@@ -172,7 +173,7 @@ const ActivitiesListBox = () => {
                     aria-haspopup="true"
                     onClick={handleClick}
                   >
-                    <img src={menuIcon} alt="menu" className="mx-auto" />
+                    <img src={menuIcon} alt="menu" className="mx-auto" style={{width:"5px"}} />
                   </div>
 
                   <Menu
@@ -204,26 +205,29 @@ const ActivitiesListBox = () => {
                   <Tooltip title="کپی کردن فعالیت">
                     <div
                       // activityId={item.guid}
+                      style={{width:'35px', height:'35px'}}
                       className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
                       // onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
-                      <img src={copyIcon} alt="menu" className="mx-auto" />
+                      <img src={copyIcon} alt="menu" className="mx-auto" style={{width:"15px"}} />
                     </div>
                   </Tooltip>
                   <Tooltip title="ویرایش فعالیت">
                     <div
+                    style={{width:'35px', height:'35px'}}
                       className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                       onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
-                      <img src={editIcon} alt="menu" className="mx-auto" />
+                      <img src={editIcon} alt="menu" className="mx-auto" style={{width:"18px"}} />
                     </div>
                   </Tooltip>
                   <Tooltip title="حذف فعالیت">
                     <div
+                    style={{width:'35px', height:'35px'}}
                       className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                       onClick={() => showDeleteModal(item?.guid)}
                     >
-                      <img src={trashIcon} alt="menu" className="mx-auto" />
+                      <img src={trashIcon} alt="menu" className="mx-auto" style={{width:"15px"}} />
                     </div>
                   </Tooltip>
                 </td>

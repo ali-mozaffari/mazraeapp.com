@@ -8,8 +8,6 @@ const AddActivityPage = () => {
 
             <AddAccessTopBar/>
 
-            <hr/>
-
             <AddAccessForm/>
 
         </div>

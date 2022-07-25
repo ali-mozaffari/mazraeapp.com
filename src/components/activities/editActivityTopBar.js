@@ -6,7 +6,7 @@ const EditActivityTopBar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between" style={{borderBottom: "1px solid #e0e0e0", paddingBottom:"18px"}}>
 
             <div className="d-flex align-items-center mx-2">
                 <span>

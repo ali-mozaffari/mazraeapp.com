@@ -4,7 +4,7 @@ import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
 import "./accessModal.css";
 import { useDispatch } from "react-redux";
-import { deleteAccessList } from "../../../redux/slice/access/accessListBox";
+import accessListBoxSlice, { deleteAccessList } from "../../../redux/slice/access/accessListBox";
 
 const DeleteConfirmationModal = ({
   showModal,
@@ -15,8 +15,13 @@ const DeleteConfirmationModal = ({
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(deleteAccessList(id));
-    confirmModal();
-    hideModal();
+    if(accessListBoxSlice?.isDone)
+    {
+      
+      confirmModal();
+      hideModal();
+    }
+    
   };
 
   return (
