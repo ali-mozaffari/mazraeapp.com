@@ -45,12 +45,17 @@ const AccessListBox = () => {
 
   // const owner = data?.filter(item => item.permission_type === "owner");
   const manager = data?.filter((item) => item.permission_type === "manager");
+  const contribute = data?.filter(
+    (item) => item.permission_type === "contribute"
+  );
   const no_access = data?.filter(
     (item) => item.permission_type === "no_access"
   );
-  const contributor = data?.filter(
-    (item) => item.permission_type === "contributor"
-  );
+
+  // const owner= null;
+  // const manager=null;
+  // const contributor=null;
+  // const no_access=null;
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -193,7 +198,7 @@ const AccessListBox = () => {
                               style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
-                                navigate(`/edit-activity/${item?.guid}`)
+                                navigate(`/edit-access/${item?.guid}`)
                               }
                             >
                               <img
@@ -236,9 +241,9 @@ const AccessListBox = () => {
           <TabPanelUnstyled value={1}>
             <table className="table table-borderless d-md-table">
               <tbody>
-                {contributor?.length > 0 ? (
+                {contribute?.length > 0 ? (
                   data
-                    ?.filter((e) => e.permission_type === "contributor")
+                    ?.filter((e) => e.permission_type === "contribute")
                     .map((item, index) => (
                       <tr key={index}>
                         <td
@@ -267,7 +272,7 @@ const AccessListBox = () => {
                               style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
-                                navigate(`/edit-activity/${item?.guid}`)
+                                navigate(`/edit-access/${item?.guid}`)
                               }
                             >
                               <img
@@ -342,7 +347,7 @@ const AccessListBox = () => {
                               style={{ width: "35px", height: "35px" }}
                               className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                               onClick={() =>
-                                navigate(`/edit-activity/${item?.guid}`)
+                                navigate(`/edit-access/${item?.guid}`)
                               }
                             >
                               <img

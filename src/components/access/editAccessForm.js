@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import "yup-phone";
 import { Field, Form, Formik } from "formik";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addAccess } from "../../redux/slice/access/addAccess";
-import { clearAccess } from "../../redux/slice/access/addAccess";
+// import { clearAccess } from "../../redux/slice/access/addAccess";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
 import ownerIcon from "../../assets/img/owner.png";
@@ -73,43 +73,42 @@ const Tab = styled(TabUnstyled)`
   }
 `;
 
-const AddAccessForm = () => {
+const EditAccessForm = () => {
+
+  const { id } = useParams();
+  const accessList = useSelector((state) => state.accessList);
+  const accessGuid = accessList.data;
+  const existingAccess = accessGuid.filter((access) => access.guid === id);
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const farms = useSelector((state) => state.farmlist);
 
   // console.log(farms.postList)
-  const [permissionType, setPermissionType] = useState("");
-  // const [workerName, setWorkerName] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [farm, setFarm] = useState("");
+  const [permissionType, setPermissionType] = useState(existingAccess[0]?.permission_type);
+  // const [workerName, setWorkerName] = useState(existingAccess[0]?.worker?.name);
+  // const [phone, setPhone] = useState(existingAccess[0]?.worker?.cell_phone);
+  const [farm, setFarm] = useState(existingAccess[0]?.farm?.guid);
 
   console.log(permissionType);
 
-  const access = useSelector((state) => state.addAccess);
+  const accessEdit = useSelector((state) => state.editAccess);
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
- let permissionValidation = () =>{
-   if(!permissionType){
-    return false
-   }else{
-     return true
-   }
- }
-//  .test(function(permissionType) {if(permissionType === null) return false}),
   const validation = Yup.object().shape({
-    permission_type: Yup.string().test('permission_type','required',permissionValidation),
+    permissionType: Yup.string().required(),
     workerName: Yup.string().required(),
     phone: Yup.string().required().phone(),
     farm: Yup.string().required(),
-  })
+  });
 
   const initialValues = {
-    permission_type: permissionType,
-    workerName: "",
-    phone: "",
-    farm: "",
+    permissionType: permissionType,
+    workerName: existingAccess[0]?.worker?.name,
+    phone: existingAccess[0]?.worker?.cell_phone,
+    farm: farm,
   };
 
   const onFormSubmit = (values) => {
@@ -119,9 +118,8 @@ const AddAccessForm = () => {
     setClicked(true);
 
     const payload = {
-      permission_type: permissionType,
-      name: values.workerName,
-      cell_phone: values.phone,
+      guid: existingAccess[0]?.guid,
+      permission_type: values.permissionType,
       "farm-guid": values.farm,
     };
     dispatch(addAccess(payload));
@@ -130,16 +128,16 @@ const AddAccessForm = () => {
   };
 
   useEffect(() => {
-    if (access?.isDone) {
-      if (access?.response?.url) {
+    if (accessEdit?.isDone) {
+      if (accessEdit?.response.guid) {
         setLoading(false);
         toast.success("دسترسی افزوده شد", { position: "top-center" });
         setClicked(false);
-        dispatch(clearAccess());
+        // dispatch(clearAccess());
         navigate("/access");
       }
     }
-  }, [access?.isDone]);
+  }, [accessEdit?.isDone]);
 
   if (!loading) {
     return (
@@ -149,6 +147,7 @@ const AddAccessForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
+
             // dispatch(addAccess(values));
             setLoading(true);
             formikHelpers.resetForm();
@@ -162,10 +161,9 @@ const AddAccessForm = () => {
               <Form className="row">
                 {/* ------------- Start user-box ------------ */}
                 <TabsUnstyled
-                  name="permission_type"
+                  name="permissionType"
                   // defaultValue={null}
-                  onChange={(e, val) => setPermissionType(val)}
-                  // onChange={(e) => permission(e.target.value)}
+                  // onChange={(e, val) => setPermissionType(val)}
                   // style={
                   //   !permissionType
                   //     ? {
@@ -193,15 +191,6 @@ const AddAccessForm = () => {
                       <Tab type="button"
                         value="manager"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
-                        style={
-                          errors.permission_type && touched.permission_type
-                            ? {
-                                border: "1px solid #f00",
-                                color: "red",
-                              }
-                            : { border: "1px solid #858585", color: "#212529"}
-                        }
                       >
                         <div className="user-img">
                           <img src={managerIcon} width="45px" height="48px" />
@@ -218,15 +207,6 @@ const AddAccessForm = () => {
                       <Tab type="button"
                         value="contribute"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
-                        style={
-                          errors.permission_type && touched.permission_type
-                            ? {
-                                border: "1px solid #f00",
-                                color: "red",
-                              }
-                            : { border: "1px solid #858585", color: "#212529"}
-                        }
                       >
                         <div className="user-img">
                           <img src={workerIcon} width="45px" height="48px" />
@@ -243,15 +223,6 @@ const AddAccessForm = () => {
                       <Tab type="button"
                         value="no_access"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
-                        style={
-                          errors.permission_type && touched.permission_type
-                            ? {
-                                border: "1px solid #f00",
-                                color: "red",
-                              }
-                            : { border: "1px solid #858585", color: "#212529"}
-                        }
                       >
                         <div className="user-img">
                           <img src={guestIcon} width="45px" height="48px" />
@@ -264,9 +235,7 @@ const AddAccessForm = () => {
                       </Tab>
                     </Box>
                   </TabsListUnstyled>
-                
-                  
-                  </TabsUnstyled>
+                </TabsUnstyled>
 
                 {/* ------------- End user-box ------------ */}
 
@@ -284,18 +253,11 @@ const AddAccessForm = () => {
                   <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
                     <Field
                       name="workerName"
-                      type="text"
+                      // type="text"
                       autoComplete="off"
                       className="search-input w-100 mt-4 py-3"
                       placeholder="نام شخص"
-                      style={
-                        errors.workerName && touched.workerName
-                          ? {
-                              border: "1px solid #f00",
-                              color: "red",
-                            }
-                          : { border: "none" }
-                      }
+                      disabled={true}
                     />
                   </Box>
                   <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
@@ -305,14 +267,7 @@ const AddAccessForm = () => {
                       autoComplete="off"
                       className="search-input w-100 mt-4 pl-5 py-3"
                       placeholder="شماره تماس"
-                      style={
-                        errors.phone && touched.phone
-                          ? {
-                              border: "1px solid #f00",
-                              color: "red",
-                            }
-                          : { border: "none" }
-                      }
+                      disabled={true}
                     />
                   </Box>
                 </Box>
@@ -379,4 +334,4 @@ const AddAccessForm = () => {
   }
 };
 
-export default AddAccessForm;
+export default EditAccessForm;

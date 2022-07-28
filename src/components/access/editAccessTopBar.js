@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const AddAccessTopBar = () => {
+const EditAccessTopBar = () => {
   const navigate = useNavigate();
 
   return (
@@ -12,7 +12,7 @@ const AddAccessTopBar = () => {
       <div className="d-flex align-items-center mx-2">
         <span>دسترسی ها</span>
         <span className="mx-2">/</span>
-        <span style={{ fontWeight: "900" }}>شخص جدید</span>
+        <span style={{ fontWeight: "900" }}>ویرایش دسترسی شخص</span>
       </div>
       <div>
         <button
@@ -26,4 +26,4 @@ const AddAccessTopBar = () => {
   );
 };
 
-export default AddAccessTopBar;
+export default EditAccessTopBar;

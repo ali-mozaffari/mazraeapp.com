@@ -74,9 +74,9 @@ const EditActivityForm = () => {
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
 
-    useEffect(() => {
-      set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
-    },[]);
+  useEffect(() => {
+    set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
+  }, []);
 
   useEffect(() => {
     setYaddasht(existingActivity[0]?.yaddasht);
@@ -123,10 +123,9 @@ const EditActivityForm = () => {
     dispatch(deleteNahade(item));
   };
 
-
   const deleteNahadeAPI = (guid) => {
     dispatch(deleteNahadeEditActivity(guid));
-    if(nahades.isDeleted){
+    if (nahades.isDeleted) {
       dispatch(deleteEditNahade(guid));
     }
   };
@@ -147,8 +146,7 @@ const EditActivityForm = () => {
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
-      if(activityEdit?.isDone)
-      navigate("/activities");
+      if (activityEdit?.isDone) navigate("/activities");
     } else {
       setDateError(true);
       // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
@@ -158,18 +156,18 @@ const EditActivityForm = () => {
   useEffect(() => {
     if (activityEdit?.isDone) {
       if (activityEdit?.response.guid) {
-          nahades?.nahades?.map((item) => {
-            const payload = {
-              "activity-guid": activityEdit.response.guid,
-              "nahade-item-guid": item.nahade_item_guid,
-              name_nahade: item.name_nahade,
-              meghdar: item.meghdar,
-              hazine_nahade: item.hazine_nahade,
-              vahede_meghdar: item.vahede_meghdar,
-              vahede_masahat: item.vahede_masahat,
-            };
-            dispatch(addNahade(payload));
-          });
+        nahades?.nahades?.map((item) => {
+          const payload = {
+            "activity-guid": activityEdit.response.guid,
+            "nahade-item-guid": item.nahade_item_guid,
+            name_nahade: item.name_nahade,
+            meghdar: item.meghdar,
+            hazine_nahade: item.hazine_nahade,
+            vahede_meghdar: item.vahede_meghdar,
+            vahede_masahat: item.vahede_masahat,
+          };
+          dispatch(addNahade(payload));
+        });
       }
     }
   }, [activityEdit.isDone]);
@@ -225,7 +223,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 py-4"
                   onClick={(e) => setSelectedCultivation(e.target.value)}
                 >
-
                   {farms?.postList?.map((item) => [
                     item.cultivation?.map((i) => (
                       <option
@@ -252,7 +249,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_noe_faaliat(e.target.value)}
                 >
-
                   {noe_faaliat_items?.map((item) => (
                     <option
                       key={item.key}
@@ -278,7 +274,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setVaziat(e.target.value)}
                 >
-
                   {vaziat_items?.map((item) => (
                     <option
                       key={item.key}
@@ -298,7 +293,11 @@ const EditActivityForm = () => {
                   onClick={onCalendarHandler}
                 >
                   {tarikh_mohlat_anjam ? (
-                    <div>{moment(tarikh_mohlat_anjam, "YYYY/MM/DD").format("jYYYY-jMM-jDD")}</div>
+                    <div>
+                      {moment(tarikh_mohlat_anjam, "YYYY/MM/DD").format(
+                        "jYYYY-jMM-jDD"
+                      )}
+                    </div>
                   ) : (
                     <div className=" d-flex justify-content-between">
                       <span>
@@ -323,7 +322,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_anjam_dahande_list(e.target.value)}
                 >
-
                   {vaziat_items?.map((item) => (
                     <option key={item.key} value={item.key} label={item.title}>
                       {item.title}
@@ -337,7 +335,6 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
                 >
-
                   {tools?.data?.map((item) => (
                     <option key={item.id} value={item.id} label={item.title}>
                       {item.title}
@@ -386,7 +383,7 @@ const EditActivityForm = () => {
                     ))
                   : null}
 
-                 {/* --------- Existing Nahade from Database ----------- */}        
+                {/* --------- Existing Nahade from Database ----------- */}
 
                 {existingActivity[0]?.nahades?.length > 0
                   ? existingActivity[0]?.nahades?.map((item) => (
@@ -414,7 +411,6 @@ const EditActivityForm = () => {
                       </div>
                     ))
                   : null}
-
 
                 <hr style={{ backgroundColor: "transparent" }} />
                 <Field
@@ -509,13 +505,19 @@ const EditActivityForm = () => {
             className="border-0 shadow-sm my-5"
             onChange={(value) => {
               console.warn(value);
-              const date = value.jYear() + '-' + (value.jMonth() + 1) + '-' + value.jDate();
-              set_tarikh_mohlat_anjam(moment(date, "jYYYY-jMM-jDD").format("YYYY-MM-DD"));
+              const date =
+                value.jYear() +
+                "-" +
+                (value.jMonth() + 1) +
+                "-" +
+                value.jDate();
+              set_tarikh_mohlat_anjam(
+                moment(date, "jYYYY-jMM-jDD").format("YYYY-MM-DD")
+              );
               setShowCalendar(false);
               setDateError(false);
             }}
           />
-
         </Modal>
       </div>
     );

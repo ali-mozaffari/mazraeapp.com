@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "../../../services/config";
-import {token} from "../../../services/token";
+import { token } from "../../../services/token";
 
 export const getAccessList = createAsyncThunk(
   "accessList/getAccessList",
@@ -35,7 +35,8 @@ export const deleteAccessList = createAsyncThunk(
           Authorization: token,
         },
       });
-      return data.results;
+      // console.log(id);
+      return data, id;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.data.results);
@@ -75,20 +76,13 @@ const accessListBoxSlice = createSlice({
       state.isDone = false;
     },
     [deleteAccessList.fulfilled]: (state, action) => {
-      state.data = action.payload;
+      // state.data = action.payload;
+      state.data = state.data.filter(({ guid }) => guid !== action.payload);
+      // console.log(state.data);
       state.loading = false;
       state.isDone = true;
-      if (!action.payload.guid) {
-        toast.success("کاربر حذف شد", {
-          position: "top-center",
-          theme: "dark",
-        });
-      }
     },
-    // [deleteAccessList.fulfilled]: (state, action) => {
-    //   let index = state.findIndex(({ id }) => id === action.payload.id);
-    //   state.splice(index, 1);
-    // },
+
     [deleteAccessList.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;

@@ -4,6 +4,7 @@ import AppLayout from "../layouts/appLayout";
 import AuthLayout from "../layouts/authLayout";
 import AccessPage from "../pages/access/accessPage";
 import AddAccessPage from "../pages/access/addAccessPage";
+import EditAccessPage from "../pages/access/editAccessPage";
 import EditActivityPage from "../pages/activities/editActivityPage";
 import WeatherPage from "../pages/weather/weatherPage";
 
@@ -86,6 +87,7 @@ const AppView = () => {
                 <Route path="/edit-activity/:id" element={<EditActivityPage />} />
                 <Route path="/access" element={<AccessPage />} />
                 <Route path="/add-access" element={<AddAccessPage />} />
+                <Route path="/edit-access/:id" element={<EditAccessPage />} />
                 <Route path="/weather" element={<WeatherPage />} />
             </Routes>
         </AppLayout>

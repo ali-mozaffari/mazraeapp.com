@@ -12,6 +12,8 @@ import thunk from 'redux-thunk';
 import {combineReducers} from 'redux';
 import activityEditReducer from './slice/activities/editActivity';
 import accessListBoxReducer from './slice/access/accessListBox';
+import accessReducer from './slice/access/addAccess';
+import accessEditRducer from './slice/access/editAccess';
 
 const persistConfig = {
     key: 'root',
@@ -27,7 +29,10 @@ const rootReducer = combineReducers({
     nahade: nahadeToolsReducer,
     activityEdit: activityEditReducer,
     accessList: accessListBoxReducer,
+    addAccess: accessReducer,
+    accessEdit: accessEditRducer,
 })
+
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

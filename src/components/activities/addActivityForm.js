@@ -116,10 +116,10 @@ const AddActivityForm = () => {
   };
 
   useEffect(() => {
-    if (activity.isDone) {
-      if (activity.response.guid) {
-        if (nahades.nahades.length > 0) {
-          nahades.nahades.map((item) => {
+    if (activity?.isDone) {
+      if (activity?.response?.guid) {
+        if (nahades?.nahades?.length > 0) {
+          nahades?.nahades?.map((item) => {
             const payload = {
               "activity-guid": activity.response.guid,
               "nahade-item-guid": item.nahade_item_guid,

@@ -15,13 +15,8 @@ const DeleteConfirmationModal = ({
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(deleteAccessList(id));
-    if(accessListBoxSlice?.isDone)
-    {
-      
-      confirmModal();
-      hideModal();
-    }
-    
+    confirmModal();
+    hideModal();
   };
 
   return (

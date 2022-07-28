@@ -52,6 +52,7 @@ const ActivitiesListBox = () => {
   // Handle the actual deletion of the item
   const submitDelete = (id) => {
     toast.success("فعالیت حذف شد");
+    
     setDisplayConfirmationModal(false);
   };
 

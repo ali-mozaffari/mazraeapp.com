@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
-import {token} from "../../../services/token";
+import { token } from "../../../services/token";
 
 export const getActivitiesList = createAsyncThunk(
   "activitiesList/getActivitiesList",
@@ -34,7 +34,8 @@ export const deleteActivityList = createAsyncThunk(
           Authorization: token,
         },
       });
-      return data.results;
+      console.log(data);
+      return data, id;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.data.results);
@@ -42,9 +43,15 @@ export const deleteActivityList = createAsyncThunk(
   }
 );
 
+// const initialState = {
+//   data: [],
+//   loading: false,
+//   error: null,
+// };
 const activitiesListBoxSlice = createSlice({
   name: "activitiesList",
   initialState: { value: {} },
+  // initialState,
   // reducers: {
   //   deleteFarm: (state, action) => {
   //     state.value = state.value.filter((farm)=> farm.id !== action.payload.id);
@@ -66,9 +73,11 @@ const activitiesListBoxSlice = createSlice({
       state.loading = true;
     },
     [deleteActivityList.fulfilled]: (state, action) => {
-      state.postList = action.payload;
       state.loading = false;
+      state.data = state.data.details.filter((guid) => guid !== action.payload);
+      console.log(state.data);
     },
+
     [deleteActivityList.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -77,5 +86,5 @@ const activitiesListBoxSlice = createSlice({
   },
 });
 
-// export const {deleteFarm} = farmListBoxSlice.actions;
+// export const {deleteActivity} = activitiesListBoxSlice.actions;
 export default activitiesListBoxSlice.reducer;
