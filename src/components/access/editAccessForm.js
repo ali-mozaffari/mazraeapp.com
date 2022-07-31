@@ -4,8 +4,8 @@ import "yup-phone";
 import { Field, Form, Formik } from "formik";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAccess } from "../../redux/slice/access/addAccess";
-// import { clearAccess } from "../../redux/slice/access/addAccess";
+import { editAccess } from "../../redux/slice/access/editAccess";
+import { clearAccess } from "../../redux/slice/access/editAccess";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
 import ownerIcon from "../../assets/img/owner.png";
@@ -13,15 +13,12 @@ import managerIcon from "../../assets/img/manager.png";
 import workerIcon from "../../assets/img/worker.png";
 import guestIcon from "../../assets/img/guest.png";
 import {
-  buttonUnstyledClasses,
-  TabPanelUnstyled,
   TabsListUnstyled,
   TabsUnstyled,
   TabUnstyled,
   tabUnstyledClasses,
 } from "@mui/base";
 import { Box, styled } from "@mui/system";
-// import { Tab } from "@mui/material";
 import "./access.css";
 
 const Tab = styled(TabUnstyled)`
@@ -74,33 +71,44 @@ const Tab = styled(TabUnstyled)`
 `;
 
 const EditAccessForm = () => {
-
   const { id } = useParams();
   const accessList = useSelector((state) => state.accessList);
   const accessGuid = accessList.data;
   const existingAccess = accessGuid.filter((access) => access.guid === id);
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const farms = useSelector((state) => state.farmlist);
 
-  // console.log(farms.postList)
-  const [permissionType, setPermissionType] = useState(existingAccess[0]?.permission_type);
+  const [permissionType, setPermissionType] = useState(
+    existingAccess[0]?.permission_type
+  );
   // const [workerName, setWorkerName] = useState(existingAccess[0]?.worker?.name);
   // const [phone, setPhone] = useState(existingAccess[0]?.worker?.cell_phone);
   const [farm, setFarm] = useState(existingAccess[0]?.farm?.guid);
 
   console.log(permissionType);
 
-  const accessEdit = useSelector((state) => state.editAccess);
+  const accessEdit = useSelector((state) => state.accessEdit);
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  let permissionValidation = () => {
+    if (!permissionType) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const validation = Yup.object().shape({
-    permissionType: Yup.string().required(),
-    workerName: Yup.string().required(),
-    phone: Yup.string().required().phone(),
+    permission_type: Yup.string().test(
+      "permission_type",
+      "required",
+      permissionValidation
+    ),
+    // workerName: Yup.string().required(),
+    // phone: Yup.string().required().phone(),
     farm: Yup.string().required(),
   });
 
@@ -112,28 +120,32 @@ const EditAccessForm = () => {
   };
 
   const onFormSubmit = (values) => {
-    // if(permission !== "manager" || permission !== "contribute" || permission !== "no_access")
-    // {permission = ""}else{
-      setLoading(true);
+    setLoading(true);
     setClicked(true);
 
     const payload = {
       guid: existingAccess[0]?.guid,
-      permission_type: values.permissionType,
+      permission_type: permissionType,
       "farm-guid": values.farm,
     };
-    dispatch(addAccess(payload));
-    // }
+    dispatch(editAccess(payload));
     
   };
 
   useEffect(() => {
     if (accessEdit?.isDone) {
-      if (accessEdit?.response.guid) {
+      if (accessEdit?.response?.url && accessEdit?.response?.message) {
         setLoading(false);
-        toast.success("دسترسی افزوده شد", { position: "top-center" });
+        toast.success("دسترسی به روز رسانی شد", { position: "top-center" });
         setClicked(false);
-        // dispatch(clearAccess());
+        dispatch(clearAccess());
+        navigate("/access");
+      }
+      if (accessEdit?.response?.message && !accessEdit?.response?.url) {
+        setLoading(false);
+        toast.success("هیچ تغییراتی وضع نشد", { position: "top-center" });
+        setClicked(false);
+        dispatch(clearAccess());
         navigate("/access");
       }
     }
@@ -147,8 +159,6 @@ const EditAccessForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
-
-            // dispatch(addAccess(values));
             setLoading(true);
             formikHelpers.resetForm();
           }}
@@ -161,17 +171,9 @@ const EditAccessForm = () => {
               <Form className="row">
                 {/* ------------- Start user-box ------------ */}
                 <TabsUnstyled
-                  name="permissionType"
-                  // defaultValue={null}
-                  // onChange={(e, val) => setPermissionType(val)}
-                  // style={
-                  //   !permissionType
-                  //     ? {
-                  //         border: "1px solid #f00",
-                  //         color: "red",
-                  //       }
-                  //     : null
-                  // }
+                defaultValue={permissionType}
+                  name="permission_type"
+                  onChange={(e, val) => setPermissionType(val)}
                 >
                   <TabsListUnstyled className="row" style={{ rowGap: "30px" }}>
                     {/* <Box className="col-6 col-sm-3">
@@ -188,9 +190,18 @@ const EditAccessForm = () => {
                     </Box> */}
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="manager"
                         className="user-box"
+                        style={
+                          errors.permission_type && touched.permission_type
+                            ? {
+                                border: "1px solid #f00",
+                                color: "red",
+                              }
+                            : { border: "1px solid #858585", color: "#212529" }
+                        }
                       >
                         <div className="user-img">
                           <img src={managerIcon} width="45px" height="48px" />
@@ -204,9 +215,18 @@ const EditAccessForm = () => {
                     </Box>
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="contribute"
                         className="user-box"
+                        style={
+                          errors.permission_type && touched.permission_type
+                            ? {
+                                border: "1px solid #f00",
+                                color: "red",
+                              }
+                            : { border: "1px solid #858585", color: "#212529" }
+                        }
                       >
                         <div className="user-img">
                           <img src={workerIcon} width="45px" height="48px" />
@@ -220,9 +240,18 @@ const EditAccessForm = () => {
                     </Box>
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="no_access"
                         className="user-box"
+                        style={
+                          errors.permission_type && touched.permission_type
+                            ? {
+                                border: "1px solid #f00",
+                                color: "red",
+                              }
+                            : { border: "1px solid #858585", color: "#212529" }
+                        }
                       >
                         <div className="user-img">
                           <img src={guestIcon} width="45px" height="48px" />
@@ -313,7 +342,7 @@ const EditAccessForm = () => {
                 </Box>
 
                 <div className="d-flex justify-content-center mt-3">
-                  <button type="submit" className="btn-dark-blue mx-1 mt-4" >
+                  <button type="submit" className="btn-dark-blue mx-1 mt-4">
                     افزودن
                   </button>
                   <NavLink

@@ -4,7 +4,7 @@ import warning from "./../../../assets/img/warning.png";
 import closeNotification from "./../../../assets/img/close-notification.png";
 import "./accessModal.css";
 import { useDispatch } from "react-redux";
-import accessListBoxSlice, { deleteAccessList } from "../../../redux/slice/access/accessListBox";
+import { deleteAccessList } from "../../../redux/slice/access/accessListBox";
 
 const DeleteConfirmationModal = ({
   showModal,

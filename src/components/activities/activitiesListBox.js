@@ -15,6 +15,8 @@ import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { noe_faaliat_items, vaziat_items } from "../../assets/strings/strings";
 import Loading from "../loading/loading";
 
+import { deleteActivityList } from "../../redux/slice/activities/activitiesListBox";
+
 const options = [
   "علامت گذاری به عنوان انجام شده",
   "علامت گذاری به عنوان لغو شده",
@@ -32,7 +34,6 @@ const ActivitiesListBox = () => {
 
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
-    // console.log(activitiesList)
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -40,6 +41,8 @@ const ActivitiesListBox = () => {
 
   // Handle the displaying of the modal based on type and id
   const showDeleteModal = (id) => {
+    // dispatch(deleteActivityList(id));
+    // dispatch(getActivitiesList());
     setId(id);
     setDisplayConfirmationModal(true);
   };
@@ -52,8 +55,8 @@ const ActivitiesListBox = () => {
   // Handle the actual deletion of the item
   const submitDelete = (id) => {
     toast.success("فعالیت حذف شد");
-    
     setDisplayConfirmationModal(false);
+    dispatch(getActivitiesList());
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -121,7 +124,6 @@ const ActivitiesListBox = () => {
                     {vaziat_items.map((item2) =>
                       item2.key === item.vaziat ? item2.title : null
                     )}
-
                   </span>
                 </td>
                 <td
@@ -131,7 +133,6 @@ const ActivitiesListBox = () => {
                   {noe_faaliat_items.map((item3) =>
                     item3.key === item.noe_faaliat ? item3.title : null
                   )}
-
                 </td>
                 <td
                   className="py-3"
@@ -165,7 +166,7 @@ const ActivitiesListBox = () => {
                 </td>
                 <td className="d-flex">
                   <div
-                  style={{width:'35px', height:'35px'}}
+                    style={{ width: "35px", height: "35px" }}
                     className="btn tableToolIconBgGray d-flex align-items-center"
                     aria-label="more"
                     id="long-button"
@@ -174,7 +175,12 @@ const ActivitiesListBox = () => {
                     aria-haspopup="true"
                     onClick={handleClick}
                   >
-                    <img src={menuIcon} alt="menu" className="mx-auto" style={{width:"5px"}} />
+                    <img
+                      src={menuIcon}
+                      alt="menu"
+                      className="mx-auto"
+                      style={{ width: "5px" }}
+                    />
                   </div>
 
                   <Menu
@@ -206,29 +212,44 @@ const ActivitiesListBox = () => {
                   <Tooltip title="کپی کردن فعالیت">
                     <div
                       // activityId={item.guid}
-                      style={{width:'35px', height:'35px'}}
+                      style={{ width: "35px", height: "35px" }}
                       className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
                       // onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
-                      <img src={copyIcon} alt="menu" className="mx-auto" style={{width:"15px"}} />
+                      <img
+                        src={copyIcon}
+                        alt="menu"
+                        className="mx-auto"
+                        style={{ width: "15px" }}
+                      />
                     </div>
                   </Tooltip>
                   <Tooltip title="ویرایش فعالیت">
                     <div
-                    style={{width:'35px', height:'35px'}}
+                      style={{ width: "35px", height: "35px" }}
                       className="btn tableToolIconBgBlue d-flex align-items-center justify-content-center"
                       onClick={() => navigate(`/edit-activity/${item?.guid}`)}
                     >
-                      <img src={editIcon} alt="menu" className="mx-auto" style={{width:"18px"}} />
+                      <img
+                        src={editIcon}
+                        alt="menu"
+                        className="mx-auto"
+                        style={{ width: "18px" }}
+                      />
                     </div>
                   </Tooltip>
                   <Tooltip title="حذف فعالیت">
                     <div
-                    style={{width:'35px', height:'35px'}}
+                      style={{ width: "35px", height: "35px" }}
                       className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                       onClick={() => showDeleteModal(item?.guid)}
                     >
-                      <img src={trashIcon} alt="menu" className="mx-auto" style={{width:"15px"}} />
+                      <img
+                        src={trashIcon}
+                        alt="menu"
+                        className="mx-auto"
+                        style={{ width: "15px" }}
+                      />
                     </div>
                   </Tooltip>
                 </td>

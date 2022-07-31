@@ -44,7 +44,6 @@ export const deleteAccessList = createAsyncThunk(
   }
 );
 
-export const deleteAccessUser = createAction("accessUser/deleteAccessUser");
 
 const accessListBoxSlice = createSlice({
   name: "accessList",
@@ -65,11 +64,6 @@ const accessListBoxSlice = createSlice({
     [getAccessList.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-    },
-    [deleteAccessUser]: (state, action) => {
-      state.nahades = state.nahades.filter(
-        (element) => element.id !== action.payload
-      );
     },
     [deleteAccessList.pending]: (state, action) => {
       state.loading = true;

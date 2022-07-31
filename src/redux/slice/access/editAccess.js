@@ -5,10 +5,13 @@ import { token } from "../../../services/token";
 
 export const editAccess = createAsyncThunk(
   "accessEdit/editAccess",
-  async ( payload, { rejectWithValue, getState, dispatch }) => {
-    console.log(payload);
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+      // console.log(payload);
     try {
-      const {data} = await axios.put("/api/v2/farm/farmPermission", JSON.stringify(payload), {
+      const { data } = await axios.put(
+        "/api/v2/farm/farmPermission",
+        JSON.stringify(payload),
+        {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",
@@ -19,7 +22,7 @@ export const editAccess = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error);
-      return rejectWithValue(error.data);
+      return rejectWithValue(error.data.results);
     }
   }
 );

@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
-import { toast } from "react-toastify";
 import { token } from "../../../services/token";
-import { getQueriesForElement } from "@testing-library/react";
 
 export const editActivity = createAsyncThunk(
   "activityEdit/editActivity",
-  async ( payload, { rejectWithValue, getState, dispatch }) => {
-    console.log(payload);
+  async (payload, { rejectWithValue, getState, dispatch }) => {
+    // console.log(payload);
     try {
-      const {data} = await axios.put("/api/v2/farm/activity", JSON.stringify(payload), {
+      const { data } = await axios.put(
+        "/api/v2/farm/activity",
+        JSON.stringify(payload),
+        {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",

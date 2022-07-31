@@ -90,20 +90,24 @@ const AddAccessForm = () => {
   const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
- let permissionValidation = () =>{
-   if(!permissionType){
-    return false
-   }else{
-     return true
-   }
- }
-//  .test(function(permissionType) {if(permissionType === null) return false}),
+  let permissionValidation = () => {
+    if (!permissionType) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  //  .test(function(permissionType) {if(permissionType === null) return false}),
   const validation = Yup.object().shape({
-    permission_type: Yup.string().test('permission_type','required',permissionValidation),
+    permission_type: Yup.string().test(
+      "permission_type",
+      "required",
+      permissionValidation
+    ),
     workerName: Yup.string().required(),
     phone: Yup.string().required().phone(),
     farm: Yup.string().required(),
-  })
+  });
 
   const initialValues = {
     permission_type: permissionType,
@@ -113,9 +117,7 @@ const AddAccessForm = () => {
   };
 
   const onFormSubmit = (values) => {
-    // if(permission !== "manager" || permission !== "contribute" || permission !== "no_access")
-    // {permission = ""}else{
-      setLoading(true);
+    setLoading(true);
     setClicked(true);
 
     const payload = {
@@ -125,8 +127,6 @@ const AddAccessForm = () => {
       "farm-guid": values.farm,
     };
     dispatch(addAccess(payload));
-    // }
-    
   };
 
   useEffect(() => {
@@ -149,7 +149,6 @@ const AddAccessForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
-            // dispatch(addAccess(values));
             setLoading(true);
             formikHelpers.resetForm();
           }}
@@ -163,17 +162,7 @@ const AddAccessForm = () => {
                 {/* ------------- Start user-box ------------ */}
                 <TabsUnstyled
                   name="permission_type"
-                  // defaultValue={null}
                   onChange={(e, val) => setPermissionType(val)}
-                  // onChange={(e) => permission(e.target.value)}
-                  // style={
-                  //   !permissionType
-                  //     ? {
-                  //         border: "1px solid #f00",
-                  //         color: "red",
-                  //       }
-                  //     : null
-                  // }
                 >
                   <TabsListUnstyled className="row" style={{ rowGap: "30px" }}>
                     {/* <Box className="col-6 col-sm-3">
@@ -190,17 +179,17 @@ const AddAccessForm = () => {
                     </Box> */}
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="manager"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
                         style={
                           errors.permission_type && touched.permission_type
                             ? {
                                 border: "1px solid #f00",
                                 color: "red",
                               }
-                            : { border: "1px solid #858585", color: "#212529"}
+                            : { border: "1px solid #858585", color: "#212529" }
                         }
                       >
                         <div className="user-img">
@@ -215,17 +204,17 @@ const AddAccessForm = () => {
                     </Box>
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="contribute"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
                         style={
                           errors.permission_type && touched.permission_type
                             ? {
                                 border: "1px solid #f00",
                                 color: "red",
                               }
-                            : { border: "1px solid #858585", color: "#212529"}
+                            : { border: "1px solid #858585", color: "#212529" }
                         }
                       >
                         <div className="user-img">
@@ -240,17 +229,17 @@ const AddAccessForm = () => {
                     </Box>
 
                     <Box className="col-6 col-sm-4">
-                      <Tab type="button"
+                      <Tab
+                        type="button"
                         value="no_access"
                         className="user-box"
-                        // style={!permissionType ? { color: "red" } : null}
                         style={
                           errors.permission_type && touched.permission_type
                             ? {
                                 border: "1px solid #f00",
                                 color: "red",
                               }
-                            : { border: "1px solid #858585", color: "#212529"}
+                            : { border: "1px solid #858585", color: "#212529" }
                         }
                       >
                         <div className="user-img">
@@ -264,9 +253,7 @@ const AddAccessForm = () => {
                       </Tab>
                     </Box>
                   </TabsListUnstyled>
-                
-                  
-                  </TabsUnstyled>
+                </TabsUnstyled>
 
                 {/* ------------- End user-box ------------ */}
 
@@ -358,7 +345,7 @@ const AddAccessForm = () => {
                 </Box>
 
                 <div className="d-flex justify-content-center mt-3">
-                  <button type="submit" className="btn-dark-blue mx-1 mt-4" >
+                  <button type="submit" className="btn-dark-blue mx-1 mt-4">
                     افزودن
                   </button>
                   <NavLink

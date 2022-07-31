@@ -50,6 +50,21 @@ const AddActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
 
+  const accessList = useSelector((state) => state.accessList);
+
+  const PermissionNameFarsi = (type) => {
+    switch (type) {
+      case "manager":
+        return "مدیر";
+      case "contribute":
+        return "همکار";
+      case "no_access":
+        return "مهمان";
+      default:
+        return "";
+    }
+  };
+
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
@@ -105,7 +120,7 @@ const AddActivityForm = () => {
         tarikh_mohlat_anjam: date,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
-        anjam_dahande_list: "1",
+        anjam_dahande_list: values.anjam_dahande_list,
         yaddasht: values.yaddasht,
       };
       dispatch(addActivity(payload));
@@ -307,12 +322,11 @@ const AddActivityForm = () => {
                   onClick={(e) => set_anjam_dahande_list(e.target.value)}
                 >
                   <option value="" label="انجام دهنده ها *">
-                    انجام دهنده ها{" "}
+                    انجام دهنده ها
                   </option>
 
-                  {vaziat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
-                      {item.title}
+                  {accessList?.data?.map((item) => (
+                    <option key={item?.id} value={item?.id} label={item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type)}>
                     </option>
                   ))}
                 </Field>

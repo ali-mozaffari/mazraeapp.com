@@ -60,7 +60,7 @@ const EditActivityForm = () => {
 
   const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
   const [anjam_dahande_list, set_anjam_dahande_list] = useState(
-    existingActivity[0]?.anjam_dahande_list
+    existingActivity[0]?.anjam_dahande?.name
   );
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
@@ -73,6 +73,21 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
+
+  const accessList = useSelector((state) => state.accessList);
+
+  const PermissionNameFarsi = (type) => {
+    switch (type) {
+      case "manager":
+        return "مدیر";
+      case "contribute":
+        return "همکار";
+      case "no_access":
+        return "مهمان";
+      default:
+        return "";
+    }
+  };
 
   useEffect(() => {
     set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
@@ -142,7 +157,7 @@ const EditActivityForm = () => {
         tarikh_mohlat_anjam: tarikh_mohlat_anjam,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
-        anjam_dahande_list: "1",
+        anjam_dahande_list: values.anjam_dahande_list,
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
@@ -155,7 +170,7 @@ const EditActivityForm = () => {
 
   useEffect(() => {
     if (activityEdit?.isDone) {
-      if (activityEdit?.response.guid) {
+      if (activityEdit?.response?.guid) {
         nahades?.nahades?.map((item) => {
           const payload = {
             "activity-guid": activityEdit.response.guid,
@@ -322,9 +337,8 @@ const EditActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_anjam_dahande_list(e.target.value)}
                 >
-                  {vaziat_items?.map((item) => (
-                    <option key={item.key} value={item.key} label={item.title}>
-                      {item.title}
+                  {accessList?.data?.map((item) => (
+                    <option key={item?.id} value={item?.guid} label={item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type)}>
                     </option>
                   ))}
                 </Field>

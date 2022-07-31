@@ -34,7 +34,7 @@ export const deleteActivityList = createAsyncThunk(
           Authorization: token,
         },
       });
-      console.log(data);
+      // console.log(data);
       return data, id;
     } catch (error) {
       console.log(error);
@@ -71,17 +71,22 @@ const activitiesListBoxSlice = createSlice({
     },
     [deleteActivityList.pending]: (state, action) => {
       state.loading = true;
+      state.isDone = false;
     },
     [deleteActivityList.fulfilled]: (state, action) => {
       state.loading = false;
-      state.data = state.data.details.filter((guid) => guid !== action.payload);
+      // console.log(action.payload)
+      state.response = action.payload;
+      state.data = state.data.details.filter(({guid}) => guid !== action.payload);
       console.log(state.data);
+      state.isDone = true;
     },
 
     [deleteActivityList.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
       console.log(state.error);
+      state.isDone = false;
     },
   },
 });

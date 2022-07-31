@@ -23,6 +23,8 @@ import {
 import { styled } from "@mui/system";
 import { getAccessList } from "./../../redux/slice/access/accessListBox";
 
+
+
 const Tab = styled(TabUnstyled)`
   &.${tabUnstyledClasses.selected} {
     background-color: #e2fffb !important;
@@ -33,7 +35,6 @@ const Tab = styled(TabUnstyled)`
 
 const AccessListBox = () => {
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAccessList());
@@ -51,11 +52,6 @@ const AccessListBox = () => {
   const no_access = data?.filter(
     (item) => item.permission_type === "no_access"
   );
-
-  // const owner= null;
-  // const manager=null;
-  // const contributor=null;
-  // const no_access=null;
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -76,15 +72,6 @@ const AccessListBox = () => {
   const submitDelete = (id) => {
     toast.success("کاربر حذف شد");
     setDisplayConfirmationModal(false);
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
   };
 
   return (
@@ -189,7 +176,7 @@ const AccessListBox = () => {
                           className="py-3"
                           style={{ fontSize: "13px", whiteSpace: "nowrap" }}
                         >
-                          {item.worker?.name}
+                          {item.worker?.cell_phone}
                         </td>
 
                         <td className="d-flex">
@@ -263,7 +250,7 @@ const AccessListBox = () => {
                           className="py-3"
                           style={{ fontSize: "13px", whiteSpace: "nowrap" }}
                         >
-                          {item.worker?.name}
+                          {item.worker?.cell_phone}
                         </td>
 
                         <td className="d-flex">
@@ -338,7 +325,7 @@ const AccessListBox = () => {
                           className="py-3"
                           style={{ fontSize: "13px", whiteSpace: "nowrap" }}
                         >
-                          {item.worker?.name}
+                          {item.worker?.cell_phone}
                         </td>
 
                         <td className="d-flex">
