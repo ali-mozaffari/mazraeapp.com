@@ -14,7 +14,7 @@ const AddActivityTopBar = () => {
       <div>
         <button
           className="btn btn-back-orange"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/activities")}
         >
           بازگشت
         </button>

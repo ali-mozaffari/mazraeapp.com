@@ -1,0 +1,21 @@
+/* ------start add & edit activity form-------- */
+.css-1s2u09g-control{
+    border: none !important;
+    border: 1px solid #f00 !important;
+    border-radius: 12px !important;
+    background-color: transparent !important;
+    height: 100% !important;
+}
+
+.css-1pahdxg-control {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    height: 100% !important;
+}
+
+.css-14el2xx-placeholder {
+    padding: 20px 8px !important;
+}
+/* ------end add & edit activity form-------- */

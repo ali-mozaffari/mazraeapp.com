@@ -27,6 +27,13 @@ import moment from "moment-jalaali";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
+import { getAccessList } from "./../../redux/slice/access/accessListBox";
+
+import "./activity.css";
+
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+const animatedComponents = makeAnimated();
 
 const AddActivityForm = () => {
   const navigate = useNavigate();
@@ -38,7 +45,7 @@ const AddActivityForm = () => {
   const [vaziat, setVaziat] = useState();
   const [yaddasht, setYaddasht] = useState();
   const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
-  const [anjam_dahande_list, set_anjam_dahande_list] = useState();
+  // const [anjam_dahande_list, set_anjam_dahande_list] = useState();
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
@@ -51,6 +58,8 @@ const AddActivityForm = () => {
   const hiddenFileInput = React.useRef(null);
 
   const accessList = useSelector((state) => state.accessList);
+  const [worker, setWorker] = useState();
+  // console.log(worker);
 
   const PermissionNameFarsi = (type) => {
     switch (type) {
@@ -64,6 +73,25 @@ const AddActivityForm = () => {
         return "";
     }
   };
+  // let options = accessList.data.map((item) => {
+  //   return { value: item.worker.id, label: item.worker.name };
+  // });
+  let options = accessList.data.map((item) => {
+    return { value: item.worker.id, label: item.worker.name + " - " + PermissionNameFarsi(item.permission_type) };
+  });
+  // console.log(options)
+
+  const workerOnchange = (val) => {
+    console.log(val)
+    let list = "";
+    val.map((item, i, arr) => {
+      list = list + item.value + (i != arr.length - 1 ? "," : "");
+    });
+    // console.log(list);
+    setWorker(list);
+  };
+
+  
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -76,6 +104,7 @@ const AddActivityForm = () => {
 
   useEffect(() => {
     dispatch(getToolsList());
+    dispatch(getAccessList());
   }, []);
 
   const onCalendarHandler = () => {
@@ -99,7 +128,7 @@ const AddActivityForm = () => {
     cultivations: selectedCultivation,
     noe_faaliat: noe_faaliat,
     vaziat: vaziat,
-    anjam_dahande_list: anjam_dahande_list,
+    anjam_dahande_list: worker,
     yaddasht: yaddasht,
   };
 
@@ -226,6 +255,7 @@ const AddActivityForm = () => {
                   {farms?.postList?.map((item) => [
                     item.cultivation?.map((i) => (
                       <option
+                        key={i.id}
                         value={i.id}
                         label={i.mahsul.title + " " + i.sathe_zire_kesht}
                         className="m-3"
@@ -255,7 +285,7 @@ const AddActivityForm = () => {
                   </option>
 
                   {noe_faaliat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
+                    <option key={item.key} value={item.key} label={item.title}>
                       {item.title}
                     </option>
                   ))}
@@ -282,7 +312,7 @@ const AddActivityForm = () => {
                   </option>
 
                   {vaziat_items?.map((item) => (
-                    <option value={item.key} label={item.title}>
+                    <option key={item.key} value={item.key} label={item.title}>
                       {item.title}
                     </option>
                   ))}
@@ -307,7 +337,7 @@ const AddActivityForm = () => {
                   )}
                 </div>
 
-                <Field
+                {/* <Field
                   as="select"
                   name="anjam_dahande_list"
                   style={
@@ -320,16 +350,25 @@ const AddActivityForm = () => {
                   }
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => set_anjam_dahande_list(e.target.value)}
-                >
-                  <option value="" label="انجام دهنده ها *">
+                > */}
+                {/* <option value="" label="انجام دهنده ها *">
                     انجام دهنده ها
-                  </option>
+                  </option> */}
 
-                  {accessList?.data?.map((item) => (
-                    <option key={item?.id} value={item?.id} label={item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type)}>
-                    </option>
-                  ))}
-                </Field>
+                <Select
+                  placeholder="انجام دهنده ها *"
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  // defaultValue={[options[1], options[2]]}
+                  isMulti
+                  options={options}
+                  className="search-input col-md-5 mx-auto mt-4 p-0"
+                  name="anjam_dahande_list"
+                  onChange={workerOnchange}
+                  // style={{border:"1px solid #f00 !important", color: "green !important", backgroundColor: "yellow !important"}}
+                />
+
+                {/* </Field> */}
 
                 <Field
                   as="select"
@@ -342,12 +381,12 @@ const AddActivityForm = () => {
                     className="text-gray"
                     label="تجهیزات و ابزار"
                   >
-                    تجهیزات و ابزار{" "}
+                    تجهیزات و ابزار
                   </option>
 
                   {tools?.data?.map((item) => (
-                    <option value={item.id} label={item.title}>
-                      {item.title}
+                    <option key={item?.id} value={item?.id} label={item?.title}>
+                      {item?.title}
                     </option>
                   ))}
                 </Field>
@@ -366,6 +405,7 @@ const AddActivityForm = () => {
                 {nahades?.nahades?.length > 0
                   ? nahades?.nahades?.map((item) => (
                       <div
+                        key={item?.id}
                         className={
                           nahades?.nahades?.length / 2 === 0
                             ? "nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between"

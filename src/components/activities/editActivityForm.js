@@ -30,6 +30,11 @@ import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
 import { CompressOutlined } from "@mui/icons-material";
+import "./activity.css";
+
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
+const animatedComponents = makeAnimated();
 
 const EditActivityForm = () => {
   const { id } = useParams();
@@ -38,6 +43,8 @@ const EditActivityForm = () => {
   const existingActivity = activityGuid.filter(
     (activity) => activity.guid === id
   );
+  // const { name } = existingActivity[0]?.anjam_dahande[0][0];
+  // console.log(name)
   //   console.log(existingActivity[0]?.guid)
   //   const mahsulTitle = existingActivity[0].cultivation[0].mahsul.title;
   // console.log(existingActivity[0]?.abzar?.id);
@@ -57,11 +64,24 @@ const EditActivityForm = () => {
   );
   const [vaziat, setVaziat] = useState(existingActivity[0]?.vaziat);
   const [yaddasht, setYaddasht] = useState();
-
   const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
+
+
   const [anjam_dahande_list, set_anjam_dahande_list] = useState(
-    existingActivity[0]?.anjam_dahande?.name
+    // existingActivity[0]?.anjam_dahande[0]?.id
+    // existingActivity[0].anjam_dahande_list.map((item)=>item.id)
   );
+  
+  const existingWorker = existingActivity[0];
+  
+  console.log(existingWorker)
+  let workerList = "";
+  existingWorker.anjam_dahande.map((item) => {
+    workerList = workerList + item.id;
+  });
+  console.log(workerList)
+
+
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
@@ -75,7 +95,10 @@ const EditActivityForm = () => {
   const activityEdit = useSelector((state) => state.activityEdit);
 
   const accessList = useSelector((state) => state.accessList);
-
+  const [worker, setWorker] = useState();
+  // console.log(worker)
+  
+ 
   const PermissionNameFarsi = (type) => {
     switch (type) {
       case "manager":
@@ -88,6 +111,20 @@ const EditActivityForm = () => {
         return "";
     }
   };
+  let options = accessList.data.map((item) => {
+    return { value: item.worker.id, label: item.worker.name + " - " + PermissionNameFarsi(item.permission_type) };
+  });
+  // console.log(options)
+  const workerOnchange = (val) => {
+    // console.log(val)
+    let list = "";
+    val.map((item, i, arr) => {
+      list = list + item.value + (i != arr.length - 1 ? "," : "");
+    });
+    console.log(list);
+    setWorker(list);
+  };
+
 
   useEffect(() => {
     set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
@@ -323,25 +360,22 @@ const EditActivityForm = () => {
                   )}
                 </div>
 
-                <Field
-                  as="select"
+
+                <Select
+                  placeholder="انجام دهنده ها *"
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  // defaultValue={options.map((item)=>[options[item.workerList]])}
+                  defaultValue={[options[workerList]]}
+                  // defaultValue={[options[0],options[1],options[2]]}
+                  isMulti
+                  options={options}
+                  className="search-input col-md-5 mx-auto mt-4 p-0"
                   name="anjam_dahande_list"
-                  style={
-                    errors.anjam_dahande_list && touched.anjam_dahande_list
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_anjam_dahande_list(e.target.value)}
-                >
-                  {accessList?.data?.map((item) => (
-                    <option key={item?.id} value={item?.guid} label={item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type)}>
-                    </option>
-                  ))}
-                </Field>
+                  onChange={workerOnchange}
+                  style={{border:"1px solid #f00 !important", color: "green !important", backgroundColor: "yellow !important"}}
+                />
+
 
                 <Field
                   as="select"

@@ -13,7 +13,7 @@ import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { Dropdown, ToastContainer } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
-import { getAccessList } from "./../../redux/slice/access/accessListBox";
+
 
 
 const ITEM_HEIGHT = 48;
@@ -24,7 +24,6 @@ const FarmListBox = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFarmList());
-    dispatch(getAccessList());
   }, []);
 
   const farmlist = useSelector((state) => state.farmlist);
