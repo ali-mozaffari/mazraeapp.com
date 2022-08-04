@@ -35,30 +35,40 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 const animatedComponents = makeAnimated();
 
+const selectErrorStyle = {
+  control: (styles) => ({
+    ...styles,
+    border: "1px solid #f00 !important",
+    color: "red !important",
+    borderRadius: "12px !important",
+  }),
+};
+
 const AddActivityForm = () => {
   const navigate = useNavigate();
   const farms = useSelector((state) => state.farmlist);
   const nahades = useSelector((state) => state.nahade);
   const [selectedTool, setSelectedTool] = useState();
-  const [selectedCultivation, setSelectedCultivation] = useState();
-  const [noe_faaliat, set_noe_faaliat] = useState();
-  const [vaziat, setVaziat] = useState();
+  const [selectedCultivation, setSelectedCultivation] = useState("");
+  const [noe_faaliat, set_noe_faaliat] = useState("");
+  const [vaziat, setVaziat] = useState("");
   const [yaddasht, setYaddasht] = useState();
-  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
+  const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState("");
+
   // const [anjam_dahande_list, set_anjam_dahande_list] = useState();
   const [showCalendar, setShowCalendar] = useState(false);
-  const [dateError, setDateError] = useState(false);
+  // const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
   const dispatch = useDispatch();
   const tools = useSelector((state) => state.tools);
   const activity = useSelector((state) => state.activity);
-  const [clicked, setClicked] = useState(false);
+  // const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
 
   const accessList = useSelector((state) => state.accessList);
-  const [worker, setWorker] = useState();
+  const [worker, setWorker] = useState("");
   // console.log(worker);
 
   const PermissionNameFarsi = (type) => {
@@ -73,25 +83,22 @@ const AddActivityForm = () => {
         return "";
     }
   };
-  // let options = accessList.data.map((item) => {
-  //   return { value: item.worker.id, label: item.worker.name };
-  // });
+
   let options = accessList.data.map((item) => {
-    return { value: item.worker.id, label: item.worker.name + " - " + PermissionNameFarsi(item.permission_type) };
+    return {
+      value: item.worker.id,
+      label:
+        item.worker.name + " - " + PermissionNameFarsi(item.permission_type),
+    };
   });
-  // console.log(options)
 
   const workerOnchange = (val) => {
-    console.log(val)
     let list = "";
     val.map((item, i, arr) => {
       list = list + item.value + (i != arr.length - 1 ? "," : "");
     });
-    // console.log(list);
     setWorker(list);
   };
-
-  
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -101,6 +108,7 @@ const AddActivityForm = () => {
     const fileUploaded = event.target.files[0];
     setFile([fileUploaded]);
   };
+  console.log(file)
 
   useEffect(() => {
     dispatch(getToolsList());
@@ -115,12 +123,36 @@ const AddActivityForm = () => {
     setShowNahadeModal(!showNahadeModal);
   };
 
+  let tarikh_mohlat_anjam_validation = () => {
+    if (!tarikh_mohlat_anjam) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  
+  let anjam_dahande_validation = () => {
+    if (!worker) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const validation = Yup.object().shape({
-    farm: Yup.string().required(true),
-    cultivations: Yup.string().required(true),
-    noe_faaliat: Yup.string().required(true),
-    vaziat: Yup.string().required(true),
-    anjam_dahande_list: Yup.string().required(true),
+    cultivations: Yup.string().required(),
+    noe_faaliat: Yup.string().required(),
+    vaziat: Yup.string().required(),
+    tarikh_mohlat_anjam: Yup.string().test(
+      "tarikh_mohlat_anjam",
+      "required",
+      tarikh_mohlat_anjam_validation
+    ),
+    anjam_dahande_list: Yup.string().test(
+      "anjam_dahande_list",
+      "required",
+      anjam_dahande_validation,
+    ),
   });
 
   const initialValues = {
@@ -128,6 +160,7 @@ const AddActivityForm = () => {
     cultivations: selectedCultivation,
     noe_faaliat: noe_faaliat,
     vaziat: vaziat,
+    tarikh_mohlat_anjam: tarikh_mohlat_anjam,
     anjam_dahande_list: worker,
     yaddasht: yaddasht,
   };
@@ -137,26 +170,28 @@ const AddActivityForm = () => {
   };
 
   const onFormSubmit = (values) => {
-    if (tarikh_mohlat_anjam) {
+    // if (tarikh_mohlat_anjam ) {
       setLoading(true);
-      setClicked(true);
+      // setClicked(true);
       const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
         "YYYY-MM-DD"
       );
+
       const payload = {
         vaziat: values.vaziat,
         noe_faaliat: values.noe_faaliat,
         tarikh_mohlat_anjam: date,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
-        anjam_dahande_list: values.anjam_dahande_list,
-        yaddasht: values.yaddasht,
+        anjam_dahande_list: worker,
+        yaddasht: yaddasht,
       };
       dispatch(addActivity(payload));
-    } else {
-      setDateError(true);
-      // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    }
+    // } 
+    // else {
+    //   setDateError(true);
+    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
+    // }
   };
 
   useEffect(() => {
@@ -176,19 +211,19 @@ const AddActivityForm = () => {
             dispatch(addNahade(payload));
           });
         } else {
-          // if (file[0]) {
-          //     const formData = new FormData();
-          //     const guid = activity.response.guid
-          //     const image = file[0]
-          //
-          //     formData['guid'] = guid
-          //     formData['image'] = file[0]
-          //
-          //     dispatch(addActivityFile(formData))
-          // }
+          if (file[0]) {
+              const formData = new FormData();
+              const guid = activity.response.guid
+              const image = file[0]
+          
+              formData['guid'] = guid
+              formData['image'] = file[0]
+          
+              dispatch(addActivityFile(formData))
+          }
           setLoading(false);
           toast.success("فعالیت افزوده شد", { position: "top-center" });
-          setClicked(false);
+          // setClicked(false);
           setFile([]);
           dispatch(clearNahadeList());
           dispatch(clearActivity());
@@ -196,30 +231,30 @@ const AddActivityForm = () => {
         }
       }
     }
-  }, [activity.isDone]);
+  }, [activity?.isDone]);
 
   useEffect(() => {
-    if (!nahades.addNahadeLoading) {
+    if (!nahades?.addNahadeLoading) {
       setLoading(false);
-      if (nahades.nahades.length > 0) {
-        // if (file[0]) {
-        //     const formData = new FormData();
-        //     const guid = activity.response.guid
-        //     const image = file[0]
-        //
-        //     formData['guid'] = guid
-        //     formData['image'] = file[0]
-        //
-        //     dispatch(addActivityFile(formData))
-        // }
+      if (nahades?.nahades.length > 0) {
+        if (file[0]) {
+            const formData = new FormData();
+            const guid = activity.response.guid
+            const image = file[0]
+        
+            formData['guid'] = guid
+            formData['image'] = file[0]
+        
+            dispatch(addActivityFile(formData))
+        }
         setFile([]);
         dispatch(clearNahadeList());
         dispatch(clearActivity());
-        setClicked(false);
+        // setClicked(false);
         navigate("/activities");
       }
     }
-  }, [nahades.addNahadeLoading]);
+  }, [nahades?.addNahadeLoading]);
 
   if (!loading) {
     return (
@@ -229,6 +264,8 @@ const AddActivityForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
+            // dispatch(addActivity(values));
+            formikHelpers.resetForm();
           }}
         >
           {({ errors, touched }) => (
@@ -308,7 +345,7 @@ const AddActivityForm = () => {
                   onClick={(e) => setVaziat(e.target.value)}
                 >
                   <option value="" label="وضعیت *">
-                    وضعیت{" "}
+                    وضعیت
                   </option>
 
                   {vaziat_items?.map((item) => (
@@ -319,41 +356,32 @@ const AddActivityForm = () => {
                 </Field>
 
                 <div
+                  name="tarikh_mohlat_anjam"
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  style={
-                    dateError
-                      ? { border: "1px solid #f00", color: "red" }
-                      : { border: "none" }
-                  }
+                  // style={
+                  //   dateError
+                  //     ? { border: "1px solid #f00", color: "red" }
+                  //     : { border: "none" }
+                  // }
                   onClick={onCalendarHandler}
+                  style={
+                    errors.tarikh_mohlat_anjam && touched.tarikh_mohlat_anjam
+                      ? {
+                          border: "1px solid #f00",
+                          color: "red",
+                        }
+                      : { border: "none", color: "#212529" }
+                  }
                 >
                   {tarikh_mohlat_anjam ? (
                     <div>{tarikh_mohlat_anjam}</div>
                   ) : (
-                    <div className=" d-flex justify-content-between">
+                    <div className="d-flex justify-content-between">
                       <span>تاریخ مهلت انجام *</span>
                       <CalendarIcon fill={"gray"} />
                     </div>
                   )}
                 </div>
-
-                {/* <Field
-                  as="select"
-                  name="anjam_dahande_list"
-                  style={
-                    errors.anjam_dahande_list && touched.anjam_dahande_list
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_anjam_dahande_list(e.target.value)}
-                > */}
-                {/* <option value="" label="انجام دهنده ها *">
-                    انجام دهنده ها
-                  </option> */}
 
                 <Select
                   placeholder="انجام دهنده ها *"
@@ -361,14 +389,18 @@ const AddActivityForm = () => {
                   components={animatedComponents}
                   // defaultValue={[options[1], options[2]]}
                   isMulti
+                  isSearchable
                   options={options}
                   className="search-input col-md-5 mx-auto mt-4 p-0"
                   name="anjam_dahande_list"
                   onChange={workerOnchange}
                   // style={{border:"1px solid #f00 !important", color: "green !important", backgroundColor: "yellow !important"}}
+                  styles={
+                    errors.anjam_dahande_list && touched.anjam_dahande_list
+                      ? selectErrorStyle
+                      : ""
+                  }
                 />
-
-                {/* </Field> */}
 
                 <Field
                   as="select"
@@ -490,12 +522,9 @@ const AddActivityForm = () => {
 
                 <div className="d-flex justify-content-center mt-3">
                   <button
-                    disabled={clicked}
+                    // disabled={clicked}
                     type="submit"
                     className="btn-dark-blue mx-1 mt-4"
-                    onClick={() => {
-                      onFormSubmit(initialValues);
-                    }}
                   >
                     افزودن
                   </button>
@@ -523,13 +552,13 @@ const AddActivityForm = () => {
             timePicker={false}
             className="border-0 shadow-sm my-5"
             onChange={(value) => {
-              console.warn(value);
+              // console.warn(value);
               const month = value.jMonth() + 1;
               set_tarikh_mohlat_anjam(
                 value.jYear() + "-" + month + "-" + value.jDate()
               );
               setShowCalendar(false);
-              setDateError(false);
+              // setDateError(false);
             }}
           />
         </Modal>

@@ -153,11 +153,11 @@ export const CloseIcon = (props) => {
         <svg fill={props.fill} xmlns="http://www.w3.org/2000/svg" width="13.366" height="13.093" viewBox="0 0 13.366 13.093">
             <g id="close-5" transform="translate(2.121 2.121)">
                 <path id="Path_161" data-name="Path 161" d="M4995.451,5250.286l-9.124,8.851"
-                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" stroke-linecap="round"
-                      stroke-width="3"/>
+                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" strokeLinecap="round"
+                      strokeWidth="3"/>
                 <path id="Path_162" data-name="Path 162" d="M4986.327,5250.286l9.124,8.851"
-                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" stroke-linecap="round"
-                      stroke-width="3"/>
+                      transform="translate(-4986.327 -5250.286)" fill="none" stroke="#dc1f1f" strokeLinecap="round"
+                      strokeWidth="3"/>
             </g>
         </svg>
     );
@@ -355,7 +355,7 @@ export const InfoIcon = (props) => {
                 <g id="Group_26" data-name="Group 26" transform="translate(0 0)">
                     <g id="Group_392" data-name="Group 392">
                         <g id="Ellipse_31" data-name="Ellipse 31" transform="translate(3.075 3.7)" fill="none"
-                           stroke="#2c699a" stroke-width="2.4">
+                           stroke="#2c699a" strokeWidth="2.4">
                             <circle cx="14.5" cy="14.5" r="14.5" stroke="none"/>
                             <circle cx="14.5" cy="14.5" r="13.3" fill="none"/>
                         </g>
@@ -528,7 +528,7 @@ export const AcceptNotification = (props) => {
                     transform="translate(1327.398 122.249)"
                     fill="#16db93"
                     stroke="#16db93"
-                    stroke-width="1"
+                    strokeWidth="1"
                 />
                 <g
                     id="Ellipse_32"
@@ -536,7 +536,7 @@ export const AcceptNotification = (props) => {
                     transform="translate(1317.866 202.866)"
                     fill="none"
                     stroke="#16db93"
-                    stroke-width="2.4"
+                    strokeWidth="2.4"
                 >
                     <circle cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                     <circle cx="16.5" cy="16.5" r="15.3" fill="none"/>
@@ -563,7 +563,7 @@ export const WarningNotification = (props) => {
                             transform="translate(3.075 3.7)"
                             fill="none"
                             stroke="#2c699a"
-                            stroke-width="2.4"
+                            strokeWidth="2.4"
                         >
                             <circle cx="14.5" cy="14.5" r="14.5" stroke="none"/>
                             <circle cx="14.5" cy="14.5" r="13.3" fill="none"/>
@@ -741,9 +741,9 @@ export const ArrowDownIcon = (props) => {
                     transform="translate(614.691 782.199)"
                     fill="none"
                     stroke="#2c699a"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_346"
@@ -752,9 +752,9 @@ export const ArrowDownIcon = (props) => {
                     transform="translate(614.691 788.973)"
                     fill="none"
                     stroke="#2c699a"
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
             </g>
         </svg>

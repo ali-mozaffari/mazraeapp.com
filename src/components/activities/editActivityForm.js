@@ -29,12 +29,21 @@ import moment from "moment-jalaali";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
-import { CompressOutlined } from "@mui/icons-material";
+import { CompressOutlined, InsertEmoticonOutlined } from "@mui/icons-material";
 import "./activity.css";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 const animatedComponents = makeAnimated();
+
+const selectErrorStyle = {
+  control: styles => ({
+    ...styles,
+    border: '1px solid #f00 !important',
+    color: 'red !important',
+    borderRadius: '12px !important',
+  })
+}
 
 const EditActivityForm = () => {
   const { id } = useParams();
@@ -66,22 +75,6 @@ const EditActivityForm = () => {
   const [yaddasht, setYaddasht] = useState();
   const [tarikh_mohlat_anjam, set_tarikh_mohlat_anjam] = useState();
 
-
-  const [anjam_dahande_list, set_anjam_dahande_list] = useState(
-    // existingActivity[0]?.anjam_dahande[0]?.id
-    // existingActivity[0].anjam_dahande_list.map((item)=>item.id)
-  );
-  
-  const existingWorker = existingActivity[0];
-  
-  console.log(existingWorker)
-  let workerList = "";
-  existingWorker.anjam_dahande.map((item) => {
-    workerList = workerList + item.id;
-  });
-  console.log(workerList)
-
-
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
@@ -94,10 +87,15 @@ const EditActivityForm = () => {
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
 
+  let workerList = "";
+  existingActivity[0]?.anjam_dahande?.map((item, i, arr) => {
+    workerList = workerList + item.id + (i != arr.length - 1 ? ", " : "");
+  });
+  const [anjam_dahande_list, set_anjam_dahande_list] = useState();
+  console.log(workerList)
+
   const accessList = useSelector((state) => state.accessList);
-  const [worker, setWorker] = useState();
-  // console.log(worker)
-  
+  const [worker, setWorker] = useState(workerList);
  
   const PermissionNameFarsi = (type) => {
     switch (type) {
@@ -111,17 +109,28 @@ const EditActivityForm = () => {
         return "";
     }
   };
-  let options = accessList.data.map((item) => {
-    return { value: item.worker.id, label: item.worker.name + " - " + PermissionNameFarsi(item.permission_type) };
+  let options = accessList?.data?.map((item) => {
+    return { value: item?.worker?.id, label: item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type) };
   });
-  // console.log(options)
+
+  // let workerId = options?.map((item)=> item.value)
+  let workerArray = existingActivity[0]?.anjam_dahande?.map((item) => item.id);
+
+  // let filterSelectWorker = options.filter(( {value} ) => !workerArray.includes(value));
+
+  let index = [];
+  index = workerArray.map(n => {
+  return options.map(i => i.value).indexOf(n);
+  })
+
+
   const workerOnchange = (val) => {
     // console.log(val)
     let list = "";
     val.map((item, i, arr) => {
       list = list + item.value + (i != arr.length - 1 ? "," : "");
     });
-    console.log(list);
+    // console.log(list);
     setWorker(list);
   };
 
@@ -155,11 +164,23 @@ const EditActivityForm = () => {
     setShowNahadeModal(!showNahadeModal);
   };
 
+  let anjam_dahande_validation = () => {
+    if (!worker) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const validation = Yup.object().shape({
     cultivations: Yup.string().required(true),
     noe_faaliat: Yup.string().required(true),
     vaziat: Yup.string().required(true),
-    anjam_dahande_list: Yup.string().required(true),
+    anjam_dahande_list: Yup.string().test(
+      "anjam_dahande_list",
+      "required",
+      anjam_dahande_validation
+    ),
   });
 
   const initialValues = {
@@ -167,7 +188,7 @@ const EditActivityForm = () => {
     cultivations: selectedCultivation,
     noe_faaliat: noe_faaliat,
     vaziat: vaziat,
-    anjam_dahande_list: anjam_dahande_list,
+    anjam_dahande_list: worker,
     yaddasht: yaddasht,
   };
 
@@ -183,7 +204,7 @@ const EditActivityForm = () => {
   };
 
   const onFormSubmit = (values) => {
-    if (tarikh_mohlat_anjam) {
+    // if (tarikh_mohlat_anjam) {
       setLoading(true);
       setClicked(true);
 
@@ -194,15 +215,15 @@ const EditActivityForm = () => {
         tarikh_mohlat_anjam: tarikh_mohlat_anjam,
         abzar_id: values.abzar_id,
         cultivations: values.cultivations,
-        anjam_dahande_list: values.anjam_dahande_list,
+        anjam_dahande_list: worker,
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
       if (activityEdit?.isDone) navigate("/activities");
-    } else {
-      setDateError(true);
-      // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    }
+    // } else {
+    //   setDateError(true);
+    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
+    // }
   };
 
   useEffect(() => {
@@ -365,15 +386,14 @@ const EditActivityForm = () => {
                   placeholder="انجام دهنده ها *"
                   closeMenuOnSelect={false}
                   components={animatedComponents}
-                  // defaultValue={options.map((item)=>[options[item.workerList]])}
-                  defaultValue={[options[workerList]]}
+                  defaultValue={index.map(i=> options[i])}
                   // defaultValue={[options[0],options[1],options[2]]}
                   isMulti
                   options={options}
                   className="search-input col-md-5 mx-auto mt-4 p-0"
                   name="anjam_dahande_list"
                   onChange={workerOnchange}
-                  style={{border:"1px solid #f00 !important", color: "green !important", backgroundColor: "yellow !important"}}
+                  styles={(errors.anjam_dahande_list && touched.anjam_dahande_list)? selectErrorStyle : ""}
                 />
 
 

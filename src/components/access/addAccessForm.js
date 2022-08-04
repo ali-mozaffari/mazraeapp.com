@@ -87,7 +87,7 @@ const AddAccessForm = () => {
   console.log(permissionType);
 
   const access = useSelector((state) => state.addAccess);
-  const [clicked, setClicked] = useState(false);
+  // const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   let permissionValidation = () => {
@@ -118,7 +118,7 @@ const AddAccessForm = () => {
 
   const onFormSubmit = (values) => {
     setLoading(true);
-    setClicked(true);
+    // setClicked(true);
 
     const payload = {
       permission_type: permissionType,
@@ -134,7 +134,7 @@ const AddAccessForm = () => {
       if (access?.response?.url) {
         setLoading(false);
         toast.success("دسترسی افزوده شد", { position: "top-center" });
-        setClicked(false);
+        // setClicked(false);
         dispatch(clearAccess());
         navigate("/access");
       }
@@ -149,7 +149,6 @@ const AddAccessForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
-            setLoading(true);
             formikHelpers.resetForm();
           }}
         >
