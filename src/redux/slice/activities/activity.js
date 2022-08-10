@@ -9,7 +9,7 @@ export const addActivity = createAsyncThunk(
     async (payload, {rejectWithValue, getState, dispatch}) => {
         try {
             // const {data} = await axios.post("/api/v2/farm/activity", JSON.stringify(payload), {
-            const {data} = await axios.patch("/api/v2/farm/activity", payload, {
+            const {data} = await axios.post("/api/v2/farm/activity", payload, {
                 headers: {
                     'Authorization': token,
                     // 'Content-Type': 'application/json'

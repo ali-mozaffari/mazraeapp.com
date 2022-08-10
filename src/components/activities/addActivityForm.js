@@ -197,19 +197,11 @@ const AddActivityForm = () => {
     formData.append("cultivations", values.cultivations);
     formData.append("anjam_dahande_list", worker);
     formData.append("yaddasht", yaddasht);
-    formData.append("file", file[0]);
+    formData.append("image", file[0]);
 
     console.log(file[0]);
     dispatch(addActivity(formData));
-    
-    // }
-    // else {
-    //   setDateError(true);
-    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    // }
-  };
 
-  useEffect(() => {
     if (activity?.isDone) {
       if (activity?.response?.guid) {
         if (nahades?.nahades?.length > 0) {
@@ -248,33 +240,80 @@ const AddActivityForm = () => {
         }
       }
     }
-  }, [activity?.isDone]);
+    
+    // }
+    // else {
+    //   setDateError(true);
+    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
+    // }
+  };
 
-  useEffect(() => {
-    if (!nahades?.addNahadeLoading) {
-      setLoading(false);
-      if (nahades?.nahades.length > 0) {
-        // if (file[0]) {
-        //     const formData = new FormData();
-        //     const guid = activity.response.guid
-        //     const image = file[0]
-        //     console.log(formData.append('file',file))
+  // useEffect(() => {
+  //   if (activity?.isDone) {
+  //     if (activity?.response?.guid) {
+  //       if (nahades?.nahades?.length > 0) {
+  //         nahades?.nahades?.map((item) => {
+  //           const payload = {
+  //             "activity-guid": activity.response.guid,
+  //             "nahade-item-guid": item.nahade_item_guid,
+  //             name_nahade: item.name_nahade,
+  //             meghdar: item.meghdar,
+  //             hazine_nahade: item.hazine_nahade,
+  //             vahede_meghdar: item.vahede_meghdar,
+  //             vahede_masahat: item.vahede_masahat,
+  //           };
+  //           dispatch(addNahade(payload));
+  //         });
+  //       } else {
+  //         // if (file[0]) {
+  //         //     const formData = new FormData();
+  //         //     const guid = activity.response.guid
+  //         //     const image = file[0]
 
-        //     formData['guid'] = guid
-        //     formData['image'] = file[0]
-        //     // formData.append('file', file);
+  //         //     formData['guid'] = guid
+  //         //     formData['image'] = file[0]
+  //         //     formData.append('file', file);
+  //         //     console.log(formData.append('file',file))
 
-        //     // dispatch(addActivityFile(formData))
-        // }
-        setFile([]);
-        dispatch(clearNahadeList());
-        dispatch(clearActivity());
-        setClicked(false);
-        toast.success("فعالیت افزوده شد", { position: "top-center" });
-        navigate("/activities");
-      }
-    }
-  }, [nahades?.addNahadeLoading]);
+  //         //     // dispatch(addActivityFile(formData))
+  //         // }
+  //         setLoading(false);
+  //         toast.success("فعالیت افزوده شد", { position: "top-center" });
+  //         setClicked(false);
+  //         setFile([]);
+  //         dispatch(clearNahadeList());
+  //         dispatch(clearActivity());
+  //         navigate("/activities");
+  //       }
+  //     }
+  //   }
+  // }, [activity?.isDone]);
+
+  // useEffect(() => {
+  //   if (!nahades?.addNahadeLoading) {
+  //     setLoading(false);
+  //     if (nahades?.nahades.length > 0) {
+  //       // if (file[0]) {
+  //       //     const formData = new FormData();
+  //       //     const guid = activity.response.guid
+  //       //     const image = file[0]
+  //       //     console.log(formData.append('file',file))
+
+  //       //     formData['guid'] = guid
+  //       //     formData['image'] = file[0]
+  //       //     // formData.append('file', file);
+
+  //       //     // dispatch(addActivityFile(formData))
+  //       // }
+  //       setFile([]);
+  //       dispatch(clearNahadeList());
+  //       dispatch(clearActivity());
+  //       setClicked(false);
+  //       toast.success("فعالیت افزوده شد", { position: "top-center" });
+  //       navigate("/activities");
+  //     }
+  //   }
+  // }, [nahades?.addNahadeLoading]);
 
   if (!loading) {
     return (

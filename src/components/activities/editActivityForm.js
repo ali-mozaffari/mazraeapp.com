@@ -39,13 +39,13 @@ import { current } from "@reduxjs/toolkit";
 const animatedComponents = makeAnimated();
 
 const selectErrorStyle = {
-  control: styles => ({
+  control: (styles) => ({
     ...styles,
-    border: '1px solid #f00 !important',
-    color: 'red !important',
-    borderRadius: '12px !important',
-  })
-}
+    border: "1px solid #f00 !important",
+    color: "red !important",
+    borderRadius: "12px !important",
+  }),
+};
 
 const EditActivityForm = () => {
   const { id } = useParams();
@@ -88,7 +88,9 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
-  const [existingNahade, setExistingNahade] = useState(existingActivity[0]?.nahades);
+  const [existingNahade, setExistingNahade] = useState(
+    existingActivity[0]?.nahades
+  );
   const [deletedNahade, setDeletedNahade] = useState([]);
 
   let workerList = "";
@@ -100,7 +102,7 @@ const EditActivityForm = () => {
 
   const accessList = useSelector((state) => state.accessList);
   const [worker, setWorker] = useState(workerList);
- 
+
   const PermissionNameFarsi = (type) => {
     switch (type) {
       case "manager":
@@ -114,7 +116,11 @@ const EditActivityForm = () => {
     }
   };
   let options = accessList?.data?.map((item) => {
-    return { value: item?.worker?.id, label: item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type) };
+    return {
+      value: item?.worker?.id,
+      label:
+        item?.worker?.name + " - " + PermissionNameFarsi(item?.permission_type),
+    };
   });
 
   // let workerId = options?.map((item)=> item.value)
@@ -123,10 +129,9 @@ const EditActivityForm = () => {
   // let filterSelectWorker = options.filter(( {value} ) => !workerArray.includes(value));
 
   let index = [];
-  index = workerArray.map(n => {
-  return options.map(i => i.value).indexOf(n);
-  })
-
+  index = workerArray.map((n) => {
+    return options.map((i) => i.value).indexOf(n);
+  });
 
   const workerOnchange = (val) => {
     // console.log(val)
@@ -137,7 +142,6 @@ const EditActivityForm = () => {
     // console.log(list);
     setWorker(list);
   };
-
 
   useEffect(() => {
     set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
@@ -201,41 +205,31 @@ const EditActivityForm = () => {
   };
 
   const deleteNahadeAPI = (id) => {
-    setExistingNahade(existingNahade?.filter(i=>i.guid !== id));
-    setDeletedNahade(current => [...current, id])
+    setExistingNahade(existingNahade?.filter((i) => i.guid !== id));
+    setDeletedNahade((current) => [...current, id]);
   };
 
   const onFormSubmit = (values) => {
     // if (tarikh_mohlat_anjam) {
-      setLoading(true);
-      setClicked(true);
+    setLoading(true);
+    setClicked(true);
 
-      const payload = {
-        guid: existingActivity[0]?.guid,
-        vaziat: values.vaziat,
-        noe_faaliat: values.noe_faaliat,
-        tarikh_mohlat_anjam: tarikh_mohlat_anjam,
-        abzar_id: values.abzar_id,
-        cultivations: values.cultivations,
-        anjam_dahande_list: worker,
-        yaddasht: yaddasht,
-      };
-      dispatch(editActivity(payload));
-      deletedNahade?.map(id =>
-        // console.log(id)
-        dispatch(deleteNahadeEditActivity(id)) 
-        )
-      
-      if (activityEdit?.isDone)
-      toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
-      navigate("/activities");
-    // } else {
-    //   setDateError(true);
-    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    // }
-  };
+    const payload = {
+      guid: existingActivity[0]?.guid,
+      vaziat: values.vaziat,
+      noe_faaliat: values.noe_faaliat,
+      tarikh_mohlat_anjam: tarikh_mohlat_anjam,
+      abzar_id: values.abzar_id,
+      cultivations: values.cultivations,
+      anjam_dahande_list: worker,
+      yaddasht: yaddasht,
+    };
+    dispatch(editActivity(payload));
+    deletedNahade?.map((id) =>
+      // console.log(id)
+      dispatch(deleteNahadeEditActivity(id))
+    );
 
-  useEffect(() => {
     if (activityEdit?.isDone) {
       if (activityEdit?.response?.guid) {
         nahades?.nahades?.map((item) => {
@@ -250,12 +244,41 @@ const EditActivityForm = () => {
           };
           dispatch(addNahade(payload));
           dispatch(clearNahadeList());
-          dispatch(clearActivity());
           setClicked(false);
         });
       }
+
+      dispatch(clearActivity());
+      toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+      navigate("/activities");
     }
-  }, [activityEdit.isDone]);
+
+    // } else {
+    //   setDateError(true);
+    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
+    // }
+  };
+
+  // useEffect(() => {
+  //   if (activityEdit?.isDone) {
+  //     if (activityEdit?.response?.guid) {
+  //       nahades?.nahades?.map((item) => {
+  //         const payload = {
+  //           "activity-guid": activityEdit.response.guid,
+  //           "nahade-item-guid": item.nahade_item_guid,
+  //           name_nahade: item.name_nahade,
+  //           meghdar: item.meghdar,
+  //           hazine_nahade: item.hazine_nahade,
+  //           vahede_meghdar: item.vahede_meghdar,
+  //           vahede_masahat: item.vahede_masahat,
+  //         };
+  //         dispatch(addNahade(payload));
+  //         dispatch(clearNahadeList());
+  //         setClicked(false);
+  //       });
+  //     }
+  //   }
+  // }, [activityEdit.isDone]);
 
   // useEffect(() => {
   //   if (!nahades.addNahadeLoading) {
@@ -395,28 +418,30 @@ const EditActivityForm = () => {
                   )}
                 </div>
 
-
                 <Select
                   placeholder="انجام دهنده ها *"
                   closeMenuOnSelect={false}
                   components={animatedComponents}
-                  defaultValue={index.map(i=> options[i])}
+                  defaultValue={index.map((i) => options[i])}
                   // defaultValue={[options[0],options[1],options[2]]}
                   isMulti
                   options={options}
                   className="search-input col-md-5 mx-auto mt-4 p-0"
                   name="anjam_dahande_list"
                   onChange={workerOnchange}
-                  styles={(errors.anjam_dahande_list && touched.anjam_dahande_list)? selectErrorStyle : ""}
+                  styles={
+                    errors.anjam_dahande_list && touched.anjam_dahande_list
+                      ? selectErrorStyle
+                      : ""
+                  }
                 />
-
 
                 <Field
                   as="select"
                   name="abzar_id"
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
-                  style={{height: "71px"}}
+                  style={{ height: "71px" }}
                 >
                   {tools?.data?.map((item) => (
                     <option key={item.id} value={item.id} label={item.title}>
@@ -469,8 +494,8 @@ const EditActivityForm = () => {
                 {/* --------- Existing Nahade from Database ----------- */}
 
                 {/* {deletedNahade === "" ? */}
-                {existingActivity[0]?.nahades?.length > 0 ?
-                  existingNahade?.map((item) => (
+                {existingActivity[0]?.nahades?.length > 0
+                  ? existingNahade?.map((item) => (
                       <div
                         key={item.guid}
                         className={
@@ -494,8 +519,7 @@ const EditActivityForm = () => {
                         </div>
                       </div>
                     ))
-                : null
-                }
+                  : null}
 
                 <hr style={{ backgroundColor: "transparent" }} />
                 <Field
