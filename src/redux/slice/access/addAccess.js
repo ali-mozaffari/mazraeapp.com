@@ -43,6 +43,8 @@ const acceccSlice = createSlice({
     },
     [addAccess.fulfilled]: (state, action) => {
       state.response = action.payload;
+      // console.log(state.response)
+      // console.log(action.payload)
       state.isDone = true;
       state.loading = false;
     },

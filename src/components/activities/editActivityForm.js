@@ -15,10 +15,11 @@ import { getToolsList } from "../../redux/slice/activities/toolsList";
 import AddNahadeModal from "./modals/addNahadeModal";
 import {
   addNahade,
-  // clearNahadeList,
-  deleteEditNahade,
+  clearNahadeList,
+  // deleteEditNahade,
   deleteNahade,
   deleteNahadeEditActivity,
+  getActivitiesNahade,
 } from "../../redux/slice/activities/nahade";
 import {
   editActivity,
@@ -34,6 +35,7 @@ import "./activity.css";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import { current } from "@reduxjs/toolkit";
 const animatedComponents = makeAnimated();
 
 const selectErrorStyle = {
@@ -86,13 +88,15 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
+  const [existingNahade, setExistingNahade] = useState(existingActivity[0]?.nahades);
+  const [deletedNahade, setDeletedNahade] = useState([]);
 
   let workerList = "";
   existingActivity[0]?.anjam_dahande?.map((item, i, arr) => {
     workerList = workerList + item.id + (i != arr.length - 1 ? ", " : "");
   });
-  const [anjam_dahande_list, set_anjam_dahande_list] = useState();
-  console.log(workerList)
+  // const [anjam_dahande_list, set_anjam_dahande_list] = useState();
+  // console.log(workerList)
 
   const accessList = useSelector((state) => state.accessList);
   const [worker, setWorker] = useState(workerList);
@@ -196,11 +200,9 @@ const EditActivityForm = () => {
     dispatch(deleteNahade(item));
   };
 
-  const deleteNahadeAPI = (guid) => {
-    dispatch(deleteNahadeEditActivity(guid));
-    if (nahades.isDeleted) {
-      dispatch(deleteEditNahade(guid));
-    }
+  const deleteNahadeAPI = (id) => {
+    setExistingNahade(existingNahade?.filter(i=>i.guid !== id));
+    setDeletedNahade(current => [...current, id])
   };
 
   const onFormSubmit = (values) => {
@@ -219,7 +221,14 @@ const EditActivityForm = () => {
         yaddasht: yaddasht,
       };
       dispatch(editActivity(payload));
-      if (activityEdit?.isDone) navigate("/activities");
+      deletedNahade?.map(id =>
+        // console.log(id)
+        dispatch(deleteNahadeEditActivity(id)) 
+        )
+      
+      if (activityEdit?.isDone)
+      toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+      navigate("/activities");
     // } else {
     //   setDateError(true);
     //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
@@ -240,33 +249,37 @@ const EditActivityForm = () => {
             vahede_masahat: item.vahede_masahat,
           };
           dispatch(addNahade(payload));
+          dispatch(clearNahadeList());
+          dispatch(clearActivity());
+          setClicked(false);
         });
       }
     }
   }, [activityEdit.isDone]);
 
-  useEffect(() => {
-    if (!nahades.addNahadeLoading) {
-      setLoading(false);
-      if (nahades.nahades.length > 0) {
-        // if (file[0]) {
-        //     const formData = new FormData();
-        //     const guid = activity.response.guid
-        //     const image = file[0]
-        //
-        //     formData['guid'] = guid
-        //     formData['image'] = file[0]
-        //
-        //     dispatch(addActivityFile(formData))
-        // }
-        setFile([]);
-        // dispatch(clearNahadeList());
-        dispatch(clearActivity());
-        setClicked(false);
-        navigate("/activities");
-      }
-    }
-  }, [nahades.addNahadeLoading]);
+  // useEffect(() => {
+  //   if (!nahades.addNahadeLoading) {
+  //     setLoading(false);
+  //     if (nahades.nahades.length > 0) {
+  //       // if (file[0]) {
+  //       //     const formData = new FormData();
+  //       //     const guid = activity.response.guid
+  //       //     const image = file[0]
+  //       //
+  //       //     formData['guid'] = guid
+  //       //     formData['image'] = file[0]
+  //       //
+  //       //     dispatch(addActivityFile(formData))
+  //       // }
+  //       setFile([]);
+  //       dispatch(clearNahadeList());
+  //       dispatch(clearActivity());
+  //       setClicked(false);
+  //       toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+  //       navigate("/activities");
+  //     }
+  //   }
+  // }, [nahades.addNahadeLoading]);
 
   if (!loading) {
     return (
@@ -276,6 +289,7 @@ const EditActivityForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
+            formikHelpers.resetForm();
           }}
         >
           {({ errors, touched }) => (
@@ -402,6 +416,7 @@ const EditActivityForm = () => {
                   name="abzar_id"
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
+                  style={{height: "71px"}}
                 >
                   {tools?.data?.map((item) => (
                     <option key={item.id} value={item.id} label={item.title}>
@@ -453,8 +468,9 @@ const EditActivityForm = () => {
 
                 {/* --------- Existing Nahade from Database ----------- */}
 
-                {existingActivity[0]?.nahades?.length > 0
-                  ? existingActivity[0]?.nahades?.map((item) => (
+                {/* {deletedNahade === "" ? */}
+                {existingActivity[0]?.nahades?.length > 0 ?
+                  existingNahade?.map((item) => (
                       <div
                         key={item.guid}
                         className={
@@ -478,7 +494,8 @@ const EditActivityForm = () => {
                         </div>
                       </div>
                     ))
-                  : null}
+                : null
+                }
 
                 <hr style={{ backgroundColor: "transparent" }} />
                 <Field

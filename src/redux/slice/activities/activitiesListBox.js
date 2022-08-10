@@ -22,6 +22,30 @@ export const getActivitiesList = createAsyncThunk(
   }
 );
 
+export const copyActivityList = createAsyncThunk(
+  "activitiesList/copyActivityList",
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch(
+        "/api/v2/farm/activity",
+        {
+          guid: id,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      // console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.data.results);
+    }
+  }
+);
+
 export const deleteActivityList = createAsyncThunk(
   "farmlist/deleteActivityList",
   async (id, { rejectWithValue }) => {
@@ -35,7 +59,7 @@ export const deleteActivityList = createAsyncThunk(
         },
       });
       // console.log(data);
-      return data, id;
+      return data;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.data.results);
@@ -69,6 +93,19 @@ const activitiesListBoxSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    [copyActivityList.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [copyActivityList.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      console.log(state.data)
+      console.log(action.payload)
+      state.loading = false;
+    },
+    [copyActivityList.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     [deleteActivityList.pending]: (state, action) => {
       state.loading = true;
       state.isDone = false;
@@ -77,8 +114,10 @@ const activitiesListBoxSlice = createSlice({
       state.loading = false;
       // console.log(action.payload)
       state.response = action.payload;
-      state.data = state.data.details.filter(({guid}) => guid !== action.payload);
-      console.log(state.data);
+      state.data = state.data.details.filter(
+        ({ guid }) => guid !== action.payload
+      );
+      // console.log(state.data);
       state.isDone = true;
     },
 

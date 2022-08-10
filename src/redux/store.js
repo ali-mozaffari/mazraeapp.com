@@ -14,6 +14,7 @@ import activityEditReducer from './slice/activities/editActivity';
 import accessListBoxReducer from './slice/access/accessListBox';
 import accessReducer from './slice/access/addAccess';
 import accessEditRducer from './slice/access/editAccess';
+import nahadeReducer from './slice/activities/nahade';
 
 const persistConfig = {
     key: 'root',
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     activity: activityReducer,
     nahade: nahadeToolsReducer,
     activityEdit: activityEditReducer,
+    nahades: nahadeReducer,
     accessList: accessListBoxReducer,
     addAccess: accessReducer,
     accessEdit: accessEditRducer,

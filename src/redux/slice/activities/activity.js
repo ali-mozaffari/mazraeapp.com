@@ -8,35 +8,16 @@ export const addActivity = createAsyncThunk(
     "activity/addActivity",
     async (payload, {rejectWithValue, getState, dispatch}) => {
         try {
-            const {data} = await axios.post("/api/v2/farm/activity", JSON.stringify(payload), {
+            // const {data} = await axios.post("/api/v2/farm/activity", JSON.stringify(payload), {
+            const {data} = await axios.patch("/api/v2/farm/activity", payload, {
                 headers: {
                     'Authorization': token,
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.error(data)
-            return data;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error.data.results);
-        }
-    }
-);
-
-
-export const addActivityFile = createAsyncThunk(
-    "activity/addActivityFile",
-    async (payload, {rejectWithValue, getState, dispatch}) => {
-        try {
-
-            console.warn(payload)
-            const {data} = await axios.patch("/api/v2/farm/activity", {data: payload}, {
-                headers: {
-                    'Authorization': token,
+                    // 'Content-Type': 'application/json'
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            console.error(data)
+            // console.error(data)
+            // console.log(data)
             return data;
         } catch (error) {
             console.log(error);
@@ -44,6 +25,28 @@ export const addActivityFile = createAsyncThunk(
         }
     }
 );
+
+
+// export const addActivityFile = createAsyncThunk(
+//     "activity/addActivityFile",
+//     async (payload, {rejectWithValue, getState, dispatch}) => {
+//         try {
+
+//             console.warn(payload)
+//             const {data} = await axios.post("/api/v2/farm/activity", {data: payload}, {
+//                 headers: {
+//                     'Authorization': token,
+//                     'Content-Type': 'multipart/form-data'
+//                 }
+//             });
+//             console.error(data)
+//             return data;
+//         } catch (error) {
+//             console.log(error);
+//             return rejectWithValue(error.data.results);
+//         }
+//     }
+// );
 export const clearActivity = createAction('activity/clearActivity')
 
 const activity = createSlice({
@@ -69,16 +72,16 @@ const activity = createSlice({
         },
 
 
-        [addActivityFile.pending]: (state, action) => {
-            state.fileLoading = true;
-        },
-        [addActivityFile.fulfilled]: (state, action) => {
-            state.fileLoading = false;
-        },
-        [addActivityFile.rejected]: (state, action) => {
-            state.fileLoading = false;
-            state.error = action.payload;
-        },
+        // [addActivityFile.pending]: (state, action) => {
+        //     state.fileLoading = true;
+        // },
+        // [addActivityFile.fulfilled]: (state, action) => {
+        //     state.fileLoading = false;
+        // },
+        // [addActivityFile.rejected]: (state, action) => {
+        //     state.fileLoading = false;
+        //     state.error = action.payload;
+        // },
     },
 });
 

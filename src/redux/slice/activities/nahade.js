@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../../services/config";
 import { clearFarm } from "../farm/addFarm";
 import { token } from "../../../services/token";
+import { Co2Sharp } from "@mui/icons-material";
 // import { guid } from "rsuite/esm/utils";
 
 export const getNahadeItemsList = createAsyncThunk(
@@ -46,7 +47,7 @@ export const addNahade = createAsyncThunk(
   }
 );
 
-/* -------Delete Nahade from Edit Activity------ */
+/* -------Delete Nahade from Edit Activity Database------ */
 export const deleteNahadeEditActivity = createAsyncThunk(
   "nahade/deleteNahadeEditActivity",
   async (id, { rejectWithValue }) => {
@@ -69,7 +70,7 @@ export const deleteNahadeEditActivity = createAsyncThunk(
 
 export const addNahadeToList = createAction("nahade/addNahadeToList");
 export const deleteNahade = createAction("nahade/deleteNahade");
-export const deleteEditNahade = createAction("nahade/deleteEditNahade");
+// export const deleteEditNahade = createAction("nahade/deleteEditNahade");
 export const clearNahadeList = createAction("nahade/clearNahadeList");
 
 const nahade = createSlice({
@@ -84,11 +85,13 @@ const nahade = createSlice({
         (element) => element.id !== action.payload
       );
     },
-    [deleteEditNahade]: (state, action) => {
-      state.nahades = state.nahades.filter(
-        (item) => {return item.guid !== action.payload}
-      );
-    },
+    // [deleteEditNahade]: (state, action) => {
+    //   console.log(action.payload)
+    //   console.log(state.nahades)
+    //   state.nahades = state.nahades.filter(
+    //     (item) => item.guid !== action.payload
+    //   );
+    // },
     [clearNahadeList]: (state, action) => {
       state.nahades = [];
     },
@@ -122,8 +125,6 @@ const nahade = createSlice({
       state.postList = action.payload;
       state.loading = false;
       state.isDeleted = true;
-    //   state.nahades = state.nahades.filter((element) => element.guid !== action.payload)
-    // data.nahade.filter((element)=>element.guid !== id)
     },
     [deleteNahadeEditActivity.rejected]: (state, action) => {
       state.loading = false;

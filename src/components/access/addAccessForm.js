@@ -287,7 +287,7 @@ const AddAccessForm = () => {
                   <Box sx={{ width: { xs: "100%", sm: "45%" } }}>
                     <Field
                       name="phone"
-                      type="text"
+                      type="number"
                       autoComplete="off"
                       className="search-input w-100 mt-4 pl-5 py-3"
                       placeholder="شماره تماس"

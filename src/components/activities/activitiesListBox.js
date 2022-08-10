@@ -15,7 +15,8 @@ import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { noe_faaliat_items, vaziat_items } from "../../assets/strings/strings";
 import Loading from "../loading/loading";
 
-import { deleteActivityList } from "../../redux/slice/activities/activitiesListBox";
+import { copyActivityList } from "../../redux/slice/activities/activitiesListBox";
+// import { deleteActivityList } from "../../redux/slice/activities/activitiesListBox";
 
 const options = [
   "علامت گذاری به عنوان انجام شده",
@@ -34,6 +35,13 @@ const ActivitiesListBox = () => {
 
   const activitiesList = useSelector((state) => state.activitiesList);
   const { data, loading } = activitiesList;
+
+  // Handle the Copy activity Button
+  const handleCopy = (id) => {
+    dispatch(copyActivityList(id));
+    toast.success("یک کپی فعالیت به لیست اضافه شد");
+    dispatch(getActivitiesList());
+  };
 
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -211,10 +219,9 @@ const ActivitiesListBox = () => {
 
                   <Tooltip title="کپی کردن فعالیت">
                     <div
-                      // activityId={item.guid}
                       style={{ width: "35px", height: "35px" }}
                       className="btn tableToolIconBgGray d-flex align-items-center justify-content-center"
-                      // onClick={() => navigate(`/edit-activity/${item?.guid}`)}
+                      onClick={() => handleCopy(item?.guid)}
                     >
                       <img
                         src={copyIcon}

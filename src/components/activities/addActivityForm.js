@@ -20,7 +20,7 @@ import {
 } from "../../redux/slice/activities/nahade";
 import {
   addActivity,
-  addActivityFile,
+  // addActivityFile,
   clearActivity,
 } from "../../redux/slice/activities/activity";
 import moment from "moment-jalaali";
@@ -62,11 +62,12 @@ const AddActivityForm = () => {
   const dispatch = useDispatch();
   const tools = useSelector((state) => state.tools);
   const activity = useSelector((state) => state.activity);
-  // const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState([]);
+  // const [file, setFile] = useState([]);
+  const [file, setFile] = useState("");
   const hiddenFileInput = React.useRef(null);
-
+  // console.log(file[0])
   const accessList = useSelector((state) => state.accessList);
   const [worker, setWorker] = useState("");
   // console.log(worker);
@@ -84,7 +85,7 @@ const AddActivityForm = () => {
     }
   };
 
-  let options = accessList.data.map((item) => {
+  let options = accessList?.data?.map((item) => {
     return {
       value: item.worker.id,
       label:
@@ -94,21 +95,11 @@ const AddActivityForm = () => {
 
   const workerOnchange = (val) => {
     let list = "";
-    val.map((item, i, arr) => {
+    val?.map((item, i, arr) => {
       list = list + item.value + (i != arr.length - 1 ? "," : "");
     });
     setWorker(list);
   };
-
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
-  };
-
-  const handleChange = (event) => {
-    const fileUploaded = event.target.files[0];
-    setFile([fileUploaded]);
-  };
-  console.log(file)
 
   useEffect(() => {
     dispatch(getToolsList());
@@ -123,6 +114,10 @@ const AddActivityForm = () => {
     setShowNahadeModal(!showNahadeModal);
   };
 
+  const handleClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
   let tarikh_mohlat_anjam_validation = () => {
     if (!tarikh_mohlat_anjam) {
       return false;
@@ -130,7 +125,7 @@ const AddActivityForm = () => {
       return true;
     }
   };
-  
+
   let anjam_dahande_validation = () => {
     if (!worker) {
       return false;
@@ -151,7 +146,7 @@ const AddActivityForm = () => {
     anjam_dahande_list: Yup.string().test(
       "anjam_dahande_list",
       "required",
-      anjam_dahande_validation,
+      anjam_dahande_validation
     ),
   });
 
@@ -163,31 +158,51 @@ const AddActivityForm = () => {
     tarikh_mohlat_anjam: tarikh_mohlat_anjam,
     anjam_dahande_list: worker,
     yaddasht: yaddasht,
+    file: file[0],
   };
 
   const clearNahade = (item) => {
     dispatch(deleteNahade(item));
   };
 
+  // const formData = new FormData();
+  // formData.append("File", file[0]);
+  // console.log(file);
+  // console.log(formData);
+
   const onFormSubmit = (values) => {
     // if (tarikh_mohlat_anjam ) {
-      setLoading(true);
-      // setClicked(true);
-      const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
-        "YYYY-MM-DD"
-      );
+    setLoading(true);
+    setClicked(true);
+    const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
+      "YYYY-MM-DD"
+    );
 
-      const payload = {
-        vaziat: values.vaziat,
-        noe_faaliat: values.noe_faaliat,
-        tarikh_mohlat_anjam: date,
-        abzar_id: values.abzar_id,
-        cultivations: values.cultivations,
-        anjam_dahande_list: worker,
-        yaddasht: yaddasht,
-      };
-      dispatch(addActivity(payload));
-    // } 
+    // const payload = {
+    //   vaziat: values.vaziat,
+    //   noe_faaliat: values.noe_faaliat,
+    //   tarikh_mohlat_anjam: date,
+    //   abzar_id: values.abzar_id,
+    //   cultivations: values.cultivations,
+    //   anjam_dahande_list: worker,
+    //   yaddasht: yaddasht,
+    //   file: file[0],
+    // };
+
+    const formData = new FormData();
+    formData.append("vaziat", values.vaziat);
+    formData.append("noe_faaliat", values.noe_faaliat);
+    formData.append("tarikh_mohlat_anjam", date);
+    formData.append("abzar_id", values.abzar_id);
+    formData.append("cultivations", values.cultivations);
+    formData.append("anjam_dahande_list", worker);
+    formData.append("yaddasht", yaddasht);
+    formData.append("file", file[0]);
+
+    console.log(file[0]);
+    dispatch(addActivity(formData));
+    
+    // }
     // else {
     //   setDateError(true);
     //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
@@ -211,19 +226,21 @@ const AddActivityForm = () => {
             dispatch(addNahade(payload));
           });
         } else {
-          if (file[0]) {
-              const formData = new FormData();
-              const guid = activity.response.guid
-              const image = file[0]
-          
-              formData['guid'] = guid
-              formData['image'] = file[0]
-          
-              dispatch(addActivityFile(formData))
-          }
+          // if (file[0]) {
+          //     const formData = new FormData();
+          //     const guid = activity.response.guid
+          //     const image = file[0]
+
+          //     formData['guid'] = guid
+          //     formData['image'] = file[0]
+          //     formData.append('file', file);
+          //     console.log(formData.append('file',file))
+
+          //     // dispatch(addActivityFile(formData))
+          // }
           setLoading(false);
           toast.success("فعالیت افزوده شد", { position: "top-center" });
-          // setClicked(false);
+          setClicked(false);
           setFile([]);
           dispatch(clearNahadeList());
           dispatch(clearActivity());
@@ -237,20 +254,23 @@ const AddActivityForm = () => {
     if (!nahades?.addNahadeLoading) {
       setLoading(false);
       if (nahades?.nahades.length > 0) {
-        if (file[0]) {
-            const formData = new FormData();
-            const guid = activity.response.guid
-            const image = file[0]
-        
-            formData['guid'] = guid
-            formData['image'] = file[0]
-        
-            dispatch(addActivityFile(formData))
-        }
+        // if (file[0]) {
+        //     const formData = new FormData();
+        //     const guid = activity.response.guid
+        //     const image = file[0]
+        //     console.log(formData.append('file',file))
+
+        //     formData['guid'] = guid
+        //     formData['image'] = file[0]
+        //     // formData.append('file', file);
+
+        //     // dispatch(addActivityFile(formData))
+        // }
         setFile([]);
         dispatch(clearNahadeList());
         dispatch(clearActivity());
-        // setClicked(false);
+        setClicked(false);
+        toast.success("فعالیت افزوده شد", { position: "top-center" });
         navigate("/activities");
       }
     }
@@ -264,7 +284,6 @@ const AddActivityForm = () => {
           validationSchema={validation}
           onSubmit={(values, formikHelpers) => {
             onFormSubmit(values);
-            // dispatch(addActivity(values));
             formikHelpers.resetForm();
           }}
         >
@@ -394,7 +413,6 @@ const AddActivityForm = () => {
                   className="search-input col-md-5 mx-auto mt-4 p-0"
                   name="anjam_dahande_list"
                   onChange={workerOnchange}
-                  // style={{border:"1px solid #f00 !important", color: "green !important", backgroundColor: "yellow !important"}}
                   styles={
                     errors.anjam_dahande_list && touched.anjam_dahande_list
                       ? selectErrorStyle
@@ -407,6 +425,7 @@ const AddActivityForm = () => {
                   name="abzar_id"
                   className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
                   onClick={(e) => setSelectedTool(e.target.value)}
+                  style={{ height: "71px" }}
                 >
                   <option
                     value=""
@@ -453,7 +472,7 @@ const AddActivityForm = () => {
                           {" - "}
                           {item.meghdar}
                           {" - "}
-                          {vahede_meghdar_items.map((i) =>
+                          {vahede_meghdar_items?.map((i) =>
                             i.key === item.vahede_meghdar ? i.title : null
                           )}
                         </div>
@@ -484,8 +503,9 @@ const AddActivityForm = () => {
                     <div onClick={handleClick}>
                       <input
                         type="file"
+                        name="file"
                         ref={hiddenFileInput}
-                        onChange={handleChange}
+                        onChange={(e) => setFile([e.target.files[0]])}
                         style={{ display: "none" }}
                       />
                       <img
@@ -522,7 +542,7 @@ const AddActivityForm = () => {
 
                 <div className="d-flex justify-content-center mt-3">
                   <button
-                    // disabled={clicked}
+                    disabled={clicked}
                     type="submit"
                     className="btn-dark-blue mx-1 mt-4"
                   >
