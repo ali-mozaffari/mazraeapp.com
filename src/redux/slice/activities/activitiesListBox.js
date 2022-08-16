@@ -12,15 +12,17 @@ export const getActivitiesList = createAsyncThunk(
           Authorization: token,
         },
       });
+      // console.log(data.results.details)
       // console.log(data.results)
+      // return data.results.details;
       return data.results;
     } catch (error) {
-      // return error?.response;
       console.log(error);
       return rejectWithValue(error.data.results);
     }
   }
 );
+// console.log(data.results)
 
 export const copyActivityList = createAsyncThunk(
   "activitiesList/copyActivityList",
@@ -38,10 +40,11 @@ export const copyActivityList = createAsyncThunk(
         }
       );
       // console.log(data);
-      return data;
+      console.log(data.results);
+      return data.results;
     } catch (error) {
       console.log(error);
-      return rejectWithValue(error.data.results);
+      return rejectWithValue(error.data);
     }
   }
 );
@@ -51,6 +54,7 @@ export const deleteActivityList = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await axios.delete("/api/v2/farm/activity", {
+        // await axios.delete("/api/v2/farm/activity", {
         data: {
           guid: id,
         },
@@ -59,7 +63,7 @@ export const deleteActivityList = createAsyncThunk(
         },
       });
       // console.log(data);
-      return data;
+      return data.results;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error.data.results);
@@ -67,68 +71,67 @@ export const deleteActivityList = createAsyncThunk(
   }
 );
 
-// const initialState = {
-//   data: [],
-//   loading: false,
-//   error: null,
-// };
 const activitiesListBoxSlice = createSlice({
   name: "activitiesList",
-  initialState: { value: {} },
-  // initialState,
-  // reducers: {
-  //   deleteFarm: (state, action) => {
-  //     state.value = state.value.filter((farm)=> farm.id !== action.payload.id);
-  //   }
-  // },
+  // initialState: { value: [] },
+  initialState: {
+    data: [],
+    loading: false,
+    isDone: false,
+    error: false,
+  },
   extraReducers: {
-    [getActivitiesList.pending]: (state, action) => {
+    [getActivitiesList.pending]: (state, { payload }) => {
       state.loading = true;
     },
-    [getActivitiesList.fulfilled]: (state, action) => {
-      state.data = action.payload;
+    [getActivitiesList.fulfilled]: (state, { payload }) => {
+      state.data = payload;
       state.loading = false;
+      // console.log(state);
+      // return state;
     },
-    [getActivitiesList.rejected]: (state, action) => {
+    [getActivitiesList.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = payload;
     },
-    [copyActivityList.pending]: (state, action) => {
-      state.loading = true;
-    },
-    [copyActivityList.fulfilled]: (state, action) => {
-      state.data = action.payload;
-      console.log(state.data)
-      console.log(action.payload)
-      state.loading = false;
-    },
-    [copyActivityList.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    [deleteActivityList.pending]: (state, action) => {
+    [copyActivityList.pending]: (state, { payload }) => {
       state.loading = true;
       state.isDone = false;
     },
-    [deleteActivityList.fulfilled]: (state, action) => {
-      state.loading = false;
-      // console.log(action.payload)
-      state.response = action.payload;
-      state.data = state.data.details.filter(
-        ({ guid }) => guid !== action.payload
-      );
+    [copyActivityList.fulfilled]: (state, { payload }) => {
+      state.data = payload;
+      console.log(payload);
       // console.log(state.data);
+      state.loading = false;
+      state.isDone = true;
+    },
+    [copyActivityList.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.isDone = false;
+      state.error = payload;
+    },
+    [deleteActivityList.pending]: (state, { payload }) => {
+      state.loading = true;
+      state.isDone = false;
+    },
+    [deleteActivityList.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      // state.data = state.data.details.filter(
+      // state.data = state.data.filter(({ guid }) => guid != payload);
+      // state.data = state.data.details.filter(({ guid }) => guid != payload);
+      state.data = payload;
+      // console.log(payload);
+      console.log(state.data);
       state.isDone = true;
     },
 
-    [deleteActivityList.rejected]: (state, action) => {
+    [deleteActivityList.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.error = action.payload;
-      console.log(state.error);
+      state.error = payload;
       state.isDone = false;
     },
   },
 });
 
-// export const {deleteActivity} = activitiesListBoxSlice.actions;
+// export const {getActivitiesList,copyActivity,deleteActivity} = activitiesListBoxSlice.actions;
 export default activitiesListBoxSlice.reducer;

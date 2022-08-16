@@ -36,17 +36,17 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 const BreadCrumbs = (props) => {
   const isLast = (index) => {
-    return index === props.crumbs.length - 1;
+    return index === props?.crumbs?.length - 1;
   };
   return (
     <Breadcrumbs aria-label="breadcrumb">
-      {props.crumbs.map((name, ci) => {
-        const lastTitle = isLast(ci) ? "fw-bolder !important" : "";
+      {props?.crumbs?.map((name, ci) => {
+        const lastTitle = isLast(ci) ? "display" : "";
         return (
-          <ul key={ci} style={{padding: "0"}}>
+          <ul key={ci} style={{padding: "0", color: "#A2A2A2"}}>
             <li
               className={`btn btn-link ${lastTitle}`}
-              style={{ textDecoration: "none", color: "inherit", padding:"0", cursor: "auto", fontSize:"14px" }}
+              style={{ textDecoration: "none", color: "inherit", padding:"0", cursor: "auto", fontSize:"16px", color: "#4A4A4A" }}
             >
               {name}
             </li>

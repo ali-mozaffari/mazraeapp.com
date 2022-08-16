@@ -8,17 +8,16 @@ export const editActivity = createAsyncThunk(
   async (payload, { rejectWithValue, getState, dispatch }) => {
     // console.log(payload);
     try {
-      const { data } = await axios.put(
-        "/api/v2/farm/activity",
-        JSON.stringify(payload),
+      const { data } = await axios.put("/api/v2/farm/activity", payload,
         {
           headers: {
             Authorization: token,
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.error(data);
+      // console.error(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -39,15 +38,15 @@ const activityEditSlice = createSlice({
       state.loading = true;
       state.isDone = false;
     },
-    [editActivity.fulfilled]: (state, action) => {
-      state.response = action.payload;
+    [editActivity.fulfilled]: (state, {payload}) => {
+      state.response = payload;
       state.loading = false;
       state.isDone = true;
     },
-    [editActivity.rejected]: (state, action) => {
+    [editActivity.rejected]: (state, {payload}) => {
       state.loading = false;
       state.isDone = false;
-      state.error = action.payload;
+      state.error = payload;
     },
   },
 });

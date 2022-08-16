@@ -44,15 +44,9 @@ export const deleteAccessList = createAsyncThunk(
   }
 );
 
-
 const accessListBoxSlice = createSlice({
   name: "accessList",
   initialState: { value: {} },
-  // reducers: {
-  //   deleteFarm: (state, action) => {
-  //     state.value = state.value.filter((farm)=> farm.id !== action.payload.id);
-  //   }
-  // },
   extraReducers: {
     [getAccessList.pending]: (state, action) => {
       state.loading = true;

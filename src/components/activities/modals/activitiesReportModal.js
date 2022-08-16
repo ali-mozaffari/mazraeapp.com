@@ -19,6 +19,7 @@ const labels = [
 
 
 const Chart = memo(({ data }) => {
+  console.log(data)
   const pieChartData = data.map((value, index) => ({
     title: labels[index][0],
     value,

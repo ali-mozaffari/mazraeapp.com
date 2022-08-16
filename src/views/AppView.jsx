@@ -6,6 +6,7 @@ import AccessPage from "../pages/access/accessPage";
 import AddAccessPage from "../pages/access/addAccessPage";
 import EditAccessPage from "../pages/access/editAccessPage";
 import EditActivityPage from "../pages/activities/editActivityPage";
+import AddCultivationPage from "../pages/farm/addCultivationPage";
 import WeatherPage from "../pages/weather/weatherPage";
 
 
@@ -79,6 +80,7 @@ const AppView = () => {
                 <Route path="/" element={<Navigate replace to="home"/>}/>
                 <Route path="/home" element={<Main/>}/>
                 {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
+                <Route path="/add-cultivation" element={<AddCultivationPage/>}/>
                 <Route path="/activities" element={<ActivitiesPage/>}/>
                 <Route path="/farm-services" element={<FarmServicePage/>}/>
                 <Route path="/invitation" element={<InvitationPage/>}/>

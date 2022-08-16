@@ -1,0 +1,49 @@
+.modal-content{
+  padding: 0 !important;
+}
+
+.farm-field-modal-header {
+    display: grid !important;
+    position: relative;
+    box-shadow: 0px 4px 8.7px rgba(0, 0, 0, 0.08);
+    padding: 30px 20px 5px;
+}
+
+.modal-footer {
+  box-shadow: 0px -4px 8.7px rgba(0, 0, 0, 0.08);
+  margin: 0;
+  margin-top: 30px;
+  color: #4A4A4A;
+}
+
+.farm-field-modal-btn {
+  padding: 10px 60px;
+}
+
+.farm-field-modal-body {
+  font-weight: 800;
+  font-size: 16px;
+  color: #aeaeae;
+  padding: 0 0 0 20px;
+  overflow-y: scroll;
+}
+.year-field-modal{
+  max-height: 200px;
+}
+.product-field-modal{
+  max-height: 400px;
+}
+
+.farm-field-radio {
+  justify-content: space-between;
+  padding: 0 5px;
+  border-bottom: 1px solid #aeaeae;
+  margin: 0;
+}
+
+/* @media screen and (min-width: 899px){
+  .farm-field-modal {
+    width: 45%;
+  }
+} */
+

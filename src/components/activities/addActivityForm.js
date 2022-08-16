@@ -103,7 +103,7 @@ const AddActivityForm = () => {
 
   useEffect(() => {
     dispatch(getToolsList());
-    dispatch(getAccessList());
+    // dispatch(getAccessList());
   }, []);
 
   const onCalendarHandler = () => {
@@ -158,50 +158,36 @@ const AddActivityForm = () => {
     tarikh_mohlat_anjam: tarikh_mohlat_anjam,
     anjam_dahande_list: worker,
     yaddasht: yaddasht,
-    file: file[0],
+    image: file[0],
   };
 
   const clearNahade = (item) => {
     dispatch(deleteNahade(item));
   };
 
-  // const formData = new FormData();
-  // formData.append("File", file[0]);
-  // console.log(file);
-  // console.log(formData);
-
   const onFormSubmit = (values) => {
-    // if (tarikh_mohlat_anjam ) {
     setLoading(true);
     setClicked(true);
     const date = moment(tarikh_mohlat_anjam, "jYYYY/jMM/jDD").format(
       "YYYY-MM-DD"
     );
 
-    // const payload = {
-    //   vaziat: values.vaziat,
-    //   noe_faaliat: values.noe_faaliat,
-    //   tarikh_mohlat_anjam: date,
-    //   abzar_id: values.abzar_id,
-    //   cultivations: values.cultivations,
-    //   anjam_dahande_list: worker,
-    //   yaddasht: yaddasht,
-    //   file: file[0],
-    // };
+    const payload = {
+      vaziat: values.vaziat,
+      noe_faaliat: values.noe_faaliat,
+      tarikh_mohlat_anjam: date,
+      abzar_id: values.abzar_id,
+      cultivations: values.cultivations,
+      anjam_dahande_list: worker,
+      yaddasht: yaddasht,
+      image: file[0],
+    };
 
-    const formData = new FormData();
-    formData.append("vaziat", values.vaziat);
-    formData.append("noe_faaliat", values.noe_faaliat);
-    formData.append("tarikh_mohlat_anjam", date);
-    formData.append("abzar_id", values.abzar_id);
-    formData.append("cultivations", values.cultivations);
-    formData.append("anjam_dahande_list", worker);
-    formData.append("yaddasht", yaddasht);
-    formData.append("image", file[0]);
+    dispatch(addActivity(payload));
+  };
 
-    console.log(file[0]);
-    dispatch(addActivity(formData));
-
+  useEffect(() => {
+    // console.log(activity?.isDone)
     if (activity?.isDone) {
       if (activity?.response?.guid) {
         if (nahades?.nahades?.length > 0) {
@@ -215,105 +201,38 @@ const AddActivityForm = () => {
               vahede_meghdar: item.vahede_meghdar,
               vahede_masahat: item.vahede_masahat,
             };
+            console.log('---------')
+            console.log(payload)
             dispatch(addNahade(payload));
           });
         } else {
-          // if (file[0]) {
-          //     const formData = new FormData();
-          //     const guid = activity.response.guid
-          //     const image = file[0]
 
-          //     formData['guid'] = guid
-          //     formData['image'] = file[0]
-          //     formData.append('file', file);
-          //     console.log(formData.append('file',file))
-
-          //     // dispatch(addActivityFile(formData))
-          // }
           setLoading(false);
-          toast.success("فعالیت افزوده شد", { position: "top-center" });
           setClicked(false);
-          setFile([]);
+          // setFile("");
           dispatch(clearNahadeList());
           dispatch(clearActivity());
+          toast.success("فعالیت افزوده شد", { position: "top-center" });
           navigate("/activities");
         }
       }
     }
-    
-    // }
-    // else {
-    //   setDateError(true);
-    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    // }
-  };
+  }, [activity?.isDone]);
 
-  // useEffect(() => {
-  //   if (activity?.isDone) {
-  //     if (activity?.response?.guid) {
-  //       if (nahades?.nahades?.length > 0) {
-  //         nahades?.nahades?.map((item) => {
-  //           const payload = {
-  //             "activity-guid": activity.response.guid,
-  //             "nahade-item-guid": item.nahade_item_guid,
-  //             name_nahade: item.name_nahade,
-  //             meghdar: item.meghdar,
-  //             hazine_nahade: item.hazine_nahade,
-  //             vahede_meghdar: item.vahede_meghdar,
-  //             vahede_masahat: item.vahede_masahat,
-  //           };
-  //           dispatch(addNahade(payload));
-  //         });
-  //       } else {
-  //         // if (file[0]) {
-  //         //     const formData = new FormData();
-  //         //     const guid = activity.response.guid
-  //         //     const image = file[0]
+  useEffect(() => {
+    if (!nahades?.addNahadeLoading) {
+      setLoading(false);
+      if (nahades?.nahades.length > 0) {
 
-  //         //     formData['guid'] = guid
-  //         //     formData['image'] = file[0]
-  //         //     formData.append('file', file);
-  //         //     console.log(formData.append('file',file))
-
-  //         //     // dispatch(addActivityFile(formData))
-  //         // }
-  //         setLoading(false);
-  //         toast.success("فعالیت افزوده شد", { position: "top-center" });
-  //         setClicked(false);
-  //         setFile([]);
-  //         dispatch(clearNahadeList());
-  //         dispatch(clearActivity());
-  //         navigate("/activities");
-  //       }
-  //     }
-  //   }
-  // }, [activity?.isDone]);
-
-  // useEffect(() => {
-  //   if (!nahades?.addNahadeLoading) {
-  //     setLoading(false);
-  //     if (nahades?.nahades.length > 0) {
-  //       // if (file[0]) {
-  //       //     const formData = new FormData();
-  //       //     const guid = activity.response.guid
-  //       //     const image = file[0]
-  //       //     console.log(formData.append('file',file))
-
-  //       //     formData['guid'] = guid
-  //       //     formData['image'] = file[0]
-  //       //     // formData.append('file', file);
-
-  //       //     // dispatch(addActivityFile(formData))
-  //       // }
-  //       setFile([]);
-  //       dispatch(clearNahadeList());
-  //       dispatch(clearActivity());
-  //       setClicked(false);
-  //       toast.success("فعالیت افزوده شد", { position: "top-center" });
-  //       navigate("/activities");
-  //     }
-  //   }
-  // }, [nahades?.addNahadeLoading]);
+        // setFile("");
+        dispatch(clearNahadeList());
+        dispatch(clearActivity());
+        setClicked(false);
+        toast.success("فعالیت افزوده شد", { position: "top-center" });
+        navigate("/activities");
+      }
+    }
+  }, [nahades?.addNahadeLoading]);
 
   if (!loading) {
     return (
@@ -542,7 +461,7 @@ const AddActivityForm = () => {
                     <div onClick={handleClick}>
                       <input
                         type="file"
-                        name="file"
+                        name="image"
                         ref={hiddenFileInput}
                         onChange={(e) => setFile([e.target.files[0]])}
                         style={{ display: "none" }}

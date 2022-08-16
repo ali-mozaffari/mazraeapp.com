@@ -96,11 +96,11 @@ const FilterActivitiesBar = () => {
         <Box
           className="d-flex align-items-center justify-content-end"
           sx={{ width: { xs: "100%", sm: "40%" } }}
-          onClick={() => showActivitiesModal()}
         >
           <button
             className="btn-outline-light-blue mx-1"
             style={{ width: "70%", padding: "14px 10px", fontSize: "13px" }}
+            onClick={() => showActivitiesModal()}
           >
             گزارش فعالیت ها
           </button>

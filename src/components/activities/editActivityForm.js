@@ -35,7 +35,8 @@ import "./activity.css";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { current } from "@reduxjs/toolkit";
+import url from './../../services/config';
+import { getAccessList } from "../../redux/slice/access/accessListBox";
 const animatedComponents = makeAnimated();
 
 const selectErrorStyle = {
@@ -48,9 +49,13 @@ const selectErrorStyle = {
 };
 
 const EditActivityForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const activities = useSelector((state) => state.activitiesList);
   const activityGuid = activities.data.details;
+  // const activityGuid = activities.data;
   const existingActivity = activityGuid.filter(
     (activity) => activity.guid === id
   );
@@ -61,7 +66,6 @@ const EditActivityForm = () => {
   // console.log(existingActivity[0]?.abzar?.id);
   //   console.log(mahsulTitle);
 
-  const navigate = useNavigate();
   const farms = useSelector((state) => state.farmlist);
   const nahades = useSelector((state) => state.nahade);
   const [selectedTool, setSelectedTool] = useState(
@@ -80,7 +84,7 @@ const EditActivityForm = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [dateError, setDateError] = useState(false);
   const [showNahadeModal, setShowNahadeModal] = useState(false);
-  const dispatch = useDispatch();
+
   const tools = useSelector((state) => state.tools);
   // const activity = useSelector((state) => state.activity);
   const [clicked, setClicked] = useState(false);
@@ -88,6 +92,7 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
+  console.log(activityEdit)
   const [existingNahade, setExistingNahade] = useState(
     existingActivity[0]?.nahades
   );
@@ -142,14 +147,21 @@ const EditActivityForm = () => {
     // console.log(list);
     setWorker(list);
   };
+  
+  // useEffect(() => {
+  //   dispatch(getToolsList());
+  //   // dispatch(getAccessList());
+  // }, []);
 
   useEffect(() => {
+    dispatch(getToolsList());
     set_tarikh_mohlat_anjam(existingActivity[0]?.tarikh_mohlat_anjam);
-  }, []);
-
-  useEffect(() => {
     setYaddasht(existingActivity[0]?.yaddasht);
   }, []);
+
+  // useEffect(() => {
+  //   setYaddasht(existingActivity[0]?.yaddasht);
+  // }, []);
 
   const handleClick = (event) => {
     hiddenFileInput.current.click();
@@ -159,10 +171,6 @@ const EditActivityForm = () => {
     const fileUploaded = event.target.files[0];
     setFile([fileUploaded]);
   };
-
-  useEffect(() => {
-    dispatch(getToolsList());
-  }, []);
 
   const onCalendarHandler = () => {
     setShowCalendar(!showCalendar);
@@ -198,6 +206,7 @@ const EditActivityForm = () => {
     vaziat: vaziat,
     anjam_dahande_list: worker,
     yaddasht: yaddasht,
+    image: file[0],
   };
 
   const clearNahade = (item) => {
@@ -210,7 +219,6 @@ const EditActivityForm = () => {
   };
 
   const onFormSubmit = (values) => {
-    // if (tarikh_mohlat_anjam) {
     setLoading(true);
     setClicked(true);
 
@@ -223,6 +231,7 @@ const EditActivityForm = () => {
       cultivations: values.cultivations,
       anjam_dahande_list: worker,
       yaddasht: yaddasht,
+      image: file[0],
     };
     dispatch(editActivity(payload));
     deletedNahade?.map((id) =>
@@ -230,34 +239,76 @@ const EditActivityForm = () => {
       dispatch(deleteNahadeEditActivity(id))
     );
 
+    // if (activityEdit?.isDone) {
+    //   console.log(activityEdit?.response?.guid)
+    //   if (activityEdit?.response?.guid) {
+    //     nahades?.nahades?.map((item) => {
+    //       const payload = {
+    //         "activity-guid": activityEdit.response.guid,
+    //         "nahade-item-guid": item.nahade_item_guid,
+    //         name_nahade: item.name_nahade,
+    //         meghdar: item.meghdar,
+    //         hazine_nahade: item.hazine_nahade,
+    //         vahede_meghdar: item.vahede_meghdar,
+    //         vahede_masahat: item.vahede_masahat,
+    //       };
+    //       dispatch(addNahade(payload));
+    //       // dispatch(clearNahadeList());
+    //       setClicked(false);
+    //     });
+    //   }
+    //   dispatch(clearNahadeList());
+    //   dispatch(clearActivity());
+    //   toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+    //   navigate("/activities");
+    // }
+
+  };
+
+  useEffect(() => {
     if (activityEdit?.isDone) {
       if (activityEdit?.response?.guid) {
-        nahades?.nahades?.map((item) => {
-          const payload = {
-            "activity-guid": activityEdit.response.guid,
-            "nahade-item-guid": item.nahade_item_guid,
-            name_nahade: item.name_nahade,
-            meghdar: item.meghdar,
-            hazine_nahade: item.hazine_nahade,
-            vahede_meghdar: item.vahede_meghdar,
-            vahede_masahat: item.vahede_masahat,
-          };
-          dispatch(addNahade(payload));
-          dispatch(clearNahadeList());
+        if (nahades?.nahades?.length > 0) {
+          nahades?.nahades?.map((item) => {
+            const payload = {
+              "activity-guid": activityEdit.response.guid,
+              "nahade-item-guid": item.nahade_item_guid,
+              name_nahade: item.name_nahade,
+              meghdar: item.meghdar,
+              hazine_nahade: item.hazine_nahade,
+              vahede_meghdar: item.vahede_meghdar,
+              vahede_masahat: item.vahede_masahat,
+            };
+            dispatch(addNahade(payload));
+          });
+        } else {
+
+          setLoading(false);
           setClicked(false);
-        });
+          // setFile("");
+          dispatch(clearNahadeList());
+          dispatch(clearActivity());
+          toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+          navigate("/activities");
+        }
       }
-
-      dispatch(clearActivity());
-      toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
-      navigate("/activities");
     }
+  }, [activityEdit?.isDone]);
 
-    // } else {
-    //   setDateError(true);
-    //   // toast.error('تاریخ مهلت انجام را وارد نمایید', {position: "top-center", theme: 'dark'})
-    // }
-  };
+  useEffect(() => {
+    if (!nahades?.addNahadeLoading) {
+      setLoading(false);
+      if (nahades?.nahades.length > 0) {
+
+        // setFile("");
+        dispatch(clearNahadeList());
+        dispatch(clearActivity());
+        setClicked(false);
+        toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
+        navigate("/activities");
+      }
+    }
+  }, [nahades?.addNahadeLoading]);
 
   // useEffect(() => {
   //   if (activityEdit?.isDone) {
@@ -536,19 +587,22 @@ const EditActivityForm = () => {
 
                 <div
                   className="search-input file-uploader col-md-5 mx-auto mt-4"
-                  style={{ height: 200 }}
+                  // style={{ height: 200 }}
                 >
                   {file.length < 1 ? (
                     <div onClick={handleClick}>
                       <input
                         type="file"
+                        name="image"
                         ref={hiddenFileInput}
                         onChange={handleChange}
                         style={{ display: "none" }}
                       />
                       <img
-                        src={folder}
+                        // src={folder}
+                        src={url+(existingActivity[0]?.file?.image)}
                         className="d-block mx-auto mt-2 mt-md-1"
+                        style={{width: "100px"}}
                       />
                       <h5
                         style={{ fontWeight: "900" }}
@@ -566,10 +620,9 @@ const EditActivityForm = () => {
                         src={folder}
                         className="d-block mx-auto mt-2 mt-md-1"
                       />
-                      <div className="d-flex justify-content-between mt-3 px-4 mt-5">
-                        <div>
+                      <div className="image-edit d-flex justify-content-between mt-3 px-4 mt-5">
                           <span>{file[0].name}</span>
-                        </div>
+                          {/* <img src={url+(existingActivity[0]?.file?.image)} alt="image" /> */}
                         <div onClick={() => setFile([])}>
                           <CloseIcon />
                         </div>

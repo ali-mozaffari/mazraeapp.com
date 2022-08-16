@@ -13,6 +13,7 @@ import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
 import { Dropdown, ToastContainer } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
+import { getAccessList } from "../../redux/slice/access/accessListBox";
 
 
 
@@ -24,6 +25,7 @@ const FarmListBox = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFarmList());
+    dispatch(getAccessList());
   }, []);
 
   const farmlist = useSelector((state) => state.farmlist);
@@ -81,7 +83,7 @@ const FarmListBox = () => {
 
   return (
     <div className="container-fluid mt-4">
-      <div className="row d-md-flex justify-content-center">
+      <div className="row d-md-flex justify-content-between">
 
         {loading ? (
           // <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>

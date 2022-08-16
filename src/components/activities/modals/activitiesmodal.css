@@ -1,6 +1,6 @@
 .modal-content{
-  border-radius: 25px !important;
-  padding: 25px !important;
+  border-radius: 25px;
+  padding: 25px;
 }
 
 .modal-header {
@@ -9,3 +9,7 @@
     position: relative;
     justify-content: center;
 }
+
+/* .nahade-modal-body {
+  padding: 0;
+} */

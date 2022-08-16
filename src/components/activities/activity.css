@@ -21,4 +21,15 @@
     border: none;
     color: #212529;
 }
+
+.image-edit {
+    border: dotted 2px darkgrey;
+    border-radius: 15px;
+    width: 90%;
+    margin: auto;
+}
+
+.image-edit img {
+    width: 100px;
+}
 /* ------end add & edit activity form-------- */

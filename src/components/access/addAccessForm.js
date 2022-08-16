@@ -121,10 +121,10 @@ const AddAccessForm = () => {
     // setClicked(true);
 
     const payload = {
-      permission_type: permissionType,
-      name: values.workerName,
-      cell_phone: values.phone,
-      "farm-guid": values.farm,
+      "permission_type": permissionType.toString(),
+      "name": values.workerName.toString(),
+      "cell_phone": values.phone.toString(),
+      "farm-guid": values.farm.toString(),
     };
     dispatch(addAccess(payload));
   };

@@ -145,7 +145,7 @@ function ForecastCultivationProgressItem(props) {
 
     {
         main ? (
-            <div className={`${!isItem ? 'col-md-9' : ''} col-12`}>
+            <div className={`${!isItem ? 'col-md-9' : ''} col-12`} style={{paddingRight: "0"}}>
                 {cultivationData.map((item, index) => {
                     const masahatPercent = Math.round((item.masahat * 100) / data.masahat)
 
@@ -303,17 +303,15 @@ function ForecastCultivationProgressItem(props) {
 
     {
         main ? (
-            <div className='col-md-3 high-res align-items-center'>
+            <div className='col-md-3 high-res align-items-center' style={{padding: "0", margin: "auto"}} >
 
-                <p className='top-title'>
+                <span className='top-title'>
                     {data.masahat.toFixed(2)}
                     {' هکتار '}
-
-                </p>
-
-                <p className="small text-gray sub-title">
-                    مجموع مزارع
-                </p>
+                </span>
+                <span className="small text-gray sub-title">
+                مجموع مزارع
+                </span>
 
                 {/*{!isItem && isLevelOneProgress && (*/}
                 {/*    <span className='sal-farm'>*/}

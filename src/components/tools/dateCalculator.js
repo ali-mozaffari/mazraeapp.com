@@ -8,7 +8,7 @@ let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getD
 const diffDays = (date, otherDate) => Math.ceil(Math.abs(date - otherDate) / (1000 * 3600 * 24));
 const x = diffDays(new Date(date), new Date(props.remainingDate));
 
-  return <div>{x}</div>;
+  return <div>{x-1}</div>;
 };
 
 // const jDate = moment(today, "jYYYY/jMM/jDD").format("YYYY-MM-DD");

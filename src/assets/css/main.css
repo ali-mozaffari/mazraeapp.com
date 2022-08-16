@@ -2,7 +2,13 @@
     background-color: white;
     border-radius: 20px;
     min-height: 80vh;
-    padding: 30px 40px;
+    padding: 30px 25px;
+}
+
+@media screen and (max-width: 899px) {
+    .page-container {
+        border-radius: 0 !important;
+    }
 }
 
 .btn-outline-light-blue {
@@ -11,6 +17,7 @@
     background-color: white;
     padding: 15px 60px;
     border-radius: 15px;
+    height: 50px;
 }
 
 .btn-light-green {
@@ -18,10 +25,8 @@
     background-color: #16db93;
     padding: 15px 60px;
     border-radius: 15px;
+    height: 50px;
 }
-
-
-
 
 .btn-outline-purple {
     color: #54478c;
@@ -29,31 +34,41 @@
     background-color: white;
     height: 40px;
     padding: 10px 30px;
-    border-radius: 15px;
+    border-radius: 8px;
+    height: 50px;
 }
-
 
 .btn-dark-blue {
     background-color: #2c699a;
     color: white;
     border: 1px solid transparent;
     padding: 15px 60px;
-    border-radius: 15px;
+    border-radius: 8px;
+    height: 50px;
 }
-
 
 .btn-light-gray {
     background-color: gray;
     color: white;
     border: 1px solid transparent;
     padding: 15px 60px;
-    border-radius: 15px;
+    border-radius: 8px;
+    height: 50px;
+}
+
+.btn-light-pink {
+    background-color: #FED7D0;
+    color: #F2634C !important;
+    border: 1px solid transparent;
+    padding: 15px 60px;
+    border-radius: 8px;
+    height: 50px;
 }
 
 .cus-alert-info {
     background-color: rgba(235, 245, 255, 1);
     padding: 20px 30px;
-    border-radius: 15px;
+    border-radius: 8px;
     color: #2c699a;
 }
 
@@ -67,7 +82,7 @@
 
 .btn-gray {
     background-color: gray;
-    border-radius: 10px;
+    border-radius: 8px;
     color: white;
     padding: 10px 50px;
     margin: 10px 20px;
@@ -87,7 +102,7 @@
 
 .search-input {
     background-color: #f6f8f7;
-    border-radius: 15px;
+    border-radius: 8px;
     border: none;
     padding: 20px 25px;
 }
@@ -101,13 +116,13 @@
     background-color: #16db9322;
     border: 1px solid #16db9388;
     color: gray;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 20px 25px;
 }
 
 .nahade-item {
     background-color: #0a53be22;
-    border-radius: 15px;
+    border-radius: 8px;
     border: 1px solid #0a53be77;
     padding: 20px 25px;
     color: #0a53be;
@@ -119,7 +134,7 @@
     background-color: #16db9322;
     color: #16db93;
     padding: 10px 20px;
-    border-radius: 15px;
+    border-radius: 8px;
 }
 
 .table-test {
@@ -132,7 +147,7 @@ table thead {
 
 .tableToolIconBgGray {
     background-color: gray;
-    border-radius: 12px;
+    border-radius: 8px;
     width: 40px;
     height: 40px;
     margin: 0 5px;
@@ -140,7 +155,7 @@ table thead {
 
 .tableToolIconBgBlue {
     background-color: #2c699a;
-    border-radius: 12px;
+    border-radius: 8px;
     width: 40px;
     height: 40px;
     margin: 0 5px;
@@ -148,7 +163,7 @@ table thead {
 
 .tableToolIconBgOrange {
     background-color: #f2634c;
-    border-radius: 12px;
+    border-radius: 8px;
     width: 40px;
     height: 40px;
     margin: 0 5px;
@@ -159,7 +174,7 @@ table thead {
 
     .page-container {
         background-color: white;
-        border-radius: 20px;
+        border-radius: 8px;
         padding: 5px 10px 10px 10px;
         margin: 10px 0 0 0;
     }
@@ -167,7 +182,7 @@ table thead {
 
     .search-input {
         background-color: #f6f8f7;
-        border-radius: 15px;
+        border-radius: 8px;
         border: none;
         padding: 10px 15px;
     }
@@ -178,7 +193,7 @@ table thead {
         border: 1px solid #16db93;
         background-color: white;
         padding: 10px 20px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .btn-dark-blue {
@@ -186,7 +201,7 @@ table thead {
         color: white;
         border: 1px solid transparent;
         padding: 10px 20px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .btn-light-gray {
@@ -194,7 +209,7 @@ table thead {
         color: white;
         border: 1px solid transparent;
         padding: 10px 20px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
 }

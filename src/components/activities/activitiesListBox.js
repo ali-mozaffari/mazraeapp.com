@@ -8,7 +8,7 @@ import editIcon from "../../assets/img/edit.png";
 import trashIcon from "../../assets/img/trash.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getActivitiesList } from "../../redux/slice/activities/activitiesListBox";
+import { deleteActivityList, getActivitiesList } from "../../redux/slice/activities/activitiesListBox";
 import { toast } from "react-toastify";
 import DateCalculator from "../tools/dateCalculator";
 import DeleteConfirmationModal from "./modals/deleteConfirmationModal";
@@ -16,6 +16,7 @@ import { noe_faaliat_items, vaziat_items } from "../../assets/strings/strings";
 import Loading from "../loading/loading";
 
 import { copyActivityList } from "../../redux/slice/activities/activitiesListBox";
+import { getAccessList } from "../../redux/slice/access/accessListBox";
 // import { deleteActivityList } from "../../redux/slice/activities/activitiesListBox";
 
 const options = [
@@ -29,18 +30,27 @@ const ITEM_HEIGHT = 48;
 const ActivitiesListBox = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { data, loading, isDone } = useSelector((state) => state.activitiesList);
+  // const { data, loading, isDone } = activitiesList;
+  // console.log({ data, loading, isDone })
+  // console.log("data :", data)
+  // console.log("loading :", loading)
+  // console.log("isDone :", isDone)
   useEffect(() => {
     dispatch(getActivitiesList());
   }, []);
 
-  const activitiesList = useSelector((state) => state.activitiesList);
-  const { data, loading } = activitiesList;
-
   // Handle the Copy activity Button
   const handleCopy = (id) => {
     dispatch(copyActivityList(id));
-    toast.success("یک کپی فعالیت به لیست اضافه شد");
-    dispatch(getActivitiesList());
+    // console.log(isDone)
+    if (isDone) {
+      toast.success("یک کپی فعالیت به لیست اضافه شد");
+      // dispatch(getActivitiesList());
+    }else{
+      toast.error("فعالیت کپی نشد. مجددا کپی نمایید");
+    }
   };
 
   const [id, setId] = useState(null);
@@ -49,8 +59,6 @@ const ActivitiesListBox = () => {
 
   // Handle the displaying of the modal based on type and id
   const showDeleteModal = (id) => {
-    // dispatch(deleteActivityList(id));
-    // dispatch(getActivitiesList());
     setId(id);
     setDisplayConfirmationModal(true);
   };
@@ -62,9 +70,14 @@ const ActivitiesListBox = () => {
 
   // Handle the actual deletion of the item
   const submitDelete = (id) => {
-    toast.success("فعالیت حذف شد");
-    setDisplayConfirmationModal(false);
-    dispatch(getActivitiesList());
+    console.log(isDone)
+    if (isDone) {
+      toast.success("فعالیت حذف شد");
+      setDisplayConfirmationModal(false);
+      // dispatch(getActivitiesList());
+    }else{
+      toast.error("فعالیت حذف نشد. مجددا حذف نمایید");
+    }
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -117,7 +130,9 @@ const ActivitiesListBox = () => {
             </tr>
           </thead>
           <tbody>
+            {/* {data?.map((item, index) => ( */}
             {data?.details?.map((item, index) => (
+             
               <tr key={index}>
                 <td className="py-3" style={{ whiteSpace: "nowrap" }}>
                   <span
@@ -250,6 +265,7 @@ const ActivitiesListBox = () => {
                       style={{ width: "35px", height: "35px" }}
                       className="btn tableToolIconBgOrange d-flex align-items-center justify-content-center"
                       onClick={() => showDeleteModal(item?.guid)}
+                      // onClick={() => dispatch(deleteActivityList(item?.guid))}
                     >
                       <img
                         src={trashIcon}

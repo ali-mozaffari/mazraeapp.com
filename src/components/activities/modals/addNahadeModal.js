@@ -100,7 +100,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                             setFieldValue
                         } = props;
                         return (
-                            <form onSubmit={handleSubmit} className="py-4 px-2">
+                            <form onSubmit={handleSubmit} className="py-2 px-2">
 
                                 <div className="row">
 

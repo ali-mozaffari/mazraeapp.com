@@ -1,11 +1,18 @@
 .farm-item-box {
-
-    height: 500px;
     margin-top: 15px;
     padding: 10px;
     border: 1px solid lightgray;
-    border-radius: 10px;
+    border-radius: 8px;
+    width: 30%;
+    margin-right: 10px !important;
+    margin-left: 15px !important;
+    margin-bottom: 20px !important;
+}
 
+@media screen and (max-width: 899px) {
+    .farm-item-box {
+        width: 95% !important;
+    }
 }
 
 .rain-3d-report {
@@ -56,7 +63,7 @@
 
 .dropdown-toggle-icon {
     background-color: gray !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     width: 40px !important;
     height: 40px !important;
     border: none !important;
@@ -75,6 +82,16 @@
 }
 
 .dropdown-menu:focus {
-    background-color: transparent !important;
-    
+    background-color: transparent !important; 
+}
+
+.fieldIcon {
+    position: absolute !important;
+    top: 40px !important;
+    left: 15px !important;
+}
+
+.farm-bottom-btn {
+    justify-content: space-between !important;
+    padding: 0;
 }
