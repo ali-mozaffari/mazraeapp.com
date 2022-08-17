@@ -100,11 +100,66 @@
     font-weight: 800;
 }
 
+.filter-search {
+    justify-content: space-between;
+}
+
 .search-input {
     background-color: #f6f8f7;
     border-radius: 8px;
     border: none;
-    padding: 20px 25px;
+    padding: 12px 25px;
+}
+
+.search-icon {
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    right: 25px;
+}
+
+.search-input-field {
+    background-color: #f6f8f7;
+    border-radius: 0 8px 8px 0;
+    border: none;
+    padding: 12px 40px 12px 10px;
+    /* color: #C2C2C2; */
+}
+
+.searchButton {
+    background-color: #D9D9D9;
+    border-radius: 8px 0 0 8px;
+    border: none;
+    padding: 12px 16px;
+}
+
+.search-icon-modal {
+    position: absolute;
+    z-index: 1000;
+    top: 8px;
+    right: 25px;
+}
+
+.search-field-modal {
+    display: inline-flex;
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.search-input-field-modal {
+    background-color: #f6f8f7;
+    border-radius: 0 8px 8px 0;
+    border: none;
+    padding: 8px 60px 8px 10px;
+    /* color: #C2C2C2; */
+}
+
+.searchButton-modal {
+    background-color: #D9D9D9;
+    border-radius: 8px 0 0 8px;
+    border: none;
+    padding: 8px 16px;
 }
 
 .file-uploader {

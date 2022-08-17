@@ -6,6 +6,7 @@ import ForecastCultivationProgressItem from "./progressBar";
 import { CONST } from "../../assets/strings/strings";
 import { useNavigate } from "react-router-dom";
 import BreadCrumbs from "../tools/breadcrumbs";
+import { ArrowSearchIcon, SearchIcon } from "../../assets/icon";
 
 const MainPageHeader = () => {
   const data = [
@@ -226,7 +227,7 @@ const MainPageHeader = () => {
         return "افزودن کشت";
       case "/edit-farm":
         return "ویرایش مشخصات مزرعه";
-      case "/edit-codination-farm":
+      case "/edit-coordination-farm":
         return "ویرایش مختصات مزرعه";
       case "/cultivation":
         return "کشت های کنونی مزرعه";
@@ -292,15 +293,22 @@ const MainPageHeader = () => {
       <hr />
 
       {path === "/" || path === "/home" ? (
-        <div className="row d-flex align-items-center">
-          <div className="col-md-6 mx-auto">
+        <div className="filter-search row d-flex align-items-center">
+          <div className="col-md-5" style={{ display: "inline-flex", position: "relative" }}>
+            <span className="search-icon">
+              <SearchIcon />
+            </span>
+
             <input
-              className="search-input w-100"
+              className="search-input-field w-100"
               type="search"
-              placeholder="جستجو . . ."
+              placeholder="جستجو .."
             />
+            <button type="submit" className="searchButton">
+              <ArrowSearchIcon />
+            </button>
           </div>
-          <div className="col-md-6 mx-auto d-flex justify-content-around mt-3 mt-md-0">
+          <div className="col-md-4 d-flex justify-content-around mt-3 mt-md-0">
             <div>
               <img src={filterIcon} alt="filter" className="mx-2" />
               <p className="d-inline">فیلتر کردن</p>

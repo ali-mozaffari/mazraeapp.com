@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAccess } from "../../../redux/slice/access/addAccess";
 import { clearAccess } from "../../../redux/slice/access/addAccess";
 import { toast } from "react-toastify";
-import Loading from "../../loading/loading";
 import { Box, styled } from "@mui/system";
 import {
   ArrowSingleDownIcon,
@@ -17,36 +16,44 @@ import {
 import "./../main.css";
 import YearFieldModal from "./modals/yearFieldModal";
 import ProductFieldModal from "./modals/productFieldModal";
+import ProductGroupFieldModal from "./modals/productGroupFieldModal";
+import { setYear } from "date-fns";
 
 const AddCultivation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const farms = useSelector((state) => state.farmlist);
 
-  // console.log(farms.postList)
-  const [permissionType, setPermissionType] = useState("");
-  // const [workerName, setWorkerName] = useState("");
-  // const [phone, setPhone] = useState("");
-  // const [farm, setFarm] = useState("");
-
-  const access = useSelector((state) => state.addAccess);
-  // const [clicked, setClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Year Field
   const [displayYearModal, setDisplayYearModal] = useState(false);
-   // Handle the displaying modal of year field
-   const showYearModal = (id) => {
+  // Handle the displaying modal of year field
+  const showYearModal = (id) => {
     // setId(id);
     setDisplayYearModal(true);
   };
-   // Hide the modal
-   const hideYearModal = () => {
+  // Hide the modal
+  const hideYearModal = () => {
     setDisplayYearModal(false);
   };
 
+  // Product Group Field
+  const [displayProductGroupModal, setDisplayProductGroupModal] =
+    useState(false);
+  // Handle the displaying modal of product field
+  const showProductGroupModal = (id) => {
+    // setId(id);
+    setDisplayProductGroupModal(true);
+  };
+  const hideProductGroupModal = (id) => {
+    // setId(id);
+    setDisplayProductGroupModal(false);
+  };
+
+  // Product Field
   const [displayProductModal, setDisplayProductModal] = useState(false);
-   // Handle the displaying modal of product field
-   const showProductModal = (id) => {
+  // Handle the displaying modal of product field
+  const showProductModal = (id) => {
     // setId(id);
     setDisplayProductModal(true);
   };
@@ -55,10 +62,20 @@ const AddCultivation = () => {
     setDisplayProductModal(false);
   };
 
+  const [year, setYear] = useState("");
+  const getYear = (data) => {
+    setYear(data);
+  }
 
+  const [productGroup, setProductGroup] = useState("");
+  const getProductGroup = (data) => {
+    setProductGroup(data);
+  }
 
-  let permissionValidation = () => {
-    if (!permissionType) {
+  
+
+  let sal_id_validation = () => {
+    if (!year) {
       return false;
     } else {
       return true;
@@ -66,21 +83,28 @@ const AddCultivation = () => {
   };
   //  .test(function(permissionType) {if(permissionType === null) return false}),
   const validation = Yup.object().shape({
-    permission_type: Yup.string().test(
-      "permission_type",
+    // sal_id: Yup.string().required(),
+    sal_id: Yup.string().test(
+      "sal_id",
       "required",
-      permissionValidation
+      sal_id_validation
     ),
-    workerName: Yup.string().required(),
-    phone: Yup.string().required().phone(),
-    farm: Yup.string().required(),
+    product: Yup.string().required(),
+    status: Yup.string().required(),
+    cultivationArea: Yup.string().required(),
+    plantingDate: Yup.string().required(),
+    harvestDate: Yup.string().required(),
   });
 
   const initialValues = {
-    permission_type: permissionType,
-    workerName: "",
-    phone: "",
-    farm: "",
+    sal_id: year.value,
+    productGroup: productGroup.value,
+    product: "",
+    subProduct: "",
+    sathe_zire_kesht: "",
+    vaziat: "",
+    planting_datetime: "",
+    harvest_datetime: "",
   };
 
   const onFormSubmit = (values) => {
@@ -88,10 +112,10 @@ const AddCultivation = () => {
     // setClicked(true);
 
     const payload = {
-      permission_type: permissionType.toString(),
-      name: values.workerName.toString(),
-      cell_phone: values.phone.toString(),
-      "farm-guid": values.farm.toString(),
+      sal_id: year.toString(),
+      // name: values.workerName.toString(),
+      // cell_phone: values.phone.toString(),
+      // "farm-guid": values.farm.toString(),
     };
     dispatch(addAccess(payload));
   };
@@ -133,13 +157,14 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="workerName"
+                    name="sal_id"
+                    value={year.name}
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="سال زراعی *"
                     style={
-                      errors.workerName && touched.workerName
+                      errors.sal_id && touched.sal_id
                         ? {
                             border: "1px solid #f00",
                             color: "red",
@@ -180,20 +205,13 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="workerName"
+                    name="productGroup"
                     type="text"
+                    value={productGroup.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="گروه محصول"
-                    style={
-                      errors.workerName && touched.workerName
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                    onClick={() => showProductModal()}
+                    onClick={() => showProductGroupModal()}
                   />
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
@@ -206,19 +224,20 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="phone"
+                    name="product"
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     placeholder="محصول *"
                     style={
-                      errors.phone && touched.phone
+                      errors.product && touched.product
                         ? {
                             border: "1px solid #f00",
                             color: "red",
                           }
                         : { border: "none" }
                     }
+                    onClick={() => showProductModal()}
                   />
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
@@ -240,7 +259,7 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="workerName"
+                    name="subProduct"
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
@@ -290,7 +309,7 @@ const AddCultivation = () => {
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="نام شخص"
+                    placeholder="سطح زیر کشت"
                     style={
                       errors.workerName && touched.workerName
                         ? {
@@ -349,7 +368,7 @@ const AddCultivation = () => {
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="تاریخ کاشت"
+                    placeholder="تاریخ کاشت *"
                     style={
                       errors.workerName && touched.workerName
                         ? {
@@ -374,7 +393,7 @@ const AddCultivation = () => {
                     type="Text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
-                    placeholder="تاریخ برداشت"
+                    placeholder="تاریخ برداشت *"
                     style={
                       errors.phone && touched.phone
                         ? {
@@ -408,7 +427,7 @@ const AddCultivation = () => {
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="وضعیت"
+                    placeholder="وضعیت *"
                     style={
                       errors.workerName && touched.workerName
                         ? {
@@ -490,12 +509,16 @@ const AddCultivation = () => {
 
       <YearFieldModal
         showModal={displayYearModal}
-        // confirmModal={submitDelete}
         hideModal={hideYearModal}
-        // id={id}
-        // items={items}
-        // dataByName={dataByName}
+        data={getYear}
       />
+
+      <ProductGroupFieldModal
+        showModal={displayProductGroupModal}
+        hideModal={hideProductGroupModal}
+        data={getProductGroup}
+      />
+
       <ProductFieldModal
         showModal={displayProductModal}
         // confirmModal={submitDelete}

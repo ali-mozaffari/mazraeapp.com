@@ -117,7 +117,7 @@ const FarmListBox = () => {
                         </Dropdown.Item>
                         <Dropdown.Item className="dropdown-item-main">
                           <Link
-                            to={"/edit-codination-farm"}
+                            to={"/edit-coordination-farm"}
                             className="dropdownItem"
                           >
                             ویرایش مختصات مزرعه

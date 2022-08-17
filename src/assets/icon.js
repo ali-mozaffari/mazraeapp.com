@@ -1013,8 +1013,8 @@ export const NewCalendarIcon = (props) => {
 export const ArrowSearchIcon = (props) => {
   return (
     <svg
-      width="21"
-      height="16"
+      width="18"
+      height="14"
       viewBox="0 0 21 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -1022,6 +1022,26 @@ export const ArrowSearchIcon = (props) => {
       <path
         d="M1.66675 8L0.959641 7.29289L0.252535 8L0.959641 8.70711L1.66675 8ZM19.1667 9C19.719 9 20.1667 8.55228 20.1667 8C20.1667 7.44772 19.719 7 19.1667 7V9ZM7.95964 0.292893L0.959641 7.29289L2.37385 8.70711L9.37385 1.70711L7.95964 0.292893ZM0.959641 8.70711L7.95964 15.7071L9.37385 14.2929L2.37385 7.29289L0.959641 8.70711ZM1.66675 9H19.1667V7H1.66675V9Z"
         fill="white"
+      />
+    </svg>
+  );
+};
+
+export const SearchIcon = (props) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle cx="11" cy="11" r="6" stroke="#676767" stroke-width="1.5" />
+      <path
+        d="M20 20L17 17"
+        stroke="#676767"
+        stroke-width="1.5"
+        stroke-linecap="round"
       />
     </svg>
   );

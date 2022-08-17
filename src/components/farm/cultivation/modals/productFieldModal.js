@@ -4,6 +4,7 @@ import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import "./farmModal.css";
+import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const ProductFieldModal = ({
   showModal,
@@ -32,25 +33,42 @@ const ProductFieldModal = ({
 
   return (
     <Modal show={showModal} className="farm-field-modal">
-      <div className="farm-field-modal-header justify-content-start">
-        <img
-          src={closeNotification}
-          style={{
-            position: "absolute",
-            left: "25px",
-            top: "30px",
-            height: "16px",
-            cursor: "pointer",
-          }}
-          onClick={hideModal}
-        />
+      <div className="farm-field-modal-header">
+        <div>
+          <img
+            src={closeNotification}
+            style={{
+              position: "absolute",
+              left: "25px",
+              top: "30px",
+              height: "16px",
+              cursor: "pointer",
+            }}
+            onClick={hideModal}
+          />
 
-        <h6 style={{ fontWeight: "800", color: "#676767" }}>
-          انتخاب سال زراعی
-        </h6>
+          <h6 style={{ fontWeight: "800", color: "#676767" }}>
+            انتخاب محصول
+          </h6>
+        </div>
+
+        <div className="search-field-modal" >
+          <span className="search-icon-modal">
+            <SearchIcon />
+          </span>
+
+          <input
+            className="search-input-field-modal w-100"
+            type="search"
+            placeholder="جستجو .."
+          />
+          <button type="submit" className="searchButton-modal">
+            <ArrowSearchIcon />
+          </button>
+        </div>
       </div>
       {/* <hr style={{ height: "2px", margin: "0" }} /> */}
-      <Modal.Body className="farm-field-modal-body product-field-modal" >
+      <Modal.Body className="farm-field-modal-body product-field-modal">
         {/* <Select data={data} onSelect={onSelect} /> */}
         <div
           style={{
@@ -66,18 +84,78 @@ const ProductFieldModal = ({
             // value={value}
             // onChange={handleChange}
           >
-            <FormControlLabel value="female" control={<Radio />} label="-" className="farm-field-radio" />
-            <FormControlLabel value="male" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="1" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="2" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="3" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="4" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="5" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="6" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="7" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="8" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="9" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
-            <FormControlLabel value="10" control={<Radio />} label="محصولات صنعتی" className="farm-field-radio" />
+            <FormControlLabel
+              value="female"
+              control={<Radio />}
+              label="-"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="male"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="1"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="2"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="3"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="4"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="5"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="6"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="7"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="8"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="9"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
+            <FormControlLabel
+              value="10"
+              control={<Radio />}
+              label="محصولات صنعتی"
+              className="farm-field-radio"
+            />
           </RadioGroup>
         </div>
       </Modal.Body>
@@ -101,7 +179,10 @@ const ProductFieldModal = ({
           style={{ justifyContent: "space-around" }}
         >
           <div className="mx-2">
-            <button className="farm-field-modal-btn btn btn-light-green" type="submit">
+            <button
+              className="farm-field-modal-btn btn btn-light-green"
+              type="submit"
+            >
               ثبت
             </button>
           </div>
