@@ -13,7 +13,7 @@ import {
   ArrowUpDownIcon,
   NewCalendarIcon,
 } from "../../../assets/icon";
-import "./../main.css";
+import "./../farm.css";
 import YearFieldModal from "./modals/yearFieldModal";
 import ProductFieldModal from "./modals/productFieldModal";
 import ProductGroupFieldModal from "./modals/productGroupFieldModal";
@@ -162,7 +162,7 @@ const AddCultivation = () => {
                     type="text"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="سال زراعی *"
+                    // placeholder="سال زراعی *"
                     style={
                       errors.sal_id && touched.sal_id
                         ? {
@@ -173,6 +173,12 @@ const AddCultivation = () => {
                     }
                     onClick={() => showYearModal()}
                   />
+                  {!year.name ? (
+                    <span className="fieldTitleEmpty">سال زراعی <span className="starSign"> *</span></span>
+                  ):(
+                    <span className="fieldTitleFilled">سال زراعی </span>
+                  )}
+                  
                   <span className="fieldIcon">
                     <ArrowUpDownIcon />
                   </span>
@@ -206,13 +212,18 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="productGroup"
-                    type="text"
+                    type="button"
                     value={productGroup.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="گروه محصول"
+                    // placeholder="گروه محصول"
                     onClick={() => showProductGroupModal()}
                   />
+                  {!productGroup.name ? (
+                    <span className="fieldTitleEmpty">گروه محصول</span>
+                  ):(
+                    <span className="fieldTitleFilled">گروه محصول</span>
+                  )}
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
@@ -225,7 +236,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="product"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     placeholder="محصول *"
@@ -260,10 +271,10 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="subProduct"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="زیر محصول (اختیاری)"
+                    // placeholder="زیر محصول (اختیاری)"
                     style={
                       errors.workerName && touched.workerName
                         ? {
@@ -273,6 +284,7 @@ const AddCultivation = () => {
                         : { border: "none" }
                     }
                   />
+                  <span className="fieldTitle">زیر محصول (اختیاری)</span>
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
@@ -306,7 +318,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="workerName"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="سطح زیر کشت"
@@ -331,7 +343,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="phone"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     placeholder="شماره تماس"
@@ -365,7 +377,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="workerName"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="تاریخ کاشت *"
@@ -390,7 +402,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="phone"
-                    type="Text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     placeholder="تاریخ برداشت *"
@@ -424,7 +436,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="workerName"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="وضعیت *"
@@ -444,7 +456,7 @@ const AddCultivation = () => {
                 <Box sx={{ width: { xs: "100%", sm: "48%" } }}>
                   <Field
                     name="phone"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     placeholder="قیمت (تومان/کلیوگرم)"
@@ -475,7 +487,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="workerName"
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     placeholder="نام شخص"

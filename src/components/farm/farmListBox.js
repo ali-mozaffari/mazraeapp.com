@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./main.css";
+import "./farm.css";
 import "chart.js/auto";
 import menuIcon from "../../assets/img/menu.png";
 import ForecastCultivationProgressItem from "./progressBar";

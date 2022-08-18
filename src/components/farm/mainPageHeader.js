@@ -218,7 +218,7 @@ const MainPageHeader = () => {
   const navigate = useNavigate();
   const path = window.location.pathname;
   console.log(window.location.pathname);
-  console.log(window.location.href);
+  // console.log(window.location.href);
 
   const [crumbs, setCrumbs] = useState();
   const pathName = (crumbs) => {

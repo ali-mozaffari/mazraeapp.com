@@ -46,23 +46,14 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
-  console.log(selected);
+  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
-console.log(dataList)
-  const handleSearch = (e) => {
-    console.log(e.target.value);
-    // setDataList(e.target.value);
-    // const filterd = dataList?.filter(item =>  item.title.toLowerCase().includes(e.target.value));
-    // Data?.filter(item =>  item.title.toLowerCase().includes(dataList));
-    // console.log(filterd)
-    // setDataList(filterd)
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     data(selected);
-    console.log(selected);
+    // console.log(selected);
   };
 
   return (
@@ -72,6 +63,7 @@ console.log(dataList)
           <div>
             <img
               src={closeNotification}
+              alt=""
               style={{
                 position: "absolute",
                 left: "25px",
@@ -137,88 +129,10 @@ console.log(dataList)
                   className="farm-field-radio"
                 />
               ))}
-
-              {/* <FormControlLabel
-                value="0"
-                control={<Radio />}
-                name="نیشکر"
-                label="نیشکر"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="1"
-                control={<Radio />}
-                name="پنبه"
-                label="پنبه"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="5"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="6"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="7"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="8"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="9"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="10"
-                control={<Radio />}
-                name="کتان"
-                label="کتان"
-                className="farm-field-radio"
-              /> */}
             </RadioGroup>
           </div>
         </div>
-        <div className="modal-footer justify-content-center border-top-0">
+        <div className="farm-field-modal-footer justify-content-center border-top-0">
           <div
             className="col-12 d-flex mt-3"
             style={{ justifyContent: "space-around" }}

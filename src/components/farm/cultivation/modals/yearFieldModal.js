@@ -85,7 +85,7 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
             </RadioGroup>
           </div>
         </div>
-        <div className="modal-footer justify-content-center border-top-0">
+        <div className="farm-field-modal-footer justify-content-center border-top-0">
           <div
             className="col-12 d-flex mt-3"
             style={{ justifyContent: "space-around" }}

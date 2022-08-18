@@ -85,6 +85,23 @@
     background-color: transparent !important; 
 }
 
+.fieldTitleEmpty {
+    position: absolute !important;
+    top: 40px !important;
+    right: 15px !important;
+}
+
+.fieldTitleFilled {
+    position: absolute !important;
+    top: 30px !important;
+    right: 15px !important;
+    font-size: 10px !important;
+}
+
+.starSign {
+    color: #F2634C !important;
+}
+
 .fieldIcon {
     position: absolute !important;
     top: 40px !important;
