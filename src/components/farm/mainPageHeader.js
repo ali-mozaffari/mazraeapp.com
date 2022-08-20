@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import App2 from "./chart";
+// import App2 from "./chart";
 import filterIcon from "../../assets/img/filterIcon.png";
 import sortIcon from "../../assets/img/sort-down.svg";
 import ForecastCultivationProgressItem from "./progressBar";

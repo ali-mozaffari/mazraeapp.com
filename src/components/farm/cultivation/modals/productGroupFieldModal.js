@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,6 +49,12 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   // console.log(selected);
 
   const [dataList, setDataList] = useState("");
+  // console.log(dataList)
+
+  const handleClick = () => {
+    hideModal();
+    setTimeout(() => setDataList(""), 1000)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,7 +77,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 height: "16px",
                 cursor: "pointer",
               }}
-              onClick={hideModal}
+              onClick={handleClick}
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
@@ -141,7 +147,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 ثبت
               </button>
@@ -150,7 +156,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 انصراف
               </button>

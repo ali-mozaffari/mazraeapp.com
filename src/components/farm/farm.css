@@ -9,45 +9,70 @@
     margin-bottom: 20px !important;
 }
 
-@media screen and (max-width: 899px) {
+@media screen and (max-width: 1084px) {
+    .farm-item-box {
+        width: 45% !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
     .farm-item-box {
         width: 95% !important;
     }
 }
 
+
 .rain-3d-report {
 
-    background-color: #eee;
+    background-color: #F6F8F7;
     /*opacity: 0.8;*/
     border-radius: 5px;
     /*padding: 10px   ;*/
-
 }
-
 
 .rain-unit {
     font-size: 13px;
     display: inline-flex;
-    background-color: lightgray;
-    color: gray;
-    padding: 10px;
+    background-color: #E4E4E4;
+    color: #A2A2A2;
     border-radius: 5px;
     text-align: center;
+    padding: 15px 3px;
+    margin: auto;
+    white-space: nowrap;
 }
 
+.wind-title {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 24px;
+    color: #676767;
+}
 
-.wind-unit{
-    font-size: 13px;
-    background-color: lightgray;
-    color: gray;
+.wind-unit {
+    color: #A2A2A2;
     padding: 3px 5px;
     border-radius: 5px;
     text-align: center;
     margin: 0 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 12px;
+}
+
+.wind-speed {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 24px;
+    color: #676767;
 }
 
 .wind-duration-title{
     font-size: 11px;
+    margin: 0 5px;
 }
 
 .dropdown-item-main:hover {
@@ -111,4 +136,12 @@
 .farm-bottom-btn {
     justify-content: space-between !important;
     padding: 0;
+}
+
+.chart-day {
+    color: #676767;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
 }
