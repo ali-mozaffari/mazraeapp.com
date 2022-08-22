@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./main.css";
+import "./farm.css";
 import "chart.js/auto";
 import menuIcon from "../../assets/img/menu.png";
 import ForecastCultivationProgressItem from "./progressBar";
@@ -14,8 +14,6 @@ import { Dropdown, ToastContainer } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
 import { getAccessList } from "../../redux/slice/access/accessListBox";
-
-
 
 const ITEM_HEIGHT = 48;
 
@@ -35,16 +33,10 @@ const FarmListBox = () => {
   const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
     useState(false);
-  // const [deleteMessage, setDeleteMessage] = useState(null);
 
   // Handle the displaying of the modal based on type and id
   const showDeleteModal = (id) => {
     setId(id);
-    // setFruitMessage(null);
-    // setVegetableMessage(null);
-
-    // setDeleteMessage(`Are you sure you want to delete the fruit '${fruits.find((x) => x.id === id).name}'?`);
-    // setDeleteMessage(`Are you sure you want to delete the fruit`);
 
     setDisplayConfirmationModal(true);
   };
@@ -56,21 +48,10 @@ const FarmListBox = () => {
 
   // Handle the actual deletion of the item
   const submitDelete = (id) => {
-    toast.success("مزرعه حذف شد")
-    // setFruitMessage(`The fruit '${fruits.find((x) => x.id === id).name}' was deleted successfully.`);
-    // setFruitMessage(`The fruit was deleted successfully.`);
-    // setFruits(fruits.filter((fruit) => fruit.id !== id));
+    toast.success("مزرعه حذف شد");
+
     setDisplayConfirmationModal(false);
   };
-  // const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
-
-  // const handleDeleteModalClickOpen = () => {
-  //   setDeleteModalOpen(true);
-  // };
-
-  // const handleDeleteModalClose = () => {
-  //   setDeleteModalOpen(false);
-  // };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -84,10 +65,10 @@ const FarmListBox = () => {
   return (
     <div className="container-fluid mt-4">
       <div className="row d-md-flex justify-content-between">
-
         {loading ? (
-          // <h1 style={{ jusfigyContent: "center" }}>درحال بازگذاری ...</h1>
-          <div style={{ height: "40%", width: "40%", paddingTop: "30px" }}><Loading /></div>
+          <div style={{ height: "40%", width: "40%", paddingTop: "30px" }}>
+            <Loading />
+          </div>
         ) : (
           postList?.map((item) => (
             <div
@@ -100,13 +81,9 @@ const FarmListBox = () => {
                 {/* <div>مزرعه من 2</div> */}
                 <div>
                   <div className="tableToolIconBgGray d-flex align-items-center">
-
                     <Dropdown>
-                      
                       <Dropdown.Toggle className="dropdown-toggle-icon">
-                        
-                          <img src={menuIcon} alt="menu" className="mx-auto" />
-
+                        <img src={menuIcon} alt="menu" className="mx-auto" />
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -117,7 +94,7 @@ const FarmListBox = () => {
                         </Dropdown.Item>
                         <Dropdown.Item className="dropdown-item-main">
                           <Link
-                            to={"/edit-codination-farm"}
+                            to={"/edit-coordination-farm"}
                             className="dropdownItem"
                           >
                             ویرایش مختصات مزرعه
@@ -151,52 +128,58 @@ const FarmListBox = () => {
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-
                   </div>
                 </div>
               </div>
 
-              <p className="small text-gray mt-3">بارش باران در 3 روز آینده</p>
+              <p className="rain-title mt-3">بارش باران در 3 روز آینده</p>
 
               <div className="rain-3d-report d-flex">
-                <div className="rain-unit ">میلی لیتر</div>
+                <div className="rain-unit">میلی لیتر</div>
 
-                <div className="w-100 d-flex justify-content-evenly align-items-center">
+                <div className="w-100 d-flex justify-content-around align-items-center">
                   <div className="text-center">
                     18
                     <br />
-                    <span className="small text-gray">شنبه</span>
+                    <span className="chart-day">شنبه</span>
                   </div>
                   <div className="text-center">
                     23
                     <br />
-                    <span className="small text-gray">یکشنبه</span>
+                    <span className="chart-day">یکشنبه</span>
                   </div>
                   <div className="align-items-center text-center">
                     12
                     <br />
-                    <span className="small text-gray">دوشنبه</span>
+                    <span className="chart-day">دوشنبه</span>
                   </div>
                 </div>
               </div>
 
               {/*<hr/>*/}
+              <div style={{ paddingTop: "10px" }}>
+                <RainChart />
+              </div>
 
-              <RainChart />
               <hr />
 
-              <div className="d-flex justify-content-evenly align-items-center">
-                <div className="small text-bold">میزان باد</div>
-                <div className="small text-gray wind-duration-title">
-                  (در 24 ساعت آینده )
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <span className="wind-title small text-bold">میزان باد</span>
+                  <span className="wind-duration-title small">
+                    (در 24 ساعت آینده)
+                  </span>
                 </div>
+
                 <div className="d-flex align-items-center">
-                  <span className="wind-unit">mph</span>
-                  <span>24.34</span>
+                  <span className="wind-unit">کیلومتر بر ساعت</span>
+                  <span className="wind-speed">24.34</span>
                 </div>
               </div>
 
               <hr />
+
+              <div></div>
 
               {/* <ForecastCultivationProgressItem
                         farm={false}

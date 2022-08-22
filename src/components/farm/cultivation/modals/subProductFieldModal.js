@@ -40,41 +40,62 @@ const Data = [
     title: "شاهدانه",
   },
 ];
-const ProductFieldModal = ({ showModal, hideModal, data }) => {
+
+const SubProductFieldModal = ({ showModal, hideModal, data }) => {
+  const [textInput, setTextInput] = useState("");
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
+    setTextInput("");
   };
-  // console.log(selected);
+
+  const handleText = (e) => {
+    setTextInput({ value: e.target.value, name: e.target.value });
+    setSelected("");
+  };
+  console.log(textInput);
+  console.log(selected);
 
   const [dataList, setDataList] = useState("");
 
+  const handleClick = () => {
+    hideModal();
+    setTimeout(() => setDataList(""), 1000);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    data(selected);
-    // console.log(selected);
+    if(textInput === ''){
+      data(selected);
+    }else{
+      data(textInput)
+    }
+    
   };
 
   return (
     <Modal show={showModal} className="farm-field-modal">
       <form onSubmit={handleSubmit}>
-        <div className="farm-field-modal-header">
+        <div
+          className="farm-field-modal-header"
+          style={{ boxShadow: "none", padding: "30px 15px 5px 35px" }}
+        >
           <div>
             <img
               src={closeNotification}
               alt=""
               style={{
                 position: "absolute",
-                left: "25px",
+                left: "40px",
                 top: "30px",
                 height: "16px",
                 cursor: "pointer",
               }}
-              onClick={hideModal}
+              onClick={handleClick}
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
-              انتخاب گروه محصول
+              انتخاب زیر محصول
             </h6>
           </div>
 
@@ -90,6 +111,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
               // onChange={handleSearch}
               onChange={(e) => setDataList(e.target.value)}
             />
+
             <button type="submit" className="searchButton-modal">
               <ArrowSearchIcon />
             </button>
@@ -99,15 +121,34 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
           <div
             style={{
               margin: "0",
-              marginTop: "30px",
+              marginTop: "10px",
               color: "#4A4A4A",
             }}
           >
+            <div
+              style={{
+                marginRight: "15px",
+                borderBottom: "1px solid #aeaeae",
+                paddingBottom: "20px",
+              }}
+            >
+              <input
+                name="workerName"
+                type="text"
+                autoComplete="off"
+                className="search-input-field-modal w-100"
+                placeholder="نام ببرید.."
+                style={{ borderRadius: "8px", padding: "8px 15px" }}
+                value={textInput.value}
+                onChange={handleText}
+              />
+            </div>
+            {textInput === '' || textInput.value === '' ? (
             <RadioGroup
+              className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
-              // onChange={(e) => setDataList(e.target.value)}
             >
               <FormControlLabel
                 value=""
@@ -129,6 +170,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
+            ): ''}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
@@ -140,7 +182,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 ثبت
               </button>
@@ -149,7 +191,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 انصراف
               </button>
@@ -161,4 +203,4 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default ProductFieldModal;
+export default SubProductFieldModal;

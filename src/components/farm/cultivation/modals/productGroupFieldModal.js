@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,7 +40,8 @@ const Data = [
     title: "شاهدانه",
   },
 ];
-const ProductFieldModal = ({ showModal, hideModal, data }) => {
+
+const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -48,6 +49,12 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
   // console.log(selected);
 
   const [dataList, setDataList] = useState("");
+  // console.log(dataList)
+
+  const handleClick = () => {
+    hideModal();
+    setTimeout(() => setDataList(""), 1000)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,7 +77,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
                 height: "16px",
                 cursor: "pointer",
               }}
-              onClick={hideModal}
+              onClick={handleClick}
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
@@ -140,7 +147,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 ثبت
               </button>
@@ -149,7 +156,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={hideModal}
+                onClick={handleClick}
               >
                 انصراف
               </button>
@@ -161,4 +168,4 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default ProductFieldModal;
+export default ProductGroupFieldModal;

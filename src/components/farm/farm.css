@@ -1,0 +1,196 @@
+.farm-item-box {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    width: 30%;
+    margin-right: 10px !important;
+    margin-left: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+@media screen and (max-width: 1084px) {
+    .farm-item-box {
+        width: 45% !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .farm-item-box {
+        width: 95% !important;
+    }
+}
+
+.rain-3d-report {
+    background-color: #F6F8F7;
+    /*opacity: 0.8;*/
+    border-radius: 5px;
+    /*padding: 10px   ;*/
+}
+
+.rain-title {
+    color: #676767;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.rain-unit {
+    font-size: 13px;
+    display: inline-flex;
+    background-color: #E4E4E4;
+    color: #A2A2A2;
+    border-radius: 5px;
+    text-align: center;
+    padding: 15px 3px;
+    margin: auto;
+    white-space: nowrap;
+}
+
+.wind-title {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 24px;
+    color: #676767;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-title {
+        font-size: 11px !important;
+    }
+}
+
+.wind-unit {
+    color: #676767;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 12px;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-unit {
+        font-size: 9px !important;
+    }
+}
+
+.wind-speed {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 24px;
+    color: #676767;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-speed {
+        font-size: 11px !important;
+    }
+}
+
+.wind-duration-title{
+    font-size: 11px;
+    margin: 0 5px;
+    color: #676767;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-duration-title {
+        font-size: 9px !important;
+    }
+}
+
+.dropdown-item-main:hover {
+    background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.dropdownItem {
+    text-decoration: none !important;
+    color: #212529 !important;
+    font-size: 14px !important;
+     width: 100% !important;
+}
+
+.dropdown-toggle-icon {
+    background-color: #C2C2C2 !important;
+    border-radius: 8px !important;
+    width: 37px !important;
+    height: 37px !important;
+    border: none !important;
+}
+
+.dropdown-toggle-icon:focus {
+    box-shadow: none !important;
+}
+
+.dropdown-toggle-icon::after {
+    display: none !important; 
+  }
+
+.dropdown-menu {
+    text-align: right !important;
+}
+
+.dropdown-menu:focus {
+    background-color: transparent !important; 
+}
+
+.fieldTitleEmpty {
+    position: absolute !important;
+    top: 40px !important;
+    right: 15px !important;
+}
+
+.fieldTitleFilled {
+    position: absolute !important;
+    top: 30px !important;
+    right: 15px !important;
+    font-size: 10px !important;
+}
+
+.starSign {
+    color: #F2634C !important;
+}
+
+.fieldIcon {
+    position: absolute !important;
+    top: 40px !important;
+    left: 15px !important;
+}
+
+.farm-coordination-title {
+    white-space: nowrap;
+    padding: 15px;
+    height: 50px;
+    color: #2C689A;
+    background: white;
+    border: none;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.locationIcon {
+    position: absolute !important;
+    top: 35px !important;
+    left: 20px !important;
+}
+
+.farm-bottom-btn {
+    justify-content: space-between !important;
+    padding: 0;
+}
+
+.chart-day {
+    color: #676767;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+}
