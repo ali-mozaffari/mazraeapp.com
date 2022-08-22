@@ -45,6 +45,7 @@
     padding: 15px 60px;
     border-radius: 8px;
     height: 50px;
+    font-weight: 800;
 }
 
 .btn-light-gray {
@@ -155,6 +156,11 @@
     border: none;
     padding: 8px 60px 8px 10px;
     /* color: #C2C2C2; */
+}
+
+.search-input-field-modal::placeholder {
+    color: #A2A2A2;
+    font-size: 12px;
 }
 
 .searchButton-modal {

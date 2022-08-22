@@ -144,13 +144,21 @@
     position: absolute !important;
     top: 40px !important;
     right: 15px !important;
+    color: #A2A2A2;
+    cursor: pointer;
 }
+
+/* .fieldTitleEmpty:focus {
+    top: 30px !important;
+    font-size: 10px !important;
+} */
 
 .fieldTitleFilled {
     position: absolute !important;
     top: 30px !important;
     right: 15px !important;
     font-size: 10px !important;
+    color: #A2A2A2;
 }
 
 .starSign {
@@ -183,8 +191,9 @@
 }
 
 .farm-bottom-btn {
-    justify-content: space-between !important;
+    /* justify-content: space-between !important; */
     padding: 0;
+    font-weight: 800;
 }
 
 .chart-day {
@@ -193,4 +202,10 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
+}
+
+.persianToolsText {
+    color: #2C689A;
+    padding-right: 5px;
+    font-size: 11px;
 }

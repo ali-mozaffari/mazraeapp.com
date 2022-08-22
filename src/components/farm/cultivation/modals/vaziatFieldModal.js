@@ -5,7 +5,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import "./farmModal.css";
 
-const YearFieldModal = ({ showModal, hideModal, data }) => {
+const Data = [
+  {
+    id: 1,
+    title: "تصمیم به کشت",
+  },
+  {
+    id: 2,
+    title: "محصول کشت شده",
+  },
+  {
+    id: 3,
+    title: "محصول برداشت شده",
+  },
+  {
+    id: 4,
+    title: "محصول از بین رفته",
+  },
+];
+
+const VaziatFieldModal = ({ showModal, hideModal, data }) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -17,9 +36,8 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
   };
 
   return (
-      <Modal show={showModal} className="farm-field-modal">
-    <form onSubmit={handleSubmit}>
-
+    <Modal show={showModal} className="farm-field-modal">
+      <form onSubmit={handleSubmit}>
         <div className="farm-field-modal-header justify-content-start">
           <img
             src={closeNotification}
@@ -54,34 +72,16 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
               // value={value}
               onChange={handleChange}
             >
-              <FormControlLabel
-                value="1"
-                control={<Radio />}
-                name="1397-1398"
-                label="1397-1398"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="2"
-                control={<Radio />}
-                name="1398-1399"
-                label="1398-1399"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio />}
-                name="1399-1400"
-                label="1399-1400"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio />}
-                name="1400-1401"
-                label="1400-1401"
-                className="farm-field-radio"
-              />
+              {Data?.map((item) => (
+                <FormControlLabel
+                  key={item.id}
+                  value={item.id}
+                  control={<Radio />}
+                  name={item.title}
+                  label={item.title}
+                  className="farm-field-radio"
+                />
+              ))}
             </RadioGroup>
           </div>
         </div>
@@ -110,11 +110,9 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
             </div>
           </div>
         </div>
-
-        </form>
-      </Modal>
-    
+      </form>
+    </Modal>
   );
 };
 
-export default YearFieldModal;
+export default VaziatFieldModal;

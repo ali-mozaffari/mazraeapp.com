@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import "yup-phone";
+import * as persianTools from "@persian-tools/persian-tools";
 import { Field, Form, Formik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +12,7 @@ import { Box, styled } from "@mui/system";
 import {
   ArrowSingleDownIcon,
   ArrowUpDownIcon,
+  InfoLigthIcon,
   LocaltionIcon,
   NewCalendarIcon,
 } from "../../../assets/icon";
@@ -22,6 +24,9 @@ import SubProductFieldModal from "./modals/subProductFieldModal";
 import { Modal } from "react-bootstrap";
 import { Calendar } from "react-datepicker2";
 import moment from "moment-jalaali";
+import VaziatFieldModal from "./modals/vaziatFieldModal";
+import PriceFieldModal from "./modals/priceFieldModal";
+import TotalProductFieldModal from "./modals/totalProductFieldModal";
 
 const AddCultivation = () => {
   const navigate = useNavigate();
@@ -33,7 +38,6 @@ const AddCultivation = () => {
   const [displayYearModal, setDisplayYearModal] = useState(false);
   // Handle the displaying modal of year field
   const showYearModal = (id) => {
-    // setId(id);
     setDisplayYearModal(true);
   };
   // Hide the modal
@@ -46,11 +50,9 @@ const AddCultivation = () => {
     useState(false);
   // Handle the displaying modal of product field
   const showProductGroupModal = (id) => {
-    // setId(id);
     setDisplayProductGroupModal(true);
   };
   const hideProductGroupModal = (id) => {
-    // setId(id);
     setDisplayProductGroupModal(false);
   };
 
@@ -58,11 +60,9 @@ const AddCultivation = () => {
   const [displayProductModal, setDisplayProductModal] = useState(false);
   // Handle the displaying modal of product field
   const showProductModal = (id) => {
-    // setId(id);
     setDisplayProductModal(true);
   };
   const hideProductModal = (id) => {
-    // setId(id);
     setDisplayProductModal(false);
   };
 
@@ -70,14 +70,44 @@ const AddCultivation = () => {
   const [displaySubProductModal, setDisplaySubProductModal] = useState(false);
   // Handle the displaying modal of product field
   const showSubProductModal = (id) => {
-    // setId(id);
     setDisplaySubProductModal(true);
   };
   const hideSubProductModal = (id) => {
-    // setId(id);
     setDisplaySubProductModal(false);
   };
 
+  // Vaziat Field
+  const [displayVaziatModal, setDisplayVaziatModal] = useState(false);
+  // Handle the displaying modal of vaziat field
+  const showVaziatModal = (id) => {
+    setDisplayVaziatModal(true);
+  };
+  const hideVaziatModal = (id) => {
+    setDisplayVaziatModal(false);
+  };
+
+  // TotalProduct Field
+  const [displayTotalProductModal, setDisplayTotalProductModal] =
+    useState(false);
+  // Handle the displaying modal of TotalProduct field
+  const showTotalProductModal = (id) => {
+    setDisplayTotalProductModal(true);
+  };
+  const hideTotalProductModal = (id) => {
+    setDisplayTotalProductModal(false);
+  };
+
+  // Price Field
+  const [displayPriceModal, setDisplayPriceModal] = useState(false);
+  // Handle the displaying modal of Price field
+  const showPriceModal = (id) => {
+    setDisplayPriceModal(true);
+  };
+  const hidePriceModal = (id) => {
+    setDisplayPriceModal(false);
+  };
+
+  //Get Data from Modal
   const [year, setYear] = useState("");
   const getYear = (data) => {
     setYear(data);
@@ -96,7 +126,6 @@ const AddCultivation = () => {
   const [subProduct, setSubProduct] = useState("");
   const getSubProduct = (data) => {
     setSubProduct(data);
-    console.log(subProduct);
   };
 
   const [harvestDateTime, setHarvestDateTime] = useState("");
@@ -110,6 +139,44 @@ const AddCultivation = () => {
   const handlePlantingDateTime = () => {
     setShowCalendarPlanting(!showCalendarPlanting);
   };
+
+  const [vaziat, setVaziat] = useState("");
+  const getVaziat = (data) => {
+    setVaziat(data);
+  };
+
+  const [totalProduct, setTotalProduct] = useState("");
+  const getTotalProduct = (data) => {
+    setTotalProduct(data);
+  };
+  console.log(totalProduct)
+  console.log(totalProduct.input)
+
+  const [price, setPrice] = useState("");
+  const getPrice = (data) => {
+    setPrice(data);
+  };
+
+  // const [totalProduct, setTotalProduct] = useState("");
+  // const handleTotalProduct = (e) => {
+  //   setTotalProduct(e.target.value);
+  // };
+
+  // const [onClickTotalProductFieldLable, setOnClickTotalProductFieldLable] =
+  //   useState(false);
+  // const handleTotalProductLable = (e) => {
+  //   setOnClickTotalProductFieldLable(true);
+  // };
+
+  // const [price, setPrice] = useState("");
+  // const handlePrice = (e) => {
+  //   setPrice(e.target.value);
+  // };
+
+  // const [onClickPriceFieldLable, setOnPriceFieldLable] = useState(false);
+  // const handlePriceLable = (e) => {
+  //   setOnPriceFieldLable(true);
+  // };
 
   let sal_id_validation = () => {
     if (!year) {
@@ -143,17 +210,30 @@ const AddCultivation = () => {
     }
   };
 
+  const vaziat_validation = () => {
+    if (!vaziat) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   //  .test(function(permissionType) {if(permissionType === null) return false}),
   const validation = Yup.object().shape({
     // sal_id: Yup.string().required(),
     sal_id: Yup.string().test("sal_id", "required", sal_id_validation),
     product: Yup.string().test("product", "required", product_validation),
-    harvest_datetime: Yup.string().test("harvestDateTime", "required", harvestDateTime_validation),
-    planting_datetime: Yup.string().test("plantingDateTime", "required", plantingDateTime_validation),
-    status: Yup.string().required(),
-    cultivationArea: Yup.string().required(),
-    plantingDate: Yup.string().required(),
-    harvestDate: Yup.string().required(),
+    harvest_datetime: Yup.string().test(
+      "harvestDateTime",
+      "required",
+      harvestDateTime_validation
+    ),
+    planting_datetime: Yup.string().test(
+      "plantingDateTime",
+      "required",
+      plantingDateTime_validation
+    ),
+    vaziat: Yup.string().test("vaziat", "required", vaziat_validation),
   });
 
   const initialValues = {
@@ -161,12 +241,14 @@ const AddCultivation = () => {
     productGroup: productGroup.value,
     product: product.value,
     subProduct: subProduct.value,
-    harvest_datetime:harvestDateTime,
-    planting_datetime:plantingDateTime,
+    harvest_datetime: harvestDateTime,
+    planting_datetime: plantingDateTime,
     sathe_zire_kesht: "",
-    vaziat: "",
-    planting_datetime: "",
     harvest_datetime: "",
+    planting_datetime: "",
+    vaziat: "",
+    totalProduct: totalProduct.input,
+    price: "",
   };
 
   const onFormSubmit = (values) => {
@@ -225,7 +307,7 @@ const AddCultivation = () => {
                 >
                   <Field
                     name="sal_id"
-                    value={year.name}
+                    value={year?.name}
                     type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
@@ -240,14 +322,13 @@ const AddCultivation = () => {
                     }
                     onClick={() => showYearModal()}
                   />
-                  {!year.name ? (
+                  {!year?.name ? (
                     <span className="fieldTitleEmpty">
                       سال زراعی <span className="starSign"> *</span>
                     </span>
                   ) : (
                     <span className="fieldTitleFilled">سال زراعی </span>
                   )}
-
                   <span className="fieldIcon">
                     <ArrowUpDownIcon />
                   </span>
@@ -282,13 +363,13 @@ const AddCultivation = () => {
                   <Field
                     name="productGroup"
                     type="button"
-                    value={productGroup.name}
+                    value={productGroup?.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     // placeholder="گروه محصول"
                     onClick={() => showProductGroupModal()}
                   />
-                  {!productGroup.name ? (
+                  {!productGroup?.name ? (
                     <span className="fieldTitleEmpty">گروه محصول</span>
                   ) : (
                     <span className="fieldTitleFilled">گروه محصول</span>
@@ -306,7 +387,7 @@ const AddCultivation = () => {
                   <Field
                     name="product"
                     type="button"
-                    value={product.name}
+                    value={product?.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
                     // placeholder="محصول *"
@@ -320,7 +401,7 @@ const AddCultivation = () => {
                     }
                     onClick={() => showProductModal()}
                   />
-                  {!product.name ? (
+                  {!product?.name ? (
                     <span className="fieldTitleEmpty">
                       محصول <span className="starSign"> *</span>{" "}
                     </span>
@@ -349,13 +430,13 @@ const AddCultivation = () => {
                   <Field
                     name="subProduct"
                     type="button"
-                    value={subProduct.name}
+                    value={subProduct?.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     // placeholder="زیر محصول (اختیاری)"
                     onClick={() => showSubProductModal()}
                   />
-                  {!subProduct.name ? (
+                  {!subProduct?.name ? (
                     <span className="fieldTitleEmpty">زیر محصول</span>
                   ) : (
                     <span className="fieldTitleFilled">زیر محصول</span>
@@ -523,41 +604,80 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="workerName"
+                    name="vaziat"
+                    value={vaziat?.name}
                     type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
-                    placeholder="وضعیت *"
                     style={
-                      errors.workerName && touched.workerName
+                      errors.vaziat && touched.vaziat
                         ? {
                             border: "1px solid #f00",
                             color: "red",
                           }
                         : { border: "none" }
                     }
+                    onClick={() => showVaziatModal()}
                   />
+                  {!vaziat ? (
+                    <span className="fieldTitleEmpty">
+                      وضعیت<span className="starSign"> *</span>
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled">وضعیت</span>
+                  )}
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
                 </Box>
-                <Box sx={{ width: { xs: "100%", sm: "48%" } }}>
-                  <Field
-                    name="phone"
-                    type="button"
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
-                    placeholder="قیمت (تومان/کلیوگرم)"
-                    style={
-                      errors.phone && touched.phone
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                  />
-                </Box>
+                {vaziat?.value === "3" ? (
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%", position: "relative" },
+                    }}
+                  >
+                    <Field
+                      name="totalProduct"
+                      value={totalProduct}
+                      type="button"
+                      autoComplete="off"
+                      className="search-input w-100 mt-4 py-3"
+                      onClick={showTotalProductModal}
+                      // onChange={handleTotalProduct}
+                    />
+                    {!totalProduct ? (
+                      <span
+                        className="fieldTitleEmpty"
+                        // onClick={handleTotalProductLable}
+                      >
+                        تولید کل (کیلوگرم در هکتار)
+                      </span>
+                    ) : (
+                      <span className="fieldTitleFilled">
+                        تولید کل (کیلوگرم در هکتار)
+                      </span>
+                    )}
+                    <span className="fieldIcon" style={{ color: "#A2A2A2" }}>
+                      کیلوگرم
+                    </span>
+
+                    {totalProduct ? (
+                      <span>
+                        <span>
+                          <InfoLigthIcon />
+                        </span>
+                        <span className="persianToolsText">
+                          {persianTools.numberToWords(totalProduct)}
+                          <span> </span>
+                        </span>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </Box>
+                ) : (
+                  ""
+                )}
               </Box>
 
               <Box
@@ -567,28 +687,52 @@ const AddCultivation = () => {
                   padding: "0",
                 }}
               >
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "48%" },
-                    position: "relative",
-                  }}
-                >
-                  <Field
-                    name="workerName"
-                    type="button"
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
-                    placeholder="نام شخص"
-                    style={
-                      errors.workerName && touched.workerName
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                  />
-                </Box>
+                {vaziat?.value === "3" ? (
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      name="price"
+                      value={price}
+                      type="button"
+                      autoComplete="off"
+                      className="search-input w-100 mt-4 py-3"
+                      onClick={showPriceModal}
+                      // onChange={handlePrice}
+                    />
+                    {!price ? (
+                      <span
+                        className="fieldTitleEmpty"
+                        // onClick={handlePriceLable}
+                      >
+                        قیمت (تومان/کیلوگرم)
+                      </span>
+                    ) : (
+                      <span className="fieldTitleFilled">
+                        قیمت (تومان/کیلوگرم)
+                      </span>
+                    )}
+
+                    {price ? (
+                      <span>
+                        <span>
+                          <InfoLigthIcon />
+                        </span>
+                        <span className="persianToolsText">
+                          {persianTools.numberToWords(price)}
+                          <span> تومان</span>
+                        </span>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </Box>
+                ) : (
+                  ""
+                )}
               </Box>
 
               <div className="farm-bottom-btn d-flex mt-3">
@@ -638,7 +782,6 @@ const AddCultivation = () => {
           timePicker={false}
           className="border-0 shadow-sm my-5"
           onChange={(value) => {
-            // console.warn(value);
             const month = value.jMonth() + 1;
             setHarvestDateTime(
               value.jYear() + "-" + month + "-" + value.jDate()
@@ -655,7 +798,6 @@ const AddCultivation = () => {
           timePicker={false}
           className="border-0 shadow-sm my-5"
           onChange={(value) => {
-            // console.warn(value);
             const month = value.jMonth() + 1;
             setHarvestDateTime(
               value.jYear() + "-" + month + "-" + value.jDate()
@@ -665,14 +807,17 @@ const AddCultivation = () => {
         />
       </Modal>
 
-      <Modal show={showCalendarPlanting} centered onHide={handlePlantingDateTime}>
+      <Modal
+        show={showCalendarPlanting}
+        centered
+        onHide={handlePlantingDateTime}
+      >
         <Calendar
           persianDigits={true}
           isGregorian={false}
           timePicker={false}
           className="border-0 shadow-sm my-5"
           onChange={(value) => {
-            // console.warn(value);
             const month = value.jMonth() + 1;
             setPlantingDateTime(
               value.jYear() + "-" + month + "-" + value.jDate()
@@ -681,7 +826,24 @@ const AddCultivation = () => {
           }}
         />
       </Modal>
-      
+
+      <VaziatFieldModal
+        showModal={displayVaziatModal}
+        hideModal={hideVaziatModal}
+        data={getVaziat}
+      />
+
+      <TotalProductFieldModal
+        showModal={displayTotalProductModal}
+        hideModal={hideTotalProductModal}
+        data={getTotalProduct}
+      />
+
+      <PriceFieldModal
+        showModal={displayPriceModal}
+        hideModal={hidePriceModal}
+        data={getPrice}
+      />
     </div>
   );
 };
