@@ -11,13 +11,17 @@ import { Box, styled } from "@mui/system";
 import {
   ArrowSingleDownIcon,
   ArrowUpDownIcon,
+  LocaltionIcon,
   NewCalendarIcon,
 } from "../../../assets/icon";
 import "./../farm.css";
 import YearFieldModal from "./modals/yearFieldModal";
 import ProductFieldModal from "./modals/productFieldModal";
 import ProductGroupFieldModal from "./modals/productGroupFieldModal";
-import { setYear } from "date-fns";
+import SubProductFieldModal from "./modals/subProductFieldModal";
+import { Modal } from "react-bootstrap";
+import { Calendar } from "react-datepicker2";
+import moment from "moment-jalaali";
 
 const AddCultivation = () => {
   const navigate = useNavigate();
@@ -62,17 +66,50 @@ const AddCultivation = () => {
     setDisplayProductModal(false);
   };
 
+  // SubProduct Field
+  const [displaySubProductModal, setDisplaySubProductModal] = useState(false);
+  // Handle the displaying modal of product field
+  const showSubProductModal = (id) => {
+    // setId(id);
+    setDisplaySubProductModal(true);
+  };
+  const hideSubProductModal = (id) => {
+    // setId(id);
+    setDisplaySubProductModal(false);
+  };
+
   const [year, setYear] = useState("");
   const getYear = (data) => {
     setYear(data);
-  }
+  };
 
   const [productGroup, setProductGroup] = useState("");
   const getProductGroup = (data) => {
     setProductGroup(data);
-  }
+  };
 
-  
+  const [product, setProduct] = useState("");
+  const getProduct = (data) => {
+    setProduct(data);
+  };
+
+  const [subProduct, setSubProduct] = useState("");
+  const getSubProduct = (data) => {
+    setSubProduct(data);
+    console.log(subProduct);
+  };
+
+  const [harvestDateTime, setHarvestDateTime] = useState("");
+  const [showCalendarHarvest, setShowCalendarHarvest] = useState(false);
+  const handleHarvestDateTime = () => {
+    setShowCalendarHarvest(!showCalendarHarvest);
+  };
+
+  const [plantingDateTime, setPlantingDateTime] = useState("");
+  const [showCalendarPlanting, setShowCalendarPlanting] = useState(false);
+  const handlePlantingDateTime = () => {
+    setShowCalendarPlanting(!showCalendarPlanting);
+  };
 
   let sal_id_validation = () => {
     if (!year) {
@@ -81,15 +118,38 @@ const AddCultivation = () => {
       return true;
     }
   };
+
+  const product_validation = () => {
+    if (!product) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  let harvestDateTime_validation = () => {
+    if (!harvestDateTime) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  let plantingDateTime_validation = () => {
+    if (!plantingDateTime) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   //  .test(function(permissionType) {if(permissionType === null) return false}),
   const validation = Yup.object().shape({
     // sal_id: Yup.string().required(),
-    sal_id: Yup.string().test(
-      "sal_id",
-      "required",
-      sal_id_validation
-    ),
-    product: Yup.string().required(),
+    sal_id: Yup.string().test("sal_id", "required", sal_id_validation),
+    product: Yup.string().test("product", "required", product_validation),
+    harvest_datetime: Yup.string().test("harvestDateTime", "required", harvestDateTime_validation),
+    planting_datetime: Yup.string().test("plantingDateTime", "required", plantingDateTime_validation),
     status: Yup.string().required(),
     cultivationArea: Yup.string().required(),
     plantingDate: Yup.string().required(),
@@ -99,8 +159,10 @@ const AddCultivation = () => {
   const initialValues = {
     sal_id: year.value,
     productGroup: productGroup.value,
-    product: "",
-    subProduct: "",
+    product: product.value,
+    subProduct: subProduct.value,
+    harvest_datetime:harvestDateTime,
+    planting_datetime:plantingDateTime,
     sathe_zire_kesht: "",
     vaziat: "",
     planting_datetime: "",
@@ -109,7 +171,12 @@ const AddCultivation = () => {
 
   const onFormSubmit = (values) => {
     setLoading(true);
-    // setClicked(true);
+    const harvestDate = moment(harvestDateTime, "jYYYY/jMM/jDD").format(
+      "YYYY-MM-DD"
+    );
+    const plantingDate = moment(plantingDateTime, "jYYYY/jMM/jDD").format(
+      "YYYY-MM-DD"
+    );
 
     const payload = {
       sal_id: year.toString(),
@@ -159,7 +226,7 @@ const AddCultivation = () => {
                   <Field
                     name="sal_id"
                     value={year.name}
-                    type="text"
+                    type="button"
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     // placeholder="سال زراعی *"
@@ -174,11 +241,13 @@ const AddCultivation = () => {
                     onClick={() => showYearModal()}
                   />
                   {!year.name ? (
-                    <span className="fieldTitleEmpty">سال زراعی <span className="starSign"> *</span></span>
-                  ):(
+                    <span className="fieldTitleEmpty">
+                      سال زراعی <span className="starSign"> *</span>
+                    </span>
+                  ) : (
                     <span className="fieldTitleFilled">سال زراعی </span>
                   )}
-                  
+
                   <span className="fieldIcon">
                     <ArrowUpDownIcon />
                   </span>
@@ -221,7 +290,7 @@ const AddCultivation = () => {
                   />
                   {!productGroup.name ? (
                     <span className="fieldTitleEmpty">گروه محصول</span>
-                  ):(
+                  ) : (
                     <span className="fieldTitleFilled">گروه محصول</span>
                   )}
                   <span className="fieldIcon">
@@ -237,9 +306,10 @@ const AddCultivation = () => {
                   <Field
                     name="product"
                     type="button"
+                    value={product.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
-                    placeholder="محصول *"
+                    // placeholder="محصول *"
                     style={
                       errors.product && touched.product
                         ? {
@@ -250,6 +320,13 @@ const AddCultivation = () => {
                     }
                     onClick={() => showProductModal()}
                   />
+                  {!product.name ? (
+                    <span className="fieldTitleEmpty">
+                      محصول <span className="starSign"> *</span>{" "}
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled"> محصول</span>
+                  )}
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
@@ -272,19 +349,17 @@ const AddCultivation = () => {
                   <Field
                     name="subProduct"
                     type="button"
+                    value={subProduct.name}
                     autoComplete="off"
                     className="search-input w-100 mt-4 py-3"
                     // placeholder="زیر محصول (اختیاری)"
-                    style={
-                      errors.workerName && touched.workerName
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
+                    onClick={() => showSubProductModal()}
                   />
-                  <span className="fieldTitle">زیر محصول (اختیاری)</span>
+                  {!subProduct.name ? (
+                    <span className="fieldTitleEmpty">زیر محصول</span>
+                  ) : (
+                    <span className="fieldTitleFilled">زیر محصول</span>
+                  )}
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
@@ -331,33 +406,30 @@ const AddCultivation = () => {
                         : { border: "none" }
                     }
                   />
-                  <span className="fieldIcon">
-                    <ArrowSingleDownIcon />
-                  </span>
                 </Box>
                 <Box
                   sx={{
                     width: { xs: "100%", sm: "48%" },
                     position: "relative",
+                    display: "flex",
+                    justifyContent: "end",
                   }}
                 >
-                  <Field
-                    name="phone"
+                  <button
                     type="button"
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
-                    placeholder="شماره تماس"
-                    style={
-                      errors.phone && touched.phone
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                  />
-                  <span className="fieldIcon">
-                    <ArrowSingleDownIcon />
+                    className="farm-coordination-title mx-1 mt-4"
+                  >
+                    مختصات کل مزرعه
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-dark-blue mx-1 mt-4"
+                    style={{ width: "40%", display: "-webkit-box" }}
+                  >
+                    افزودن
+                  </button>
+                  <span className="locationIcon">
+                    <LocaltionIcon />
                   </span>
                 </Box>
               </Box>
@@ -376,20 +448,28 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="workerName"
+                    name="harvest_datetime"
                     type="button"
+                    value={harvestDateTime}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
-                    placeholder="تاریخ کاشت *"
+                    className="search-input w-100 mt-4 pl-5 py-3"
                     style={
-                      errors.workerName && touched.workerName
+                      errors.harvest_datetime && touched.harvest_datetime
                         ? {
                             border: "1px solid #f00",
                             color: "red",
                           }
                         : { border: "none" }
                     }
+                    onClick={handleHarvestDateTime}
                   />
+                  {!harvestDateTime ? (
+                    <span className="fieldTitleEmpty">
+                      تاریخ کاشت <span className="starSign"> *</span>{" "}
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled"> تاریخ کاشت</span>
+                  )}
                   <span className="fieldIcon">
                     <NewCalendarIcon />
                   </span>
@@ -401,20 +481,28 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="phone"
+                    name="planting_datetime"
                     type="button"
+                    value={plantingDateTime}
                     autoComplete="off"
                     className="search-input w-100 mt-4 pl-5 py-3"
-                    placeholder="تاریخ برداشت *"
                     style={
-                      errors.phone && touched.phone
+                      errors.planting_datetime && touched.planting_datetime
                         ? {
                             border: "1px solid #f00",
                             color: "red",
                           }
                         : { border: "none" }
                     }
+                    onClick={handlePlantingDateTime}
                   />
+                  {!plantingDateTime ? (
+                    <span className="fieldTitleEmpty">
+                      تاریخ برداشت <span className="starSign"> *</span>{" "}
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled"> تاریخ برداشت</span>
+                  )}
                   <span className="fieldIcon">
                     <NewCalendarIcon />
                   </span>
@@ -533,12 +621,67 @@ const AddCultivation = () => {
 
       <ProductFieldModal
         showModal={displayProductModal}
-        // confirmModal={submitDelete}
         hideModal={hideProductModal}
-        // id={id}
-        // items={items}
-        // dataByName={dataByName}
+        data={getProduct}
       />
+
+      <SubProductFieldModal
+        showModal={displaySubProductModal}
+        hideModal={hideSubProductModal}
+        data={getSubProduct}
+      />
+
+      <Modal show={showCalendarHarvest} centered onHide={handleHarvestDateTime}>
+        <Calendar
+          persianDigits={true}
+          isGregorian={false}
+          timePicker={false}
+          className="border-0 shadow-sm my-5"
+          onChange={(value) => {
+            // console.warn(value);
+            const month = value.jMonth() + 1;
+            setHarvestDateTime(
+              value.jYear() + "-" + month + "-" + value.jDate()
+            );
+            setShowCalendarHarvest(false);
+          }}
+        />
+      </Modal>
+
+      <Modal show={showCalendarHarvest} centered onHide={handleHarvestDateTime}>
+        <Calendar
+          persianDigits={true}
+          isGregorian={false}
+          timePicker={false}
+          className="border-0 shadow-sm my-5"
+          onChange={(value) => {
+            // console.warn(value);
+            const month = value.jMonth() + 1;
+            setHarvestDateTime(
+              value.jYear() + "-" + month + "-" + value.jDate()
+            );
+            setShowCalendarHarvest(false);
+          }}
+        />
+      </Modal>
+
+      <Modal show={showCalendarPlanting} centered onHide={handlePlantingDateTime}>
+        <Calendar
+          persianDigits={true}
+          isGregorian={false}
+          timePicker={false}
+          className="border-0 shadow-sm my-5"
+          onChange={(value) => {
+            // console.warn(value);
+            const month = value.jMonth() + 1;
+            setPlantingDateTime(
+              value.jYear() + "-" + month + "-" + value.jDate()
+            );
+            setShowCalendarPlanting(false);
+          }}
+        />
+      </Modal>
+      
     </div>
   );
 };

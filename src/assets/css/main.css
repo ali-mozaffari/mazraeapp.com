@@ -203,10 +203,10 @@ table thead {
 }
 
 .tableToolIconBgGray {
-    background-color: gray;
+    background-color: #C2C2C2;
     border-radius: 8px;
-    width: 40px;
-    height: 40px;
+    width: 37px;
+    height: 37px;
     margin: 0 5px;
 }
 

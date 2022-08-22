@@ -80,7 +80,7 @@ const RainChart = () => {
           // color: '#fff',
           drawBorder: false,
         },
-        position: "top",
+        // position: "top",
         ticks: {
           font: {
             size: 10,

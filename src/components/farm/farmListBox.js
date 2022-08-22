@@ -132,7 +132,7 @@ const FarmListBox = () => {
                 </div>
               </div>
 
-              <p className="small text-gray mt-3">بارش باران در 3 روز آینده</p>
+              <p className="rain-title mt-3">بارش باران در 3 روز آینده</p>
 
               <div className="rain-3d-report d-flex">
                 <div className="rain-unit">میلی لیتر</div>
@@ -166,8 +166,8 @@ const FarmListBox = () => {
               <div className="d-flex justify-content-between align-items-center">
                 <div>
                   <span className="wind-title small text-bold">میزان باد</span>
-                  <span className="wind-duration-title small text-gray">
-                    (در 24 ساعت آینده )
+                  <span className="wind-duration-title small">
+                    (در 24 ساعت آینده)
                   </span>
                 </div>
 

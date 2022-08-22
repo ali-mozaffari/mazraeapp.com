@@ -21,13 +21,19 @@
     }
 }
 
-
 .rain-3d-report {
-
     background-color: #F6F8F7;
     /*opacity: 0.8;*/
     border-radius: 5px;
     /*padding: 10px   ;*/
+}
+
+.rain-title {
+    color: #676767;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
 }
 
 .rain-unit {
@@ -45,14 +51,19 @@
 .wind-title {
     font-style: normal;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
     color: #676767;
 }
 
+@media screen and (min-width: 898px) {
+    .wind-title {
+        font-size: 11px !important;
+    }
+}
+
 .wind-unit {
-    color: #A2A2A2;
-    padding: 3px 5px;
+    color: #676767;
     border-radius: 5px;
     text-align: center;
     margin: 0 5px;
@@ -62,17 +73,36 @@
     line-height: 12px;
 }
 
+@media screen and (min-width: 898px) {
+    .wind-unit {
+        font-size: 9px !important;
+    }
+}
+
 .wind-speed {
     font-style: normal;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 24px;
     color: #676767;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-speed {
+        font-size: 11px !important;
+    }
 }
 
 .wind-duration-title{
     font-size: 11px;
     margin: 0 5px;
+    color: #676767;
+}
+
+@media screen and (min-width: 898px) {
+    .wind-duration-title {
+        font-size: 9px !important;
+    }
 }
 
 .dropdown-item-main:hover {
@@ -87,10 +117,10 @@
 }
 
 .dropdown-toggle-icon {
-    background-color: gray !important;
+    background-color: #C2C2C2 !important;
     border-radius: 8px !important;
-    width: 40px !important;
-    height: 40px !important;
+    width: 37px !important;
+    height: 37px !important;
     border: none !important;
 }
 
@@ -131,6 +161,25 @@
     position: absolute !important;
     top: 40px !important;
     left: 15px !important;
+}
+
+.farm-coordination-title {
+    white-space: nowrap;
+    padding: 15px;
+    height: 50px;
+    color: #2C689A;
+    background: white;
+    border: none;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.locationIcon {
+    position: absolute !important;
+    top: 35px !important;
+    left: 20px !important;
 }
 
 .farm-bottom-btn {
