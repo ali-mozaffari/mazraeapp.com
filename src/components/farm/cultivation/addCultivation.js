@@ -149,8 +149,12 @@ const AddCultivation = () => {
   const getTotalProduct = (data) => {
     setTotalProduct(data);
   };
-  console.log(totalProduct)
-  console.log(totalProduct.input)
+  
+  const [tonKilogram, setTonKilogram] = useState("");
+  const getTonKg = (data) => {
+    setTonKilogram(data);
+  }
+  console.log(tonKilogram)
 
   const [price, setPrice] = useState("");
   const getPrice = (data) => {
@@ -247,7 +251,7 @@ const AddCultivation = () => {
     harvest_datetime: "",
     planting_datetime: "",
     vaziat: "",
-    totalProduct: totalProduct.input,
+    totalProduct: "",
     price: "",
   };
 
@@ -667,13 +671,42 @@ const AddCultivation = () => {
                           <InfoLigthIcon />
                         </span>
                         <span className="persianToolsText">
+                          {tonKilogram.division ? (
+                            <span>
+                              {persianTools.numberToWords(tonKilogram.division)}{" "}
+                              <span>تن</span>
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {tonKilogram.division && tonKilogram.remain ? <span> و </span> : ""}
+                          {tonKilogram.remain ? (
+                            <span>
+                              {persianTools.numberToWords(tonKilogram.remain)}{" "}
+                              <span>کیلوگرم</span>
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </span>
+                      </span>
+                    ) : (
+                      ""
+                    )}
+
+                    {/* {totalProduct ? (
+                      <span>
+                        <span>
+                          <InfoLigthIcon />
+                        </span>
+                        <span className="persianToolsText">
                           {persianTools.numberToWords(totalProduct)}
                           <span> </span>
                         </span>
                       </span>
                     ) : (
                       ""
-                    )}
+                    )} */}
                   </Box>
                 ) : (
                   ""
@@ -837,6 +870,7 @@ const AddCultivation = () => {
         showModal={displayTotalProductModal}
         hideModal={hideTotalProductModal}
         data={getTotalProduct}
+        tonKg={getTonKg}
       />
 
       <PriceFieldModal

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./farmModal.css";
 import { InfoLigthIcon } from "../../../../assets/icon";
 
-const TotalProductFieldModal = ({ showModal, hideModal, data }) => {
+const TotalProductFieldModal = ({ showModal, hideModal, data, tonKg }) => {
   const [textInput, setTextInput] = useState("");
 
   const [division, setDivision] = useState("");
@@ -23,7 +23,8 @@ const TotalProductFieldModal = ({ showModal, hideModal, data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    data({input: textInput, division: division, remain: remain});
+    data(textInput);
+    tonKg({division: division, remain: remain});
   };
 
   return (
@@ -84,10 +85,9 @@ const TotalProductFieldModal = ({ showModal, hideModal, data }) => {
                     <InfoLigthIcon />
                   </span>
                   <span className="persianToolsText">
-                    {/* {persianTools.numberToWords(textInput)} */}
-                    {division ? (<span>{division} <span>تن</span></span>):("")}
+                    {division ? (<span>{persianTools.numberToWords(division)} <span>تن</span></span>):("")}
                     {division && remain ? (<span> و </span>):("")}
-                    {remain ? (<span>{remain} <span>کیلوگرم</span></span>):("")}
+                    {remain ? (<span>{persianTools.numberToWords(remain)} <span>کیلوگرم</span></span>):("")}
                   </span>
                 </span>
               ) : (
