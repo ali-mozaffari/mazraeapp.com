@@ -190,11 +190,16 @@
     left: 20px !important;
 }
 
-.farm-bottom-btn {
-    /* justify-content: space-between !important; */
+/* .farm-bottom-btn {
     padding: 0;
     font-weight: 800;
 }
+
+@media screen and (max-width: 599px) {
+    .farm-bottom-btn {
+        display: grid !important;
+    }
+} */
 
 .chart-day {
     color: #676767;

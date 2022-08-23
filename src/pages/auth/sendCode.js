@@ -98,18 +98,10 @@ const SendCode = () => {
         برای ورود در سامانه مزرعه شماره تماس خود را وارد کنید
       </Typography>
       <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-        {/* <Input
-                disableUnderline
-                required
-                fullWidth
-                autoFocus
-                placeholder="شماره تماس"
-                className="authInput"
-              /> */}
-
         <TextField
           className="authInput"
           label="شماره تماس"
+          type="number"
           variant="standard"
           InputProps={{
             disableUnderline: true,
