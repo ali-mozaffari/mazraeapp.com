@@ -111,7 +111,7 @@
     border: none;
     /* padding: 12px 25px; */
     padding: 22px 25px 6px 25px !important;
-    text-align: right;
+    text-align: right !important;
 }
 
 .search-icon {

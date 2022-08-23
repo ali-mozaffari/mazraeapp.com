@@ -161,27 +161,6 @@ const AddCultivation = () => {
     setPrice(data);
   };
 
-  // const [totalProduct, setTotalProduct] = useState("");
-  // const handleTotalProduct = (e) => {
-  //   setTotalProduct(e.target.value);
-  // };
-
-  // const [onClickTotalProductFieldLable, setOnClickTotalProductFieldLable] =
-  //   useState(false);
-  // const handleTotalProductLable = (e) => {
-  //   setOnClickTotalProductFieldLable(true);
-  // };
-
-  // const [price, setPrice] = useState("");
-  // const handlePrice = (e) => {
-  //   setPrice(e.target.value);
-  // };
-
-  // const [onClickPriceFieldLable, setOnPriceFieldLable] = useState(false);
-  // const handlePriceLable = (e) => {
-  //   setOnPriceFieldLable(true);
-  // };
-
   let sal_id_validation = () => {
     if (!year) {
       return false;
@@ -327,7 +306,7 @@ const AddCultivation = () => {
                     onClick={() => showYearModal()}
                   />
                   {!year?.name ? (
-                    <span className="fieldTitleEmpty">
+                    <span className="fieldTitleEmpty" onClick={() => showYearModal()}>
                       سال زراعی <span className="starSign"> *</span>
                     </span>
                   ) : (
@@ -374,7 +353,7 @@ const AddCultivation = () => {
                     onClick={() => showProductGroupModal()}
                   />
                   {!productGroup?.name ? (
-                    <span className="fieldTitleEmpty">گروه محصول</span>
+                    <span className="fieldTitleEmpty" onClick={() => showProductGroupModal()}>گروه محصول</span>
                   ) : (
                     <span className="fieldTitleFilled">گروه محصول</span>
                   )}
@@ -406,7 +385,7 @@ const AddCultivation = () => {
                     onClick={() => showProductModal()}
                   />
                   {!product?.name ? (
-                    <span className="fieldTitleEmpty">
+                    <span className="fieldTitleEmpty" onClick={() => showProductModal()}>
                       محصول <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -441,7 +420,7 @@ const AddCultivation = () => {
                     onClick={() => showSubProductModal()}
                   />
                   {!subProduct?.name ? (
-                    <span className="fieldTitleEmpty">زیر محصول</span>
+                    <span className="fieldTitleEmpty" onClick={() => showSubProductModal()}>زیر محصول</span>
                   ) : (
                     <span className="fieldTitleFilled">زیر محصول</span>
                   )}
@@ -549,7 +528,7 @@ const AddCultivation = () => {
                     onClick={handleHarvestDateTime}
                   />
                   {!harvestDateTime ? (
-                    <span className="fieldTitleEmpty">
+                    <span className="fieldTitleEmpty" onClick={handleHarvestDateTime}>
                       تاریخ کاشت <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -582,7 +561,7 @@ const AddCultivation = () => {
                     onClick={handlePlantingDateTime}
                   />
                   {!plantingDateTime ? (
-                    <span className="fieldTitleEmpty">
+                    <span className="fieldTitleEmpty" onClick={handlePlantingDateTime}>
                       تاریخ برداشت <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -624,7 +603,7 @@ const AddCultivation = () => {
                     onClick={() => showVaziatModal()}
                   />
                   {!vaziat ? (
-                    <span className="fieldTitleEmpty">
+                    <span className="fieldTitleEmpty" onClick={() => showVaziatModal()}>
                       وضعیت<span className="starSign"> *</span>
                     </span>
                   ) : (
@@ -651,9 +630,7 @@ const AddCultivation = () => {
                     />
                     {!totalProduct ? (
                       <span
-                        className="fieldTitleEmpty"
-                        // onClick={handleTotalProductLable}
-                      >
+                        className="fieldTitleEmpty" onClick={() => showTotalProductModal()}>
                         تولید کل (کیلوگرم در هکتار)
                       </span>
                     ) : (
@@ -693,20 +670,6 @@ const AddCultivation = () => {
                     ) : (
                       ""
                     )}
-
-                    {/* {totalProduct ? (
-                      <span>
-                        <span>
-                          <InfoLigthIcon />
-                        </span>
-                        <span className="persianToolsText">
-                          {persianTools.numberToWords(totalProduct)}
-                          <span> </span>
-                        </span>
-                      </span>
-                    ) : (
-                      ""
-                    )} */}
                   </Box>
                 ) : (
                   ""
@@ -738,9 +701,7 @@ const AddCultivation = () => {
                     />
                     {!price ? (
                       <span
-                        className="fieldTitleEmpty"
-                        // onClick={handlePriceLable}
-                      >
+                        className="fieldTitleEmpty" onClick={() => showPriceModal()}>
                         قیمت (تومان/کیلوگرم)
                       </span>
                     ) : (

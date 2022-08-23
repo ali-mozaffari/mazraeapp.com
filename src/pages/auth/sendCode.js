@@ -5,6 +5,17 @@ import { InstagramIcon, TelegramIcon, WhatsappIcon } from "../../assets/icon";
 import "./auth.css";
 import SiteRulesModal from './siteRulesModal';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import rtlPlugin from 'stylis-plugin-rtl';
+import { prefixer } from 'stylis';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+
+const cacheRtl = createCache({
+  key: 'muirtl',
+  stylisPlugins: [prefixer, rtlPlugin],
+});
+
 function SiteRules(props) {
   // const [id, setId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
@@ -77,7 +88,8 @@ const SendCode = () => {
   };
 
   return (
-    <Grid sx={{ pr: "10%", pl: "10%" }}>
+    <CacheProvider value={cacheRtl}>
+      <Grid sx={{ pr: "10%", pl: "10%" }}>
       <Typography
         component="p"
         variant="p"
@@ -99,12 +111,6 @@ const SendCode = () => {
           className="authInput"
           label="شماره تماس"
           variant="standard"
-          InputLabelProps={{
-            style: {
-              // "label + .css-1x51dt5-MuiInputBase-input-MuiInput-input":{color: "red !important"}
-              // "& .MuiFormLabel-root":{color: "red !important"}
-            },
-          }}
           InputProps={{
             disableUnderline: true,
             style: {
@@ -117,20 +123,15 @@ const SendCode = () => {
               fontSize: "13px",
               color: "#6ca271",
               "&.Mui-focused": {
-                right: 0,
                 color: "#6ca271",
                 marginTop: "8px",
-                style: {
-                  // right: "5px",
-                },
               },
             },
             input: {
               color: "#6ca271",
             },
-            ".MuiFormLabel-root.Mui-focused": {
-              marginRight: "-29% !important",
-              // color: 'red !important'
+            ".MuiFormLabel-root": {
+              paddingLeft: '5px !important',
             },
           }}
         />
@@ -197,6 +198,8 @@ const SendCode = () => {
         </Grid>
       </Box>
     </Grid>
+    </CacheProvider>
+    
   );
 };
 
