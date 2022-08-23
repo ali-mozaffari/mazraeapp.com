@@ -8,6 +8,7 @@ import './index.css';
 import './assets/css/main.css';
 import './assets/css/activitiesPage.css';
 import './assets/css/modals.css';
+import './assets/css/texCss.css';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import store from './redux/store'

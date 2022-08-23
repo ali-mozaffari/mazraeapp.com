@@ -31,8 +31,7 @@ const FarmListBox = () => {
 
   // const [type, setType] = useState(null);
   const [id, setId] = useState(null);
-  const [displayConfirmationModal, setDisplayConfirmationModal] =
-    useState(false);
+  const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
 
   // Handle the displaying of the modal based on type and id
   const showDeleteModal = (id) => {

@@ -18,7 +18,9 @@ const AppLayout = ({ children }) => {
         >
           <Grid item xs={12} sm={12} md={9} lg={8} className="mx-auto">
             <Topbar />
-            {children}
+            <div className="mx-2">
+               {children}
+            </div>
           </Grid>
 
           <Sidebar />

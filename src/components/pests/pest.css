@@ -1,0 +1,42 @@
+.pest-product-card-box{
+
+    background-color: #F6F8F7;
+    border-radius: 8px;
+    margin: 6px 0;
+
+}
+
+.pest-product-card-box-selected{
+
+    background-color: #E2FFFB;
+    border: 1px solid #0DB39F;
+    border-radius: 8px;
+    margin: 6px 0;
+
+}
+
+
+.pest-product-card-title{
+
+    text-align: center;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 16px;
+    margin: 0 8px;
+    background-color: #fff;
+
+}
+
+
+
+.pest-product-card-title-selected{
+
+    text-align: center;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 16px;
+    margin: 0 8px;
+    color: #fff;
+    background-color: #0DB39F;
+
+}
