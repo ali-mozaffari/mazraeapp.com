@@ -15,7 +15,7 @@ const PestMainPage = () => {
     const [ products, setProducts ] = useState([])  
     const farmlist = useSelector((state) => state.farmlist.postList);
   
-    const data = []
+    var data = []
     useEffect(() => {
         farmlist.map((item) => {
             if(item.cultivation.length > 0){
@@ -25,8 +25,15 @@ const PestMainPage = () => {
             }
         })
 
-        let uniqueData = [...new Set(data)];
-        setProducts(uniqueData);
+        var uniqueArray = data.reduce((filter, current) => {
+            var dk = filter.find(item => item.guid === current.guid);
+            if (!dk) {
+              return filter.concat([current]);
+            } else {
+              return filter;
+            }
+          }, []);
+        setProducts(uniqueArray)
 
     }, [])
 

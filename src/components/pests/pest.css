@@ -22,11 +22,10 @@
     font-weight: 800;
     font-size: 14px;
     border-radius: 16px;
-    margin: 0 8px;
+    margin: 0 12px;
     background-color: #fff;
 
 }
-
 
 
 .pest-product-card-title-selected{
@@ -35,8 +34,18 @@
     font-weight: 800;
     font-size: 14px;
     border-radius: 16px;
-    margin: 0 8px;
+    margin: 0 12px;
     color: #fff;
     background-color: #0DB39F;
 
+}
+
+.btn-outline-dark-blue{
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #2C689A;
+    border-radius: 16px;
+    width: 100%;
+    padding: 16px 0;
+    color: #2C689A;
 }

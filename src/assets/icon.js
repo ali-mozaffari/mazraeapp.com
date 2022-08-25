@@ -150,7 +150,6 @@ export const Insect = (props) => {
 export const CloseIcon = (props) => {
   return (
     <svg
-      fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
       width="13.366"
       height="13.093"
@@ -163,7 +162,7 @@ export const CloseIcon = (props) => {
           d="M4995.451,5250.286l-9.124,8.851"
           transform="translate(-4986.327 -5250.286)"
           fill="none"
-          stroke="#dc1f1f"
+          stroke={props.fill}
           strokeLinecap="round"
           strokeWidth="3"
         />
@@ -173,7 +172,7 @@ export const CloseIcon = (props) => {
           d="M4986.327,5250.286l9.124,8.851"
           transform="translate(-4986.327 -5250.286)"
           fill="none"
-          stroke="#dc1f1f"
+          stroke={props.fill}
           strokeLinecap="round"
           strokeWidth="3"
         />
@@ -1016,12 +1015,12 @@ export const ArrowSearchIcon = (props) => {
       width="18"
       height="14"
       viewBox="0 0 21 16"
-      fill="none"
+      fill={props.fill}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M1.66675 8L0.959641 7.29289L0.252535 8L0.959641 8.70711L1.66675 8ZM19.1667 9C19.719 9 20.1667 8.55228 20.1667 8C20.1667 7.44772 19.719 7 19.1667 7V9ZM7.95964 0.292893L0.959641 7.29289L2.37385 8.70711L9.37385 1.70711L7.95964 0.292893ZM0.959641 8.70711L7.95964 15.7071L9.37385 14.2929L2.37385 7.29289L0.959641 8.70711ZM1.66675 9H19.1667V7H1.66675V9Z"
-        fill="white"
+        fill={props.fill ? props.fill : 'white'}
       />
     </svg>
   );
