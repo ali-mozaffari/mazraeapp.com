@@ -196,6 +196,15 @@
     padding: 8px 16px;
 }
 
+.searchButton-modal-active{
+
+    background-color: #16DB93;
+    border-radius: 8px 0 0 8px;
+    border: none;
+    padding: 8px 16px;
+
+}
+
 .file-uploader {
     border: 1px dashed #0a53be;
     cursor: pointer;

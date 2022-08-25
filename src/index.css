@@ -10,3 +10,7 @@ html, body {
     font-family: IranSans !important;
     outline: none !important;
 }
+
+hr {
+    background-color: gray;
+}
