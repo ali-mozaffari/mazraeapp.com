@@ -42,19 +42,19 @@ const Data = [
 ];
 
 const SubProductFieldModal = ({ showModal, hideModal, data }) => {
-  const [textInput, setTextInput] = useState("");
+  // const [textInput, setTextInput] = useState("");
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
-    setTextInput("");
+    // setTextInput("");
   };
 
-  const handleText = (e) => {
-    setTextInput({ value: e.target.value, name: e.target.value });
-    setSelected("");
-  };
-  console.log(textInput);
-  console.log(selected);
+  // const handleText = (e) => {
+  //   setTextInput({ value: e.target.value, name: e.target.value });
+  //   setSelected("");
+  // };
+  // console.log(textInput);
+  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
 
@@ -65,11 +65,12 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(textInput === ''){
-      data(selected);
-    }else{
-      data(textInput)
-    }
+    data(selected);
+    // if(textInput === ''){
+    //   data(selected);
+    // }else{
+    //   data(textInput)
+    // }
     
   };
 
@@ -125,7 +126,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
               color: "#4A4A4A",
             }}
           >
-            <div
+            {/* <div
               style={{
                 marginRight: "15px",
                 borderBottom: "1px solid #aeaeae",
@@ -142,8 +143,8 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                 value={textInput.value}
                 onChange={handleText}
               />
-            </div>
-            {textInput === '' || textInput.value === '' ? (
+            </div> */}
+            {/* {textInput === '' || textInput.value === '' ? ( */}
             <RadioGroup
               className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
@@ -170,7 +171,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
-            ): ''}
+            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">

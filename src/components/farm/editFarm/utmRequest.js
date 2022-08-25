@@ -4,7 +4,7 @@ import { UTMReportIcon } from "../../../assets/icon";
 import { ArrowSingleDownIcon } from "../../../assets/icon";
 import { NavLink } from "react-router-dom";
 import * as Yup from "yup";
-// import "yup-phone";
+import "yup-phone";
 import UtmRequestModal from "./utmRequestModal";
 import React, { useEffect, useState } from "react";
 
@@ -47,9 +47,30 @@ function UTMRequest() {
   //   setPhone(data);
   // };
 
+  // const validation = Yup.object().shape({
+  //   // phone: Yup.string().phone().nullable(),
+  //   phone: Yup.string().phone(),
+  // });
+
+  const [phoneInput, setPhoneInput] = useState("");
+  const handlePhone = (e) => {
+    setPhoneInput(e.target.value);
+  };
+
+  const PHONE_REGEX = new RegExp(/^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})$/);
+  // const PHONE_REGEX = new RegExp(/^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$/);
+  const phone_validation = () => {
+    const match = PHONE_REGEX.test(phoneInput);
+    if(phoneInput){
+      return match;
+    }else{
+      return true;
+    }
+    
+  };
+
   const validation = Yup.object().shape({
-    // phone: Yup.string().phone().nullable(),
-    phone: Yup.string().phone(),
+    phone: Yup.string().test(phone_validation).nullable(),
   });
 
   const initialValues = {
@@ -62,37 +83,22 @@ function UTMRequest() {
     <CacheProvider value={cacheRtl}>
       <div
         className="container-fluid pb-5 mb-5"
-        style={{
-          fontSize: "14px",
-          background: " #FFFFFF",
-          borderRadius: "16px 16px 0px 0px",
-        }}
+        style={
+          {
+            // fontSize: "14px",
+          }
+        }
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
           }}
         >
           <UTMReportIcon />
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontFamily: "IRANSans",
-            fontStyle: "normal",
-            fontWeight: "900",
-            fontSize: "20px",
-            lineHeight: "56px",
-            color: "#4A4A4A",
-          }}
-        >
-          ثبت درخواست گزارش UTM
-        </div>
+        <div className="utm-top-title">ثبت درخواست گزارش UTM</div>
         <hr className="mt-4" />
         <Formik
           initialValues={initialValues}
@@ -107,18 +113,7 @@ function UTMRequest() {
               className="row"
               style={{ paddingRight: "12px", paddingLeft: "12px" }}
             >
-              <p
-                style={{
-                  marginTop: "10px",
-                  marginBottom: "0",
-                  paddingRight: "0",
-                  color: "#676767",
-                  fontSize: "14px",
-                  fontWeight: "800",
-                }}
-              >
-                انتخاب مزرعه
-              </p>
+              <p className="general-field-title">انتخاب مزرعه</p>
 
               <Box
                 sx={{
@@ -159,22 +154,7 @@ function UTMRequest() {
               </Box>
 
               <hr className="mt-4" />
-              <p
-                style={{
-                  marginTop: "10px",
-                  marginBottom: "0",
-                  paddingRight: "0",
-                  fontFamily: "IRANSans",
-                  fontStyle: "normal",
-                  fontWeight: "800",
-                  fontSize: "14px",
-                  lineHeight: "22px",
-                  color: "#676767",
-                  height: "22px",
-                }}
-              >
-                ارسال لینک دانلود گزارش به
-              </p>
+              <p className="general-field-title">ارسال لینک دانلود گزارش به</p>
 
               <Box
                 sx={{
@@ -222,6 +202,7 @@ function UTMRequest() {
                         },
                       },
                     }}
+                    onChange={handlePhone}
                     style={
                       errors.phone && touched.phone
                         ? {

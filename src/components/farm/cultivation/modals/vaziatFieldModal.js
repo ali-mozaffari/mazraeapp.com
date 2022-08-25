@@ -52,7 +52,7 @@ const VaziatFieldModal = ({ showModal, hideModal, data }) => {
           />
 
           <h6 style={{ fontWeight: "800", color: "#676767" }}>
-            انتخاب سال زراعی
+            انتخاب وضعیت
           </h6>
         </div>
         {/* <hr style={{ height: "2px", margin: "0" }} /> */}

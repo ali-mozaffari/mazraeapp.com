@@ -227,8 +227,6 @@ const AddCultivation = () => {
     harvest_datetime: harvestDateTime,
     planting_datetime: plantingDateTime,
     sathe_zire_kesht: "",
-    harvest_datetime: "",
-    planting_datetime: "",
     vaziat: "",
     totalProduct: "",
     price: "",
@@ -432,72 +430,6 @@ const AddCultivation = () => {
 
               <hr className="mt-4" />
 
-              <p
-                style={{
-                  marginTop: "10px",
-                  marginBottom: "0",
-                  paddingRight: "0",
-                }}
-              >
-                سطح زیر کشت (هکتار)
-              </p>
-
-              <Box
-                sx={{
-                  display: { xs: "block", sm: "flex" },
-                  justifyContent: "space-between",
-                  padding: "0",
-                }}
-              >
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "48%" },
-                    position: "relative",
-                  }}
-                >
-                  <Field
-                    name="workerName"
-                    type="button"
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
-                    placeholder="سطح زیر کشت"
-                    style={
-                      errors.workerName && touched.workerName
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "48%" },
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "end",
-                  }}
-                >
-                  <button
-                    type="button"
-                    className="farm-coordination-title mx-1 mt-4"
-                  >
-                    مختصات کل مزرعه
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-dark-blue mx-1 mt-4"
-                    style={{ width: "40%", display: "-webkit-box" }}
-                  >
-                    افزودن
-                  </button>
-                  <span className="locationIcon">
-                    <LocaltionIcon />
-                  </span>
-                </Box>
-              </Box>
-
               <Box
                 sx={{
                   display: { xs: "block", sm: "flex" },
@@ -569,6 +501,72 @@ const AddCultivation = () => {
                   )}
                   <span className="fieldIcon">
                     <NewCalendarIcon />
+                  </span>
+                </Box>
+              </Box>
+
+              <p
+                style={{
+                  marginTop: "10px",
+                  marginBottom: "0",
+                  paddingRight: "0",
+                }}
+              >
+                سطح زیر کشت (هکتار)
+              </p>
+
+              <Box
+                sx={{
+                  display: { xs: "block", sm: "flex" },
+                  justifyContent: "space-between",
+                  padding: "0",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
+                  }}
+                >
+                  <Field
+                    name="workerName"
+                    type="button"
+                    autoComplete="off"
+                    className="search-input w-100 mt-4 py-3"
+                    placeholder="سطح زیر کشت"
+                    style={
+                      errors.workerName && touched.workerName
+                        ? {
+                            border: "1px solid #f00",
+                            color: "red",
+                          }
+                        : { border: "none" }
+                    }
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
+                    display: "flex",
+                    justifyContent: "end",
+                  }}
+                >
+                  <button
+                    type="button"
+                    className="farm-coordination-title mx-1 mt-4"
+                  >
+                    مختصات کل مزرعه
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-dark-blue mx-1 mt-4"
+                    style={{ width: "40%", display: "-webkit-box" }}
+                  >
+                    افزودن
+                  </button>
+                  <span className="locationIcon">
+                    <LocaltionIcon />
                   </span>
                 </Box>
               </Box>
