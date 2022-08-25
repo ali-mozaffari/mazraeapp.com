@@ -121,7 +121,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                             </option>
 
                                             {
-                                                nahadeTools?.items.map((item) =>
+                                                nahadeTools?.items?.map((item) =>
                                                     (
                                                         <option value={item.guid} label={item.title}>
                                                             {item.title}
@@ -161,7 +161,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                                         color: '#2c699a'
                                                     }}
                                                     className="mx-1 p-2 mt-2">
-                                                {vahede_meghdar_items.map(item => {
+                                                {vahede_meghdar_items?.map(item => {
                                                     return (
                                                         <option className="select-option"
                                                                 key={item.key}
@@ -184,7 +184,7 @@ function AddNahadeModal({show, onNahadeModalHandler, values}) {
                                                         color: '#2c699a'
                                                     }}
                                                     className="mx-1 p-2 mt-2">
-                                                {vahede_masahat_items.map(item => {
+                                                {vahede_masahat_items?.map(item => {
                                                     return (
                                                         <option className="select-option"
                                                                 key={item.key}
