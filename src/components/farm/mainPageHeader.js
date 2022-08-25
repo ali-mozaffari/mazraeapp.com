@@ -6,7 +6,7 @@ import ForecastCultivationProgressItem from "./progressBar";
 import { CONST } from "../../assets/strings/strings";
 import { useNavigate } from "react-router-dom";
 import BreadCrumbs from "../tools/breadcrumbs";
-import { ArrowSearchIcon, SearchIcon } from "../../assets/icon";
+import { ArrowSearchIcon, BackIcon, SearchIcon } from "../../assets/icon";
 
 const MainPageHeader = () => {
   const data = [
@@ -233,6 +233,8 @@ const MainPageHeader = () => {
         return "کشت های کنونی مزرعه";
       case "/history":
         return "تاریخچه کشت های مزرعه";
+      case "/edit-farm-info":
+        return "ویرایش مشخصات مزرعه";
       default:
         return "";
     }
@@ -271,28 +273,29 @@ const MainPageHeader = () => {
           </div>
         ) : (
           <div>
-            <button
-              className="btn-light-pink mx-1"
-              style={{ color: "#F1634B", backgroundColor: "#FED7D0" }}
+            <div
+              style={{ cursor: "pointer" }}
               onClick={() => navigate("/")}
             >
-              بازگشت
-            </button>
+              <BackIcon />
+            </div>
           </div>
         )}
       </div>
 
-      <ForecastCultivationProgressItem
+      {path === "/edit-farm-info" ? (null):(
+        <ForecastCultivationProgressItem
         main={true}
         all
         // title={"مجموع مزارع"}
         // data={data}
         data={calculateFarmsProgressData(data)}
       />
+      )}
 
       <hr />
 
-      {path === "/" || path === "/home" ? (
+      {/* {path === "/" || path === "/home" ? (
         <div className="filter-search row d-flex align-items-center">
           <div className="col-md-5" style={{ display: "inline-flex", position: "relative" }}>
             <span className="search-icon">
@@ -319,7 +322,7 @@ const MainPageHeader = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 

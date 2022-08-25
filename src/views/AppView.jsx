@@ -11,6 +11,7 @@ import WeatherPage from "../pages/weather/weatherPage";
 import UTMRequestPage from "../pages/farm/utmRequestPage";
 import OwnerInfoPage from "../pages/farm/ownerInfoPage";
 import EditFarmInfoPage from "../pages/farm/editFarmInfoPage";
+import AddCultivationHistoryPage from "../pages/farm/addCultivationHistoryPage";
 
 const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
 const Login = React.lazy(() => import("./../pages/auth/login"));
@@ -85,6 +86,10 @@ const AppView = () => {
         <Route path="/home" element={<Main />} />
         {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
         <Route path="/add-cultivation" element={<AddCultivationPage />} />
+        <Route
+          path="/add-cultivation-history"
+          element={<AddCultivationHistoryPage />}
+        />
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/farm-services" element={<FarmServicePage />} />
         <Route path="/invitation" element={<InvitationPage />} />
