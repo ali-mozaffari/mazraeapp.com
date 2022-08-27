@@ -26,7 +26,7 @@ ChartJS.register(
 
 ChartJS.defaults.font.family = "IRANSans";
 
-const RainChart = () => {
+const RainChart = (props) => {
   const options = {
     responsive: true,
     plugins: {
@@ -103,9 +103,12 @@ const RainChart = () => {
 
   const data = {
     // labels,
+
+    // labels: [props?.map((item => `${item.totalliquid_3_days[1]} میلی متر`,))],
     labels: [`${12} میلی متر`, `${17} میلی متر`, `${7} میلی متر`],
     datasets: [
       {
+        // data: [props?.map((item => item.totalliquid_3_days[1],))],
         data: [12, 17, 7],
         // backgroundColor: colors.map((item) => item),
         backgroundColor: colors,

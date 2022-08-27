@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 
 const Data = [
   {

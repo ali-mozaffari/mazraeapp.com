@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -77,17 +78,14 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
   return (
     <Modal show={showModal} className="farm-field-modal">
       <form onSubmit={handleSubmit}>
-        <div
-          className="farm-field-modal-header"
-          style={{ boxShadow: "none", padding: "30px 15px 5px 35px" }}
-        >
+        <div className="farm-field-modal-header">
           <div>
             <img
               src={closeNotification}
               alt=""
               style={{
                 position: "absolute",
-                left: "40px",
+                left: "25px",
                 top: "30px",
                 height: "16px",
                 cursor: "pointer",
@@ -122,8 +120,8 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
           <div
             style={{
               margin: "0",
-              marginTop: "10px",
-              color: "#4A4A4A",
+              marginTop: "30px",
+              // color: "#4A4A4A",
             }}
           >
             {/* <div
@@ -152,6 +150,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
               onChange={handleChange}
             >
               <FormControlLabel
+              // style={{margin: "0"}}
                 value=""
                 control={<Radio />}
                 name=""

@@ -5,7 +5,6 @@ import menuIcon from "../../assets/img/menu.png";
 import ForecastCultivationProgressItem from "./progressBar";
 import { CONST } from "../../assets/strings/strings";
 import RainChart from "./rainChart";
-import { Menu, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getFarmList } from "../../redux/slice/farm/farmListBox";
 import { useNavigate, Link, NavLink } from "react-router-dom";
@@ -14,6 +13,14 @@ import { Dropdown, ToastContainer } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Loading from "../loading/loading";
 import { getAccessList } from "../../redux/slice/access/accessListBox";
+import moment from "moment-jalaali";
+import {
+  Menu,
+  MenuItem,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 const ITEM_HEIGHT = 48;
 
@@ -26,12 +33,15 @@ const FarmListBox = () => {
     dispatch(getAccessList());
   }, []);
 
+  moment.loadPersian({ dialect: "persian-modern" });
+
   const farmlist = useSelector((state) => state.farmlist);
   const { postList, loading } = farmlist;
 
   // const [type, setType] = useState(null);
   const [id, setId] = useState(null);
-  const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
+  const [displayConfirmationModal, setDisplayConfirmationModal] =
+    useState(false);
 
   // Handle the displaying of the modal based on type and id
   const showDeleteModal = (id) => {
@@ -85,6 +95,119 @@ const FarmListBox = () => {
                         <img src={menuIcon} alt="menu" className="mx-auto" />
                       </Dropdown.Toggle>
 
+                      <Dropdown.Menu
+                      style={{direction: "ltr"}}
+                      >
+                        <Dropdown.Item className="dropdown-item-main">
+                          <Link to={"/edit-farm"} className="dropdownItem">
+                            <FormControlLabel
+                              control={<Radio />}
+                              label="ویرایش مشخصات مزرعه"
+                              className="farm-field-radio"
+                              style={{width: "100%"}}
+                            />
+                          </Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item-main">
+                          <Link to={"/edit-coordination-farm"} className="dropdownItem">
+                            <FormControlLabel
+                              control={<Radio />}
+                              label="ویرایش مختصات مزرعه"
+                              className="farm-field-radio"
+                              style={{width: "100%"}}
+                            />
+                          </Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item-main">
+                          <Link to={"/cultivation"} className="dropdownItem">
+                            <FormControlLabel
+                              control={<Radio />}
+                              label="کشت های کنونی مزرعه"
+                              className="farm-field-radio"
+                              style={{width: "100%"}}
+                            />
+                          </Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item className="dropdown-item-main">
+                          <Link to={"/history"} className="dropdownItem">
+                            <FormControlLabel
+                              control={<Radio />}
+                              label="تاریخچه کشت های مزرعه"
+                              className="farm-field-radio"
+                              style={{width: "100%"}}
+                            />
+                          </Link>
+                        </Dropdown.Item>
+
+                        <Dropdown.Item className="dropdown-item-main">
+                          <div
+                            className="dropdownItem"
+                            onClick={() => showDeleteModal(item?.guid)}
+                          >
+                            <FormControlLabel
+                              control={<Radio />}
+                              label="حذف"
+                              className="farm-field-radio"
+                              style={{width: "100%", border: 'none'}}
+                            />
+                          </div>
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+
+                    {/* <RadioGroup
+                      aria-labelledby="demo-controlled-radio-buttons-group"
+                      name="controlled-radio-buttons-group"
+                      // value={value}
+                      // onChange={handleChange}
+                    >
+                      <Link
+                        to={"/edit-farm"}
+                        // value="1"
+                        control={<Radio />}
+                        name="1397-1398"
+                        label="ویرایش مشخصات مزرعه"
+                        className="farm-field-radio"
+                      />
+                      <Link
+                        to={"/edit-coordination-farm"}
+                        // value="2"
+                        control={<Radio />}
+                        name="1398-1399"
+                        label="ویرایش مختصات مزرعه"
+                        className="farm-field-radio"
+                      />
+                      <Link
+                        to={"/cultivation"}
+                        // value="3"
+                        control={<Radio />}
+                        name="1399-1400"
+                        label="کشت های کنونی مزرعه"
+                        className="farm-field-radio"
+                      />
+                      <Link
+                        to={"/history"}
+                        // value="4"
+                        control={<Radio />}
+                        name="1400-1401"
+                        label="تاریخچه کشت های مزرعه"
+                        className="farm-field-radio"
+                      />
+                      <div
+                        // value="4"
+                        control={<Radio />}
+                        name="1400-1401"
+                        label="حذف مزرعه"
+                        className="farm-field-radio"
+                        onClick={() => showDeleteModal(item?.guid)}
+                      />
+                    </RadioGroup> */}
+
+                    {/* <Dropdown>
+                      <Dropdown.Toggle className="dropdown-toggle-icon">
+                        <img src={menuIcon} alt="menu" className="mx-auto" />
+                      </Dropdown.Toggle>
+
                       <Dropdown.Menu>
                         <Dropdown.Item className="dropdown-item-main">
                           <Link to={"/edit-farm"} className="dropdownItem">
@@ -97,14 +220,6 @@ const FarmListBox = () => {
                             className="dropdownItem"
                           >
                             ویرایش مختصات مزرعه
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <Link
-                            to={"/add-cultivation"}
-                            className="dropdownItem"
-                          >
-                            افزودن کشت
                           </Link>
                         </Dropdown.Item>
                         <Dropdown.Item className="dropdown-item-main">
@@ -126,7 +241,7 @@ const FarmListBox = () => {
                           </div>
                         </Dropdown.Item>
                       </Dropdown.Menu>
-                    </Dropdown>
+                    </Dropdown> */}
                   </div>
                 </div>
               </div>
@@ -137,6 +252,15 @@ const FarmListBox = () => {
                 <div className="rain-unit">میلی لیتر</div>
 
                 <div className="w-100 d-flex justify-content-around align-items-center">
+                  {/* {item?.totalliquid_3_days?.map((day) => (
+                    <div className="text-center">
+                      {moment(day[0]).format('jD')}
+                      <br />
+                      <span className="chart-day">
+                        {moment(day[1]).format("dddd")}
+                      </span>
+                    </div>
+                  ))} */}
                   <div className="text-center">
                     18
                     <br />
@@ -157,7 +281,7 @@ const FarmListBox = () => {
 
               {/*<hr/>*/}
               <div style={{ paddingTop: "10px" }}>
-                <RainChart />
+                <RainChart data={item.totalliquid_3_days} />
               </div>
 
               <hr />
@@ -172,6 +296,7 @@ const FarmListBox = () => {
 
                 <div className="d-flex align-items-center">
                   <span className="wind-unit">کیلومتر بر ساعت</span>
+                  {/* <span className="wind-speed">{item.windgust}</span> */}
                   <span className="wind-speed">24.34</span>
                 </div>
               </div>
@@ -179,6 +304,16 @@ const FarmListBox = () => {
               <hr />
 
               <div></div>
+              <div>
+                <button
+                  type="submit"
+                  className="btn-dark-blue mx-1 mt-4"
+                  style={{ width: "100%" }}
+                  onClick={() => navigate("/add-cultivation")}
+                >
+                  افزودن کشت
+                </button>
+              </div>
 
               {/* <ForecastCultivationProgressItem
                         farm={false}

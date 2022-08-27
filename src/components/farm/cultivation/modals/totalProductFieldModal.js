@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import * as persianTools from "@persian-tools/persian-tools";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 import { InfoLigthIcon } from "../../../../assets/icon";
 
 const TotalProductFieldModal = ({ showModal, hideModal, data, tonKg }) => {
@@ -55,7 +56,7 @@ const TotalProductFieldModal = ({ showModal, hideModal, data, tonKg }) => {
         </div>
         <div
           className="farm-field-modal-body product-field-modal"
-          style={{ overflowY: "auto" }}
+          style={{ overflowY: "auto", direction: "rtl" }}
         >
           <div
             style={{

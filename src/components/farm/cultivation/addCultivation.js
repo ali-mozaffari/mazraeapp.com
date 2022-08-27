@@ -291,7 +291,7 @@ const AddCultivation = () => {
                     value={year?.name}
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="سال زراعی *"
                     style={
                       errors.sal_id && touched.sal_id
@@ -346,7 +346,7 @@ const AddCultivation = () => {
                     type="button"
                     value={productGroup?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="گروه محصول"
                     onClick={() => showProductGroupModal()}
                   />
@@ -370,7 +370,7 @@ const AddCultivation = () => {
                     type="button"
                     value={product?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
+                    className="search-input pl-5"
                     // placeholder="محصول *"
                     style={
                       errors.product && touched.product
@@ -413,7 +413,7 @@ const AddCultivation = () => {
                     type="button"
                     value={subProduct?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="زیر محصول (اختیاری)"
                     onClick={() => showSubProductModal()}
                   />
@@ -448,7 +448,7 @@ const AddCultivation = () => {
                     type="button"
                     value={harvestDateTime}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
+                    className="search-input pl-5"
                     style={
                       errors.harvest_datetime && touched.harvest_datetime
                         ? {
@@ -481,7 +481,7 @@ const AddCultivation = () => {
                     type="button"
                     value={plantingDateTime}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
+                    className="search-input pl-5"
                     style={
                       errors.planting_datetime && touched.planting_datetime
                         ? {
@@ -532,7 +532,7 @@ const AddCultivation = () => {
                     name="workerName"
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     placeholder="سطح زیر کشت"
                     style={
                       errors.workerName && touched.workerName
@@ -589,7 +589,7 @@ const AddCultivation = () => {
                     value={vaziat?.name}
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     style={
                       errors.vaziat && touched.vaziat
                         ? {
@@ -622,7 +622,7 @@ const AddCultivation = () => {
                       value={totalProduct}
                       type="button"
                       autoComplete="off"
-                      className="search-input w-100 mt-4 py-3"
+                      className="search-input"
                       onClick={showTotalProductModal}
                       // onChange={handleTotalProduct}
                     />
@@ -693,7 +693,7 @@ const AddCultivation = () => {
                       value={price}
                       type="button"
                       autoComplete="off"
-                      className="search-input w-100 mt-4 py-3"
+                      className="search-input"
                       onClick={showPriceModal}
                       // onChange={handlePrice}
                     />

@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./../../cultivation/modals/farmModal.css";
+// import "./../../cultivation/modals/farmModal.css";
 
 const YearFieldModalHistory = ({ showModal, hideModal, data }) => {
   const [selected, setSelected] = useState("");

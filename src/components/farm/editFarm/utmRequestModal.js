@@ -3,8 +3,9 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./editModal.css";
+// import "./editModal.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../assets/icon";
+// import "./../../../assets/css/modals.css";
 
 const Data = [
   {
@@ -102,14 +103,8 @@ const UtmRequestModal = ({ showModal, hideModal, data }) => {
             </button>
           </div>
         </div>
-        <div className="farm-field-modal-body product-field-modal">
-          <div
-            style={{
-              // margin: "0",
-              
-              // margin: "30px 15px 0 0",
-            }}
-          >
+        <div className="farm-field-modal-body product-field-modal" >
+          <div style={{margin:"30px 0px 0px"}}>
               <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
