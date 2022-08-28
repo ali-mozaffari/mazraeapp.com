@@ -13,8 +13,12 @@ import { combineReducers } from "redux";
 import activityEditReducer from "./slice/activities/editActivity";
 import accessListBoxReducer from "./slice/access/accessListBox";
 import accessReducer from "./slice/access/addAccess";
-import accessEditRducer from "./slice/access/editAccess";
-import pestProductRducer from "./slice/pests/pestProduct";
+import accessEditReducer from "./slice/access/editAccess";
+import pestProductReducer from "./slice/pests/pestProduct";
+import yearListReducer from "./slice/farm/cultivation/yearList";
+import mahsulCategoriesReducer from "./slice/farm/cultivation/mahsulCategories";
+import mahsulsReducer from "./slice/farm/cultivation/mahsuls";
+import subMahsulsReducer from "./slice/farm/cultivation/subMahsuls";
 
 const persistConfig = {
   key: "root",
@@ -31,8 +35,12 @@ const rootReducer = combineReducers({
   activityEdit: activityEditReducer,
   accessList: accessListBoxReducer,
   addAccess: accessReducer,
-  accessEdit: accessEditRducer,
-  pestProduct: pestProductRducer
+  accessEdit: accessEditReducer,
+  pestProduct: pestProductReducer,
+  yearList: yearListReducer,
+  mahsulCategories: mahsulCategoriesReducer,
+  mahsuls: mahsulsReducer,
+  subMahsuls: subMahsulsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

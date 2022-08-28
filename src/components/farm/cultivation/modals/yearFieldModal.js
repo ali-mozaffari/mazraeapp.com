@@ -1,8 +1,9 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { getYearList } from "../../../../redux/slice/farm/cultivation/yearList";
 // import "./farmModal.css";
 // import "./../../../../assets/css/modals.css";
 // import { makeStyles } from "@mui/styles";
@@ -19,17 +20,23 @@ const styles = {
   formLabel: {
     color: "#000",
     "&.Mui-focused": {
-      color: "#000"
-    }
-  }
+      color: "#000",
+    },
+  },
 };
 
 const YearFieldModal = ({ showModal, hideModal, data }) => {
   // const classes = useStyles();
+  const dispatch = useDispatch();
+  const { year } = useSelector((state) => state.yearList);
+  // console.log(year);
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
+  useEffect(() => {
+    dispatch(getYearList());
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,9 +44,12 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
   };
 
   return (
-      <Modal show={showModal} className="farm-field-modal" aria-labelledby="child-modal-title">
-    <form onSubmit={handleSubmit}>
-
+    <Modal
+      show={showModal}
+      className="farm-field-modal"
+      aria-labelledby="child-modal-title"
+    >
+      <form onSubmit={handleSubmit}>
         <div className="farm-field-modal-header justify-content-start">
           <img
             src={closeNotification}
@@ -68,23 +78,25 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
               color: "#4A4A4A",
             }}
           >
-                  {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
+            {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
 
-            <RadioGroup
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
-              // value={value}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="1"
-                control={<Radio />}
-                name="1397-1398"
-                label="1397-1398"
-                className="farm-field-radio"
-                // classes={classes}
-              />
-              <FormControlLabel
+            {year?.map((item) => (
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                // value={value}
+                onChange={handleChange}
+              >
+                <FormControlLabel
+                  value={item.id}
+                  control={<Radio />}
+                  name={item.title}
+                  label={item.title}
+                  className="farm-field-radio"
+                  // classes={classes}
+                />
+
+                {/* <FormControlLabel
                 value="2"
                 control={<Radio />}
                 name="1398-1399"
@@ -104,8 +116,9 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
                 name="1400-1401"
                 label="1400-1401"
                 className="farm-field-radio"
-              />
-            </RadioGroup>
+              /> */}
+              </RadioGroup>
+            ))}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
@@ -133,10 +146,8 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
             </div>
           </div>
         </div>
-
-        </form>
-      </Modal>
-    
+      </form>
+    </Modal>
   );
 };
 

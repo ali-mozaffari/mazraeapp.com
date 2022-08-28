@@ -43,6 +43,8 @@ const Data = [
 ];
 
 const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
+  const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
+
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -54,8 +56,8 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
 
   const handleClick = () => {
     hideModal();
-    setTimeout(() => setDataList(""), 1000)
-  }
+    setTimeout(() => setDataList(""), 1000);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -124,7 +126,20 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 label="-"
                 className="farm-field-radio"
               />
-              {Data?.filter((item) =>
+              {mahsulCategory
+                ?.filter((item) => item.title.toLowerCase().includes(dataList))
+                .map((item) => (
+                  <FormControlLabel
+                    key={item.guid}
+                    value={item.guid}
+                    control={<Radio />}
+                    name={item.title}
+                    label={item.title}
+                    className="farm-field-radio"
+                  />
+                ))}
+
+              {/* {Data?.filter((item) =>
                 item.title.toLowerCase().includes(dataList)
               ).map((item) => (
                 <FormControlLabel
@@ -135,7 +150,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                   label={item.title}
                   className="farm-field-radio"
                 />
-              ))}
+              ))} */}
             </RadioGroup>
           </div>
         </div>

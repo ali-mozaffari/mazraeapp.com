@@ -27,10 +27,23 @@ import moment from "moment-jalaali";
 import VaziatFieldModal from "./modals/vaziatFieldModal";
 import PriceFieldModal from "./modals/priceFieldModal";
 import TotalProductFieldModal from "./modals/totalProductFieldModal";
+import { getMahsulCategories } from "../../../redux/slice/farm/cultivation/mahsulCategories";
+import { getMahsuls } from "../../../redux/slice/farm/cultivation/mahsuls";
+import { getSubMahsuls } from "../../../redux/slice/farm/cultivation/subMahsuls";
 
 const AddCultivation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
+  // const { mahsul } = useSelector((state) => state.mahsuls);
+  // console.log(mahsulCategory)
+
+  useEffect(() => {
+    dispatch(getMahsulCategories());
+    dispatch(getMahsuls());
+    dispatch(getSubMahsuls());
+  }, []);
 
   const [loading, setLoading] = useState(false);
 
