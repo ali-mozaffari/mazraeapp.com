@@ -47,10 +47,17 @@ const EditFarmPage = React.lazy(() =>
 );
 
 const AddActivity = React.lazy(() =>
-  import("../pages/activities/addActivityPage")
-);
+    import("../pages/activities/addActivityPage"));
 
-const PestMainPage = React.lazy(() => import("../pages/pests/pestMainPage"));
+
+const PestMainPage = React.lazy(() =>
+    import("../pages/pests/pestMainPage"));
+
+const PestMenuPage = React.lazy(() =>
+    import("../pages/pests/pestMenuPage"));
+
+const PestQuestionsPage = React.lazy(() =>
+    import("../pages/pests/pestQuestionsPage"));
 
 const AppView = () => {
   const location = useLocation();
@@ -64,20 +71,52 @@ const AppView = () => {
 
   if (location.pathname === "/sendcode" || location.pathname === "/login") {
     return (
-      <AuthLayout>
-        <Routes>
-          <Route path="/sendcode" element={<SendCode />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </AuthLayout>
+        <AppLayout>
+            <Routes>
+                <Route path="/" element={<Navigate replace to="home"/>}/>
+                <Route path="/home" element={<Main/>}/>
+                {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
+                <Route path="/add-cultivation" element={<AddCultivationPage/>}/>
+                <Route path="/activities" element={<ActivitiesPage/>}/>
+                <Route path="/farm-services" element={<FarmServicePage/>}/>
+                <Route path="/invitation" element={<InvitationPage/>}/>
+                <Route path="/edit-farm" element={<EditFarmPage />} />
+                <Route path="/add-activity" element={<AddActivity />} />
+                <Route path="/edit-activity/:id" element={<EditActivityPage />} />
+                <Route path="/access" element={<AccessPage />} />
+                <Route path="/add-access" element={<AddAccessPage />} />
+                <Route path="/edit-access/:id" element={<EditAccessPage />} />
+                <Route path="/weather" element={<WeatherPage />} />
+
+
+
+                {/* pests routes ---------------------------------------- */}
+                <Route path="/desises" element={<PestMainPage />} />
+                <Route path="/desises-menu" element={<PestMenuPage />} />
+                <Route path="/desises-questions" element={<PestQuestionsPage />} />
+            </Routes>
+        </AppLayout>
     );
-  } else if (location.pathname === "/add-farm") {
+  }else{
     return (
-      <Routes>
-        <Route path="add-farm" element={<AddFarmPage />} />
-      </Routes>
-    );
-  }
+      <AppLayout>
+          <Routes>
+              <Route path="/" element={<Navigate replace to="home"/>}/>
+              <Route path="/home" element={<Main/>}/>
+              {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
+              <Route path="/add-cultivation" element={<AddCultivationPage/>}/>
+              <Route path="/activities" element={<ActivitiesPage/>}/>
+              <Route path="/farm-services" element={<FarmServicePage/>}/>
+              <Route path="/invitation" element={<InvitationPage/>}/>
+              <Route path="/edit-farm" element={<EditFarmPage />} />
+              <Route path="/add-activity" element={<AddActivity />} />
+              <Route path="/edit-activity/:id" element={<EditActivityPage />} />
+              <Route path="/access" element={<AccessPage />} />
+              <Route path="/add-access" element={<AddAccessPage />} />
+              <Route path="/edit-access/:id" element={<EditAccessPage />} />
+              <Route path="/weather" element={<WeatherPage />} />
+
+
 
   return (
     <AppLayout>
@@ -109,6 +148,34 @@ const AppView = () => {
       </Routes>
     </AppLayout>
   );
+  }
+
+  // return (
+  //   <AppLayout>
+  //     <Routes>
+  //       <Route path="/" element={<Navigate replace to="home" />} />
+  //       <Route path="/home" element={<Main />} />
+  //       {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
+  //       <Route path="/add-cultivation" element={<AddCultivationPage />} />
+  //       <Route path="/activities" element={<ActivitiesPage />} />
+  //       <Route path="/farm-services" element={<FarmServicePage />} />
+  //       <Route path="/invitation" element={<InvitationPage />} />
+  //       <Route path="/edit-farm" element={<EditFarmPage />} />
+  //       <Route path="/add-activity" element={<AddActivity />} />
+  //       <Route path="/edit-activity/:id" element={<EditActivityPage />} />
+  //       <Route path="/access" element={<AccessPage />} />
+  //       <Route path="/add-access" element={<AddAccessPage />} />
+  //       <Route path="/edit-access/:id" element={<EditAccessPage />} />
+  //       <Route path="/weather" element={<WeatherPage />} />
+  //       <Route path="/utm-request" element={<UTMRequestPage />} />
+  //       <Route path="/owner-info" element={<OwnerInfoPage />} />
+  //       <Route path="/edit-farm-info" element={<EditFarmInfoPage />} />
+
+  //       {/* pests routes ---------------------------------------- */}
+  //       <Route path="/desises" element={<PestMainPage />} />
+  //     </Routes>
+  //   </AppLayout>
+  // );
 };
 
 export default AppView;
