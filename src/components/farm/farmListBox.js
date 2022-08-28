@@ -21,10 +21,25 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@material-ui/core/styles";
+
+// const useStyles = makeStyles({
+//   label: {
+//     fontSize: "13px",
+//   },
+// });
+const useStyles = makeStyles(theme => ({
+  label: {
+    fontSize: "13px !important",
+    paddingLeft: "20px",
+  }
+}));
 
 const ITEM_HEIGHT = 48;
 
 const FarmListBox = () => {
+  const classes = useStyles();
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -96,7 +111,8 @@ const FarmListBox = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu
-                      style={{direction: "ltr"}}
+                      className="dropdown-menu-farm-box"
+                      // style={{direction: "ltr", paddingBottom: "0"}}
                       >
                         <Dropdown.Item className="dropdown-item-main">
                           <Link to={"/edit-farm"} className="dropdownItem">
@@ -104,6 +120,7 @@ const FarmListBox = () => {
                               control={<Radio />}
                               label="ویرایش مشخصات مزرعه"
                               className="farm-field-radio"
+                              classes={classes}
                               style={{width: "100%"}}
                             />
                           </Link>
@@ -114,6 +131,7 @@ const FarmListBox = () => {
                               control={<Radio />}
                               label="ویرایش مختصات مزرعه"
                               className="farm-field-radio"
+                              classes={classes}
                               style={{width: "100%"}}
                             />
                           </Link>
@@ -124,6 +142,7 @@ const FarmListBox = () => {
                               control={<Radio />}
                               label="کشت های کنونی مزرعه"
                               className="farm-field-radio"
+                              classes={classes}
                               style={{width: "100%"}}
                             />
                           </Link>
@@ -134,6 +153,7 @@ const FarmListBox = () => {
                               control={<Radio />}
                               label="تاریخچه کشت های مزرعه"
                               className="farm-field-radio"
+                              classes={classes}
                               style={{width: "100%"}}
                             />
                           </Link>
@@ -148,6 +168,7 @@ const FarmListBox = () => {
                               control={<Radio />}
                               label="حذف"
                               className="farm-field-radio"
+                              classes={classes}
                               style={{width: "100%", border: 'none'}}
                             />
                           </div>
@@ -155,93 +176,6 @@ const FarmListBox = () => {
                       </Dropdown.Menu>
                     </Dropdown>
 
-                    {/* <RadioGroup
-                      aria-labelledby="demo-controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      // value={value}
-                      // onChange={handleChange}
-                    >
-                      <Link
-                        to={"/edit-farm"}
-                        // value="1"
-                        control={<Radio />}
-                        name="1397-1398"
-                        label="ویرایش مشخصات مزرعه"
-                        className="farm-field-radio"
-                      />
-                      <Link
-                        to={"/edit-coordination-farm"}
-                        // value="2"
-                        control={<Radio />}
-                        name="1398-1399"
-                        label="ویرایش مختصات مزرعه"
-                        className="farm-field-radio"
-                      />
-                      <Link
-                        to={"/cultivation"}
-                        // value="3"
-                        control={<Radio />}
-                        name="1399-1400"
-                        label="کشت های کنونی مزرعه"
-                        className="farm-field-radio"
-                      />
-                      <Link
-                        to={"/history"}
-                        // value="4"
-                        control={<Radio />}
-                        name="1400-1401"
-                        label="تاریخچه کشت های مزرعه"
-                        className="farm-field-radio"
-                      />
-                      <div
-                        // value="4"
-                        control={<Radio />}
-                        name="1400-1401"
-                        label="حذف مزرعه"
-                        className="farm-field-radio"
-                        onClick={() => showDeleteModal(item?.guid)}
-                      />
-                    </RadioGroup> */}
-
-                    {/* <Dropdown>
-                      <Dropdown.Toggle className="dropdown-toggle-icon">
-                        <img src={menuIcon} alt="menu" className="mx-auto" />
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/edit-farm"} className="dropdownItem">
-                            ویرایش مشخصات مزرعه
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <Link
-                            to={"/edit-coordination-farm"}
-                            className="dropdownItem"
-                          >
-                            ویرایش مختصات مزرعه
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/cultivation"} className="dropdownItem">
-                            کشت های کنونی مزرعه
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/history"} className="dropdownItem">
-                            تاریخچه کشت های مزرعه
-                          </Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item className="dropdown-item-main">
-                          <div
-                            className="dropdownItem"
-                            onClick={() => showDeleteModal(item?.guid)}
-                          >
-                            حذف مزرعه
-                          </div>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown> */}
                   </div>
                 </div>
               </div>

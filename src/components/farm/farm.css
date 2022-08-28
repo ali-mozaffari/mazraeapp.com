@@ -105,6 +105,13 @@
     }
 }
 
+.dropdown-menu-farm-box {
+    direction: ltr;
+    padding-bottom: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 5px rgb(0 0 0 / 10%);
+}
 .dropdown-item-main {
     padding: 0 10px !important;
 }
@@ -117,10 +124,6 @@
     text-decoration: none !important;
     color: #212529 !important;
      width: 100% !important;
-}
-
-.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
-    font-size: 13px;
 }
 
 .css-vqmohf-MuiButtonBase-root-MuiRadio-root {
