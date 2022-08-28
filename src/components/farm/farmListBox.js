@@ -111,9 +111,7 @@ const FarmListBox = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu
-                      className="dropdown-menu-farm-box"
-                      // style={{direction: "ltr", paddingBottom: "0"}}
-                      >
+                      className="dropdown-menu-farm-box">
                         <Dropdown.Item className="dropdown-item-main">
                           <Link to={"/edit-farm"} className="dropdownItem">
                             <FormControlLabel

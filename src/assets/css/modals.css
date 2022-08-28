@@ -50,6 +50,23 @@
     font-size: 13px !important;
   }
   
+  .css-j204z7-MuiFormControlLabel-root:focus-within {
+    color: #16DB93;
+  }
+
+  .muirtl-j204z7-MuiFormControlLabel-root:focus-within {
+    color: #16DB93;
+  }
+
+  /* .farm-field-radio input[type="radio"]:checked:after {
+    background-color: #16DB93;
+    color:#16DB93;
+    accent-color: #16DB93;
+  } */
+  /* .farm-field-radio:focus {
+    color: #16DB93 !important;
+  } */
+  
   /* @media screen and (min-width: 899px){
     .farm-field-modal {
       width: 45%;
