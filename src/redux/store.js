@@ -15,6 +15,7 @@ import accessListBoxReducer from "./slice/access/accessListBox";
 import accessReducer from "./slice/access/addAccess";
 import accessEditRducer from "./slice/access/editAccess";
 import pestProductRducer from "./slice/pests/pestProduct";
+import pestRducer from "./slice/pests/pests";
 
 const persistConfig = {
   key: "root",
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   accessList: accessListBoxReducer,
   addAccess: accessReducer,
   accessEdit: accessEditRducer,
-  pestProduct: pestProductRducer
+  pestProduct: pestProductRducer,
+  pest: pestRducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
