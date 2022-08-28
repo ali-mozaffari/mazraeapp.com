@@ -11,6 +11,10 @@ html, body {
     outline: none !important;
 }
 
+hr{
+  background-color: gray;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
