@@ -3,9 +3,29 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
+// import { makeStyles } from "@mui/styles";
+
+// const useStyles = makeStyles(theme => ({
+//   label: {
+//     '&.Mui-focused': {
+//       color: "#16DB93 !important",
+//     }
+//   }
+// }));
+
+const styles = {
+  formLabel: {
+    color: "#000",
+    "&.Mui-focused": {
+      color: "#000"
+    }
+  }
+};
 
 const YearFieldModal = ({ showModal, hideModal, data }) => {
+  // const classes = useStyles();
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -17,7 +37,7 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
   };
 
   return (
-      <Modal show={showModal} className="farm-field-modal">
+      <Modal show={showModal} className="farm-field-modal" aria-labelledby="child-modal-title">
     <form onSubmit={handleSubmit}>
 
         <div className="farm-field-modal-header justify-content-start">
@@ -48,6 +68,8 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
               color: "#4A4A4A",
             }}
           >
+                  {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
+
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
@@ -60,6 +82,7 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
                 name="1397-1398"
                 label="1397-1398"
                 className="farm-field-radio"
+                // classes={classes}
               />
               <FormControlLabel
                 value="2"

@@ -227,8 +227,6 @@ const AddCultivation = () => {
     harvest_datetime: harvestDateTime,
     planting_datetime: plantingDateTime,
     sathe_zire_kesht: "",
-    harvest_datetime: "",
-    planting_datetime: "",
     vaziat: "",
     totalProduct: "",
     price: "",
@@ -293,7 +291,7 @@ const AddCultivation = () => {
                     value={year?.name}
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="سال زراعی *"
                     style={
                       errors.sal_id && touched.sal_id
@@ -348,7 +346,7 @@ const AddCultivation = () => {
                     type="button"
                     value={productGroup?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="گروه محصول"
                     onClick={() => showProductGroupModal()}
                   />
@@ -372,7 +370,7 @@ const AddCultivation = () => {
                     type="button"
                     value={product?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
+                    className="search-input pl-5"
                     // placeholder="محصول *"
                     style={
                       errors.product && touched.product
@@ -415,7 +413,7 @@ const AddCultivation = () => {
                     type="button"
                     value={subProduct?.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     // placeholder="زیر محصول (اختیاری)"
                     onClick={() => showSubProductModal()}
                   />
@@ -431,6 +429,81 @@ const AddCultivation = () => {
               </Box>
 
               <hr className="mt-4" />
+
+              <Box
+                sx={{
+                  display: { xs: "block", sm: "flex" },
+                  justifyContent: "space-between",
+                  padding: "0",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
+                  }}
+                >
+                  <Field
+                    name="harvest_datetime"
+                    type="button"
+                    value={harvestDateTime}
+                    autoComplete="off"
+                    className="search-input pl-5"
+                    style={
+                      errors.harvest_datetime && touched.harvest_datetime
+                        ? {
+                            border: "1px solid #f00",
+                            color: "red",
+                          }
+                        : { border: "none" }
+                    }
+                    onClick={handleHarvestDateTime}
+                  />
+                  {!harvestDateTime ? (
+                    <span className="fieldTitleEmpty" onClick={handleHarvestDateTime}>
+                      تاریخ کاشت <span className="starSign"> *</span>{" "}
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled"> تاریخ کاشت</span>
+                  )}
+                  <span className="fieldIcon">
+                    <NewCalendarIcon />
+                  </span>
+                </Box>
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
+                  }}
+                >
+                  <Field
+                    name="planting_datetime"
+                    type="button"
+                    value={plantingDateTime}
+                    autoComplete="off"
+                    className="search-input pl-5"
+                    style={
+                      errors.planting_datetime && touched.planting_datetime
+                        ? {
+                            border: "1px solid #f00",
+                            color: "red",
+                          }
+                        : { border: "none" }
+                    }
+                    onClick={handlePlantingDateTime}
+                  />
+                  {!plantingDateTime ? (
+                    <span className="fieldTitleEmpty" onClick={handlePlantingDateTime}>
+                      تاریخ برداشت <span className="starSign"> *</span>{" "}
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled"> تاریخ برداشت</span>
+                  )}
+                  <span className="fieldIcon">
+                    <NewCalendarIcon />
+                  </span>
+                </Box>
+              </Box>
 
               <p
                 style={{
@@ -459,7 +532,7 @@ const AddCultivation = () => {
                     name="workerName"
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     placeholder="سطح زیر کشت"
                     style={
                       errors.workerName && touched.workerName
@@ -512,86 +585,11 @@ const AddCultivation = () => {
                   }}
                 >
                   <Field
-                    name="harvest_datetime"
-                    type="button"
-                    value={harvestDateTime}
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
-                    style={
-                      errors.harvest_datetime && touched.harvest_datetime
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                    onClick={handleHarvestDateTime}
-                  />
-                  {!harvestDateTime ? (
-                    <span className="fieldTitleEmpty" onClick={handleHarvestDateTime}>
-                      تاریخ کاشت <span className="starSign"> *</span>{" "}
-                    </span>
-                  ) : (
-                    <span className="fieldTitleFilled"> تاریخ کاشت</span>
-                  )}
-                  <span className="fieldIcon">
-                    <NewCalendarIcon />
-                  </span>
-                </Box>
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "48%" },
-                    position: "relative",
-                  }}
-                >
-                  <Field
-                    name="planting_datetime"
-                    type="button"
-                    value={plantingDateTime}
-                    autoComplete="off"
-                    className="search-input w-100 mt-4 pl-5 py-3"
-                    style={
-                      errors.planting_datetime && touched.planting_datetime
-                        ? {
-                            border: "1px solid #f00",
-                            color: "red",
-                          }
-                        : { border: "none" }
-                    }
-                    onClick={handlePlantingDateTime}
-                  />
-                  {!plantingDateTime ? (
-                    <span className="fieldTitleEmpty" onClick={handlePlantingDateTime}>
-                      تاریخ برداشت <span className="starSign"> *</span>{" "}
-                    </span>
-                  ) : (
-                    <span className="fieldTitleFilled"> تاریخ برداشت</span>
-                  )}
-                  <span className="fieldIcon">
-                    <NewCalendarIcon />
-                  </span>
-                </Box>
-              </Box>
-
-              <Box
-                sx={{
-                  display: { xs: "block", sm: "flex" },
-                  justifyContent: "space-between",
-                  padding: "0",
-                }}
-              >
-                <Box
-                  sx={{
-                    width: { xs: "100%", sm: "48%" },
-                    position: "relative",
-                  }}
-                >
-                  <Field
                     name="vaziat"
                     value={vaziat?.name}
                     type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     style={
                       errors.vaziat && touched.vaziat
                         ? {
@@ -624,7 +622,7 @@ const AddCultivation = () => {
                       value={totalProduct}
                       type="button"
                       autoComplete="off"
-                      className="search-input w-100 mt-4 py-3"
+                      className="search-input"
                       onClick={showTotalProductModal}
                       // onChange={handleTotalProduct}
                     />
@@ -695,7 +693,7 @@ const AddCultivation = () => {
                       value={price}
                       type="button"
                       autoComplete="off"
-                      className="search-input w-100 mt-4 py-3"
+                      className="search-input"
                       onClick={showPriceModal}
                       // onChange={handlePrice}
                     />

@@ -27,7 +27,7 @@ import moment from "moment-jalaali";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
-import { getAccessList } from "./../../redux/slice/access/accessListBox";
+import { Box } from "@mui/system";
 
 import "./activity.css";
 
@@ -201,12 +201,11 @@ const AddActivityForm = () => {
               vahede_meghdar: item.vahede_meghdar,
               vahede_masahat: item.vahede_masahat,
             };
-            console.log('---------')
-            console.log(payload)
+            console.log("---------");
+            console.log(payload);
             dispatch(addNahade(payload));
           });
         } else {
-
           setLoading(false);
           setClicked(false);
           // setFile("");
@@ -223,7 +222,6 @@ const AddActivityForm = () => {
     if (!nahades?.addNahadeLoading) {
       setLoading(false);
       if (nahades?.nahades.length > 0) {
-
         // setFile("");
         dispatch(clearNahadeList());
         dispatch(clearActivity());
@@ -248,168 +246,262 @@ const AddActivityForm = () => {
           {({ errors, touched }) => (
             <div className="container">
               <Form className="row">
-                <Field
-                  as="select"
-                  name="cultivations"
-                  validate={true}
-                  style={
-                    errors.cultivations && touched.cultivations
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 py-4"
-                  onClick={(e) => setSelectedCultivation(e.target.value)}
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  <option value="" label="محصول *" className="m-3">
-                    نام محصول *
-                  </option>
-                  {farms?.postList?.map((item) => [
-                    item.cultivation?.map((i) => (
-                      <option
-                        key={i.id}
-                        value={i.id}
-                        label={i.mahsul.title + " " + i.sathe_zire_kesht}
-                        className="m-3"
-                      >
-                        {i.mahsul.title}
-                      </option>
-                    )),
-                  ])}
-                </Field>
-
-                <Field
-                  as="select"
-                  name="noe_faaliat"
-                  style={
-                    errors.noe_faaliat && touched.noe_faaliat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_noe_faaliat(e.target.value)}
-                >
-                  <option value="" label="نوع *">
-                    نوع{" "}
-                  </option>
-
-                  {noe_faaliat_items?.map((item) => (
-                    <option key={item.key} value={item.key} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <hr className="mt-5" />
-
-                <Field
-                  as="select"
-                  name="vaziat"
-                  style={
-                    errors.vaziat && touched.vaziat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setVaziat(e.target.value)}
-                >
-                  <option value="" label="وضعیت *">
-                    وضعیت
-                  </option>
-
-                  {vaziat_items?.map((item) => (
-                    <option key={item.key} value={item.key} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
-
-                <div
-                  name="tarikh_mohlat_anjam"
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  // style={
-                  //   dateError
-                  //     ? { border: "1px solid #f00", color: "red" }
-                  //     : { border: "none" }
-                  // }
-                  onClick={onCalendarHandler}
-                  style={
-                    errors.tarikh_mohlat_anjam && touched.tarikh_mohlat_anjam
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none", color: "#212529" }
-                  }
-                >
-                  {tarikh_mohlat_anjam ? (
-                    <div>{tarikh_mohlat_anjam}</div>
-                  ) : (
-                    <div className="d-flex justify-content-between">
-                      <span>تاریخ مهلت انجام *</span>
-                      <CalendarIcon fill={"gray"} />
-                    </div>
-                  )}
-                </div>
-
-                <Select
-                  placeholder="انجام دهنده ها *"
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  // defaultValue={[options[1], options[2]]}
-                  isMulti
-                  isSearchable
-                  options={options}
-                  className="search-input col-md-5 mx-auto mt-4 p-0"
-                  name="anjam_dahande_list"
-                  onChange={workerOnchange}
-                  styles={
-                    errors.anjam_dahande_list && touched.anjam_dahande_list
-                      ? selectErrorStyle
-                      : ""
-                  }
-                />
-
-                <Field
-                  as="select"
-                  name="abzar_id"
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setSelectedTool(e.target.value)}
-                  style={{ height: "71px" }}
-                >
-                  <option
-                    value=""
-                    className="text-gray"
-                    label="تجهیزات و ابزار"
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
                   >
-                    تجهیزات و ابزار
-                  </option>
+                    <Field
+                      as="select"
+                      name="cultivations"
+                      validate={true}
+                      style={
+                        errors.cultivations && touched.cultivations
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => setSelectedCultivation(e.target.value)}
+                    >
+                      <option value="" label="محصول *" className="m-3">
+                        نام محصول *
+                      </option>
+                      {farms?.postList?.map((item) => [
+                        item.cultivation?.map((i) => (
+                          <option
+                            key={i.id}
+                            value={i.id}
+                            label={i.mahsul.title + " " + i.sathe_zire_kesht}
+                            className="m-3"
+                          >
+                            {i.mahsul.title}
+                          </option>
+                        )),
+                      ])}
+                    </Field>
+                  </Box>
 
-                  {tools?.data?.map((item) => (
-                    <option key={item?.id} value={item?.id} label={item?.title}>
-                      {item?.title}
-                    </option>
-                  ))}
-                </Field>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="noe_faaliat"
+                      style={
+                        errors.noe_faaliat && touched.noe_faaliat
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => set_noe_faaliat(e.target.value)}
+                    >
+                      <option value="" label="نوع *">
+                        نوع{" "}
+                      </option>
+
+                      {noe_faaliat_items?.map((item) => (
+                        <option
+                          key={item.key}
+                          value={item.key}
+                          label={item.title}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+                    </Field>
+                  </Box>
+                </Box>
 
                 <hr className="mt-5" />
 
-                <div
-                  onClick={onNahadeModalHandler}
-                  className="search-input col-md-5 mx-md-5 mt-4 py-4 d-flex justify-content-between"
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  <span className="text-gray">نهاده</span>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="vaziat"
+                      style={
+                        errors.vaziat && touched.vaziat
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => setVaziat(e.target.value)}
+                    >
+                      <option value="" label="وضعیت *">
+                        وضعیت
+                      </option>
 
-                  <PlusIcon fill={"gray"} />
-                </div>
+                      {vaziat_items?.map((item) => (
+                        <option
+                          key={item.key}
+                          value={item.key}
+                          label={item.title}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+                    </Field>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <div
+                      name="tarikh_mohlat_anjam"
+                      className="search-input"
+                      // style={
+                      //   dateError
+                      //     ? { border: "1px solid #f00", color: "red" }
+                      //     : { border: "none" }
+                      // }
+                      onClick={onCalendarHandler}
+                      style={
+                        errors.tarikh_mohlat_anjam &&
+                        touched.tarikh_mohlat_anjam
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none", color: "#212529" }
+                      }
+                    >
+                      {tarikh_mohlat_anjam ? (
+                        <div>{tarikh_mohlat_anjam}</div>
+                      ) : (
+                        <div className="d-flex justify-content-between">
+                          <span>تاریخ مهلت انجام *</span>
+                          <CalendarIcon fill={"gray"} />
+                        </div>
+                      )}
+                    </div>
+                  </Box>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Select
+                      placeholder="انجام دهنده ها *"
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      // defaultValue={[options[1], options[2]]}
+                      isMulti
+                      isSearchable
+                      options={options}
+                      className="search-input p-0"
+                      name="anjam_dahande_list"
+                      onChange={workerOnchange}
+                      styles={
+                        errors.anjam_dahande_list && touched.anjam_dahande_list
+                          ? selectErrorStyle
+                          : ""
+                      }
+                    />
+                  </Box>
+
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="abzar_id"
+                      className="search-input"
+                      onClick={(e) => setSelectedTool(e.target.value)}
+                      // style={{ height: "71px" }}
+                    >
+                      <option
+                        value=""
+                        className="text-gray"
+                        label="تجهیزات و ابزار"
+                      >
+                        تجهیزات و ابزار
+                      </option>
+
+                      {tools?.data?.map((item) => (
+                        <option
+                          key={item?.id}
+                          value={item?.id}
+                          label={item?.title}
+                        >
+                          {item?.title}
+                        </option>
+                      ))}
+                    </Field>
+                  </Box>
+                </Box>
+
+                <hr className="mt-5" />
+
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <div
+                      onClick={onNahadeModalHandler}
+                      className="search-input d-flex justify-content-between"
+                    >
+                      <span className="text-gray">نهاده</span>
+
+                      <PlusIcon fill={"gray"} />
+                    </div>
+                  </Box>
+                </Box>
 
                 {nahades?.nahades?.length > 0
                   ? nahades?.nahades?.map((item) => (
@@ -418,7 +510,7 @@ const AddActivityForm = () => {
                         className={
                           nahades?.nahades?.length / 2 === 0
                             ? "nahade-item col-md-5 mx-auto mt-4 d-flex justify-content-between"
-                            : "nahade-item col-md-5 mx-md-5 mt-4 d-flex justify-content-between"
+                            : "nahade-item col-md-5 mt-4 d-flex justify-content-between"
                         }
                       >
                         <div>
@@ -442,61 +534,83 @@ const AddActivityForm = () => {
                   : null}
 
                 <hr style={{ backgroundColor: "transparent" }} />
-                <Field
-                  name="yaddasht"
-                  type="text"
-                  component="textarea"
-                  rows="4"
-                  autoComplete="off"
-                  onChange={(e) => setYaddasht(e.target.value)}
-                  className="search-input col-md-5 mx-auto mt-4"
-                  placeholder="یادداشت"
-                />
 
-                <div
-                  className="search-input file-uploader col-md-5 mx-auto mt-4"
-                  style={{ height: 200 }}
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  {file.length < 1 ? (
-                    <div onClick={handleClick}>
-                      <input
-                        type="file"
-                        name="image"
-                        ref={hiddenFileInput}
-                        onChange={(e) => setFile([e.target.files[0]])}
-                        style={{ display: "none" }}
-                      />
-                      <img
-                        src={folder}
-                        className="d-block mx-auto mt-2 mt-md-1"
-                      />
-                      <h5
-                        style={{ fontWeight: "900" }}
-                        className="text-center mt-3"
-                      >
-                        آپلود مدارک
-                      </h5>
-                      <p className="text-center text-gray mt-3">
-                        فایل های خود را انتخاب کنید
-                      </p>
-                    </div>
-                  ) : (
-                    <div>
-                      <img
-                        src={folder}
-                        className="d-block mx-auto mt-2 mt-md-1"
-                      />
-                      <div className="d-flex justify-content-between mt-3 px-4 mt-5">
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      name="yaddasht"
+                      type="text"
+                      component="textarea"
+                      rows="4"
+                      autoComplete="off"
+                      onChange={(e) => setYaddasht(e.target.value)}
+                      className="search-input"
+                      placeholder="یادداشت"
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <div
+                      className="search-input file-uploader"
+                      style={{ padding: "5px" }}
+                    >
+                      {file.length < 1 ? (
+                        <div onClick={handleClick}>
+                          <input
+                            type="file"
+                            name="image"
+                            ref={hiddenFileInput}
+                            onChange={(e) => setFile([e.target.files[0]])}
+                            style={{ display: "none" }}
+                          />
+                          <img
+                            src={folder}
+                            className="d-block mx-auto mt-2 mt-md-1"
+                          />
+                          <h5
+                            style={{ fontWeight: "900" }}
+                            className="text-center mt-3"
+                          >
+                            آپلود مدارک
+                          </h5>
+                          <p className="text-center text-gray mt-3">
+                            فایل های خود را انتخاب کنید
+                          </p>
+                        </div>
+                      ) : (
                         <div>
-                          <span>{file[0].name}</span>
+                          <img
+                            src={folder}
+                            className="d-block mx-auto mt-2 mt-md-1"
+                          />
+                          <div className="d-flex justify-content-between mt-3 px-4 mt-5">
+                            <div>
+                              <span>{file[0].name}</span>
+                            </div>
+                            <div onClick={() => setFile([])}>
+                              <CloseIcon />
+                            </div>
+                          </div>
                         </div>
-                        <div onClick={() => setFile([])}>
-                          <CloseIcon />
-                        </div>
-                      </div>
+                      )}
                     </div>
-                  )}
-                </div>
+                  </Box>
+                </Box>
 
                 <div className="d-flex justify-content-center mt-3">
                   <button

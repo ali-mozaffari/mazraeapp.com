@@ -4,7 +4,8 @@ import * as persianTools from "@persian-tools/persian-tools";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 import {
   ArrowSearchIcon,
   InfoLigthIcon,
@@ -51,7 +52,7 @@ const PriceFieldModal = ({ showModal, hideModal, data }) => {
         </div>
         <div
           className="farm-field-modal-body product-field-modal"
-          style={{ overflowY: "auto" }}
+          style={{ overflowY: "auto", direction: "rtl" }}
         >
           <div
             style={{

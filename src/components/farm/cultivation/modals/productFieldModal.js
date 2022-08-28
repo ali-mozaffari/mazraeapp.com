@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -74,7 +75,7 @@ const ProductFieldModal = ({ showModal, hideModal, data }) => {
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
-              انتخاب گروه محصول
+              انتخاب محصول
             </h6>
           </div>
 

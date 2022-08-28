@@ -30,13 +30,12 @@ import moment from "moment-jalaali";
 import { toast } from "react-toastify";
 import folder from "./../../assets/img/folder.png";
 import Loading from "../loading/loading";
-import { CompressOutlined, InsertEmoticonOutlined } from "@mui/icons-material";
+import { Box } from "@mui/system";
 import "./activity.css";
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import url from './../../services/config';
-import { getAccessList } from "../../redux/slice/access/accessListBox";
+import url from "./../../services/config";
 const animatedComponents = makeAnimated();
 
 const selectErrorStyle = {
@@ -92,7 +91,7 @@ const EditActivityForm = () => {
   const [file, setFile] = useState([]);
   const hiddenFileInput = React.useRef(null);
   const activityEdit = useSelector((state) => state.activityEdit);
-  console.log(activityEdit)
+  console.log(activityEdit);
   const [existingNahade, setExistingNahade] = useState(
     existingActivity[0]?.nahades
   );
@@ -147,7 +146,7 @@ const EditActivityForm = () => {
     // console.log(list);
     setWorker(list);
   };
-  
+
   // useEffect(() => {
   //   dispatch(getToolsList());
   //   // dispatch(getAccessList());
@@ -262,7 +261,6 @@ const EditActivityForm = () => {
     //   toast.success("فعالیت به روز رسانی شد", { position: "top-center" });
     //   navigate("/activities");
     // }
-
   };
 
   useEffect(() => {
@@ -282,7 +280,6 @@ const EditActivityForm = () => {
             dispatch(addNahade(payload));
           });
         } else {
-
           setLoading(false);
           setClicked(false);
           // setFile("");
@@ -299,7 +296,6 @@ const EditActivityForm = () => {
     if (!nahades?.addNahadeLoading) {
       setLoading(false);
       if (nahades?.nahades.length > 0) {
-
         // setFile("");
         dispatch(clearNahadeList());
         dispatch(clearActivity());
@@ -369,148 +365,232 @@ const EditActivityForm = () => {
           {({ errors, touched }) => (
             <div className="container">
               <Form className="row">
-                <Field
-                  as="select"
-                  name="cultivations"
-                  validate={true}
-                  style={
-                    errors.cultivations && touched.cultivations
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 py-4"
-                  onClick={(e) => setSelectedCultivation(e.target.value)}
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  {farms?.postList?.map((item) => [
-                    item.cultivation?.map((i) => (
-                      <option
-                        key={i.id}
-                        value={i.id}
-                        label={i.sathe_zire_kesht + " " + i.mahsul.title}
-                        className="m-3"
-                      ></option>
-                    )),
-                  ])}
-                </Field>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="cultivations"
+                      validate={true}
+                      style={
+                        errors.cultivations && touched.cultivations
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => setSelectedCultivation(e.target.value)}
+                    >
+                      {farms?.postList?.map((item) => [
+                        item.cultivation?.map((i) => (
+                          <option
+                            key={i.id}
+                            value={i.id}
+                            label={i.sathe_zire_kesht + " " + i.mahsul.title}
+                            className="m-3"
+                          ></option>
+                        )),
+                      ])}
+                    </Field>
+                  </Box>
 
-                <Field
-                  as="select"
-                  name="noe_faaliat"
-                  style={
-                    errors.noe_faaliat && touched.noe_faaliat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => set_noe_faaliat(e.target.value)}
-                >
-                  {noe_faaliat_items?.map((item) => (
-                    <option
-                      key={item.key}
-                      value={item.key}
-                      label={item.title}
-                    ></option>
-                  ))}
-                </Field>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="noe_faaliat"
+                      style={
+                        errors.noe_faaliat && touched.noe_faaliat
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => set_noe_faaliat(e.target.value)}
+                    >
+                      {noe_faaliat_items?.map((item) => (
+                        <option
+                          key={item.key}
+                          value={item.key}
+                          label={item.title}
+                        ></option>
+                      ))}
+                    </Field>
+                  </Box>
+                </Box>
 
                 <hr className="mt-5" />
 
-                <Field
-                  as="select"
-                  name="vaziat"
-                  style={
-                    errors.vaziat && touched.vaziat
-                      ? {
-                          border: "1px solid #f00",
-                          color: "red",
-                        }
-                      : { border: "none" }
-                  }
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setVaziat(e.target.value)}
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  {vaziat_items?.map((item) => (
-                    <option
-                      key={item.key}
-                      value={item.key}
-                      label={item.title}
-                    ></option>
-                  ))}
-                </Field>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="vaziat"
+                      style={
+                        errors.vaziat && touched.vaziat
+                          ? {
+                              border: "1px solid #f00",
+                              color: "red",
+                            }
+                          : { border: "none" }
+                      }
+                      className="search-input"
+                      onClick={(e) => setVaziat(e.target.value)}
+                    >
+                      {vaziat_items?.map((item) => (
+                        <option
+                          key={item.key}
+                          value={item.key}
+                          label={item.title}
+                        ></option>
+                      ))}
+                    </Field>
+                  </Box>
 
-                <div
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  style={
-                    dateError
-                      ? { border: "1px solid #f00", color: "red" }
-                      : { border: "none" }
-                  }
-                  onClick={onCalendarHandler}
-                >
-                  {tarikh_mohlat_anjam ? (
-                    <div>
-                      {moment(tarikh_mohlat_anjam, "YYYY/MM/DD").format(
-                        "jYYYY-jMM-jDD"
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <div
+                      className="search-input"
+                      style={
+                        dateError
+                          ? { border: "1px solid #f00", color: "red" }
+                          : { border: "none" }
+                      }
+                      onClick={onCalendarHandler}
+                    >
+                      {tarikh_mohlat_anjam ? (
+                        <div>
+                          {moment(tarikh_mohlat_anjam, "YYYY/MM/DD").format(
+                            "jYYYY-jMM-jDD"
+                          )}
+                        </div>
+                      ) : (
+                        <div className=" d-flex justify-content-between">
+                          <span>
+                            <span>تاریخ ثبت نشده</span>
+                          </span>
+                          <CalendarIcon fill={"gray"} />
+                        </div>
                       )}
                     </div>
-                  ) : (
-                    <div className=" d-flex justify-content-between">
-                      <span>
-                        <span>تاریخ ثبت نشده</span>
-                      </span>
-                      <CalendarIcon fill={"gray"} />
-                    </div>
-                  )}
-                </div>
+                  </Box>
+                </Box>
 
-                <Select
-                  placeholder="انجام دهنده ها *"
-                  closeMenuOnSelect={false}
-                  components={animatedComponents}
-                  defaultValue={index.map((i) => options[i])}
-                  // defaultValue={[options[0],options[1],options[2]]}
-                  isMulti
-                  options={options}
-                  className="search-input col-md-5 mx-auto mt-4 p-0"
-                  name="anjam_dahande_list"
-                  onChange={workerOnchange}
-                  styles={
-                    errors.anjam_dahande_list && touched.anjam_dahande_list
-                      ? selectErrorStyle
-                      : ""
-                  }
-                />
-
-                <Field
-                  as="select"
-                  name="abzar_id"
-                  className="search-input col-md-5 mx-auto mt-4 pl-5 py-4"
-                  onClick={(e) => setSelectedTool(e.target.value)}
-                  style={{ height: "71px" }}
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
                 >
-                  {tools?.data?.map((item) => (
-                    <option key={item.id} value={item.id} label={item.title}>
-                      {item.title}
-                    </option>
-                  ))}
-                </Field>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Select
+                      placeholder="انجام دهنده ها *"
+                      closeMenuOnSelect={false}
+                      components={animatedComponents}
+                      defaultValue={index.map((i) => options[i])}
+                      // defaultValue={[options[0],options[1],options[2]]}
+                      isMulti
+                      options={options}
+                      className="search-input p-0"
+                      name="anjam_dahande_list"
+                      onChange={workerOnchange}
+                      styles={
+                        errors.anjam_dahande_list && touched.anjam_dahande_list
+                          ? selectErrorStyle
+                          : ""
+                      }
+                    />
+                  </Box>
+
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      as="select"
+                      name="abzar_id"
+                      className="search-input"
+                      onClick={(e) => setSelectedTool(e.target.value)}
+                    >
+                      {tools?.data?.map((item) => (
+                        <option
+                          key={item.id}
+                          value={item.id}
+                          label={item.title}
+                        >
+                          {item.title}
+                        </option>
+                      ))}
+                    </Field>
+                  </Box>
+                </Box>
 
                 <hr className="mt-5" />
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
 
                 <div
                   onClick={onNahadeModalHandler}
-                  className="search-input col-md-5 mx-md-5 mt-4 py-4 d-flex justify-content-between"
+                  className="search-input d-flex justify-content-between"
                 >
                   <span className="text-gray">نهاده</span>
 
                   <PlusIcon fill={"gray"} />
                 </div>
+                </Box>
+                </Box>
 
                 {nahades?.nahades?.length > 0
                   ? nahades?.nahades?.map((item) => (
@@ -573,6 +653,19 @@ const EditActivityForm = () => {
                   : null}
 
                 <hr style={{ backgroundColor: "transparent" }} />
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
                 <Field
                   name="yaddasht"
                   type="text"
@@ -584,10 +677,17 @@ const EditActivityForm = () => {
                   placeholder="یادداشت"
                   defaultValue={existingActivity[0]?.yaddasht}
                 />
+                </Box>
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
 
                 <div
-                  className="search-input file-uploader col-md-5 mx-auto mt-4"
-                  // style={{ height: 200 }}
+                  className="search-input file-uploader"
+                  style={{ padding: "5px" }}
                 >
                   {file.length < 1 ? (
                     <div onClick={handleClick}>
@@ -600,9 +700,9 @@ const EditActivityForm = () => {
                       />
                       <img
                         // src={folder}
-                        src={url+(existingActivity[0]?.file?.image)}
+                        src={url + existingActivity[0]?.file?.image}
                         className="d-block mx-auto mt-2 mt-md-1"
-                        style={{width: "100px"}}
+                        style={{ width: "100px" }}
                       />
                       <h5
                         style={{ fontWeight: "900" }}
@@ -621,8 +721,8 @@ const EditActivityForm = () => {
                         className="d-block mx-auto mt-2 mt-md-1"
                       />
                       <div className="image-edit d-flex justify-content-between mt-3 px-4 mt-5">
-                          <span>{file[0].name}</span>
-                          {/* <img src={url+(existingActivity[0]?.file?.image)} alt="image" /> */}
+                        <span>{file[0].name}</span>
+                        {/* <img src={url+(existingActivity[0]?.file?.image)} alt="image" /> */}
                         <div onClick={() => setFile([])}>
                           <CloseIcon />
                         </div>
@@ -630,6 +730,8 @@ const EditActivityForm = () => {
                     </div>
                   )}
                 </div>
+                </Box>
+                </Box>
 
                 <div className="d-flex justify-content-center mt-3">
                   <button

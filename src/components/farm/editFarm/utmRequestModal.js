@@ -3,41 +3,42 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./../cultivation/modals/farmModal.css";
+// import "./editModal.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../assets/icon";
+// import "./../../../assets/css/modals.css";
 
 const Data = [
   {
     id: 1,
-    title: "Apple Garden",
+    title: "محصولات صنعتی",
   },
   {
     id: 2,
-    title: "Orange Garden",
+    title: "پنبه",
   },
   {
     id: 3,
-    title: "Tomato Farm",
+    title: "کتان",
   },
   {
     id: 4,
-    title: "Potato Farm",
+    title: "نیشکر",
   },
   {
     id: 5,
-    title: "Grapes Garden",
+    title: "توتون",
   },
   {
     id: 6,
-    title: "Cucumber Farm",
+    title: "خشخاش",
   },
   {
     id: 7,
-    title: "Pistachio Garden",
+    title: "نیشکر 2",
   },
   {
     id: 8,
-    title: "Pear Graden",
+    title: "شاهدانه",
   },
 ];
 
@@ -102,15 +103,9 @@ const UtmRequestModal = ({ showModal, hideModal, data }) => {
             </button>
           </div>
         </div>
-        <div className="farm-field-modal-body product-field-modal">
-          <div
-            style={{
-              margin: "0",
-              marginTop: "30px",
-              color: "#4A4A4A",
-            }}
-          >
-            <RadioGroup
+        <div className="farm-field-modal-body product-field-modal" >
+          <div style={{margin:"30px 0px 0px"}}>
+              <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
@@ -136,6 +131,7 @@ const UtmRequestModal = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
+            
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">

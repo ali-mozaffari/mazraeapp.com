@@ -105,6 +105,17 @@
     }
 }
 
+.dropdown-menu-farm-box {
+    direction: ltr;
+    padding-bottom: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 5px rgb(0 0 0 / 10%);
+}
+.dropdown-item-main {
+    padding: 0 10px !important;
+}
+
 .dropdown-item-main:hover {
     background-color: rgba(0, 0, 0, 0.04) !important;
 }
@@ -112,8 +123,11 @@
 .dropdownItem {
     text-decoration: none !important;
     color: #212529 !important;
-    font-size: 14px !important;
      width: 100% !important;
+}
+
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root {
+    padding-left: 0 !important;
 }
 
 .dropdown-toggle-icon {
@@ -213,4 +227,27 @@
     color: #2C689A;
     padding-right: 5px;
     font-size: 11px;
+}
+
+.utm-top-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 56px;
+    color: #4A4A4A;
+}
+
+.general-field-title {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-right: 0;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 22px;
+    color: #676767;
+    height: 22px;
 }

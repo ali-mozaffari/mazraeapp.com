@@ -3,7 +3,8 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import "./farmModal.css";
+// import "./farmModal.css";
+// import "./../../../../assets/css/modals.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -42,19 +43,19 @@ const Data = [
 ];
 
 const SubProductFieldModal = ({ showModal, hideModal, data }) => {
-  const [textInput, setTextInput] = useState("");
+  // const [textInput, setTextInput] = useState("");
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
-    setTextInput("");
+    // setTextInput("");
   };
 
-  const handleText = (e) => {
-    setTextInput({ value: e.target.value, name: e.target.value });
-    setSelected("");
-  };
-  console.log(textInput);
-  console.log(selected);
+  // const handleText = (e) => {
+  //   setTextInput({ value: e.target.value, name: e.target.value });
+  //   setSelected("");
+  // };
+  // console.log(textInput);
+  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
 
@@ -65,28 +66,26 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(textInput === ''){
-      data(selected);
-    }else{
-      data(textInput)
-    }
+    data(selected);
+    // if(textInput === ''){
+    //   data(selected);
+    // }else{
+    //   data(textInput)
+    // }
     
   };
 
   return (
     <Modal show={showModal} className="farm-field-modal">
       <form onSubmit={handleSubmit}>
-        <div
-          className="farm-field-modal-header"
-          style={{ boxShadow: "none", padding: "30px 15px 5px 35px" }}
-        >
+        <div className="farm-field-modal-header">
           <div>
             <img
               src={closeNotification}
               alt=""
               style={{
                 position: "absolute",
-                left: "40px",
+                left: "25px",
                 top: "30px",
                 height: "16px",
                 cursor: "pointer",
@@ -121,11 +120,11 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
           <div
             style={{
               margin: "0",
-              marginTop: "10px",
-              color: "#4A4A4A",
+              marginTop: "30px",
+              // color: "#4A4A4A",
             }}
           >
-            <div
+            {/* <div
               style={{
                 marginRight: "15px",
                 borderBottom: "1px solid #aeaeae",
@@ -142,8 +141,8 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                 value={textInput.value}
                 onChange={handleText}
               />
-            </div>
-            {textInput === '' || textInput.value === '' ? (
+            </div> */}
+            {/* {textInput === '' || textInput.value === '' ? ( */}
             <RadioGroup
               className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
@@ -151,6 +150,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
               onChange={handleChange}
             >
               <FormControlLabel
+              // style={{margin: "0"}}
                 value=""
                 control={<Radio />}
                 name=""
@@ -170,7 +170,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
-            ): ''}
+            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
