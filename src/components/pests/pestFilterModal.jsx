@@ -13,10 +13,11 @@ import { VirusNewIcon } from './../../assets/pestIcons/virusNewIcon';
 import { WeedNewIcon } from './../../assets/pestIcons/weedNewIcon';
 import { NutrationNewIcon } from './../../assets/pestIcons/nutrationNewIcon';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { set } from "date-fns";
 
 
 const IOSSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    <Switch checked={props.value ? props.value : false} focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
   ))(({ theme }) => ({
     width: 42,
     height: 26,
@@ -93,12 +94,21 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
   const [weed, setWeed] = useState(false);
   const [nutration, setNutration] = useState(false);
 
-  
+  const diseasesOnCLick = (val) => {
+
+      setFungal(val);
+      setBacteri(val);
+      setVirus(val);
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    let data = {}
+
     
+
   };
 
   return (
@@ -133,13 +143,14 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4">
                     <div className="d-flex">
-                        <PestNewIcon fill={pest ? '#16DB93' : '#E4E4E4'}/>
+                        <PestNewIcon active={pest} fill={pest ? '#16DB93' : '#E4E4E4'}/>
                         <p style={{fontWeight:800}} className="pt-1 mx-2">
                         آفات
                         </p>
                     </div>
+
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}/>}
+                        control={<IOSSwitch value={pest} sx={{ m: 1 }}/>}
                         onChange={(e) => setPest(e.target.checked)}
                     />
                 </div>
@@ -150,14 +161,17 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4">
                     <div className="d-flex">
-                        <DiseasesNewIcon fill={diseases ? '#16DB93' : '#E4E4E4'}/>
+                        <DiseasesNewIcon active={diseases}/>
                         <p style={{fontWeight:800}} className="mx-2">
                         بیمار‌ی‌ها
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
-                        onChange={(e) => setDiseases(e.target.checked)}
+                        control={<IOSSwitch value={diseases} sx={{ m: 1 }}  />}
+                        onChange={(e) => {
+                          setDiseases(e.target.checked)
+                          diseasesOnCLick(e.target.checked);
+                        }}
                     />
                 </div>
             </FormGroup>
@@ -166,13 +180,13 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4 mt-2">
                     <div className="d-flex">
-                        <FungalNewIcon fill={fungal ? '#16DB93' : '#E4E4E4'}/>
+                        <FungalNewIcon active={fungal}/>
                         <p className="pt-1 mx-2">
                         قارچ
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
+                        control={<IOSSwitch value={fungal} sx={{ m: 1 }}  />}
                         onChange={(e) => setFungal(e.target.checked)}
                     />
                 </div>
@@ -183,13 +197,13 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4 mt-2">
                     <div className="d-flex">
-                        <BacteriNewIcon fill={bacteri ? '#16DB93' : '#E4E4E4'}/>
+                        <BacteriNewIcon active={bacteri}/>
                         <p className="pt-1 mx-2">
                         باکتری
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
+                        control={<IOSSwitch value={bacteri} sx={{ m: 1 }}  />}
                         onChange={(e) => setBacteri(e.target.checked)}
                     />
                 </div>
@@ -198,13 +212,13 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4 mt-2">
                     <div className="d-flex">
-                        <VirusNewIcon fill={virus ? '#16DB93' : '#E4E4E4'}/>
+                        <VirusNewIcon active={virus}/>
                         <p className="pt-1 mx-2">
                         ویروس
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
+                        control={<IOSSwitch value={virus} sx={{ m: 1 }}  />}
                         onChange={(e) => setVirus(e.target.checked)}
                     />
                 </div>
@@ -216,13 +230,13 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4">
                     <div className="d-flex">
-                        <WeedNewIcon fill={weed ? '#16DB93' : '#E4E4E4'}/>
+                        <WeedNewIcon active={weed}/>
                         <p style={{fontWeight:800}} className="mx-2">
                         علف هرز
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
+                        control={<IOSSwitch value={weed} sx={{ m: 1 }}  />}
                         onChange={(e) => setWeed(e.target.checked)}
                     />
                 </div>
@@ -234,13 +248,13 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
             <FormGroup>
                 <div className="d-flex justify-content-between px-4">
                     <div className="d-flex">
-                        <NutrationNewIcon fill={nutration ? '#16DB93' : '#E4E4E4'}/>
+                        <NutrationNewIcon active={nutration}/>
                         <p style={{fontWeight:800}} className="mx-2">
                         تغذیه
                         </p>
                     </div>
                     <FormControlLabel
-                        control={<IOSSwitch sx={{ m: 1 }}  />}
+                        control={<IOSSwitch value={nutration} sx={{ m: 1 }}  />}
                         onChange={(e) => setNutration(e.target.checked)}
                     />
                 </div>
