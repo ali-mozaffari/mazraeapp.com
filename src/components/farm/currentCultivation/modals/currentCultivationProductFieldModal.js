@@ -40,19 +40,18 @@ const Data = [
     title: "شاهدانه",
   },
 ];
-
-const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
+const CurrentCultivationProductFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
+  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
-
-  const handleClick = () => {
-    hideModal();
-    setTimeout(() => setDataList(""), 1000);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,11 +74,11 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
                 height: "16px",
                 cursor: "pointer",
               }}
-              onClick={handleClick}
+              onClick={hideModal}
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
-              انتخاب زیر محصول
+              انتخاب گروه محصول
             </h6>
           </div>
 
@@ -92,9 +91,9 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
               className="search-input-field-modal w-100"
               type="search"
               placeholder="جستجو .."
+              // onChange={handleSearch}
               onChange={(e) => setDataList(e.target.value)}
             />
-
             <button type="submit" className="searchButton-modal">
               <ArrowSearchIcon />
             </button>
@@ -105,13 +104,14 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
             style={{
               margin: "0",
               marginTop: "30px",
+              color: "#4A4A4A",
             }}
           >
             <RadioGroup
-              className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
+              // onChange={(e) => setDataList(e.target.value)}
             >
               <FormControlLabel
                 value=""
@@ -133,7 +133,6 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
-            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
@@ -145,7 +144,7 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={handleClick}
+                onClick={hideModal}
               >
                 ثبت
               </button>
@@ -154,7 +153,7 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={handleClick}
+                onClick={hideModal}
               >
                 انصراف
               </button>
@@ -166,4 +165,4 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default SubProductFieldModalHistory;
+export default CurrentCultivationProductFieldModal;

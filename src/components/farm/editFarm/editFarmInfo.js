@@ -9,6 +9,8 @@ import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { inputLabelClasses } from "@mui/material/InputLabel";
+import { useNavigate } from "react-router-dom";
+import { ArrowSingleDownIcon } from "../../../assets/icon";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -16,7 +18,8 @@ const cacheRtl = createCache({
 });
 
 function EditFarmInfo() {
-  const [selectedValue, setSelectedValue] = useState("a");
+  const navigate = useNavigate();
+  const [selectedValue, setSelectedValue] = useState("");
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
   };
@@ -62,7 +65,7 @@ function EditFarmInfo() {
                   }}
                 >
                   <TextField
-                    name="farmName"
+                    name="name"
                     type="text"
                     variant="standard"
                     label="نام مزرعه"
@@ -104,16 +107,14 @@ function EditFarmInfo() {
                   }}
                 >
                   <TextField
-                    name="farmName"
+                    name="name"
                     type="text"
                     variant="standard"
-                    label="نام مزرعه"
+                    label="مساحت(هکتار)"
                     autoComplete="off"
                     className="input-label w-100 mt-4 pl-5 py-3"
-                    // style={{height: "49px"}}
                     InputProps={{
                       disableUnderline: true,
-                      marginTop: "0px !important",
                     }}
                     sx={{
                       "& label": {
@@ -123,8 +124,6 @@ function EditFarmInfo() {
                         "&.Mui-focused": {
                           color: "#A2A2A2",
                         },
-                        position: "relative",
-                        
                       },
                       input: {
                         color: "#676767",
@@ -141,6 +140,7 @@ function EditFarmInfo() {
                       },
                     }}
                   />
+
                   <button
                     style={{
                       position: "absolute",
@@ -154,45 +154,104 @@ function EditFarmInfo() {
                     }}
                     type="submit"
                     className="btn-dark-blue mx-1 mt-4"
+                    onClick={() => navigate("/utm-request")}
                   >
                     گزارش UTM
                   </button>
                 </Box>
+              </Box>
 
-                {/* <Box
+              <hr className="mt-4" style={{ marginBottom: "0" }} />
+
+              <Box
+                sx={{
+                  display: { xs: "block", sm: "flex" },
+                  justifyContent: "space-between",
+                  padding: "0",
+                }}
+              >
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
+                  }}
+                >
+                  <div>
+                    <p>نوع آبیاری مزرعه</p>
+
+                    <RadioGroup
+                      style={{ display: "flex", flexDirection: "row" }}
+                      aria-labelledby="demo-error-radios"
+                      name="quiz"
+                      // value={value}
+                      onChange={handleRadioChange}
+                    >
+                      <Radio
+                        // size="medium"
+                        {...controlProps("a")}
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                      <Radio
+                        // size="large"
+                        {...controlProps("b")}
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                    </RadioGroup>
+                  </div>
+                </Box>
+
+                <Box
                   sx={{
                     width: { xs: "100%", sm: "48%" },
                     position: "relative",
                   }}
                 >
                   <Field
-                    name="farmArea"
-                    type="number"
+                    name="sal_id"
+                    // value={year?.name}
+                    type="button"
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
-                    style={{ position: "relative" }}
+                    className="search-input"
+                    // placeholder="سال زراعی *"
+                    // style={
+                    //   errors.sal_id && touched.sal_id
+                    //     ? {
+                    //         border: "1px solid #f00",
+                    //         color: "red",
+                    //       }
+                    //     : { border: "none" }
+                    // }
+                    // onClick={() => showYearModal()}
                   />
-                  <button
-                    style={{
-                      position: "absolute",
-                      width: "30%",
-                      whiteSpace: "nowrap",
-                      padding: "0",
-                      left: "3px",
-                      top: "4px",
-                      bottom: "4px",
-                      height: "41px",
-                    }}
-                    type="submit"
-                    className="btn-dark-blue mx-1 mt-4"
-                  >
-                    گزارش UTM
-                  </button>
-                </Box> */}
-              </Box>
-              <hr className="mt-4" style={{ marginBottom: "0" }} />
+                  {/* {!year?.name ? (
+                    <span className="fieldTitleEmpty" onClick={() => showYearModal()}>
+                      سال زراعی <span className="starSign"> *</span>
+                    </span>
+                  ) : (
+                    <span className="fieldTitleFilled">سال زراعی </span>
+                  )} */}
+                  <span className="fieldIcon">
+                    <ArrowSingleDownIcon />
+                  </span>
+                </Box>
 
-              <div
+                {/* <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
@@ -250,20 +309,21 @@ function EditFarmInfo() {
                     />
                   </RadioGroup>
                   {/* </div> */}
-                </div>
+                {/* </div>
 
                 <Field
                   name="datail"
                   type="text"
                   autoComplete="off"
-                  className="search-input w-100 mt-4 pl-5 py-3"
+                  className="search-input"
                   padding="16px 25px 16px 25px"
                   style={{
                     maxWidth: "365px",
                     marginTop: "0",
                   }}
                 />
-              </div>
+              </div> */}
+              </Box>
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <p
                   style={{
@@ -293,9 +353,7 @@ function EditFarmInfo() {
                       width: "250px",
                       justifyContent: "space-between",
                     }}
-                  >
-
-                  </div>
+                  ></div>
                 </div>
               </div>
               <hr className="mt-4" />
@@ -328,23 +386,25 @@ function EditFarmInfo() {
                       width: "250px",
                       justifyContent: "space-between",
                     }}
-                  >
-
-                  </div>
+                  ></div>
                 </div>
                 <Field
                   name="datail"
                   type="text"
                   autoComplete="off"
-                  className="search-input w-100 mt-4 pl-5 py-3"
+                  className="search-input"
                   padding="16px 25px 16px 25px"
                 />
               </div>
               <hr className="mt-4" />
 
               <div className="farm-bottom-btn d-flex mt-3">
-                <button type="submit" className="btn-dark-blue mx-1 mt-4">
-                  ثبت درخواست
+                <button
+                  type="submit"
+                  className="btn-dark-blue mx-1 mt-4"
+                  // onClick={() => navigate("/home")}
+                >
+                  ویرایش مشخصات
                 </button>
                 <NavLink
                   to={"/"}

@@ -113,7 +113,7 @@ const FarmListBox = () => {
                       <Dropdown.Menu
                       className="dropdown-menu-farm-box">
                         <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/edit-farm"} className="dropdownItem">
+                          <Link to={"/edit-farm-info"} className="dropdownItem">
                             <FormControlLabel
                               control={<Radio />}
                               label="ویرایش مشخصات مزرعه"
@@ -135,7 +135,7 @@ const FarmListBox = () => {
                           </Link>
                         </Dropdown.Item>
                         <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/cultivation"} className="dropdownItem">
+                          <Link to={"/current-cultivation"} className="dropdownItem">
                             <FormControlLabel
                               control={<Radio />}
                               label="کشت های کنونی مزرعه"
@@ -146,7 +146,7 @@ const FarmListBox = () => {
                           </Link>
                         </Dropdown.Item>
                         <Dropdown.Item className="dropdown-item-main">
-                          <Link to={"/history"} className="dropdownItem">
+                          <Link to={"/cultivation-history"} className="dropdownItem">
                             <FormControlLabel
                               control={<Radio />}
                               label="تاریخچه کشت های مزرعه"

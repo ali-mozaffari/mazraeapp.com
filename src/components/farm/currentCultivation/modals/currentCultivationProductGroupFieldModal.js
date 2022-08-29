@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,13 +41,19 @@ const Data = [
   },
 ];
 
-const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
+const CurrentCultivationProductGroupFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
+  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
+  // console.log(dataList)
 
   const handleClick = () => {
     hideModal();
@@ -79,7 +85,7 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
-              انتخاب زیر محصول
+              انتخاب گروه محصول
             </h6>
           </div>
 
@@ -92,9 +98,9 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
               className="search-input-field-modal w-100"
               type="search"
               placeholder="جستجو .."
+              // onChange={handleSearch}
               onChange={(e) => setDataList(e.target.value)}
             />
-
             <button type="submit" className="searchButton-modal">
               <ArrowSearchIcon />
             </button>
@@ -105,13 +111,14 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
             style={{
               margin: "0",
               marginTop: "30px",
+              color: "#4A4A4A",
             }}
           >
             <RadioGroup
-              className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
+              // onChange={(e) => setDataList(e.target.value)}
             >
               <FormControlLabel
                 value=""
@@ -133,7 +140,6 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
-            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
@@ -166,4 +172,4 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default SubProductFieldModalHistory;
+export default CurrentCultivationProductGroupFieldModal;

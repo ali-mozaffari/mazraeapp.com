@@ -20,15 +20,15 @@ import {
 import { Modal } from "react-bootstrap";
 import { Calendar } from "react-datepicker2";
 import moment from "moment-jalaali";
-import YearFieldModalHistory from "./modals/yearFieldModalHistory";
-import ProductFieldModalHistory from "./modals/productFieldModalHistory";
-import VaziatFieldModalHistory from "./modals/vaziatFieldModalHistory";
-import SubProductFieldModalHistory from "./modals/subProductFieldModalHistory";
-import ProductGroupFieldModalHistory from "./modals/productGroupFieldModalHistory";
-import PriceFieldModalHistory from "./modals/priceFieldModalHistory";
-import TotalProductFieldModalHistory from "./modals/totalProductFieldModalHistory";
+import CurrentCultivationPriceFieldModal from "./modals/currentCultivationPriceFieldModal";
+import CurrentCultivationTotalProductFieldModal from "./modals/currentCultivationTotalProductFieldModal";
+import CurrentCultivationVaziatFieldModal from "./modals/currentCultivationVaziatFieldModal";
+import CurrentCultivationSubProductFieldModal from "./modals/currentCultivationSubProductFieldModal";
+import CurrentCultivationProductFieldModal from "./modals/currentCultivationProductFieldModal";
+import CurrentCultivationProductGroupFieldModal from "./modals/currentCultivationProductGroupFieldModal";
+import CurrentCultivationYearFieldModal from "./modals/currentCultivationYearFieldModal";
 
-const AddCultivationHistory = () => {
+const CurrentCultivationEdit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -636,7 +636,7 @@ const AddCultivationHistory = () => {
                     <ArrowSingleDownIcon />
                   </span>
                 </Box>
-                {vaziat?.value === "1" ? (
+                {vaziat?.value === "3" ? (
                   <Box
                     sx={{
                       width: { xs: "100%", sm: "48%", position: "relative" },
@@ -712,7 +712,7 @@ const AddCultivationHistory = () => {
                   padding: "0",
                 }}
               >
-                {vaziat?.value === "1" ? (
+                {vaziat?.value === "3" ? (
                   <Box
                     sx={{
                       width: { xs: "100%", sm: "48%" },
@@ -761,11 +761,15 @@ const AddCultivationHistory = () => {
               </Box>
 
               <div className="farm-bottom-btn d-flex mt-3">
-                <button type="submit" className="btn-dark-blue mx-1 mt-4">
+                <button
+                  type="submit"
+                  className="btn-dark-blue mx-1 mt-4"
+                  // onClick={() => navigate("/current-cultivation")}
+                >
                   ذخیره
                 </button>
                 <NavLink
-                  to={"/"}
+                  to={"/current-cultivation"}
                   className="btn-light-pink mx-1 mt-4 text-decoration-none text-light"
                 >
                   لغو درخواست
@@ -776,25 +780,25 @@ const AddCultivationHistory = () => {
         )}
       </Formik>
 
-      <YearFieldModalHistory
+      <CurrentCultivationYearFieldModal
         showModal={displayYearModal}
         hideModal={hideYearModal}
         data={getYear}
       />
 
-      <ProductGroupFieldModalHistory
+      <CurrentCultivationProductGroupFieldModal
         showModal={displayProductGroupModal}
         hideModal={hideProductGroupModal}
         data={getProductGroup}
       />
 
-      <ProductFieldModalHistory
+      <CurrentCultivationProductFieldModal
         showModal={displayProductModal}
         hideModal={hideProductModal}
         data={getProduct}
       />
 
-      <SubProductFieldModalHistory
+      <CurrentCultivationSubProductFieldModal
         showModal={displaySubProductModal}
         hideModal={hideSubProductModal}
         data={getSubProduct}
@@ -852,20 +856,20 @@ const AddCultivationHistory = () => {
         />
       </Modal>
 
-      <VaziatFieldModalHistory
+      <CurrentCultivationVaziatFieldModal
         showModal={displayVaziatModal}
         hideModal={hideVaziatModal}
         data={getVaziat}
       />
 
-      <TotalProductFieldModalHistory
+      <CurrentCultivationTotalProductFieldModal
         showModal={displayTotalProductModal}
         hideModal={hideTotalProductModal}
         data={getTotalProduct}
         tonKg={getTonKg}
       />
 
-      <PriceFieldModalHistory
+      <CurrentCultivationPriceFieldModal
         showModal={displayPriceModal}
         hideModal={hidePriceModal}
         data={getPrice}
@@ -874,4 +878,4 @@ const AddCultivationHistory = () => {
   );
 };
 
-export default AddCultivationHistory;
+export default CurrentCultivationEdit;

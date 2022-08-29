@@ -41,7 +41,11 @@ const Data = [
   },
 ];
 
-const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
+const CurrentCultivationSubProductFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -57,7 +61,6 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     data(selected);
-    // console.log(selected);
   };
 
   return (
@@ -166,4 +169,4 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default SubProductFieldModalHistory;
+export default CurrentCultivationSubProductFieldModal;
