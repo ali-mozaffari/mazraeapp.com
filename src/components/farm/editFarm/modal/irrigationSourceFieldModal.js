@@ -4,17 +4,6 @@ import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { getYearList } from "../../../../redux/slice/farm/cultivation/yearList";
-// import "./farmModal.css";
-// import "./../../../../assets/css/modals.css";
-// import { makeStyles } from "@mui/styles";
-
-// const useStyles = makeStyles(theme => ({
-//   label: {
-//     '&.Mui-focused': {
-//       color: "#16DB93 !important",
-//     }
-//   }
-// }));
 
 const styles = {
   formLabel: {
@@ -25,7 +14,7 @@ const styles = {
   },
 };
 
-const YearFieldModal = ({ showModal, hideModal, data }) => {
+const IrrigationSourceFieldModal = ({ showModal, hideModal, data }) => {
   // const classes = useStyles();
   const dispatch = useDispatch();
   const { year } = useSelector((state) => state.yearList);
@@ -152,4 +141,4 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default YearFieldModal;
+export default IrrigationSourceFieldModal;

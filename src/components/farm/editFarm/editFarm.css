@@ -1,0 +1,14 @@
+.irrigation-type-field {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+.irrigation-type-field p{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.irrigation-type-field-radioGroup{
+    display: block !important;
+}

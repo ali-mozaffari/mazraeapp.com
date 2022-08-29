@@ -3,7 +3,7 @@ import { Field, Form, Formik } from "formik";
 import { NavLink } from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import { useState } from "react";
-import { RadioGroup, TextField } from "@mui/material";
+import { RadioGroup, FormControlLabel, TextField } from "@mui/material";
 import rtlPlugin from "stylis-plugin-rtl";
 import { prefixer } from "stylis";
 import { CacheProvider } from "@emotion/react";
@@ -11,6 +11,8 @@ import createCache from "@emotion/cache";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useNavigate } from "react-router-dom";
 import { ArrowSingleDownIcon } from "../../../assets/icon";
+import "./editFarm.css";
+import IrrigationSourceFieldModal from "./modal/irrigationSourceFieldModal";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -19,6 +21,24 @@ const cacheRtl = createCache({
 
 function EditFarmInfo() {
   const navigate = useNavigate();
+
+  const [displayIrrigationSourceModal, setDisplayIrrigationSourceModal] = useState(false);
+  // Handle the displaying modal of UTM Request 1st field
+  const showIrrigationSourceModal = (id) => {
+    // setId(id);
+    setDisplayIrrigationSourceModal(true);
+  };
+  // Hide the modal
+  const hideIrrigationSourceModal = () => {
+    setDisplayIrrigationSourceModal(false);
+  };
+
+  const [irrigationSource, setIrrigationSource] = useState("");
+  const getIrrigationSource = (data) => {
+    setIrrigationSource(data);
+  };
+
+
   const [selectedValue, setSelectedValue] = useState("");
   const handleChange = (e) => {
     setSelectedValue(e.target.value);
@@ -176,10 +196,51 @@ function EditFarmInfo() {
                     position: "relative",
                   }}
                 >
-                  <div>
+                  <div className="irrigation-type-field">
                     <p>نوع آبیاری مزرعه</p>
 
-                    <RadioGroup
+                    <RadioGroup 
+                      aria-labelledby="demo-controlled-radio-buttons-group"
+                      name="controlled-radio-buttons-group"
+                      className="irrigation-type-field-radioGroup"
+                      // value={value}
+                      onChange={handleChange}
+                    >
+                      <FormControlLabel
+                        value="1"
+                        control={<Radio />}
+                        // name="1399-1400"
+                        // label="1399-1400"
+                        // className="farm-field-radio"
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                      <FormControlLabel
+                        value="2"
+                        control={<Radio />}
+                        // name="1400-1401"
+                        // label="1400-1401"
+                        // className="farm-field-radio"
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                    </RadioGroup>
+
+                    {/* <RadioGroup
                       style={{ display: "flex", flexDirection: "row" }}
                       aria-labelledby="demo-error-radios"
                       name="quiz"
@@ -188,7 +249,7 @@ function EditFarmInfo() {
                     >
                       <Radio
                         // size="medium"
-                        {...controlProps("a")}
+                        // {...controlProps("a")}
                         sx={{
                           "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
                             {
@@ -201,7 +262,7 @@ function EditFarmInfo() {
                       />
                       <Radio
                         // size="large"
-                        {...controlProps("b")}
+                        // {...controlProps("b")}
                         sx={{
                           "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
                             {
@@ -212,7 +273,7 @@ function EditFarmInfo() {
                           },
                         }}
                       />
-                    </RadioGroup>
+                    </RadioGroup> */}
                   </div>
                 </Box>
 
@@ -224,28 +285,20 @@ function EditFarmInfo() {
                 >
                   <Field
                     name="sal_id"
-                    // value={year?.name}
+                    value={irrigationSource?.name}
                     type="button"
                     autoComplete="off"
                     className="search-input"
-                    // placeholder="سال زراعی *"
-                    // style={
-                    //   errors.sal_id && touched.sal_id
-                    //     ? {
-                    //         border: "1px solid #f00",
-                    //         color: "red",
-                    //       }
-                    //     : { border: "none" }
-                    // }
-                    // onClick={() => showYearModal()}
+                    // placeholder="منبع آب مزرعه چیست؟ (اختیاری)"
+                    onClick={() => showIrrigationSourceModal()}
                   />
-                  {/* {!year?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showYearModal()}>
-                      سال زراعی <span className="starSign"> *</span>
+                  {!irrigationSource?.name ? (
+                    <span className="fieldTitleEmpty" onClick={() => showIrrigationSourceModal()}>
+                      منبع آب مزرعه چیست؟ (اختیاری)
                     </span>
                   ) : (
-                    <span className="fieldTitleFilled">سال زراعی </span>
-                  )} */}
+                    <span className="fieldTitleFilled">منبع آب مزرعه چیست؟ (اختیاری)</span>
+                  )}
                   <span className="fieldIcon">
                     <ArrowSingleDownIcon />
                   </span>
@@ -416,6 +469,12 @@ function EditFarmInfo() {
             </Form>
           )}
         </Formik>
+
+        <IrrigationSourceFieldModal
+          showModal={displayIrrigationSourceModal}
+          hideModal={hideIrrigationSourceModal}
+          data={getIrrigationSource}
+        />
       </div>
     </CacheProvider>
   );
