@@ -10,9 +10,10 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { useNavigate } from "react-router-dom";
-import { ArrowSingleDownIcon } from "../../../assets/icon";
+import { ArrowSingleDownIcon, InfoLigthIcon } from "../../../assets/icon";
 import "./editFarm.css";
 import IrrigationSourceFieldModal from "./modal/irrigationSourceFieldModal";
+import * as persianTools from "@persian-tools/persian-tools";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -22,7 +23,8 @@ const cacheRtl = createCache({
 function EditFarmInfo() {
   const navigate = useNavigate();
 
-  const [displayIrrigationSourceModal, setDisplayIrrigationSourceModal] = useState(false);
+  const [displayIrrigationSourceModal, setDisplayIrrigationSourceModal] =
+    useState(false);
   // Handle the displaying modal of UTM Request 1st field
   const showIrrigationSourceModal = (id) => {
     // setId(id);
@@ -38,18 +40,34 @@ function EditFarmInfo() {
     setIrrigationSource(data);
   };
 
-
-  const [selectedValue, setSelectedValue] = useState("");
-  const handleChange = (e) => {
-    setSelectedValue(e.target.value);
+  const [selectedIrrigationValue, setSelectedIrrigationValue] = useState("");
+  const handleIrrigationChange = (e) => {
+    setSelectedIrrigationValue(e.target.value);
   };
-  const controlProps = (item) => ({
-    checked: selectedValue === item,
-    onChange: handleChange,
-    value: item,
-    name: "size-radio-button-demo",
-    inputProps: { "aria-label": item },
-  });
+
+  const [selectedIrrigationPressureValue, setSelectedIrrigationPressureValue] =
+    useState("");
+  const handleIrrigationPressureChange = (e) => {
+    setSelectedIrrigationPressureValue(e.target.value);
+  };
+
+  const [selectedOwnerValue, setSelectedOwnerValue] = useState("");
+  const handleOwnerChange = (e) => {
+    setSelectedOwnerValue(e.target.value);
+  };
+
+  const [priceInput, setPriceInput] = useState("");
+  const handlePrice = (e) => {
+    setPriceInput(e.target.value);
+  };
+
+  // const controlProps = (item) => ({
+  //   checked: selectedValue === item,
+  //   onChange: handleChange,
+  //   value: item,
+  //   name: "size-radio-button-demo",
+  //   inputProps: { "aria-label": item },
+  // });
 
   const handleRadioChange = (e) => {
     console.log({ value: e.target.value, name: e.target.name });
@@ -199,19 +217,19 @@ function EditFarmInfo() {
                   <div className="irrigation-type-field">
                     <p>نوع آبیاری مزرعه</p>
 
-                    <RadioGroup 
+                    <RadioGroup
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
                       className="irrigation-type-field-radioGroup"
                       // value={value}
-                      onChange={handleChange}
+                      defaultValue="1"
+                      onChange={handleIrrigationChange}
                     >
                       <FormControlLabel
                         value="1"
+                        label="دیم"
                         control={<Radio />}
-                        // name="1399-1400"
-                        // label="1399-1400"
-                        // className="farm-field-radio"
+                        className="irrigation-radio-label-circle"
                         sx={{
                           "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
                             {
@@ -224,10 +242,9 @@ function EditFarmInfo() {
                       />
                       <FormControlLabel
                         value="2"
+                        label="آبی"
                         control={<Radio />}
-                        // name="1400-1401"
-                        // label="1400-1401"
-                        // className="farm-field-radio"
+                        className="irrigation-radio-label-circle"
                         sx={{
                           "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
                             {
@@ -239,217 +256,270 @@ function EditFarmInfo() {
                         }}
                       />
                     </RadioGroup>
-
-                    {/* <RadioGroup
-                      style={{ display: "flex", flexDirection: "row" }}
-                      aria-labelledby="demo-error-radios"
-                      name="quiz"
-                      // value={value}
-                      onChange={handleRadioChange}
-                    >
-                      <Radio
-                        // size="medium"
-                        // {...controlProps("a")}
-                        sx={{
-                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
-                            {
-                              color: "#4A4A4A",
-                            },
-                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
-                            color: "#16DB93",
-                          },
-                        }}
-                      />
-                      <Radio
-                        // size="large"
-                        // {...controlProps("b")}
-                        sx={{
-                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
-                            {
-                              color: "#4A4A4A",
-                            },
-                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
-                            color: "#16DB93",
-                          },
-                        }}
-                      />
-                    </RadioGroup> */}
                   </div>
                 </Box>
 
+                {selectedIrrigationValue === "2" ? (
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      name="sal_id"
+                      value={irrigationSource?.name}
+                      type="button"
+                      autoComplete="off"
+                      className="search-input"
+                      // placeholder="منبع آب مزرعه چیست؟ (اختیاری)"
+                      onClick={() => showIrrigationSourceModal()}
+                    />
+                    {!irrigationSource?.name ? (
+                      <span
+                        className="fieldTitleEmpty"
+                        onClick={() => showIrrigationSourceModal()}
+                      >
+                        منبع آب مزرعه چیست؟ (اختیاری)
+                      </span>
+                    ) : (
+                      <span className="fieldTitleFilled">
+                        منبع آب مزرعه چیست؟ (اختیاری)
+                      </span>
+                    )}
+                    <span className="fieldIcon">
+                      <ArrowSingleDownIcon />
+                    </span>
+                  </Box>
+                ) : (
+                  ""
+                )}
+              </Box>
+
+              {selectedIrrigationValue === "2" ? (
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <div className="irrigation-type-field">
+                      <p>آیا مزرعه سیستم آبی تحت فشار دارد؟</p>
+
+                      <RadioGroup
+                        aria-labelledby="demo-controlled-radio-buttons-group"
+                        name="controlled-radio-buttons-group"
+                        className="irrigation-type-field-radioGroup"
+                        // value={value}
+                        defaultValue="1"
+                        onChange={handleIrrigationPressureChange}
+                      >
+                        <FormControlLabel
+                          value="1"
+                          label="بله"
+                          control={<Radio />}
+                          className="irrigation-radio-label-circle"
+                          sx={{
+                            "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                              {
+                                color: "#4A4A4A",
+                              },
+                            "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                              color: "#16DB93",
+                            },
+                          }}
+                        />
+                        <FormControlLabel
+                          value="2"
+                          label="خیر"
+                          control={<Radio />}
+                          className="irrigation-radio-label-circle"
+                          sx={{
+                            "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                              {
+                                color: "#4A4A4A",
+                              },
+                            "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                              color: "#16DB93",
+                            },
+                          }}
+                        />
+                      </RadioGroup>
+                    </div>
+                  </Box>
+                </Box>
+              ) : (
+                ""
+              )}
+
+              <hr className="mt-4" />
+
+              <Box
+                sx={{
+                  display: { xs: "block", sm: "flex" },
+                  justifyContent: "space-between",
+                  padding: "0",
+                }}
+              >
                 <Box
                   sx={{
                     width: { xs: "100%", sm: "48%" },
                     position: "relative",
                   }}
                 >
-                  <Field
-                    name="sal_id"
-                    value={irrigationSource?.name}
-                    type="button"
-                    autoComplete="off"
-                    className="search-input"
-                    // placeholder="منبع آب مزرعه چیست؟ (اختیاری)"
-                    onClick={() => showIrrigationSourceModal()}
-                  />
-                  {!irrigationSource?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showIrrigationSourceModal()}>
-                      منبع آب مزرعه چیست؟ (اختیاری)
-                    </span>
-                  ) : (
-                    <span className="fieldTitleFilled">منبع آب مزرعه چیست؟ (اختیاری)</span>
-                  )}
-                  <span className="fieldIcon">
-                    <ArrowSingleDownIcon />
-                  </span>
+                  <div className="irrigation-type-field">
+                    <p>مالکیت مزرعه</p>
+
+                    <RadioGroup
+                      aria-labelledby="demo-controlled-radio-buttons-group"
+                      name="controlled-radio-buttons-group"
+                      className="irrigation-type-field-radioGroup"
+                      // value={value}
+                      defaultValue="1"
+                      onChange={handleOwnerChange}
+                    >
+                      <FormControlLabel
+                        value="1"
+                        label="ملکی"
+                        control={<Radio />}
+                        className="irrigation-radio-label-circle"
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                      <FormControlLabel
+                        value="2"
+                        label="اجاری"
+                        control={<Radio />}
+                        className="irrigation-radio-label-circle"
+                        sx={{
+                          "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
+                            {
+                              color: "#4A4A4A",
+                            },
+                          "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
+                            color: "#16DB93",
+                          },
+                        }}
+                      />
+                    </RadioGroup>
+                  </div>
                 </Box>
 
-                {/* <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
+                {selectedOwnerValue === "2" ? (
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      name="owner-details"
+                      // value={irrigationSource?.name}
+                      type="button"
+                      autoComplete="off"
+                      className="search-input"
+                      onClick={() => navigate("/owner-info")}
+                    />
+                    {!irrigationSource?.name ? (
+                      <span
+                        className="fieldTitleEmpty"
+                        onClick={() => navigate("/owner-info")}
+                      >
+                        جزئیات بیشتر (اختیاری)
+                      </span>
+                    ) : (
+                      <span className="fieldTitleFilled">
+                        جزئیات بیشتر (اختیاری)
+                      </span>
+                    )}
+                    <span className="fieldIcon">
+                      <ArrowSingleDownIcon />
+                    </span>
+                  </Box>
+                ) : (
+                  ""
+                )}
+              </Box>
+
+              <hr className="mt-4" />
+
+              <Box
+                sx={{
+                  display: { xs: "block", sm: "flex" },
                   justifyContent: "space-between",
+                  padding: "0",
                 }}
               >
-                <p
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "0px",
-                    paddingRight: "0px",
+                <Box
+                  sx={{
+                    width: { xs: "100%", sm: "48%" },
+                    position: "relative",
                   }}
                 >
-                  نوع آبیاری مزرعه
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <RadioGroup
-                    style={{ display: "flex", flexDirection: "row" }}
-                    aria-labelledby="demo-error-radios"
-                    name="quiz"
-                    // value={value}
-                    onChange={handleRadioChange}
-                  >
-                    <Radio
-                      // size="medium"
-                      {...controlProps("a")}
-                      sx={{
-                        "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
-                          {
-                            color: "#4A4A4A",
-                          },
-                        "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
-                          color: "#16DB93",
+                  <TextField
+                    name="price"
+                    type="text"
+                    variant="standard"
+                    label="قیمت (تومان/کیلوگرم)"
+                    autoComplete="off"
+                    className="input-label w-100 mt-4 pl-5 py-3"
+                    onChange={handlePrice}
+                    InputProps={{
+                      disableUnderline: true,
+                    }}
+                    sx={{
+                      "& label": {
+                        right: "10px !important",
+                        fontSize: "13px",
+                        color: "#A2A2A2",
+                        "&.Mui-focused": {
+                          color: "#A2A2A2",
                         },
-                      }}
-                    />
-                    <Radio
-                      // size="large"
-                      {...controlProps("b")}
-                      sx={{
-                        "& .MuiSvgIcon-root:not(.MuiSvgIcon-root ~ .MuiSvgIcon-root)":
-                          {
-                            color: "#4A4A4A",
-                          },
-                        "& .MuiSvgIcon-root + .MuiSvgIcon-root": {
-                          color: "#16DB93",
+                      },
+                      input: {
+                        color: "#676767",
+                      },
+                      ".MuiFormLabel-root": {
+                        paddingLeft: "15px !important",
+                      },
+                    }}
+                    InputLabelProps={{
+                      sx: {
+                        [`&.${inputLabelClasses.shrink}`]: {
+                          marginTop: "8px !important",
                         },
-                      }}
-                    />
-                  </RadioGroup>
-                  {/* </div> */}
-                {/* </div>
-
-                <Field
-                  name="datail"
-                  type="text"
-                  autoComplete="off"
-                  className="search-input"
-                  padding="16px 25px 16px 25px"
-                  style={{
-                    maxWidth: "365px",
-                    marginTop: "0",
-                  }}
-                />
-              </div> */}
+                      },
+                    }}
+                  />
+                  {priceInput ? (
+                    <span>
+                      <span>
+                        <InfoLigthIcon />
+                      </span>
+                      <span className="persianToolsText">
+                        {persianTools.numberToWords(priceInput)}
+                        <span> تومان</span>
+                      </span>
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </Box>
               </Box>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <p
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "0px",
-                    paddingRight: "0px",
-                  }}
-                >
-                  آیا مزرعه سیستم آبی تحت فشار دارد؟
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "103px",
-                    justifyContent: "space-between",
-                    marginTop: "11px",
-                    marginRight: "145px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      marginTop: "3px",
-                      marginRight: "9px",
-                      width: "250px",
-                      justifyContent: "space-between",
-                    }}
-                  ></div>
-                </div>
-              </div>
-              <hr className="mt-4" />
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <p
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "0px",
-                    paddingRight: "0px",
-                  }}
-                >
-                  مالکیت مزرعه
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "103px",
-                    justifyContent: "space-between",
-                    marginTop: "11px",
-                    marginRight: "145px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      marginTop: "3px",
-                      marginRight: "9px",
-                      width: "250px",
-                      justifyContent: "space-between",
-                    }}
-                  ></div>
-                </div>
-                <Field
-                  name="datail"
-                  type="text"
-                  autoComplete="off"
-                  className="search-input"
-                  padding="16px 25px 16px 25px"
-                />
-              </div>
-              <hr className="mt-4" />
 
               <div className="farm-bottom-btn d-flex mt-3">
                 <button

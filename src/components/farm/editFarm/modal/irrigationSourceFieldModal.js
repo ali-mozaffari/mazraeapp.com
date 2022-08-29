@@ -14,6 +14,29 @@ const styles = {
   },
 };
 
+const Data = [
+  {
+    id: 1,
+    title: "چاه",
+  },
+  {
+    id: 2,
+    title: "چشمه",
+  },
+  {
+    id: 3,
+    title: "پمپاژ از رودخانه",
+  },
+  {
+    id: 4,
+    title: "شبکه",
+  },
+  {
+    id: 5,
+    title: "قنات",
+  },
+];
+
 const IrrigationSourceFieldModal = ({ showModal, hideModal, data }) => {
   // const classes = useStyles();
   const dispatch = useDispatch();
@@ -57,7 +80,7 @@ const IrrigationSourceFieldModal = ({ showModal, hideModal, data }) => {
           </h6>
         </div>
         {/* <hr style={{ height: "2px", margin: "0" }} /> */}
-        <div className="farm-field-modal-body year-field-modal">
+        <div className="farm-field-modal-body product-field-modal">
           {/* <Select data={data} onSelect={onSelect} /> */}
           <div
             style={{
@@ -69,15 +92,22 @@ const IrrigationSourceFieldModal = ({ showModal, hideModal, data }) => {
           >
             {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
 
-            {year?.map((item) => (
-              <RadioGroup
-              key={item.id}
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                // value={value}
-                onChange={handleChange}
-              >
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              // value={value}
+              onChange={handleChange}
+            >
+              <FormControlLabel
+                value=""
+                control={<Radio />}
+                name=""
+                label="-"
+                className="farm-field-radio"
+              />
+              {Data?.map((item) => (
                 <FormControlLabel
+                  key={item.id}
                   value={item.id}
                   control={<Radio />}
                   name={item.title}
@@ -85,30 +115,8 @@ const IrrigationSourceFieldModal = ({ showModal, hideModal, data }) => {
                   className="farm-field-radio"
                   // classes={classes}
                 />
-
-                {/* <FormControlLabel
-                value="2"
-                control={<Radio />}
-                name="1398-1399"
-                label="1398-1399"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio />}
-                name="1399-1400"
-                label="1399-1400"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio />}
-                name="1400-1401"
-                label="1400-1401"
-                className="farm-field-radio"
-              /> */}
-              </RadioGroup>
-            ))}
+              ))}
+            </RadioGroup>
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
