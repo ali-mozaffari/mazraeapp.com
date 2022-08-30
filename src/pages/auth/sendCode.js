@@ -97,7 +97,7 @@ const SendCode = () => {
   return (
     <Box sx={{ width: { xs: "90%", sm: "65%" } }}>
       <CacheProvider value={cacheRtl}>
-        <Grid style={{ width: "65%" }}>
+        <Grid>
           <Typography component="p" variant="p" className="top-text-login">
             برای ورود در سامانه مزرعه شماره تماس خود را وارد کنید
           </Typography>
