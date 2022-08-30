@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, memo } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-// import "./farmModal.css";
-// import "./../../../../assets/css/modals.css";
+// import "./../../cultivation/modals/farmModal.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -42,17 +41,17 @@ const Data = [
   },
 ];
 
-const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
-  const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
-
+const CurrentCultivationSubProductFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
-  // console.log(selected);
 
   const [dataList, setDataList] = useState("");
-  // console.log(dataList)
 
   const handleClick = () => {
     hideModal();
@@ -62,7 +61,6 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     data(selected);
-    // console.log(selected);
   };
 
   return (
@@ -84,7 +82,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
-              انتخاب گروه محصول
+              انتخاب زیر محصول
             </h6>
           </div>
 
@@ -97,9 +95,9 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
               className="search-input-field-modal w-100"
               type="search"
               placeholder="جستجو .."
-              // onChange={handleSearch}
               onChange={(e) => setDataList(e.target.value)}
             />
+
             <button type="submit" className="searchButton-modal">
               <ArrowSearchIcon />
             </button>
@@ -110,14 +108,13 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
             style={{
               margin: "0",
               marginTop: "30px",
-              color: "#4A4A4A",
             }}
           >
             <RadioGroup
+              className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
-              // onChange={(e) => setDataList(e.target.value)}
             >
               <FormControlLabel
                 value=""
@@ -126,20 +123,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 label="-"
                 className="farm-field-radio"
               />
-              {mahsulCategory
-                ?.filter((item) => item.title.toLowerCase().includes(dataList))
-                .map((item) => (
-                  <FormControlLabel
-                    key={item.guid}
-                    value={item.guid}
-                    control={<Radio />}
-                    name={item.title}
-                    label={item.title}
-                    className="farm-field-radio"
-                  />
-                ))}
-
-              {/* {Data?.filter((item) =>
+              {Data?.filter((item) =>
                 item.title.toLowerCase().includes(dataList)
               ).map((item) => (
                 <FormControlLabel
@@ -150,8 +134,9 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                   label={item.title}
                   className="farm-field-radio"
                 />
-              ))} */}
+              ))}
             </RadioGroup>
+            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">
@@ -184,4 +169,4 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default ProductGroupFieldModal;
+export default CurrentCultivationSubProductFieldModal;

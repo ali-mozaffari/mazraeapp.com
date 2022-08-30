@@ -12,6 +12,9 @@ import UTMRequestPage from "../pages/farm/utmRequestPage";
 import OwnerInfoPage from "../pages/farm/ownerInfoPage";
 import EditFarmInfoPage from "../pages/farm/editFarmInfoPage";
 import AddCultivationHistoryPage from "../pages/farm/addCultivationHistoryPage";
+import CurrentCultivationEditPage from "../pages/farm/currentCultivationEditPage";
+import CurrentCultivationPage from "../pages/farm/currentCultivationPage";
+import CultivationHistoryPage from "../pages/farm/cultivationHistoryPage";
 
 const SendCode = React.lazy(() => import("./../pages/auth/sendCode"));
 const Login = React.lazy(() => import("./../pages/auth/login"));
@@ -40,10 +43,6 @@ const InvitationPage = React.lazy(() =>
 
 const AddFarmPage = React.lazy(() =>
   import(/* webpackChunkName: "views-user" */ "../pages/main/addFarmPage")
-);
-
-const EditFarmPage = React.lazy(() =>
-  import(/* webpackChunkName: "views-user" */ "../pages/main/editFarmPage")
 );
 
 const AddActivity = React.lazy(() =>
@@ -96,13 +95,24 @@ const AppView = () => {
           {/*<Route path="add-farm" element={<AddFarmPage />} />*/}
           <Route path="/add-cultivation" element={<AddCultivationPage />} />
           <Route
+            path="/current-cultivation"
+            element={<CurrentCultivationPage />}
+          />
+          <Route
+            path="/current-cultivation-edit"
+            element={<CurrentCultivationEditPage />}
+          />
+          <Route
+            path="/cultivation-history"
+            element={<CultivationHistoryPage />}
+          />
+          <Route
             path="/add-cultivation-history"
             element={<AddCultivationHistoryPage />}
           />
           <Route path="/activities" element={<ActivitiesPage />} />
           <Route path="/farm-services" element={<FarmServicePage />} />
           <Route path="/invitation" element={<InvitationPage />} />
-          <Route path="/edit-farm" element={<EditFarmPage />} />
           <Route path="/add-activity" element={<AddActivity />} />
           <Route path="/edit-activity/:id" element={<EditActivityPage />} />
           <Route path="/access" element={<AccessPage />} />

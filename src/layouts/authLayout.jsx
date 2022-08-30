@@ -11,26 +11,68 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import loginIMG from "./../assets/img/loginIMG.png";
+import loginPage from "./../assets/img/loginPage.png";
 import logo from "./../assets/img/logo.png";
 import { Input } from "@mui/material";
 import { display } from "@mui/system";
 import { InstagramIcon, TelegramIcon, WhatsappIcon } from "../assets/icon";
+import { useState } from "react";
 import "./../pages/auth/auth.css";
+import SiteRulesModal from "../pages/auth/siteRulesModal";
+
+// function SiteRules(props) {
+//   // const [id, setId] = useState(null);
+//   const [displayConfirmationModal, setDisplayConfirmationModal] =
+//     useState(false);
+
+//   // Handle the displaying of the modal based on type and id
+//   const showActivitiesModal = () => {
+//     // setId();
+//     setDisplayConfirmationModal(true);
+//   };
+
+//   // Hide the modal
+//   const hideConfirmationModal = () => {
+//     setDisplayConfirmationModal(false);
+//   };
+
+//   return (
+//     <div>
+//       <Typography variant="body2" align="center" {...props}>
+//         {"با ورود به سایت مزرعه، "}
+//         <span
+//           className="green-linked-text"
+//           onClick={() => showActivitiesModal()}
+//           // href="https://mazraeapp.com//"
+//         >
+//           قوانین و مقررات
+//         </span>
+//         {" سایت را پذیرفته ام."}
+//       </Typography>
+
+//       <SiteRulesModal
+//         showModal={displayConfirmationModal}
+//         // confirmModal={submitDelete}
+//         hideModal={hideConfirmationModal}
+//         // id={id}
+//       />
+//     </div>
+//   );
+// }
 
 const AuthLayout = ({ children }) => {
   return (
     <Grid
       container
       component="main"
-      sx={{ height: { xs: "93vh", sm: "100vh" } }}
+      sx={{ height: { xs: "93vh", sm: "100vh", position: "relative" } }}
     >
       <CssBaseline />
       <Grid
         item
         xs={12}
-        sm={8}
-        md={5}
+        sm={6}
+        md={6}
         component={Paper}
         elevation={6}
         square
@@ -46,7 +88,7 @@ const AuthLayout = ({ children }) => {
             alignItems: "center",
             mr: "auto",
             ml: "auto",
-            width: { md: "60%" },
+            // width: { md: "60%" },
           }}
         >
           <img src={logo} style={{ height: "75px", color: "#16db93" }} />
@@ -65,16 +107,47 @@ const AuthLayout = ({ children }) => {
           </Typography>
 
           {children}
+
+          {/* <Box>
+            <Grid className="login-bottom-items">
+              {" "}
+              <SiteRules />{" "}
+            </Grid>
+
+            <Grid container className="login-bottom-items">
+              <Typography
+                variant="body2"
+                align="center"
+                style={{ borderBottom: "1px solid #C2C2C2" }}
+              >
+                {"اگر سوالی دارید میتوانید با "}
+                <span style={{ fontWeight: "800" }}>09352593515</span>
+                {" تماس بگیرید"}
+              </Typography>
+            </Grid>
+
+            <Grid container className="login-bottom-items">
+              <Grid item className="loginSocialIcon">
+                <WhatsappIcon />
+              </Grid>
+              <Grid item className="loginSocialIcon">
+                <TelegramIcon />
+              </Grid>
+              <Grid item className="loginSocialIcon">
+                <InstagramIcon />
+              </Grid>
+            </Grid>
+          </Box> */}
         </Box>
       </Grid>
 
       <Grid
         item
         xs={false}
-        sm={4}
-        md={7}
+        sm={6}
+        md={6}
         sx={{
-          backgroundImage: `url(${loginIMG})`,
+          backgroundImage: `url(${loginPage})`,
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
@@ -83,33 +156,7 @@ const AuthLayout = ({ children }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      >
-        <Grid
-          container
-          className="authImgTopBar"
-          sx={{ display: { xs: "none", sm: "flex" } }}
-        >
-          <Grid item className="authImgTopBarText">
-            اگر سوالی دارید میتوانید با 09352593515 تماس بگیرید
-          </Grid>
-        </Grid>
-
-        <Grid
-          container
-          sx={{ display: { xs: "none", sm: "flex" } }}
-          style={{ paddingRight: "20px" }}
-        >
-          <Grid item className="authSocialIconTop">
-            <TelegramIcon />
-          </Grid>
-          <Grid item className="authSocialIconTop">
-            <InstagramIcon />
-          </Grid>
-          <Grid item className="authSocialIconTop">
-            <WhatsappIcon />
-          </Grid>
-        </Grid>
-      </Grid>
+      ></Grid>
     </Grid>
   );
 };

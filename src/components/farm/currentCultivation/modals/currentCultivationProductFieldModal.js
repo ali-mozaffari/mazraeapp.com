@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, memo } from "react";
 import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-// import "./farmModal.css";
-// import "./../../../../assets/css/modals.css";
+// import "./../../cultivation/modals/farmModal.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -41,10 +40,11 @@ const Data = [
     title: "شاهدانه",
   },
 ];
-
-const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
-  const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
-
+const CurrentCultivationProductFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -52,12 +52,6 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   // console.log(selected);
 
   const [dataList, setDataList] = useState("");
-  // console.log(dataList)
-
-  const handleClick = () => {
-    hideModal();
-    setTimeout(() => setDataList(""), 1000);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,7 +74,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 height: "16px",
                 cursor: "pointer",
               }}
-              onClick={handleClick}
+              onClick={hideModal}
             />
 
             <h6 style={{ fontWeight: "800", color: "#676767" }}>
@@ -126,20 +120,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 label="-"
                 className="farm-field-radio"
               />
-              {mahsulCategory
-                ?.filter((item) => item.title.toLowerCase().includes(dataList))
-                .map((item) => (
-                  <FormControlLabel
-                    key={item.guid}
-                    value={item.guid}
-                    control={<Radio />}
-                    name={item.title}
-                    label={item.title}
-                    className="farm-field-radio"
-                  />
-                ))}
-
-              {/* {Data?.filter((item) =>
+              {Data?.filter((item) =>
                 item.title.toLowerCase().includes(dataList)
               ).map((item) => (
                 <FormControlLabel
@@ -150,7 +131,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                   label={item.title}
                   className="farm-field-radio"
                 />
-              ))} */}
+              ))}
             </RadioGroup>
           </div>
         </div>
@@ -163,7 +144,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={handleClick}
+                onClick={hideModal}
               >
                 ثبت
               </button>
@@ -172,7 +153,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={handleClick}
+                onClick={hideModal}
               >
                 انصراف
               </button>
@@ -184,4 +165,4 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default ProductGroupFieldModal;
+export default CurrentCultivationProductFieldModal;

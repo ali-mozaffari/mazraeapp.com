@@ -4,53 +4,34 @@ import { Modal, Button } from "react-bootstrap";
 import closeNotification from "./../../assets/img/close-notification.png";
 import "./siteRulesModal.css";
 
-const SiteRulesModal = ({
-  showModal,
-  hideModal,
-  confirmModal,
-  // id,
-  // items,
-  // dataByName,
-}) => {
-  // const dispatch = useDispatch();
-  const handleDelete = (id) => {
-    // dispatch(deleteFarmList(id));
-    confirmModal();
-    hideModal();
-    // items();
-    // dataByName();
-  };
+
+const SiteRulesModal = ({ showModal, hideModal }) => {
 
   return (
-    <Modal show={showModal}>
-      <div
-        style={{
-        }}
-      >
-        <div className="modal-header justify-content-start">
-          <img
-            src={closeNotification}
-            style={{
-              position: "absolute",
-              left: "20px",
-              top: "15px",
-              height: "20px",
-              cursor: "pointer",
-            }}
-            onClick={hideModal}
-          />
+    <Modal show={showModal} className="site-Rule-Modal" >
+      <div className="modal-header justify-content-start">
+        <img
+          src={closeNotification}
+          style={{
+            position: "absolute",
+            left: "20px",
+            top: "15px",
+            height: "20px",
+            cursor: "pointer",
+          }}
+          onClick={hideModal}
+        />
 
-          <h6 style={{ fontWeight: "800", color: "#676767" }}>
-            قوانین و مقررات سایت مزرعه
-          </h6>
-        </div>
-        <hr style={{ height: "2px" }} />
+        <h6 style={{ fontWeight: "800", color: "#676767" }}>
+          قوانین و مقررات سایت مزرعه
+        </h6>
       </div>
-      
+      <hr style={{ height: "2px" }} />
+
       <Modal.Body
         style={{
           color: "#676767",
-          overflow: "overlay"
+          overflow: "overlay",
         }}
       >
         <h6 className="d-flex" style={{ fontWeight: "800" }}>

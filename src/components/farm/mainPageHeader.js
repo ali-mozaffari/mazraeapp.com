@@ -225,16 +225,14 @@ const MainPageHeader = () => {
     switch (crumbs) {
       case "/add-cultivation":
         return "افزودن کشت";
-      case "/edit-farm":
+      case "/edit-farm-info":
         return "ویرایش مشخصات مزرعه";
       case "/edit-coordination-farm":
         return "ویرایش مختصات مزرعه";
-      case "/cultivation":
+      case "/current-cultivation":
         return "کشت های کنونی مزرعه";
-      case "/history":
+      case "/cultivation-history":
         return "تاریخچه کشت های مزرعه";
-      case "/edit-farm-info":
-        return "ویرایش مشخصات مزرعه";
       default:
         return "";
     }
@@ -283,7 +281,7 @@ const MainPageHeader = () => {
         )}
       </div>
 
-      {path === "/edit-farm-info" ? (null):(
+      {path === "/edit-farm-info" || path === "/cultivation-history" || path === "/current-cultivation" ? (null):(
         <ForecastCultivationProgressItem
         main={true}
         all
