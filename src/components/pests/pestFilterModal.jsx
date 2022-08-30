@@ -1,6 +1,7 @@
 import React, { useState, memo } from "react";
 import { Modal } from "react-bootstrap";
 import { styled } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 import closeNotification from "../../assets/img/close-notification.png";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,7 +14,8 @@ import { VirusNewIcon } from './../../assets/pestIcons/virusNewIcon';
 import { WeedNewIcon } from './../../assets/pestIcons/weedNewIcon';
 import { NutrationNewIcon } from './../../assets/pestIcons/nutrationNewIcon';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { set } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { getResultsList } from "../../redux/slice/pests/pests";
 
 
 const IOSSwitch = styled((props) => (
@@ -93,6 +95,9 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
   const [virus, setVirus] = useState(false);
   const [weed, setWeed] = useState(false);
   const [nutration, setNutration] = useState(false);
+  const pestProduct = useSelector((state) => state.pestProduct);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const diseasesOnCLick = (val) => {
 
@@ -105,9 +110,43 @@ const PestFilterModal = ({ showModal, hideModal, data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    let pest_type = ""
     let data = {}
-
+    let filtered_items = []
     
+    if(pest){
+        pest_type = pest_type + 'pest,'
+        filtered_items.push({title: 'آفات', type: 'pest'})
+    }
+    if(fungal){
+      pest_type = pest_type + 'fungal,'
+      filtered_items.push({title: 'قارچ', type: 'fungal'})
+    }
+    if(bacteri){
+      pest_type = pest_type + 'bacteri,'
+      filtered_items.push({title: 'باکتری', type: 'bacteri'})
+    }
+    if(virus){
+      pest_type = pest_type + 'virus,'
+      filtered_items.push({title: 'ویروس', type: 'virus'})
+    }
+    if(weed){
+      pest_type = pest_type + 'weed,'
+      filtered_items.push({title: 'علف هرز', type: 'weed'})
+    }
+    if(nutration){
+      pest_type = pest_type + 'nutration,'
+      filtered_items.push({title: 'تغذیه', type: 'nutration'})
+    }
+
+    data = {
+      mahsul_guid : pestProduct.product[0].guid,
+      pest_type : pest_type
+    }
+
+    dispatch(getResultsList(data));
+    
+    navigate('/desises-result', {replace: true, state: { pest_type : filtered_items }})
 
   };
 

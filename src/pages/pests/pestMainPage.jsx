@@ -36,6 +36,7 @@ const PestMainPage = () => {
         setProducts(uniqueArray)
 
     }, [])
+    
 
     return(
         <div className="page-container container-fluid mb-5">
