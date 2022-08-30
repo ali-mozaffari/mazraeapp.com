@@ -4,10 +4,12 @@ import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import closeNotification from "./../../../assets/img/close-notification.png";
 
 
-const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal }) => {
+const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSelectedFarm }) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
+    setSelectedFarm({ value: e.target.value, name: e.target.name });
+
   };
 
   const handleSubmit = (e) => {
@@ -66,27 +68,6 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal }) => {
                 className="farm-field-radio"
                 // classes={classes}
               />
-              <FormControlLabel
-                value="2"
-                control={<Radio />}
-                name="1398-1399"
-                label="1398-1399"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio />}
-                name="1399-1400"
-                label="1399-1400"
-                className="farm-field-radio"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio />}
-                name="1400-1401"
-                label="1400-1401"
-                className="farm-field-radio"
-              />
             </RadioGroup>
           </div>
         </div>
@@ -99,7 +80,9 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal }) => {
               <button
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
-                onClick={() => setFarmSelectionModal(true)}
+                onClick={() => {
+                    setFarmSelectionModal(false)
+                }}
               >
                 ثبت
               </button>
@@ -108,7 +91,7 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal }) => {
               <button
                 className="btn btn-md btn-block"
                 type="button"
-                onClick={() => setFarmSelectionModal(true)}
+                onClick={() => setFarmSelectionModal(false)}
               >
                 انصراف
               </button>

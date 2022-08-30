@@ -1,12 +1,29 @@
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { useState } from "react";
+import { Box, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PestSelectFarmModal from "./pestSelectFarm";
+import { Field, Form, Formik } from "formik";
+import { ArrowSingleDownIcon } from "../../../assets/icon";
 
 const PestTrueDetected = () => {
   const [foundPest, setFoundPest] = useState(0);
-  const [farmSelectionModal, setFarmSelectionModal] = useState(true);
+  const [selectedFarm, setSelectedFarm] = useState();
+  const [farmSelectionModal, setFarmSelectionModal] = useState(false);
   const navigate = useNavigate();
+
+  const onSubmit = () => {
+
+    console.log('d')
+
+  };
+
+  //   useEffect(() => {
+  //     if(foundPest == 1){
+  //         setFarmSelectionModal(true)
+  //     }else{
+  //         setFarmSelectionModal(false)
+  //     }
+  //   }, [foundPest])
 
   return (
     <div>
@@ -113,31 +130,81 @@ const PestTrueDetected = () => {
         </RadioGroup>
       </div>
 
-      <div>
-
-      </div>
+      {foundPest == 1 ? (
+        <Formik
+          onSubmit={(values, formikHelpers) => {
+            onSubmit(values);
+            formikHelpers.resetForm();
+          }}
+        >
+          {({ errors, touched }) => (
+            <div className="container" style={{ maxWidth: "768px" }}>
+              <Form className="row">
+                <Box
+                  sx={{
+                    display: { xs: "block", sm: "flex" },
+                    justifyContent: "space-between",
+                    padding: "0",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: { xs: "100%", sm: "48%" },
+                      position: "relative",
+                    }}
+                  >
+                    <Field
+                      name="productGroup"
+                      type="button"
+                      autoComplete="off"
+                      className="search-input"
+                    />
+                    {!selectedFarm?.name ? (
+                      <span
+                        className="fieldTitleEmpty"
+                        onClick={() => setFarmSelectionModal(true)}
+                      >
+                        گروه محصول
+                      </span>
+                    ) : (
+                      <span className="fieldTitleFilled">
+                        {selectedFarm.name}
+                      </span>
+                    )}
+                    <span className="fieldIcon">
+                      <ArrowSingleDownIcon />
+                    </span>
+                  </Box>
+                </Box>
+              </Form>
+            </div>
+          )}
+        </Formik>
+      ) : null}
       <PestSelectFarmModal
         farmSelectionModal={farmSelectionModal}
         setFarmSelectionModal={setFarmSelectionModal}
+        setSelectedFarm={setSelectedFarm}
       />
 
       <div>
         {foundPest == 0 ? (
-          <button
-            className="pest-submit-report-disable w-100 mt-3 mb-4"
-          >
+          <button className="pest-submit-report-disable w-100 mt-3 mb-4">
             ثبت بازخورد
           </button>
         ) : null}
         {foundPest == 1 ? (
-          <button
-            className="pest-submit-report w-100 mt-3 mb-4"
-          >
+          <button className="pest-submit-report w-100 mt-3 mb-4">
             ثبت بازخورد
           </button>
         ) : null}
         {foundPest == 2 ? (
-          <button className="pest-submit-back-home w-100 mt-3 " onClick={() => navigate('/desises')}>بازگشت</button>
+          <button
+            className="pest-submit-back-home w-100 mt-3 "
+            onClick={() => navigate("/desises")}
+          >
+            بازگشت
+          </button>
         ) : null}
       </div>
     </div>
