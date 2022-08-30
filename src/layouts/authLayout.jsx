@@ -80,7 +80,6 @@ const AuthLayout = ({ children }) => {
       >
         <Box
           sx={{
-            my: 8,
             mx: 4,
             display: "flex",
             flex: 1,

@@ -138,7 +138,7 @@ const Login = () => {
         </Box>
       </Grid>
 
-      <Box>
+      <Box style={{marginTop: " 250px"}}>
         <Grid className="login-bottom-items">
           {" "}
           <SiteRules />{" "}
