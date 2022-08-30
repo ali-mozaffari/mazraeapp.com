@@ -3,8 +3,7 @@ import { Modal } from "react-bootstrap";
 import closeNotification from "./../../../../assets/img/close-notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
-// import "./farmModal.css";
-// import "./../../../../assets/css/modals.css";
+// import "./../../cultivation/modals/farmModal.css";
 import { ArrowSearchIcon, SearchIcon } from "../../../../assets/icon";
 
 const Data = [
@@ -42,9 +41,11 @@ const Data = [
   },
 ];
 
-const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
-  const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
-
+const CurrentCultivationProductGroupFieldModal = ({
+  showModal,
+  hideModal,
+  data,
+}) => {
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
@@ -126,20 +127,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                 label="-"
                 className="farm-field-radio"
               />
-              {mahsulCategory
-                ?.filter((item) => item.title.toLowerCase().includes(dataList))
-                .map((item) => (
-                  <FormControlLabel
-                    key={item.guid}
-                    value={item.guid}
-                    control={<Radio />}
-                    name={item.title}
-                    label={item.title}
-                    className="farm-field-radio"
-                  />
-                ))}
-
-              {/* {Data?.filter((item) =>
+              {Data?.filter((item) =>
                 item.title.toLowerCase().includes(dataList)
               ).map((item) => (
                 <FormControlLabel
@@ -150,7 +138,7 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
                   label={item.title}
                   className="farm-field-radio"
                 />
-              ))} */}
+              ))}
             </RadioGroup>
           </div>
         </div>
@@ -184,4 +172,4 @@ const ProductGroupFieldModal = ({ showModal, hideModal, data }) => {
   );
 };
 
-export default ProductGroupFieldModal;
+export default CurrentCultivationProductGroupFieldModal;

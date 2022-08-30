@@ -42,23 +42,10 @@ const Data = [
 ];
 
 const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
-  const [textInput, setTextInput] = useState("");
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
-    // setSelected({ value: e.target.value, name: e.target.name });
-    setSelected(e.target.value);
-    setTextInput("");
+    setSelected({ value: e.target.value, name: e.target.name });
   };
-
-  const handleText = (e) => {
-    // setTextInput({ value: e.target.value, name: e.target.value });
-    setTextInput(e.target.value);
-    if (textInput === "") {
-    }
-    setSelected("");
-  };
-  console.log(textInput);
-  console.log(selected);
 
   const [dataList, setDataList] = useState("");
 
@@ -76,17 +63,14 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
   return (
     <Modal show={showModal} className="farm-field-modal">
       <form onSubmit={handleSubmit}>
-        <div
-          className="farm-field-modal-header"
-          style={{ boxShadow: "none", padding: "30px 15px 5px 35px" }}
-        >
+        <div className="farm-field-modal-header">
           <div>
             <img
               src={closeNotification}
               alt=""
               style={{
                 position: "absolute",
-                left: "40px",
+                left: "25px",
                 top: "30px",
                 height: "16px",
                 cursor: "pointer",
@@ -108,7 +92,6 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
               className="search-input-field-modal w-100"
               type="search"
               placeholder="جستجو .."
-              // onChange={handleSearch}
               onChange={(e) => setDataList(e.target.value)}
             />
 
@@ -121,42 +104,14 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
           <div
             style={{
               margin: "0",
-              marginTop: "10px",
-              color: "#4A4A4A",
+              marginTop: "30px",
             }}
           >
-            <div
-              style={{
-                marginRight: "15px",
-                borderBottom: "1px solid #aeaeae",
-                paddingBottom: "20px",
-              }}
-            >
-              {/* <input
-                className="search-input-field-modal w-100"
-                type="text"
-                placeholder="نام ببرید.."
-                // onChange={handleSearch}
-                onChange={(e) => setDataList(e.target.value)}
-                style={{ borderRadius: "8px", padding: "8px 15px" }}
-              /> */}
-              <input
-                name="workerName"
-                type="text"
-                autoComplete="off"
-                className="search-input-field-modal w-100"
-                placeholder="نام ببرید.."
-                style={{ borderRadius: "8px", padding: "8px 15px" }}
-                value={textInput}
-                onChange={handleText}
-              />
-            </div>
             <RadioGroup
               className="redio-box"
               aria-labelledby="demo-controlled-radio-buttons-group"
               name="controlled-radio-buttons-group"
               onChange={handleChange}
-              // onChange={(e) => setDataList(e.target.value)}
             >
               <FormControlLabel
                 value=""
@@ -178,6 +133,7 @@ const SubProductFieldModalHistory = ({ showModal, hideModal, data }) => {
                 />
               ))}
             </RadioGroup>
+            {/* ): ''} */}
           </div>
         </div>
         <div className="farm-field-modal-footer justify-content-center border-top-0">

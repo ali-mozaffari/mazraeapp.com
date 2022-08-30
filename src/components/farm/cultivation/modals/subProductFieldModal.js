@@ -43,6 +43,8 @@ const Data = [
 ];
 
 const SubProductFieldModal = ({ showModal, hideModal, data }) => {
+  const { subMahsul } = useSelector((state) => state.subMahsuls);
+  // console.log(subMahsul)
   // const [textInput, setTextInput] = useState("");
   const [selected, setSelected] = useState("");
   const handleChange = (e) => {
@@ -157,7 +159,19 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                 label="-"
                 className="farm-field-radio"
               />
-              {Data?.filter((item) =>
+              {subMahsul?.filter((item) =>
+                item.title.toLowerCase().includes(dataList)
+              ).map((item) => (
+                <FormControlLabel
+                  key={item.guid}
+                  value={item.guid}
+                  control={<Radio />}
+                  name={item.title}
+                  label={item.title}
+                  className="farm-field-radio"
+                />
+              ))}
+              {/* {Data?.filter((item) =>
                 item.title.toLowerCase().includes(dataList)
               ).map((item) => (
                 <FormControlLabel
@@ -168,7 +182,7 @@ const SubProductFieldModal = ({ showModal, hideModal, data }) => {
                   label={item.title}
                   className="farm-field-radio"
                 />
-              ))}
+              ))} */}
             </RadioGroup>
             {/* ): ''} */}
           </div>

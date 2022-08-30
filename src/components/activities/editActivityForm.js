@@ -646,7 +646,7 @@ const EditActivityForm = () => {
                           {item.id}
                         </div>
                         <div onClick={() => deleteNahadeAPI(item.guid)}>
-                          <CloseIcon />
+                          <CloseIcon fill={"red"} />
                         </div>
                       </div>
                     ))
@@ -724,7 +724,7 @@ const EditActivityForm = () => {
                         <span>{file[0].name}</span>
                         {/* <img src={url+(existingActivity[0]?.file?.image)} alt="image" /> */}
                         <div onClick={() => setFile([])}>
-                          <CloseIcon />
+                          <CloseIcon fill={"red"} />
                         </div>
                       </div>
                     </div>

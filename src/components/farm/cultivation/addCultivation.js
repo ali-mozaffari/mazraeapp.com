@@ -27,10 +27,23 @@ import moment from "moment-jalaali";
 import VaziatFieldModal from "./modals/vaziatFieldModal";
 import PriceFieldModal from "./modals/priceFieldModal";
 import TotalProductFieldModal from "./modals/totalProductFieldModal";
+import { getMahsulCategories } from "../../../redux/slice/farm/cultivation/mahsulCategories";
+import { getMahsuls } from "../../../redux/slice/farm/cultivation/mahsuls";
+import { getSubMahsuls } from "../../../redux/slice/farm/cultivation/subMahsuls";
 
 const AddCultivation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const { mahsulCategory } = useSelector((state) => state.mahsulCategories);
+  // const { mahsul } = useSelector((state) => state.mahsuls);
+  // console.log(mahsulCategory)
+
+  useEffect(() => {
+    dispatch(getMahsulCategories());
+    dispatch(getMahsuls());
+    dispatch(getSubMahsuls());
+  }, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -149,12 +162,12 @@ const AddCultivation = () => {
   const getTotalProduct = (data) => {
     setTotalProduct(data);
   };
-  
+
   const [tonKilogram, setTonKilogram] = useState("");
   const getTonKg = (data) => {
     setTonKilogram(data);
-  }
-  console.log(tonKilogram)
+  };
+  console.log(tonKilogram);
 
   const [price, setPrice] = useState("");
   const getPrice = (data) => {
@@ -304,7 +317,10 @@ const AddCultivation = () => {
                     onClick={() => showYearModal()}
                   />
                   {!year?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showYearModal()}>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={() => showYearModal()}
+                    >
                       سال زراعی <span className="starSign"> *</span>
                     </span>
                   ) : (
@@ -351,7 +367,12 @@ const AddCultivation = () => {
                     onClick={() => showProductGroupModal()}
                   />
                   {!productGroup?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showProductGroupModal()}>گروه محصول</span>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={() => showProductGroupModal()}
+                    >
+                      گروه محصول
+                    </span>
                   ) : (
                     <span className="fieldTitleFilled">گروه محصول</span>
                   )}
@@ -383,7 +404,10 @@ const AddCultivation = () => {
                     onClick={() => showProductModal()}
                   />
                   {!product?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showProductModal()}>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={() => showProductModal()}
+                    >
                       محصول <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -418,7 +442,12 @@ const AddCultivation = () => {
                     onClick={() => showSubProductModal()}
                   />
                   {!subProduct?.name ? (
-                    <span className="fieldTitleEmpty" onClick={() => showSubProductModal()}>زیر محصول</span>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={() => showSubProductModal()}
+                    >
+                      زیر محصول
+                    </span>
                   ) : (
                     <span className="fieldTitleFilled">زیر محصول</span>
                   )}
@@ -460,7 +489,10 @@ const AddCultivation = () => {
                     onClick={handleHarvestDateTime}
                   />
                   {!harvestDateTime ? (
-                    <span className="fieldTitleEmpty" onClick={handleHarvestDateTime}>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={handleHarvestDateTime}
+                    >
                       تاریخ کاشت <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -493,7 +525,10 @@ const AddCultivation = () => {
                     onClick={handlePlantingDateTime}
                   />
                   {!plantingDateTime ? (
-                    <span className="fieldTitleEmpty" onClick={handlePlantingDateTime}>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={handlePlantingDateTime}
+                    >
                       تاریخ برداشت <span className="starSign"> *</span>{" "}
                     </span>
                   ) : (
@@ -601,7 +636,10 @@ const AddCultivation = () => {
                     onClick={() => showVaziatModal()}
                   />
                   {!vaziat ? (
-                    <span className="fieldTitleEmpty" onClick={() => showVaziatModal()}>
+                    <span
+                      className="fieldTitleEmpty"
+                      onClick={() => showVaziatModal()}
+                    >
                       وضعیت<span className="starSign"> *</span>
                     </span>
                   ) : (
@@ -628,7 +666,9 @@ const AddCultivation = () => {
                     />
                     {!totalProduct ? (
                       <span
-                        className="fieldTitleEmpty" onClick={() => showTotalProductModal()}>
+                        className="fieldTitleEmpty"
+                        onClick={() => showTotalProductModal()}
+                      >
                         تولید کل (کیلوگرم در هکتار)
                       </span>
                     ) : (
@@ -654,7 +694,11 @@ const AddCultivation = () => {
                           ) : (
                             ""
                           )}
-                          {tonKilogram.division && tonKilogram.remain ? <span> و </span> : ""}
+                          {tonKilogram.division && tonKilogram.remain ? (
+                            <span> و </span>
+                          ) : (
+                            ""
+                          )}
                           {tonKilogram.remain ? (
                             <span>
                               {persianTools.numberToWords(tonKilogram.remain)}{" "}
@@ -699,7 +743,9 @@ const AddCultivation = () => {
                     />
                     {!price ? (
                       <span
-                        className="fieldTitleEmpty" onClick={() => showPriceModal()}>
+                        className="fieldTitleEmpty"
+                        onClick={() => showPriceModal()}
+                      >
                         قیمت (تومان/کیلوگرم)
                       </span>
                     ) : (

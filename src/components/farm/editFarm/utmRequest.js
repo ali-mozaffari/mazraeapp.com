@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { Field, Form, Formik } from "formik";
 import { UTMReportIcon } from "../../../assets/icon";
 import { ArrowSingleDownIcon } from "../../../assets/icon";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "yup-phone";
 import UtmRequestModal from "./utmRequestModal";
@@ -21,6 +21,7 @@ const cacheRtl = createCache({
 });
 
 function UTMRequest() {
+  const navigate = useNavigate();
   const [displayUtmRequestModal, setDisplayUtmRequestModal] = useState(false);
   // Handle the displaying modal of UTM Request 1st field
   const showUtmRequestModal = (id) => {
@@ -83,13 +84,7 @@ function UTMRequest() {
   return (
     <CacheProvider value={cacheRtl}>
       <div
-        className="container-fluid pb-5 mb-5"
-        style={
-          {
-            // fontSize: "14px",
-          }
-        }
-      >
+        className="container-fluid pb-5 mb-5">
         <div
           style={{
             display: "flex",
@@ -134,7 +129,7 @@ function UTMRequest() {
                     type="button"
                     value={farmStarting.name}
                     autoComplete="off"
-                    className="search-input w-100 mt-4 py-3"
+                    className="search-input"
                     onClick={() => showUtmRequestModal()}
                   />
 
@@ -258,11 +253,15 @@ function UTMRequest() {
               </Box>
 
               <div className="farm-bottom-btn d-flex mt-3">
-                <button type="submit" className="btn-dark-blue mx-1 mt-4">
+                <button
+                  type="submit"
+                  className="btn-dark-blue mx-1 mt-4"
+                  // onClick={() => navigate("/edit-farm-info")}
+                >
                   ثبت درخواست
                 </button>
                 <NavLink
-                  to={"/"}
+                  to={"/edit-farm-info"}
                   className="btn-light-pink mx-1 mt-4 text-decoration-none text-light"
                 >
                   لغو درخواست
