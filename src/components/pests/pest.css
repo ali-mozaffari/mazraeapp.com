@@ -1,51 +1,64 @@
-.pest-product-card-box{
-
-    background-color: #F6F8F7;
-    border-radius: 8px;
-    margin: 6px 0;
-
+.pest-product-card-box {
+  background-color: #f6f8f7;
+  border-radius: 8px;
+  margin: 6px 0;
 }
 
-.pest-product-card-box-selected{
-
-    background-color: #E2FFFB;
-    border: 1px solid #0DB39F;
-    border-radius: 8px;
-    margin: 6px 0;
-
+.pest-product-card-box-selected {
+  background-color: #e2fffb;
+  border: 1px solid #0db39f;
+  border-radius: 8px;
+  margin: 6px 0;
 }
 
-
-.pest-product-card-title{
-
-    text-align: center;
-    font-weight: 800;
-    font-size: 14px;
-    border-radius: 16px;
-    margin: 0 12px;
-    background-color: #fff;
-
+.pest-product-card-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border-radius: 16px;
+  margin: 0 12px;
+  background-color: #fff;
 }
 
-
-.pest-product-card-title-selected{
-
-    text-align: center;
-    font-weight: 800;
-    font-size: 14px;
-    border-radius: 16px;
-    margin: 0 12px;
-    color: #fff;
-    background-color: #0DB39F;
-
+.pest-product-card-title-selected {
+  text-align: center;
+  font-weight: 800;
+  font-size: 14px;
+  border-radius: 16px;
+  margin: 0 12px;
+  color: #fff;
+  background-color: #0db39f;
 }
 
-.btn-outline-dark-blue{
-    box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid #2C689A;
-    border-radius: 16px;
-    width: 100%;
-    padding: 16px 0;
-    color: #2C689A;
+.btn-outline-dark-blue {
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #2c689a;
+  border-radius: 16px;
+  width: 100%;
+  padding: 16px 0;
+  color: #2c689a;
+}
+
+.pest-submit-report {
+  background-color: #2c689a !important;
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff;
+}
+.pest-submit-report-disable {
+  background-color: #c2c2c2 !important;
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff;
+}
+
+.pest-submit-back-home {
+  background-color: #fed7d0 !important;
+  border: none;
+  padding: 16px;
+  border-radius: 16px;
+  color: #df4a30;
 }

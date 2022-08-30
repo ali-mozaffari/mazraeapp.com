@@ -67,6 +67,18 @@
     font-size: 14px;
 }
 
+
+.btn-dark-blue-2 {
+    background-color: #2c699a;
+    color: white;
+    border: 1px solid transparent;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 14px;
+}
+
+
 .btn-light-gray {
     background-color: gray;
     color: white;
