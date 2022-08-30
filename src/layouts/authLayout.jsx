@@ -20,45 +20,45 @@ import { useState } from "react";
 import "./../pages/auth/auth.css";
 import SiteRulesModal from "../pages/auth/siteRulesModal";
 
-function SiteRules(props) {
-  // const [id, setId] = useState(null);
-  const [displayConfirmationModal, setDisplayConfirmationModal] =
-    useState(false);
+// function SiteRules(props) {
+//   // const [id, setId] = useState(null);
+//   const [displayConfirmationModal, setDisplayConfirmationModal] =
+//     useState(false);
 
-  // Handle the displaying of the modal based on type and id
-  const showActivitiesModal = () => {
-    // setId();
-    setDisplayConfirmationModal(true);
-  };
+//   // Handle the displaying of the modal based on type and id
+//   const showActivitiesModal = () => {
+//     // setId();
+//     setDisplayConfirmationModal(true);
+//   };
 
-  // Hide the modal
-  const hideConfirmationModal = () => {
-    setDisplayConfirmationModal(false);
-  };
+//   // Hide the modal
+//   const hideConfirmationModal = () => {
+//     setDisplayConfirmationModal(false);
+//   };
 
-  return (
-    <div>
-      <Typography variant="body2" align="center" {...props}>
-        {"با ورود به سایت مزرعه، "}
-        <span
-          style={{ cursor: "pointer", color:"#16db93" }}
-          onClick={() => showActivitiesModal()}
-          // href="https://mazraeapp.com//"
-        >
-          قوانین و مقررات
-        </span>
-        {" سایت را پذیرفته ام."}
-      </Typography>
+//   return (
+//     <div>
+//       <Typography variant="body2" align="center" {...props}>
+//         {"با ورود به سایت مزرعه، "}
+//         <span
+//           className="green-linked-text"
+//           onClick={() => showActivitiesModal()}
+//           // href="https://mazraeapp.com//"
+//         >
+//           قوانین و مقررات
+//         </span>
+//         {" سایت را پذیرفته ام."}
+//       </Typography>
 
-      <SiteRulesModal
-        showModal={displayConfirmationModal}
-        // confirmModal={submitDelete}
-        hideModal={hideConfirmationModal}
-        // id={id}
-      />
-    </div>
-  );
-}
+//       <SiteRulesModal
+//         showModal={displayConfirmationModal}
+//         // confirmModal={submitDelete}
+//         hideModal={hideConfirmationModal}
+//         // id={id}
+//       />
+//     </div>
+//   );
+// }
 
 const AuthLayout = ({ children }) => {
   return (
@@ -108,8 +108,11 @@ const AuthLayout = ({ children }) => {
 
           {children}
 
-          <Box>
-            <Grid className="login-bottom-items"> <SiteRules /> </Grid>
+          {/* <Box>
+            <Grid className="login-bottom-items">
+              {" "}
+              <SiteRules />{" "}
+            </Grid>
 
             <Grid container className="login-bottom-items">
               <Typography
@@ -134,7 +137,7 @@ const AuthLayout = ({ children }) => {
                 <InstagramIcon />
               </Grid>
             </Grid>
-          </Box>
+          </Box> */}
         </Box>
       </Grid>
 

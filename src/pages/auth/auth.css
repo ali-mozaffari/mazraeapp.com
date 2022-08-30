@@ -66,3 +66,17 @@
     width: 100%;
     text-align: center
 }
+
+.resend-code-text {
+    color: #676767;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    margin-top: 30px !important;
+}
+
+.green-linked-text {
+    cursor: pointer;
+    color:#16db93;
+    border-bottom: 1px solid #16db93;
+}
+

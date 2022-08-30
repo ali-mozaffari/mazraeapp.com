@@ -55,7 +55,7 @@ const SendCode = () => {
 
   return (
     <CacheProvider value={cacheRtl}>
-      <Grid style={{ width: "65%", height: "55vh" }}>
+      <Grid style={{ width: "65%", height: "50vh" }}>
         <Typography component="p" variant="p" className="top-text-login">
           برای ورود در سامانه مزرعه شماره تماس خود را وارد کنید
         </Typography>
