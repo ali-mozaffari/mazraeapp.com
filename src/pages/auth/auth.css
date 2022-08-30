@@ -1,5 +1,14 @@
+.top-text-login {
+    color: #A2A2A2;
+    font-size: 13px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 42px;
+}
+
 .authInput {
-    background-color: #f6f8f7 !important;
+    background-color: #E2FFFB !important;
     border-radius: 8px !important;
     height: 50px !important;
     padding-right: 15px !important;
@@ -9,13 +18,20 @@
     display: block !important;
 }
 
+.verification-inputs {
+    width: 15% !important;
+    margin-right: 2px !important;
+    margin-left: 2px !important;
+}
+
 .authSubmitBtn {
     background-color: #16db93 !important;
     border-radius: 8px !important;
     height: 50px !important;
     padding-right: 10px !important;
     padding-left: 10px !important;
-    font-size: 13px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
 }
 
 .authImgTopBar {
@@ -31,47 +47,22 @@
     color: #fff;
 }
 
-.authSocialIconTop {
-    height: 35px;
-    width: 36px;
-    background-color: rgb( 0, 0, 0, 0.1);
-    padding-right: 8px;
-    padding-top: 5px;
-    margin: 5px !important;
-    border-radius: 8px;
-    fill: #fff !important;
-    cursor: pointer;
+.login-bottom-items {
+    color: #A2A2A2 !important;
+    justify-content: center;
 }
 
-.authSocialIconTop:hover {
-    background-color: rgb( 0, 0, 0, 0.2);
-}
-
-.authSocialIconMobile {
-    height: 35px;
-    width: 36px;
-    padding-top: 4px;
-    margin: 5px !important;
-    border-radius: 8px;
-    fill: rgb(103, 103, 103);
-    color: rgb(163, 163, 163);
-    cursor: pointer;
-    border: 2px solid;
-    text-align: center;
-}
-
-.authSocialIconMobile:hover {
-    background-color: rgb( 0, 0, 0, 0.2 ) !important;
-}
-
-.authImgTopBarMobile {
-    height:10%  !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: rgb(163, 163, 163);
+.login-bottom-items p{
     font-size: 13px;
-    text-align: center;
+    padding-bottom: 5px;
 }
 
+.loginSocialIcon {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.reactCodeInput {
+    width: 100%;
+    text-align: center
+}

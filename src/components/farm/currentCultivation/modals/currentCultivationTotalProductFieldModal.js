@@ -60,7 +60,7 @@ const CurrentCultivationTotalProductFieldModal = ({
         </div>
         <div
           className="farm-field-modal-body product-field-modal"
-          style={{ overflowY: "auto" }}
+          style={{ overflowY: "auto", direction: "rtl" }}
         >
           <div
             style={{

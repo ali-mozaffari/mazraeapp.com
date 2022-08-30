@@ -1,16 +1,16 @@
-.modal-dialog {
+.site-Rule-Modal .modal-dialog {
   max-width: 90%;
   height: 95% !important;
   margin-bottom: 0 !important;
 }
 
-.modal-content{
+.site-Rule-Modal .modal-content{
   border-radius: 25px !important;
   padding: 25px !important;
   height: 95% !important;
 }
 
-.modal-header {
+.site-Rule-Modal .modal-header {
     display: grid !important;
     border-bottom: none;
     position: relative;

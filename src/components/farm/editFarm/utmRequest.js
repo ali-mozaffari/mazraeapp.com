@@ -84,13 +84,7 @@ function UTMRequest() {
   return (
     <CacheProvider value={cacheRtl}>
       <div
-        className="container-fluid pb-5 mb-5"
-        style={
-          {
-            // fontSize: "14px",
-          }
-        }
-      >
+        className="container-fluid pb-5 mb-5">
         <div
           style={{
             display: "flex",
@@ -262,7 +256,7 @@ function UTMRequest() {
                 <button
                   type="submit"
                   className="btn-dark-blue mx-1 mt-4"
-                  onClick={() => navigate("/edit-farm-info")}
+                  // onClick={() => navigate("/edit-farm-info")}
                 >
                   ثبت درخواست
                 </button>

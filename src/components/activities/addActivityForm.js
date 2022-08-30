@@ -527,7 +527,7 @@ const AddActivityForm = () => {
                           )}
                         </div>
                         <div onClick={() => clearNahade(item.id)}>
-                          <CloseIcon />
+                          <CloseIcon fill={"red"} />
                         </div>
                       </div>
                     ))
@@ -603,7 +603,7 @@ const AddActivityForm = () => {
                               <span>{file[0].name}</span>
                             </div>
                             <div onClick={() => setFile([])}>
-                              <CloseIcon />
+                              <CloseIcon fill={"red"} />
                             </div>
                           </div>
                         </div>
