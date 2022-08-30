@@ -3,6 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 
 import { ArrowSearchIcon, CloseIcon, SearchIcon } from "../../assets/icon";
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -15,7 +16,7 @@ export default function PestSearchInputModal({
 }) {
   const [searchedText, setSearchedText] = React.useState("");
   const [searchedList, setSearchedList] = React.useState([]);
-
+  const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpenSearchModal(true);
   };
@@ -84,7 +85,7 @@ export default function PestSearchInputModal({
           {searchedList.length > 0 ? (
             <div>
               {searchedList.map((item) => (
-                <p>
+                <p onClick={() => navigate('/desises-info', { state: { pest : item } } )}>
                   {item.title}
                   <hr/>
                 </p>

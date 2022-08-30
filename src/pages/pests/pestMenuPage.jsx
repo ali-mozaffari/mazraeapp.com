@@ -25,7 +25,7 @@ const PestMenuPage = () => {
         mahsul_guid: pestProduct.product[0].guid,
       };
       dispatch(getResultsList(data));
-      setTotalList(resultList.results)
+      setTotalList(resultList.results.results)
     }
   }, []);
 

@@ -60,6 +60,8 @@ const PestQuestionsPage = React.lazy(() =>
 
 const PestResultsPage = React.lazy(() => import("../pages/pests/pestListPage"));
 
+const PestInfoPage = React.lazy(() => import("../pages/pests/pestInfoPage"));
+
 const AppView = () => {
   const location = useLocation();
   // const loading = useSelector((state) => state.loading.loading)
@@ -115,6 +117,7 @@ const AppView = () => {
           <Route path="/desises-menu" element={<PestMenuPage />} />ّ
           <Route path="/desises-result" element={<PestResultsPage />} />
           <Route path="/desises-questions" element={<PestQuestionsPage />} />
+          <Route path="/desises-info" element={<PestInfoPage />} />
         </Routes>
       </AppLayout>
     );

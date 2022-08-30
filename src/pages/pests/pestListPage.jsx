@@ -47,20 +47,18 @@ const PestListPage = () => {
           <FilterIcon />
         </div>
 
-        <div className="d-flex flex-wrap mt-2">
-            {
-                pest_type.map((item) => 
-                <span className="d-flex small pt-2 px-2">
-                    {item.title}
-                    <CloseCircleIcon/>
-                </span>
-                )
-            }
-        </div>
+        {/* <div className="d-flex flex-wrap">
+          {pest_type.map((item) => (
+            <span className="d-flex small pt-2 px-2">
+              {item.title}
+              <CloseCircleIcon />
+            </span>
+          ))}
+        </div> */}
       </div>
       <hr />
 
-      {resultList?.results?.map((item) => (
+      {resultList?.results.results.map((item) => (
         <PestItemCard item={item} />
       ))}
 
