@@ -83,7 +83,7 @@ const Login = () => {
   };
 
   return (
-    <div style={{ width: "65%" }}>
+    <Box sx={{width:{xs: "90%", sm: "65%"}}} >
       <Grid>
         <Typography component="p" variant="p" className="top-text-login">
           کد ارسالی به شماره
@@ -168,7 +168,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Box>
-    </div>
+    </Box>
   );
 };
 
