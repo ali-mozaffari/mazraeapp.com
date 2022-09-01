@@ -274,7 +274,7 @@ const AddCultivation = () => {
         }}
       >
         {({ errors, touched }) => (
-          <div className="container" style={{ maxWidth: "768px" }}>
+          <div className="container">
             <Form className="row">
               <p
                 style={{

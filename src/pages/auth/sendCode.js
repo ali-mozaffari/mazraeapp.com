@@ -77,11 +77,6 @@ const SendCode = () => {
     } else {
       return false;
     }
-    // if (phoneInput) {
-    //   return match;
-    // } else {
-    //   return true;
-    // }
   };
 
   const validation = Yup.object().shape({

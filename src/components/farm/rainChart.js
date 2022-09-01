@@ -57,8 +57,8 @@ const RainChart = (props) => {
     scales: {
       y: {
         beginAtZero: false,
-        min: 5,
-        // grace: 3,
+        min: 0,
+        // grace: 1,
         // weight: 3,
         position: "right",
         ticks: {
@@ -68,7 +68,7 @@ const RainChart = (props) => {
           font: {
             size: 10,
           },
-          stepSize: 5
+          // stepSize: 5
         },
         grid: {
           drawBorder: false,
@@ -105,11 +105,11 @@ const RainChart = (props) => {
     // labels,
 
     // labels: [props?.map((item => `${item.totalliquid_3_days[1]} میلی متر`,))],
-    labels: [`${12} میلی متر`, `${17} میلی متر`, `${7} میلی متر`],
+    labels: [`${3} میلی متر`, `${0} میلی متر`, `${0} میلی متر`],
     datasets: [
       {
         // data: [props?.map((item => item.totalliquid_3_days[1],))],
-        data: [12, 17, 7],
+        data: [3, 0, 0],
         // backgroundColor: colors.map((item) => item),
         backgroundColor: colors,
         borderRadius: 4,

@@ -34,6 +34,7 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
   };
+  console.log(selected);
   useEffect(() => {
     dispatch(getYearList());
   }, []);
@@ -79,25 +80,24 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
             }}
           >
             {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
-
             {year?.map((item) => (
-              <RadioGroup
-              key={item.id}
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                // value={value}
-                onChange={handleChange}
-              >
-                <FormControlLabel
-                  value={item.id}
-                  control={<Radio />}
-                  name={item.title}
-                  label={item.title}
-                  className="farm-field-radio"
-                  // classes={classes}
-                />
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              // value={value}
+              onChange={handleChange}
+            >
+              <FormControlLabel
+                key={item.guid}
+                value={item.guid}
+                control={<Radio />}
+                name={item.title}
+                label={item.title}
+                className="farm-field-radio"
+                // classes={classes}
+              />
 
-                {/* <FormControlLabel
+              {/* <FormControlLabel
                 value="2"
                 control={<Radio />}
                 name="1398-1399"
@@ -118,7 +118,7 @@ const YearFieldModal = ({ showModal, hideModal, data }) => {
                 label="1400-1401"
                 className="farm-field-radio"
               /> */}
-              </RadioGroup>
+            </RadioGroup>
             ))}
           </div>
         </div>

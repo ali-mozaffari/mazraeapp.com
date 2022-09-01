@@ -199,12 +199,12 @@ const FarmListBox = () => {
                     <span className="chart-day">شنبه</span>
                   </div>
                   <div className="text-center">
-                    23
+                    19
                     <br />
                     <span className="chart-day">یکشنبه</span>
                   </div>
                   <div className="align-items-center text-center">
-                    12
+                    20
                     <br />
                     <span className="chart-day">دوشنبه</span>
                   </div>
