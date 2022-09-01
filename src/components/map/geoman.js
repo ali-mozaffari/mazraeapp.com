@@ -20,21 +20,27 @@ const Geoman = () => {
       optionsControls: true,
     });
 
+    leafletContainer.pm.enableDraw('Polygon', {
+        snappable: true,
+        snapDistance: 20,
+        allowSelfIntersection: false,
+      });
+
     leafletContainer.pm.setGlobalOptions({
       pmIgnore: false,
       measurements: {
         measurement: true,
         displayFormat: "metric",
-        showTooltip: true,
-        showTooltipOnHover: true,
-        totalLength: true,
-        segmentLength: true,
-        area: true,
-        radius: true,
-        perimeter: true,
-        height: true,
-        width: true,
-        coordinates: true,
+        showTooltip: false,
+        showTooltipOnHover: false,
+        totalLength: false,
+        segmentLength: false,
+        area: false,
+        radius: false,
+        perimeter: false,
+        height: false,
+        width: false,
+        coordinates: false,
       },
     });
 
