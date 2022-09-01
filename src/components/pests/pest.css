@@ -149,9 +149,19 @@
 }
 
 
-.pest-answer-next-btn {
+.pest-answer-next-btn-enable {
   border: none;
   background: #2C689A;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 0;
+  width: 25%;
+  text-align: center;
+}
+
+.pest-answer-next-btn-disable {
+  border: none;
+  background: lightgray;
   color: #fff;
   border-radius: 8px;
   padding: 8px 0;

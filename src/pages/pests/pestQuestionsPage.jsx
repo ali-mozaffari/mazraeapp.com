@@ -4,7 +4,7 @@ import { PestQuestionNewIcon } from "./../../assets/pestIcons/pestQuestionsNewIc
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getPestQuestion } from "../../redux/slice/pests/pestQuestions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PestQuestionStarter from "../../components/pests/pestQuestionStater";
 import PestQuestionItem from "../../components/pests/pestQuestionItem";
 
@@ -38,17 +38,22 @@ const PestQuestionsPage = () => {
       product_guid: pestProduct.product[0].guid,
     };
     dispatch(getPestQuestion(data));
-    if (pestQuestion.results[0].code) {
-      setShowQuestion(true);
-    }
   };
+
+  useEffect(() => {
+    if (pestQuestion?.results[0]?.code) {
+      setShowQuestion(true);
+    }else{
+      setShowQuestion(false)
+    }
+  }, [pestQuestion.results]);
 
   return (
     <div
-      className="page-container container-fluid pb-4"
-      style={{ height: "70vh" }}
+      className="page-container container-fluid pb-4 mb-5"
+      // style={{ height: "72vh" }}
     >
-      <PestBreadCrumb data={menuList} />
+      <PestBreadCrumb data={menuList} clearQuestion={true} main={showQuestion}/>
       <div className="mt-3 mx-2">
         <PestProductCard
           product={pestProduct.product[0]}
