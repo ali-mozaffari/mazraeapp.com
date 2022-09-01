@@ -12,6 +12,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import PestFalseDetected from "../../components/pests/pestInfo/pestFalseDetected";
 import PestTrueDetected from "../../components/pests/pestInfo/pestTrueDetected";
 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import PestCarousel from "../../components/pests/pestInfo/pestCarusel";
+
 const PestInfoPage = () => {
   const [selectTrueDetected, setSelectedTrueDetected] = useState(0);
   const { state } = useLocation();
@@ -19,18 +22,11 @@ const PestInfoPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="page-container container-fluid mb-5 p-0">
+    <div className="page-container container-fluid mb-5 pb-4">
       <div className="position-relative">
-        <img
-          src={pest.image[0].image}
-          height="200"
-          className="d-block"
-          style={{
-            width: "100%",
-            borderTopLeftRadius: "16px",
-            borderTopRightRadius: "16px",
-          }}
-        />
+        <div>
+          <PestCarousel images={pest?.image}></PestCarousel>
+        </div>
         <div
           className="position-absolute bg-white px-3 py-1"
           style={{
@@ -73,7 +69,7 @@ const PestInfoPage = () => {
 
         <hr />
 
-        <PestInfoPreventionCollapse detect={pest.solution} />
+        <PestInfoPreventionCollapse solution={pest.solution} />
 
         <hr />
 
@@ -82,22 +78,32 @@ const PestInfoPage = () => {
           <RadioGroup row>
             <FormControlLabel
               value="1"
-              control={<Radio sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: 24,
-                },
-              }}/>}
+              control={
+                <Radio
+                sx={{
+                  "&.Mui-checked": {
+                    fontSize: 24,
+                    color: '#16DB93'
+                  },
+                }}
+                />
+              }
               label="بله"
               labelPlacement="end"
               onChange={(e) => setSelectedTrueDetected(1)}
             />
             <FormControlLabel
               value="2"
-              control={<Radio sx={{
-                '& .MuiSvgIcon-root': {
-                  fontSize: 24,
-                },
-              }}/>}
+              control={
+                <Radio
+                  sx={{
+                    "&.Mui-checked": {
+                      fontSize: 24,
+                      color: '#16DB93'
+                    },
+                  }}
+                />
+              }
               label="خیر"
               labelPlacement="end"
               onChange={(e) => setSelectedTrueDetected(2)}
@@ -108,7 +114,6 @@ const PestInfoPage = () => {
         {selectTrueDetected === 2 ? <PestFalseDetected /> : null}
 
         {selectTrueDetected === 1 ? <PestTrueDetected /> : null}
-
       </div>
     </div>
   );

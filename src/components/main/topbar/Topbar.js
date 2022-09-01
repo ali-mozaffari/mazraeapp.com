@@ -54,6 +54,7 @@ const Topbar = () => {
       p={2}
       // mt={2}
       position="relative !important"
+      className=""
     >
       <Grid
         item

@@ -16,6 +16,7 @@ import accessReducer from "./slice/access/addAccess";
 import accessEditRducer from "./slice/access/editAccess";
 import pestProductRducer from "./slice/pests/pestProduct";
 import pestRducer from "./slice/pests/pests";
+import pestQuestionRducer from "./slice/pests/pestQuestions";
 import yearListReducer from "./slice/farm/cultivation/yearList";
 import mahsulCategoriesReducer from "./slice/farm/cultivation/mahsulCategories";
 import mahsulsReducer from "./slice/farm/cultivation/mahsuls";
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   accessEdit: accessEditRducer,
   pestProduct: pestProductRducer,
   pest: pestRducer,
+  pestQuestion: pestQuestionRducer,
   yearList: yearListReducer,
   mahsulCategories: mahsulCategoriesReducer,
   mahsuls: mahsulsReducer,

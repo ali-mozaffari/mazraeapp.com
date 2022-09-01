@@ -4,7 +4,7 @@ import { CheckNewIcon } from "../../../assets/pestIcons/checkNewIcon";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
-const PestInfoPreventionCollapse = ({detect}) => {
+const PestInfoPreventionCollapse = ({solution}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -25,7 +25,7 @@ const PestInfoPreventionCollapse = ({detect}) => {
       </div>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <div className="py-2" style={{textAlign:'justify'}}>
-            { detect }
+            { solution }
         </div>
       </Collapse>
     </div>
