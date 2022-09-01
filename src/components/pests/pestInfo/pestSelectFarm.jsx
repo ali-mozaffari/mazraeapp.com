@@ -3,18 +3,35 @@ import { Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import closeNotification from "./../../../assets/img/close-notification.png";
+import { useEffect } from "react";
 
 const PestSelectFarmModal = ({
+  seleted,
+  setSelected,
   farmSelectionModal,
   setFarmSelectionModal,
   setSelectedFarm,
 }) => {
-  const [selected, setSelected] = useState("");
   const farmlist = useSelector((state) => state.farmlist.postList);
+  const [list2, setList2] = useState([]);
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
     setSelectedFarm({ value: e.target.value, name: e.target.name });
   };
+
+  useEffect(() => {
+    let new_list = [];
+    farmlist.map((item) => {
+      if (item?.cultivation?.length > 0) {
+        new_list.push(item);
+      }
+    });
+    setList2(new_list);
+  }, []);
+
+  const onSelectFarm = () => {
+    
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,19 +70,22 @@ const PestSelectFarmModal = ({
             {/* <FormLabel classes={{ root: classes.formLabel }}>Options</FormLabel> */}
 
             <RadioGroup
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
+              aria-labelledby=""
+              name=""
               // value={value}
               onChange={handleChange}
             >
-              {farmlist.map((item) => (
+              {list2.map((item) => (
                 <FormControlLabel
-                  value="1"
+                  value={item.guid}
                   control={<Radio />}
-                  name={item?.cultivation[0]?.mahsul?.title}
-                  label={item?.cultivation[0]?.mahsul?.title}
-                  className="farm-field-radio"
-                  // classes={classes}
+                  name={
+                    item?.cultivation[0]?.mahsul?.title + ' - '  + item?.cultivation[0]?.sathe_zire_kesht + " - " + item?.name
+                  }
+                  label={
+                    item?.cultivation[0]?.mahsul?.title + ' ' + item?.cultivation[0]?.sathe_zire_kesht + " - " + item?.name
+                  }
+                  className="farm-field-radio py-3 px-3"
                 />
               ))}
             </RadioGroup>

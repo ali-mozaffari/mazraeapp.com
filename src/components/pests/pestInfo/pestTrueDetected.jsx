@@ -7,14 +7,13 @@ import { ArrowSingleDownIcon } from "../../../assets/icon";
 
 const PestTrueDetected = () => {
   const [foundPest, setFoundPest] = useState(0);
+  const [selected, setSelected] = useState("");
   const [selectedFarm, setSelectedFarm] = useState();
   const [farmSelectionModal, setFarmSelectionModal] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = () => {
-
-    console.log('d')
-
+    console.log("d");
   };
 
   //   useEffect(() => {
@@ -92,18 +91,19 @@ const PestTrueDetected = () => {
           </table>
         </div>
       </div>
-      <div className="d-flex align-items-center justify-content-between mt-3">
+      <div className="d-flex align-items-center justify-content-between mt-4">
         <div className="small">آیا آفت اکنون در مزرعه شما وجود دارد؟</div>
         <RadioGroup row className="w-50">
           <FormControlLabel
             value="1"
             control={
               <Radio
-                sx={{
-                  "& .MuiSvgIcon-root": {
-                    fontSize: 22,
-                  },
-                }}
+              sx={{
+                "&.Mui-checked": {
+                  fontSize: 24,
+                  color: '#16DB93'
+                },
+              }}
               />
             }
             label="بله"
@@ -115,11 +115,12 @@ const PestTrueDetected = () => {
             value="2"
             control={
               <Radio
-                sx={{
-                  "& .MuiSvgIcon-root": {
-                    fontSize: 22,
-                  },
-                }}
+              sx={{
+                "&.Mui-checked": {
+                  fontSize: 24,
+                  color: '#16DB93'
+                },
+              }}
               />
             }
             label="خیر"
@@ -131,56 +132,58 @@ const PestTrueDetected = () => {
       </div>
 
       {foundPest == 1 ? (
-        <Formik
-          onSubmit={(values, formikHelpers) => {
-            onSubmit(values);
-            formikHelpers.resetForm();
-          }}
-        >
-          {({ errors, touched }) => (
-            <div className="container" style={{ maxWidth: "768px" }}>
-              <Form className="row">
-                <Box
-                  sx={{
-                    display: { xs: "block", sm: "flex" },
-                    justifyContent: "space-between",
-                    padding: "0",
-                  }}
-                >
+        <div>
+          <hr />
+          <p className="small mb-0 mt-4" style={{ fontWeight: 800 }}>
+            آفت در کدام یک از مزارع شما مشاهده شده است؟
+          </p>
+          <Formik
+            onSubmit={(values, formikHelpers) => {
+              onSubmit(values);
+              formikHelpers.resetForm();
+            }}
+          >
+            {({ errors, touched }) => (
+              <div className="container mt-0">
+                <Form className="row">
                   <Box
                     sx={{
-                      width: { xs: "100%", sm: "48%" },
-                      position: "relative",
+                      display: { xs: "block", sm: "flex" },
+                      justifyContent: "space-between",
+                      padding: "0",
                     }}
                   >
-                    <Field
-                      name="productGroup"
-                      type="button"
-                      autoComplete="off"
-                      className="search-input"
-                      value={selectedFarm?.name}
-                      onClick={() => setFarmSelectionModal(true)}
-                    />
-                    {!selectedFarm?.name ? (
-                      <span
-                        className="fieldTitleEmpty"
-                      >
-                        انتخاب مزرعه
+                    <Box
+                      sx={{
+                        width: { xs: "100%", sm: "48%" },
+                        position: "relative",
+                      }}
+                    >
+                      <Field
+                        name="productGroup"
+                        type="button"
+                        autoComplete="off"
+                        className="search-input mb-3 py-3"
+                        value={selectedFarm?.name}
+                        onClick={() => setFarmSelectionModal(true)}
+                      />
+                      {!selectedFarm?.name ? (
+                        <span className="fieldTitleEmpty">انتخاب مزرعه</span>
+                      ) : null}
+                      <span className="fieldIcon">
+                        <ArrowSingleDownIcon />
                       </span>
-                    ) : (
-                      null
-                    )}
-                    <span className="fieldIcon">
-                      <ArrowSingleDownIcon />
-                    </span>
+                    </Box>
                   </Box>
-                </Box>
-              </Form>
-            </div>
-          )}
-        </Formik>
+                </Form>
+              </div>
+            )}
+          </Formik>
+        </div>
       ) : null}
       <PestSelectFarmModal
+        selected={selected}
+        setSelected={setSelected}
         farmSelectionModal={farmSelectionModal}
         setFarmSelectionModal={setFarmSelectionModal}
         setSelectedFarm={setSelectedFarm}
@@ -193,7 +196,8 @@ const PestTrueDetected = () => {
           </button>
         ) : null}
         {foundPest == 1 ? (
-          <button className="pest-submit-report w-100 mt-3 mb-4">
+          <button className={selected ? "pest-submit-report w-100 mt-3 mb-4" : "pest-submit-report-disable w-100 mt-3 mb-4"}
+          onClick={() => navigate("/desises")}>
             ثبت بازخورد
           </button>
         ) : null}
