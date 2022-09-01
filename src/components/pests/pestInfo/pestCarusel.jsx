@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import config from '../../../services/config';
+
 
 const PestCarousel = (props) => {
   const { images } = props;
@@ -40,7 +42,7 @@ const PestCarousel = (props) => {
           >
             {/* {children} */}
             <img
-              src={image}
+              src={config + image}
               height="200"
               // className="d-block"
               style={{

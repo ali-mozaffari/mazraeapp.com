@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../../../services/config";
 import { token } from "../../../services/token";
@@ -13,7 +13,6 @@ export const getPestQuestion = createAsyncThunk(
         },
         params: payload
       });
-      console.warn(data)
       return data;
     } catch (error) {
       return rejectWithValue(error.data.results);
@@ -21,10 +20,17 @@ export const getPestQuestion = createAsyncThunk(
   }
 );
 
+
+export const deletePestQuestions = createAction("pestQuestion");
+
+
 const pestQuestionSlice = createSlice({
   name: "pestQuestion",
   initialState: { results : [] },
   extraReducers: {
+    [deletePestQuestions]: (state, action) => {
+      state.results = [];
+    },
     [getPestQuestion.pending]: (state, action) => {
       state.loading = true;
     },
