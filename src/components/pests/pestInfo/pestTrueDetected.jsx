@@ -158,18 +158,17 @@ const PestTrueDetected = () => {
                       type="button"
                       autoComplete="off"
                       className="search-input"
+                      value={selectedFarm?.name}
+                      onClick={() => setFarmSelectionModal(true)}
                     />
                     {!selectedFarm?.name ? (
                       <span
                         className="fieldTitleEmpty"
-                        onClick={() => setFarmSelectionModal(true)}
                       >
-                        گروه محصول
+                        انتخاب مزرعه
                       </span>
                     ) : (
-                      <span className="fieldTitleFilled">
-                        {selectedFarm.name}
-                      </span>
+                      null
                     )}
                     <span className="fieldIcon">
                       <ArrowSingleDownIcon />

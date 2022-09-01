@@ -1,15 +1,19 @@
 import React, { useState, memo } from "react";
 import { Modal } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import closeNotification from "./../../../assets/img/close-notification.png";
 
-
-const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSelectedFarm }) => {
+const PestSelectFarmModal = ({
+  farmSelectionModal,
+  setFarmSelectionModal,
+  setSelectedFarm,
+}) => {
   const [selected, setSelected] = useState("");
+  const farmlist = useSelector((state) => state.farmlist.postList);
   const handleChange = (e) => {
     setSelected({ value: e.target.value, name: e.target.name });
     setSelectedFarm({ value: e.target.value, name: e.target.name });
-
   };
 
   const handleSubmit = (e) => {
@@ -18,11 +22,7 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSel
   };
 
   return (
-    <Modal
-      show={farmSelectionModal}
-      className="farm-field-modal"
-      centered
-    >
+    <Modal show={farmSelectionModal} className="farm-field-modal" centered>
       <form onSubmit={handleSubmit}>
         <div className="farm-field-modal-header justify-content-start">
           <img
@@ -37,9 +37,7 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSel
             onClick={() => setFarmSelectionModal(false)}
           />
 
-          <h6 style={{ fontWeight: "800", color: "#676767" }}>
-            انتخاب سال زراعی
-          </h6>
+          <h6 style={{ fontWeight: "800", color: "#676767" }}>انتخاب مزرعه</h6>
         </div>
         {/* <hr style={{ height: "2px", margin: "0" }} /> */}
         <div className="farm-field-modal-body year-field-modal">
@@ -60,14 +58,16 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSel
               // value={value}
               onChange={handleChange}
             >
-              <FormControlLabel
-                value="1"
-                control={<Radio />}
-                name="1397-1398"
-                label="1397-1398"
-                className="farm-field-radio"
-                // classes={classes}
-              />
+              {farmlist.map((item) => (
+                <FormControlLabel
+                  value="1"
+                  control={<Radio />}
+                  name={item?.cultivation[0]?.mahsul?.title}
+                  label={item?.cultivation[0]?.mahsul?.title}
+                  className="farm-field-radio"
+                  // classes={classes}
+                />
+              ))}
             </RadioGroup>
           </div>
         </div>
@@ -81,7 +81,7 @@ const PestSelectFarmModal = ({ farmSelectionModal, setFarmSelectionModal, setSel
                 className="farm-field-modal-btn btn btn-light-green"
                 type="submit"
                 onClick={() => {
-                    setFarmSelectionModal(false)
+                  setFarmSelectionModal(false);
                 }}
               >
                 ثبت
