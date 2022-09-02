@@ -1,9 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLeafletContext } from "@react-leaflet/core";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 
-const Geoman = () => {
+const Geoman = ({data}) => {
+//   const [polygon, setPolygon] = useState("");
+  const getPolygon = (e) => {
+    //   setPolygon(e)
+      data(e)
+  }
+  
   const context = useLeafletContext();
 
   useEffect(() => {
@@ -12,7 +18,6 @@ const Geoman = () => {
 
     leafletContainer.pm.addControls({
       drawMarker: false,
-      drawCircle: false,
       rotateMode: false,
       drawCircleMarker: false,
       drawRectangle: false,
@@ -20,27 +25,27 @@ const Geoman = () => {
       optionsControls: true,
     });
 
-    leafletContainer.pm.enableDraw('Polygon', {
-        snappable: true,
-        snapDistance: 20,
-        allowSelfIntersection: false,
-      });
+    leafletContainer.pm.enableDraw("Polygon", {
+      snappable: true,
+      snapDistance: 20,
+      allowSelfIntersection: false,
+    });
 
     leafletContainer.pm.setGlobalOptions({
       pmIgnore: false,
       measurements: {
         measurement: true,
         displayFormat: "metric",
-        showTooltip: false,
-        showTooltipOnHover: false,
-        totalLength: false,
-        segmentLength: false,
-        area: false,
-        radius: false,
-        perimeter: false,
-        height: false,
-        width: false,
-        coordinates: false,
+        showTooltip: true,
+        showTooltipOnHover: true,
+        totalLength: true,
+        segmentLength: true,
+        area: true,
+        radius: true,
+        perimeter: true,
+        height: true,
+        width: true,
+        coordinates: true,
       },
     });
 
@@ -52,10 +57,11 @@ const Geoman = () => {
         console.log(e);
 
         // enable editing of circle
-        shape.layer.pm.enable();
+        // shape.layer.pm.enable();
 
-        console.log(`object created: ${shape.layer.pm.getShape()}`);
-        // console.log(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+        // console.log(`object created: ${shape.layer.pm.getShape()}`);
+        console.log(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+        getPolygon(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
         leafletContainer.pm
           .getGeomanLayers(true)
           .bindPopup("i am whole")
@@ -65,7 +71,7 @@ const Geoman = () => {
           .map((layer, index) => layer.bindPopup(`I am figure N° ${index}`));
         shape.layer.on("pm:edit", (e) => {
           const event = e;
-          // console.log(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
+          console.log(leafletContainer.pm.getGeomanLayers(true).toGeoJSON());
         });
       }
     });
@@ -82,6 +88,7 @@ const Geoman = () => {
   }, [context]);
 
   return null;
+  
 };
 
 export default Geoman;

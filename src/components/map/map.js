@@ -62,6 +62,13 @@ const Map = () => {
     getLocation({ setCenter });
   }, [_center]);
 
+  //Get Data from Modal
+  const [polygon, setPolygon] = useState("");
+  const getPolygon = (data) => {
+    setPolygon(data);
+    console.log('ali mozaffari', data)
+  };
+
 //   const refreshArea = (list) => {
 //     if (list.length >= 3) {
 //       for (let i = 0; i < list.length; i++) {
@@ -111,7 +118,7 @@ const Map = () => {
               url={mapBoxUrl}
             />
 
-            <Geoman />
+            <Geoman data={getPolygon}/>
 
             {/* {pointsState.map((item, index) => {
               return (
